@@ -1,0 +1,38 @@
+<header>
+  <h2 class="left">明星商品<span> / 首頁管理</span></h2>
+  <nav class="left"></nav>      
+</header>
+<article>
+  <div class="form">
+    <%= form_for(@pickup, :url => admin_pickup_path(@pickup), html: { id: "patchthispickup" } ) do |f| %>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="7%">商品：</td>
+          <td width="31%">
+            <%= f.select :product_id, options_for_select(@products.collect { |product|
+      [product.name, product.id] }, @pickup.product_id), {}, { id: 'product_select' } %>
+          </td>
+          <td width="2%">&nbsp;</td>
+          <td width="7%">顯示：</td>
+          <td width="53%">
+            <%= f.check_box :status, { class: 'checkbox'  }, "enable", "disable" %> 是
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">描述：</td>
+          <td colspan="4">
+            <%= f.text_area :description, id: "textarea" %>
+          </td>
+        </tr>
+      </table>
+    <% end %>
+  </div>
+
+  <div class="button">
+    <%= link_to image_tag("/images/admin/left.png")+"返回", admin_pickups_path(), class: "left" %>
+    <a href="javascript: document.getElementById('patchthispickup').submit();" class="right highlight" data-no-turbolink = true >儲存
+      <img src="<%= image_path("/images/admin/up.png") %>">
+      </a>
+  </div>
+
+</article>

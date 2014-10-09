@@ -1,0 +1,42 @@
+<header>
+  <h2 class="left">最新消息</h2>
+  <nav class="left"></nav>
+</header>
+<article>
+  <div class="button">
+    <%= link_to admin_announcements_path(type: "PeditorAnnouncement"), :method => :post , class:"right highlight" do %>
+      Peditor<img src="/images/admin/add.png">
+    <% end %>
+    <%= link_to admin_announcements_path(type: "CustomizedAnnouncement"), :method => :post , class:"right highlight" do %>
+      CKEditor<img src="/images/admin/add.png">
+    <% end %>
+  </div>
+  <div class="list">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <% @announcements.each do |announcement| %>
+        <tr <%= "class=off" if announcement.status == "disable" %> >
+          <td width="5%" class="icon">
+            <%= is_set_top(announcement.ranking) %>
+          </td>
+          <td width="65%">
+            <% if announcement.type == "PeditorAnnouncement" %>
+              <%= link_to( announcement.title , edit_admin_announcement_path(announcement))  %>
+            <% elsif announcement.type == "CustomizedAnnouncement" %>
+              <%= link_to( announcement.title , custom_edit_admin_announcement_path(announcement)) %>
+            <% end %>
+          </td>
+          <td width="15%" align="right"><%= announcement.created_at.strftime("%Y年%m月%d日")%></td>
+          <td width="12%">
+            <div class="tool">
+              <%= list_edit_btn(announcement) %><%= link_to("刪除", admin_announcement_path(announcement), :method => :delete, :data => {:confirm => "確定刪除？"}, class: "delete") %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div class= "page">
+    <%= paginate @announcements ,:window => 2 %>
+  </div>
+</article>

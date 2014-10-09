@@ -1,0 +1,27 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  <tr>
+    <td align="center" valign="middle" _height="auto">
+      <h1><a href="javascript:void(0);"><img src="/images/admin/logo.png"></a></h1>
+      
+      <div class="login-input"> <img src="/images/admin/admin.png" title="帳號">
+        <%= f.email_field :email, class: "text" ,:autofocus => true, placeholder: "請輸入帳號" %>
+      </div>
+      
+      <div class="login-input"> <img src="/images/admin/key.png" title="密碼">
+        <%= f.password_field :password, class: "text",  placeholder: "請輸入密碼" %>
+        <%= f.submit "" , class: "button"%>
+      </div>
+      
+      <div class="msg">
+        <% if !flash[:notice].nil? %>
+          <div class="msg"><%= flash[:notice].html_safe %></div>
+        <% end %>
+        <% if !flash[:alert].nil? %>
+          <div class="msg"><%= flash[:alert].html_safe %></div>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+  <% end %>
+</table>

@@ -1,0 +1,11 @@
+<% category.galleries.select{ |v| v['type'] == "CategoryCoverGallery" }.each do |attach| %>
+<td>&nbsp;</td>
+<td>
+  <image src=<%= "#{attach.attachment.url}" %> alt=<%= "#{attach.file_name}" %> />  
+</td>
+<td align="right" valign="top">
+  <div class="tool">
+      <%= link_to '刪除', admin_gallery_path(attach.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'uvs', title: '刪除' %>
+  </div>
+</td>
+<% end %>

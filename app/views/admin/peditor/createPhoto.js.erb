@@ -1,0 +1,17 @@
+if(<%= @photo.id.to_s %>){
+  var image = new Object();
+  image.type = "img";
+  image.id = "<%= @photo.id.to_s %>";
+  image.path = "<%= @photo.image.to_s %>";
+  
+  if($("#newImageLink").val()){
+    image.link = $("#newImageLink").val();
+  }
+
+  editor.resetChild();
+  editor.img.update(image);
+  
+}
+else{
+  editor.alert("圖片上傳發生錯誤, 請重新上傳", "error");
+}

@@ -1,0 +1,117 @@
+<script src="/js_plugins/colorbox/jquery.colorbox-min.js"></script>
+
+<script src="/js_plugins/peditor/js/editor.js"></script>
+<script src="/js_plugins/peditor/js/editor_p.js"></script>
+<script src="/js_plugins/peditor/js/editor_img.js"></script>
+<script src="/js_plugins/peditor/js/editor_list.js"></script>
+<script src="/js_plugins/peditor/js/editor_video.js"></script>
+<script src="/js_plugins/peditor/js/jquery.imgareaselect.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/js_plugins/peditor/css/imgareaselect-default.css" />
+<link rel="stylesheet" type="text/css" href="/js_plugins/colorbox/colorbox.css" />      
+
+<header>
+  <h2 class="left">最新消息</h2>
+  <div class="explain right"><p>圖片尺寸：825 px * 377 px</p></div>
+</header>
+<article>
+  <div class="hgroup">
+    <div class="right">
+      <%= form_for(@announcement, :url => admin_announcement_path(@announcement), html: { id: "patchthisannouncement", :multipart => true } ) do |f| %>
+      顯示 <%= f.check_box :status, { class: 'checkbox'  }, "enable", "disable" %>
+      &nbsp;&nbsp;置頂 <%= f.check_box :ranking, { class: 'checkbox'  }, 100, 999 %>
+    </div>
+  </div>
+
+  <% if @gallery_count > 0 %>
+
+  <div class="form">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="7%">封面：</td>
+        <td width="93%">
+          <div class="thumb">
+            <% @announcement.galleries.select{ |v| v['type'] == "AnnouncementCoverGallery" }.each do |attach| %>
+              <image src=<%= "#{attach.attachment.url}" %> />
+              <%= link_to '', admin_gallery_path(attach.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete', title: '刪除' %>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <% else %>
+
+    <div class="form">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="7%">封面：</td>
+          <td width="93%">
+            <!-- COVER UPLOAD -->
+            <%= file_field_tag :attachment, class: 'file' %>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="button">
+      <a href="javascript: document.getElementById('patchthisannouncement').submit();" class="right highlight" data-no-turbolink = true >
+      上傳<img src="/images/admin/up.png">
+      </a>
+    </div>
+
+  <% end %>
+
+  <div class="form">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="7%">標題：</td>
+        <td width="93%">
+          <%= f.text_field :title, class: "text" ,placeholder: "輸入文章標題" %>
+        </td>
+      </tr>
+      <tr>
+        <td width="7%">摘要：</td>
+        <td width="93%">
+          <%= f.text_area :subtitle, class: "text" ,placeholder: "輸入文章摘要" %>
+
+          <%= fields_for @announcement.article do | a | %>
+            <%= a.hidden_field :content, {:id => 'peditor_announcement_content'} %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <!--form-->
+  <% end %>
+
+  <%= render  'admin/peditor/editor' %>
+
+  <div class="button"> 
+    <%= link_to image_tag("/images/admin/left.png")+"返回", admin_announcements_path(), class: "left" %>
+    <a href="javascript: document.getElementById('patchthisannouncement').submit();" class="right highlight" data-no-turbolink = true >儲存<img src="<%= image_path("save.png") %>"></a>
+  </div>
+</article>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+    editor.init({articleModel: "peditor_announcement", photoUpload: 'peditor/<%= @announcement.article.id %>/createPhoto', p_selectList: ["paragraphFontClass"],linkedp: true});
+
+    $("#submit").click(function(e){
+      e.preventDefault();
+
+      if(!editor.isPostNotSent()){
+        $("#edit_article_<%= @announcement.article.id %>").submit();
+      }
+      else{
+        editor.alert("段落編輯尚未完成。", "error");
+      }
+    
+      $('#articleContent').bind('peditor_updated', function() {
+        $('#main').height('inherit')
+      })
+    
+    });
+});
+</script>

@@ -1,0 +1,122 @@
+<header>
+  <h2 class="left">商品管理</h2>
+  <nav class="left"></nav>
+  <div class="explain right"><p>圖片尺寸：</p></div>
+</header>
+<article>
+  <div class="hgroup">
+    <h3 class="left">分類列表</h3>
+    <div class="button right">
+      <a href="javascript:void(0);" class="right highlight toggle_new_category">新增分類<img src="/images/admin/add_folder.png"></a>
+    </div>
+  </div>
+  <div class="list">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      
+      <% @categories.each do |category| %>
+
+        
+        <tr class="show_category_<%= category.id %>" >
+          <td width="6%" style="background:url(/images/admin/folder.png) center center no-repeat"></td>
+          <td width="76%">
+            <%= link_to(category.name, admin_category_path(category)) %>
+          </td>
+          <td width="18%">
+            <div class="tool">
+              <%= link_to "編輯", "javascript:void(0);", :data => { :id => category.id }, :class => "edit", title:"編輯" %><%= link_to "刪除", admin_category_path(category), :data => { :confirm => "將會刪除分類底下所有商品，確定繼續？" }, :method => :delete, :class => "delete", title: "刪除" %>
+            </div>
+          </td>
+        </tr>
+        
+        <tr class="list-edit edit_category_<%= category.id %>" style="display:none">
+          <%= form_for(category, :url => admin_category_path(category) , html: { id: "patchthiscate_#{category.id}", :multipart => true }) do |f| %>
+          
+          <td width="6%" style="background:url(/images/admin/folder.png) center center no-repeat"></td>
+          <td width="76%">
+            <div style="position:relative">
+              <%= f.text_field :name, class:"text", placeholder: "分類名稱", style:"width:50%" %>
+              <!-- COVER UPLOAD -->
+              <%= file_field_tag :attachment, class: 'file' unless category.galleries.count > 0 %>
+            </div>
+          </td>          
+          <td align="right" valign="top" width="18%">
+            <div class="tool">
+              <a href="javascript: document.getElementById('patchthiscate_<%= category.id %>').submit();" class="uvs" data-no-turbolink = true >儲存</a><%= link_to "取消", "javascript:void(0);" ,:data => { :id => category.id }, :class => "uvs" %>
+            </div>
+          </td>
+          <% end %>
+        </tr>
+        <tr class="list-edit edit_category_<%= category.id %>" style="display:none;" >
+          <!-- DISPLAY COVER -->
+          <%= render 'display_category_cover', :category => category unless category.galleries.count <= 0 %>
+        </tr>
+      <% end %>
+
+    <!-- new -->
+
+    <tr class="list-new list-edit edit_category" style="display:none;">
+      <%= form_for(@category, :url => admin_categories_path , html: {id: "create_new_cate", :multipart => true }) do |f| %>
+        <td width="6%" style="background:url(/images/admin/folder.png) center center no-repeat"></td>
+        <td width="76%">
+          <div style="position:relative">
+            <%= f.text_field :name, :placeholder => "分類名稱" , class: "text new_cate_name_input" ,placeholder:"分類名稱", style:"width:50%"%>
+            <!-- COVER UPLOAD -->
+            <%= file_field_tag :attachment, class: 'file' %>
+            
+            <%= f.hidden_field :parent_id, value: 1 %>
+            <%= f.hidden_field :depth, value: 1 %>
+          </div>
+        </td>
+        <td align="right" width="18%">
+          <div class="tool">
+            <a href="javascript: document.getElementById('create_new_cate').submit();" class="uvs" data-no-turbolink = true >儲存</a><%= link_to("取消", "javascript:void(0);", :class => "uvs cancel_new_category") %>
+          </div>
+        </td>
+      <% end %>
+    </tr>
+
+    </table>
+  </div>
+</article>
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".toggle_new_category").click(function(){
+
+    if($("tr[class*=edit_category]:visible").length > 0){
+      alert("請先完成編輯中的產品分類");
+    }
+    else{
+      
+      $(".list-new").toggle();
+    }
+  });
+
+  $(".cancel_new_category").click(function(){
+      $(".new_cate_name_input").val(''); //clear input
+      $(".list-new").toggle();
+  });
+
+  $(".edit").click(function(){
+    $active_id = $(this).data("id");
+    if($("tr[class*=edit_category]:visible").length > 0){
+      alert("請先完成編輯中的產品分類");
+    }
+    else{
+      toggle_edit_area($active_id);
+    }
+  });
+
+  $(".uvs").click(function(){
+    $active_id = $(this).data("id");
+    toggle_edit_area($active_id);
+  });
+
+  function toggle_edit_area(active_id){
+    $("tr.edit_category_" + active_id).toggle();
+    $("tr.show_category_" + active_id).toggle();
+  }
+});
+</script>

@@ -1,0 +1,19 @@
+<%# VAR %>
+<%# target_title: display name for user %>
+<%# target: object %>
+<%# target_controller: controller name %>
+<%# type: gallery type %>
+
+<div class="form">
+  
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="7%"><%= target_title %>：</td>
+      <td width="93%">
+        <!-- COVER UPLOAD -->
+        <%= file_field_tag :attachment, class: 'file' %>
+      </td>
+    </tr>
+  </table>
+  
+</div>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <title>Ladyboo</title>
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+   <script>
+    window.onload= function() {
+    <% if !flash[:notice].nil? %>
+     alertify['success']('<%= flash[:notice] %>', 2000);
+    <% end %>
+    
+    <% if !flash[:warning].nil? %>
+    alertify['error']("<%= flash[:warning].html_safe %>", 2000); 
+    <% end %>
+  }
+  </script>
+  
+</head>
+<body>
+  static / index
+  <%# render 'layouts/index_header' %>
+  
+  <%# render 'layouts/front_shared_footer' %>
+  <%= link_to 'admin', new_admin_session_path %>
+  
+</body>
+
+</html>

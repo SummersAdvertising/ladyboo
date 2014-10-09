@@ -1,0 +1,26 @@
+<header>
+  <h2 class="left">ＰＩＣＫＵＰ<span> / 首頁管理</span></h2>
+  <nav class="left"></nav>
+</header>
+<article>
+  <% if Pickup.all.count < 5 %>
+    <div class="hgroup">
+      <div class="button right">
+        <%# link_to create_pickup_admin_pickups_path(@pickup), :method => :post, class: "right highlight" do %>
+        <%= link_to new_admin_pickup_path(), class: "right highlight" do %>
+          新增<img src="/images/admin/add.png">
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <div class="gallery">
+    <% @pickups.each do |slide| %>
+    <%= slide.product.name %> => ＄<%= slide.product.price %> 
+    <div class="thumb left">
+      <%= link_to '刪除', admin_pickup_path(slide), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete', title: '刪除' %>
+      <%= link_to "編輯", edit_admin_pickup_path(slide) %>
+    </div>
+
+    <% end %>    
+  </div>
+</article>

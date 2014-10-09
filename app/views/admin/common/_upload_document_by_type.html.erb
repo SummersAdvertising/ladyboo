@@ -1,0 +1,20 @@
+<%# VAR %>
+<%# target_title: display name for user %>
+<%# target: object %>
+<%# target_controller: controller name %>
+<%# type: gallery type %>
+
+<div class="form">
+  
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="7%"><%= target_title %>：</td>
+      <td width="93%">
+        <%= text_field_tag 'filename', nil, placeholder: '附件顯示名稱', class: 'text' %>
+        <!-- COVER UPLOAD -->
+        <%= file_field_tag :attachment, class: 'file' %>
+      </td>
+    </tr>
+  </table>
+  
+</div>

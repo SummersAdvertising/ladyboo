@@ -1,0 +1,16 @@
+= measurement EDIT =
+<%= simple_form_for(@measurement, :url => admin_category_product_measurement_path(params[:category_id] , params[:product_id], @measurement), html: { id: "patchthismeasurement" } ) do |f| %>
+
+顯示：<%= f.check_box :status, { class: 'checkbox'  }, "enable", "disable" %> 是
+title：<%= f.input_field :title %><br> 
+context_1：<%= f.input_field :context_1 %><br>
+context_2：<%= f.input_field :context_2 %><br>
+context_3：<%= f.input_field :context_3 %><br>
+context_4：<%= f.input_field :context_4 %><br>
+context_5：<%= f.input_field :context_5 %><br>
+context_6：<%= f.input_field :context_6 %><br>
+
+  <%= f.submit 'Save' %><br>
+<% end %>
+
+<%= link_to 'return' ,admin_category_product_measurements_path(params[:category_id], params[:product_id]) %>

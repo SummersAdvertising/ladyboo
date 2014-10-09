@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product_id: 1
+  title: MyString
+  context_1: MyString
+  context_2: MyString
+  context_3: MyString
+  context_4: MyString
+  context_5: MyString
+  context_6: MyString
+
+two:
+  product_id: 1
+  title: MyString
+  context_1: MyString
+  context_2: MyString
+  context_3: MyString
+  context_4: MyString
+  context_5: MyString
+  context_6: MyString

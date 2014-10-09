@@ -1,0 +1,20 @@
+<%# VAR %>
+<%# target_title: display name for user %>
+<%# target: object %>
+<%# type: gallery type %>
+
+<div class="form">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="7%"><%= target_title %>：</td>
+      <td width="93%">
+        <div class="thumb">
+          <% target.galleries.select{ |v| v['type'] == type }.each do |attach| %>
+            <%= link_to "#{attach.file_name}", attach.attachment.url, target: '_blank' %>
+            <%= link_to '刪除', admin_gallery_path(attach.id), method: :delete, data: { confirm: '確認刪除?' }, class: 'delete', title: '刪除' %>
+          <% end %>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

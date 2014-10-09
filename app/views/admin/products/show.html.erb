@@ -1,0 +1,88 @@
+Vehicle  SHOW
+<br>
+= CF<br>
+<%= @vehicle.cf.html_safe%>
+<br>
+= DM DOWNLOAD<br>
+<% @dms.each do |dm| %>
+  <%= link_to "#{dm.file_name}", dm.attachment.url, target: '_blank' %>
+<% end %>
+<br>
+
+= SPEC<br>
+<% @vehicle.specs.each do |spec| %>
+  <%= spec.title %> == <%= spec.context %> <br>
+<% end %><br>
+
+== COLORS<br>
+<% @colors.each do |color| %>
+  <%= color.name %> = 
+  <div style='width:50px;height:50px;background:#<%= "#{color.hexcode}"%>;'>&nbsp;</div>
+  
+  <% color.galleries.each do |color_photo| %>
+    <% if color_photo %>
+      <%= image_tag color_photo.attachment.url %>
+    <% end %>
+  <% end %><br>
+
+<% end %>
+<br>
+
+== FEATURES<br>
+<% @features.each_with_index do |feature, index| %>
+  +<%= feature.title %>+<br>
+  <%= feature.context %><br>
+  
+  <% feature.galleries.each do |feature_photo| %>
+    <% if feature_photo %>
+      <%= image_tag feature_photo.attachment.url %>
+    <% end %>
+  <% end %><br>
+
+  <%= "<br>".html_safe if (index+1)%3 == 0 %>
+<% end %>
+== sliders<br>
+<% @sliders.each do |slider| %>
+  <%= image_tag slider.attachment.url %>
+<% end %>
+<br>
+== cover<br>
+<% @cover.each do |cover| %>
+  <%= image_tag cover.attachment.url %>
+<% end %>
+<br>
+== accessory<br>
+[標配]<br>
+<% @com_accessories.each_with_index do |accessory, index| %>
+  +(標配)<%= accessory.title %>+<br>
+  <%= accessory.context %><br>
+  
+  <% accessory.galleries.each do |accessory_photo| %>
+    <% if accessory_photo %>
+      <%= image_tag accessory_photo.attachment.url %>
+    <% end %>
+  <% end %><br>
+
+  <%= "<br>".html_safe if (index+1)%3 == 0 %>
+<% end %>
+[選配]<br>
+<% @opt_accessories.each_with_index do |accessory, index| %>
+  +(選配)<%= accessory.title %>+<br>
+  <%= accessory.context %><br>
+  
+  <% accessory.galleries.each do |accessory_photo| %>
+    <% if accessory_photo %>
+      <%= image_tag accessory_photo.attachment.url %>
+    <% end %>
+  <% end %><br>
+
+  <%= "<br>".html_safe if (index+1)%3 == 0 %>
+<% end %>
+
+<br>
+== other images<br>
+<% @photos.each_with_index do |photo, index| %>
+  <%= image_tag photo.attachment.url %>
+  <%= "<br>".html_safe if (index+1)%3 == 0 %>
+<% end %>
+<br>

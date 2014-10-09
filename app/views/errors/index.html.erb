@@ -1,0 +1,18 @@
+<article _height="auto">
+<section class="content" style=" padding: 180px 0 120px; 0">
+  <div style="width: 567px; margin: 0 auto;">   
+    <hgroup>    
+      <h1 style="font-size: 36px; font-wieght: 600; padding: 24px;">
+      Not found.
+      </h1>
+    </hgroup>
+    <p style="padding-left: 36px;">
+      即將為您引導至首頁，請稍候或點擊 <a href="<%= root_url %>" style="color: orange; text-decoration: underline;">連結</a> 回到首頁
+    </p>
+  </div>
+</section>
+</article>
+
+<script>
+  setTimeout(function() { window.location.href = '<%= root_url %>'; }, 1000);
+</script>

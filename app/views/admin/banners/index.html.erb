@@ -1,0 +1,32 @@
+<header>
+  <h2 class="left">主視覺輪播<span> / 首頁管理</span></h2>
+  <nav class="left"></nav>
+</header>
+<article>
+  <% if Banner.all.count < 5 %>
+    <div class="hgroup">
+      <div class="button right">
+        <%# link_to create_banner_admin_banners_path(@banner), :method => :post, class: "right highlight" do %>
+        <%= link_to new_admin_banner_path(), class: "right highlight" do %>
+          新增<img src="/images/admin/add.png">
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <div class="gallery">
+    <% @banners.each do |slide| %>
+
+    <div class="thumb left">
+      <%= link_to '刪除', admin_banner_path(slide), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete', title: '刪除' %>
+      <%# link_to "編輯", edit_admin_banner_path(slide) %>
+      <% if slide.galleries.empty? %>
+        <%= image_tag "/sample/sample1.jpg"%>
+      <% else %>
+        <%= link_to( image_tag(slide.galleries.select{ |v| v['type'] == 'BannerGallery' }.first.attachment.url, width: '20%', height: 'auto' ), slide.description , target: "_blank") %>
+      <% end %>
+      
+    </div>
+
+    <% end %>    
+  </div>
+</article>
