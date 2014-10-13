@@ -1,0 +1,20 @@
+<header>
+  <h2 class="left">運送管理</h2>
+</header>
+<article>
+
+  <div class="list">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <% @deliveries.each do |delivery| %>
+        <tr>
+          <td width="88%"><%= delivery.name %> (<%= link_to "查詢" , delivery.tracking_url, target: "_blank" %>)</td>
+          <td width="12%">
+            <div class="tool">
+              <%= link_to "", edit_admin_delivery_path(delivery), class:"edit", title:"編輯" %><%= link_to "", admin_delivery_path(delivery),method: :delete , data: { confirm: 'Are you sure?' }, class:"delete", title:"刪除" %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</article>

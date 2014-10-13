@@ -1,0 +1,84 @@
+    <header>
+      <h2 class="left">lookbook<span> / 首頁管理</span></h2>
+      <nav class="left"></nav>
+      <div class="explain right"><p>圖片尺寸：</p></div>
+    </header>
+    <article>
+      <div class="form">
+        <%= form_for(@lookbook, :url => admin_lookbook_path(@lookbook), html: { id: "patchthislookbook" } ) do |f| %>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="7%">Lookbook名稱：</td>
+              <td width="31%">
+               <%= f.text_field :name %>
+              </td>
+              <td width="2%">&nbsp;</td>
+              <td width="7%">關聯主題數：</td>
+              <td width="53%">
+               <%= f.text_field :limit %>
+              </td>
+            </tr>
+          </table>
+        <% end %>
+      </div>
+
+      <div class="button">
+        <%= link_to image_tag("/images/admin/left.png")+"返回", admin_lookbooks_path(), class: "left" %>
+        <a href="javascript: document.getElementById('patchthislookbook').submit();" id="sendtheform" class="right highlight" data-no-turbolink = true >變更
+          <img src="<%= image_path("/images/admin/up.png") %>">
+        </a>
+      </div>
+
+    </article>  
+    <br>
+    <%= "此穿搭主題限制關聯主題數：#{@lookbook.limit}, 已關聯主題數：#{@lookbook.lookbook_topicships.count}" %><br>
+    <% if @lookbook.lookbook_topicships.count < @lookbook.limit %>
+      <article>
+        <%= form_for(@lookbook_topicship, :url => admin_lookbook_topicships_path(), html: { id: "newthislookbook_topicship" } ) do |f| %>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="7%">新增關聯主題：</td>
+              <td width="31%">
+              <% unless @topics.count == 0 %>
+                <%= f.select :topic_id, options_for_select(@topics.collect { |topic|
+          [topic.name, topic.id] }, @lookbook_topicship.topic_id), {}, { id: 'topic_select' } %>
+              <% else %>
+                無主題可供選擇
+              <% end %>
+              </td>
+              <td width="2%">&nbsp;</td>
+              <td width="7%">&nbsp;</td>
+              <td width="53%"><%= f.hidden_field :lookbook_id, value: @lookbook.id %></td>
+            </tr>
+            <tr>
+              <td valign="top">&nbsp;</td>
+              <td colspan="4">&nbsp;</td>
+            </tr>
+          </table>
+        <% end %>
+
+        <div class="button">
+          <%= link_to image_tag("/images/admin/left.png")+"返回", admin_lookbooks_path(), class: "left" %>
+          <a href="javascript: document.getElementById('newthislookbook_topicship').submit();" id='new_lookbook_topicship' class="right highlight" data-no-turbolink = true >新增主題
+            <img src="<%= image_path("/images/admin/up.png") %>">
+          </a>
+        </div>
+
+      </article>
+    <% end %>
+    <br>== 已關聯主題產品 ==<br>
+      <% @lookbook.topics.each do |topic| %>
+        
+        <% topic.products.each do |product| %>
+          <%=topic.name%><%= product.name %> = <%= product.price %> / <%= product.price_for_sale %>
+          <br>
+        <% end %>
+      <% end %>
+      <br>== 刪除關聯主題 ==<br>
+      <% @lookbook.lookbook_topicships.each do |ship| %>
+        <%= Topic.find(ship.topic_id).name %>
+        <%= link_to '刪除', admin_lookbook_topicship_path(ship.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete', title: '刪除' %>
+      <% end %>
+    <article>
+      
+    </article>

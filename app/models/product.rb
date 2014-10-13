@@ -6,6 +6,9 @@ class Product < ActiveRecord::Base
   has_many :measurements, dependent: :destroy
   has_many :galleries, -> { order('ranking, created_at') } , as: :attachable , dependent: :destroy
 
+  has_many :topic_productships, dependent: :destroy
+  has_many :topics , through: :topic_productships
+
   scope :front_show_by_cate, ->(category_id) { where("category_id = ? AND status = ?", category_id, "enable") }
 
   store :material, accessors: [ :material_1, :material_2]
@@ -19,7 +22,7 @@ class Product < ActiveRecord::Base
   validates_numericality_of :price , :only_integer => true , :greater_than_or_equal_to => :price_for_sale, :unless => "price_for_sale.nil?" 
   validates_numericality_of :price_for_sale , :only_integer => true , :greater_than => 0
 
-  #before_destroy { |record| Banner.destroy_all "related_vehicle_id = #{record.id}"  }
+  #before_destroy { |record| Banner.destroy_all "product_id = #{record.id}"  }
   after_create :create_default_measurements
 
   def check_attrs

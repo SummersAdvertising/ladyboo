@@ -1,0 +1,51 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  ordernum: MyString
+  buyer_name: MyString
+  buyer_tel: MyString
+  receiver_name: MyString
+  receiver_tel: MyString
+  receiver_address: MyString
+  payment_type: MyString
+  payment_status: MyString
+  invoice_type: MyString
+  invoice_companynum: MyString
+  invoice_title: MyString
+  aasm_state: MyString
+  delivery_type: MyString
+  package_tracking_no: MyString
+  order_memo: MyText
+  human_involved_memo: MyText
+  accountinfo: MyString
+  items_total: 1
+  shipping_fee: 1
+  ship_to: MyString
+  shipped: MyString
+  paid: MyString
+
+two:
+  user_id: 1
+  ordernum: MyString
+  buyer_name: MyString
+  buyer_tel: MyString
+  receiver_name: MyString
+  receiver_tel: MyString
+  receiver_address: MyString
+  payment_type: MyString
+  payment_status: MyString
+  invoice_type: MyString
+  invoice_companynum: MyString
+  invoice_title: MyString
+  aasm_state: MyString
+  delivery_type: MyString
+  package_tracking_no: MyString
+  order_memo: MyText
+  human_involved_memo: MyText
+  accountinfo: MyString
+  items_total: 1
+  shipping_fee: 1
+  ship_to: MyString
+  shipped: MyString
+  paid: MyString

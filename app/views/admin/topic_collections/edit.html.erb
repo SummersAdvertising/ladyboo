@@ -1,0 +1,84 @@
+    <header>
+      <h2 class="left">topic_collection<span> / 首頁管理</span></h2>
+      <nav class="left"></nav>
+      <div class="explain right"><p>圖片尺寸：</p></div>
+    </header>
+    <article>
+      <div class="form">
+        <%= form_for(@topic_collection, :url => admin_topic_collection_path(@topic_collection), html: { id: "patchthistopic_collection" } ) do |f| %>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="7%">Lookbook名稱：</td>
+              <td width="31%">
+               <%= f.text_field :name %>
+              </td>
+              <td width="2%">&nbsp;</td>
+              <td width="7%">&nbsp;</td>
+              <td width="53%">
+               &nbsp;
+              </td>
+            </tr>
+          </table>
+        <% end %>
+      </div>
+
+      <div class="button">
+        <%= link_to image_tag("/images/admin/left.png")+"返回", admin_topic_collections_path(), class: "left" %>
+        <a href="javascript: document.getElementById('patchthistopic_collection').submit();" id="sendtheform" class="right highlight" data-no-turbolink = true >變更
+          <img src="<%= image_path("/images/admin/up.png") %>">
+        </a>
+      </div>
+
+    </article>  
+    <br>
+    <%= "此穿搭主題限制關聯主題數：#{@topic_collection.limit}, 已關聯主題數：#{@topic_collection.topic_collection_topicships.count}" %><br>
+    <% if @topic_collection.topic_collection_topicships.count < @topic_collection.limit %>
+      <article>
+        <%= form_for(@topic_collection_topicship, :url => admin_topic_collection_topicships_path(), html: { id: "newthistopic_collection_topicship" } ) do |f| %>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="7%">新增關聯主題：</td>
+              <td width="31%">
+              <% unless @topics.count == 0 %>
+                <%= f.select :topic_id, options_for_select(@topics.collect { |topic|
+          [topic.name, topic.id] }, @topic_collection_topicship.topic_id), {}, { id: 'topic_select' } %>
+              <% else %>
+                無主題可供選擇
+              <% end %>
+              </td>
+              <td width="2%">&nbsp;</td>
+              <td width="7%">&nbsp;</td>
+              <td width="53%"><%= f.hidden_field :topic_collection_id, value: @topic_collection.id %></td>
+            </tr>
+            <tr>
+              <td valign="top">&nbsp;</td>
+              <td colspan="4">&nbsp;</td>
+            </tr>
+          </table>
+        <% end %>
+
+        <div class="button">
+          <%= link_to image_tag("/images/admin/left.png")+"返回", admin_topic_collections_path(), class: "left" %>
+          <a href="javascript: document.getElementById('newthistopic_collection_topicship').submit();" id='new_topic_collection_topicship' class="right highlight" data-no-turbolink = true >新增主題
+            <img src="<%= image_path("/images/admin/up.png") %>">
+          </a>
+        </div>
+
+      </article>
+    <% end %>
+    <br>== 已關聯主題產品 ==<br>
+      <% @topic_collection.topics.each do |topic| %>
+        
+        <% topic.products.each do |product| %>
+          <%=topic.name%><%= product.name %> = <%= product.price %> / <%= product.price_for_sale %>
+          <br>
+        <% end %>
+      <% end %>
+      <br>== 刪除關聯主題 ==<br>
+      <% @topic_collection.topic_collection_topicships.each do |ship| %>
+        <%= Topic.find(ship.topic_id).name %>
+        <%= link_to '刪除', admin_topic_collection_topicship_path(ship.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete', title: '刪除' %>
+      <% end %>
+    <article>
+      
+    </article>

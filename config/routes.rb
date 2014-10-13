@@ -34,6 +34,12 @@ Rails.application.routes.draw do
 
     resources :banners
     resources :pickups
+    resources :topics
+    resources :topic_productships
+    resources :lookbooks
+    resources :lookbook_topicships
+    resources :topic_collections
+    resources :topic_collection_topicships
 
     resources :announcements do 
       member do
@@ -63,7 +69,88 @@ Rails.application.routes.draw do
       end 
     end
 
-  end
+    resources :orders, :only => [:index, :show] do
+      member do 
+        #AASM
+        post :checkout_succeeded_ATM # should remove
+        post :cancel_before_paid_ATM
+        post :atm_transfered
+        post :money_placed_ATM
+        post :atm_comfirmed
+        
+        post :checkout_succeeded_Vaccount # should remove
+        post :cancel_before_paid_Vaccount
+        post :comfirmed_Vaccount
+        #post :human_involving_after_order_placed
+        
+        post :checkout_succeeded_COD # should remove
+        post :shipping_COD
+        post :post_collect_checked
+        post :human_involving_after_order_placed_COD
+        post :human_involving_post_collect_COD
+
+        post :checkout_succeeded_general # should remove
+        post :shipping_first
+        post :human_involving_after_order_placed_general
+
+        
+        #SHARED
+        post :checkout_failed # should remove
+        post :shipping
+
+        patch :shipping
+        patch :shipping_first
+        patch :shipping_COD
+        patch :human_involving_after_order_placed_COD
+        patch :human_involving_post_collect_COD
+        patch :human_involving_after_order_placed_general
+        patch :human_involving_after_money_placed
+        patch :human_involving_after_money_checked
+        patch :human_involving_after_shipped
+        patch :human_involved_edit
+        
+
+        post :human_involved_edit
+        post :human_involving_after_money_placed
+        post :human_involving_after_money_checked
+        post :human_involving_after_shipped
+        post :close_deal
+        post :to_abnormal
+
+        get '/info_hub/:event' => 'orders#info_hub'
+        post '/info_hub/:event' => 'orders#update_from_info_hub'
+
+        get 'detail' => 'orders#detail'
+
+      end
+
+      collection do
+        #金流：查詢交易狀態
+        get "query_order_status/:id" => "orders#query_order_status", :as => "query_order"
+        get "receive_order_status" => "orders#receive_order_status"
+
+        get '/todolist' , action: 'index'
+        get '/shipped' , action: 'shipped'
+        get '/pending' , action: 'pending'
+        get '/human_involved' , action: 'human_involved'
+        #get '/history' , action: 'history'
+        match 'history' => 'orders#history', via: [:get, :post], as: :history
+        
+      end
+
+    end
+
+    resources :orderasks, :only => [:index, :update] do
+      collection do 
+        get 'history', action: 'history'
+      end
+    end
+
+    resources :deliveries
+    
+    delete 'peditor/deletePhoto/:id'        => 'peditor#destroyPhoto'
+
+  end #admin scope end
   
   
   # get '(*url)'   => 'errors#index'

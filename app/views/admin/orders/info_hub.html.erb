@@ -1,0 +1,119 @@
+<script src="/js_plugins/colorbox/jquery.colorbox-min.js"></script>
+<link rel="stylesheet" type="text/css" href="/js_plugins/colorbox/colorbox.css" />    
+<style>
+div ,td, p .noTransition {
+    -moz-transition: none;
+    -webkit-transition: none;
+    -o-transition: color 0 ease-in;
+    transition: none;
+}
+</style>
+
+<% if params[:event].in? ["shipping", "shipping_first", "shipping_COD"] %>
+  <%= render 'shipping_form' %>
+<% elsif params[:event].in? ["human_involving_after_order_placed_COD", "human_involving_post_collect_COD", "human_involving_after_order_placed_general","human_involving_after_money_placed","human_involving_after_money_checked","human_involving_after_shipped","human_involved_edit"]%>
+  <%= render 'human' %>
+<%# elsif params[:event].in? ["cancel_before_paid_ATM","cancel_before_paid_Vaccount"] %>
+<% elsif params[:event].in? ["atm_transfered","atm_comfirmed"]%>
+  <%= render 'atm_confirm' %>
+<% elsif params[:event].in? ["comfirmed_Vaccount"]%>
+<%= render 'vaccount_confirm' %>
+<% elsif params[:event].in? ["post_collect_checked"]%>
+<%= render 'post_collect_checked' %>
+<% else %>
+
+<div id="wrapper">
+  <div id="up">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+          <td width="24%">確認操作：</td>
+          <td width="76%"><%= get_event_display_name(params[:event]) %></td>
+      </tr>
+    </table>
+  </div>
+  <div id="down">
+      <%= link_to "確認", "/admin/orders/#{@order.id}/#{params[:event]}" , :method => :post , class: "action_confirmed" , id: "send" %>
+      <%= link_to "取消" , "javascript: void(0);" , class: "cancel" , id: "cancel" %>
+  </div>
+ </div> 
+<% end %>
+
+<!-- This contains the hidden content for inline calls -->
+<div class="waiting" style='display:none'>
+  <div id='inline_content' style='padding:10px; background:#fff;'>
+    <p><strong>訂單處理中 請稍後...</strong></p>
+    <p><%= image_tag("/images/loading.gif") %></p>
+  </div>
+</div>
+
+<div style="display:none;">
+<br>DOABLE ACTION:<br>
+<% @order.aasm.events.each do |event| %>
+  [<%= link_to get_event_display_name(event.to_s), "/admin/orders/#{@order.id}/#{event}" , :method => :post , class: "action_confirmed" %>]
+<% end %>
+<br>
+<br>Advanced OP: 交易查詢<br>
+<h3>send 交易查詢</h3>
+<%= form_tag("https://acqtest.esunbank.com.tw/acq_online/online/sale47.htm", :id => "send_to_esun") do |f|%>
+特店代碼：<%= text_field_tag :MID, get_esun_MID %><br>
+
+訂單編號：<%= text_field_tag :ONO, @order.ordernum %><br>
+01: 授權, 02: 取消授權, 03: 請款, 04: 退貨授權<br>
+<% query_type = "04" %>
+交易類別：<%= text_field_tag :TYP, query_type %><br> 
+
+交易序號：<%= text_field_tag :TRANSNUM , "" %><br>
+
+版本：<%= text_field_tag :VERSION , "01" %><br>
+
+押碼：<%# text_field_tag :M, get_esun_M %><%= text_field_tag :M, query_esun_key(@order.ordernum, query_type, "", "01") %> 押碼<br>
+<a id="sendquery">送出訂單查詢</a>
+<% end %>
+
+<br>Advanced OP: 交易查詢<br>
+<h3>請款前, 線上取消授權</h3>
+<%= form_tag("https://acqtest.esunbank.com.tw/acq_online/online/sale51.htm", :id => "send_cancel_to_esun") do |f|%>
+特店代碼：<%= text_field_tag :MID, get_esun_MID %><br>
+
+訂單編號：<%= text_field_tag :ONO, @order.ordernum %><br>
+
+押碼：<%# text_field_tag :M, get_esun_M %><%= text_field_tag :M, cancel_esun_key(@order.ordernum) %> 押碼<br>
+<a id="sendcancel">送出取消授權</a>
+<% end %>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+  
+  $("#sendquery").click(function(){ 
+      $("#send_to_esun").submit();
+  });
+
+  $("#sendcancel").click(function(){ 
+      $("#send_cancel_to_esun").submit();
+  });
+
+  $(".cancel").click(function(){ 
+    parent.jQuery.colorbox.close();
+  });
+
+  $(".action_confirmed").click(function(){
+      
+      $(".action_confirmed").toggle();
+      
+      $.colorbox({
+        inline:true, 
+        width:"483",
+        height:"320",
+        escKey: false, 
+        closeButton: false,
+        overlayClose: false,
+        href: "#inline_content",
+        transition: "none",
+        open: true
+      });
+      
+  });
+
+
+});
+</script>

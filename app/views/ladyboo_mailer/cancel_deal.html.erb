@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+  <%= render "ladyboo_mailer/header_logo" %>  
+  
+  <p>親愛的會員 <%= @order.buyer_name%>，您好：</p>
+
+  <p>感謝您對ladyboo的支持，您的訂單已取消，訂單編號：<%= @order.ordernum%>。</p>
+
+  <%= render "ladyboo_mailer/footer" %>
+</body>
+</html>

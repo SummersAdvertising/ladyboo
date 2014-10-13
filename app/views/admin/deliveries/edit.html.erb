@@ -1,0 +1,36 @@
+<header>
+  <h2 class="left">運送管理</h2>
+</header>
+<article>
+  <div class="form">
+    <%= form_for @delivery, :url => admin_delivery_path(@delivery), html: {method: "patch", id: "patchthisdelivery"} do |f| %>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="7%">方式：</td>
+          <td width="42%"><%= f.text_field :name, class: "text" %></td>
+          <td width="2%"></td>
+          <td width="7%">門檻：</td>
+          <td width="42%"><%= f.text_field :discount_criteria, class: "text"   %></td>
+        </tr>
+        <tr>
+          <td width="7%">原價：</td>
+          <td width="42%"><%= f.text_field :normal_fee, class: "text" %></td>
+          <td width="2%"></td>
+          <td width="7%">免運：</td>
+          <td width="42%"><%= f.text_field :discount_fee, class: "text"   %></td>
+        </tr>
+        <td>網址：</td>
+          <td colspan="4"><%= f.text_field :tracking_url, class: "text"  %></td>
+        </tr>
+      </table>
+    <% end %>
+  </div>
+
+  <div class="button">
+    <%= link_to image_tag("/images/admin/left.png")+"返回", admin_deliveries_path(), class: "left" %>
+    <a href="javascript: document.getElementById('patchthisdelivery').submit();" class="right highlight" data-no-turbolink = true >儲存
+      <img src="<%= image_path("/images/admin/up.png") %>">
+      </a>
+  </div>
+  
+</article>

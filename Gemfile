@@ -43,8 +43,13 @@ gem 'cancan'
 gem 'rolify'
 
 gem 'ckeditor'
-gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4'
+gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.1'
 gem 'simple_form'
+
+gem 'recaptcha', :require => "recaptcha/rails"
+
+gem 'whenever', :require => false
+gem 'sucker_punch', '~> 1.0'
 
 group :production, :staging do
   gem 'mysql2'

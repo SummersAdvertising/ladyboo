@@ -1,0 +1,79 @@
+<script src="/js_plugins/colorbox/jquery.colorbox-min.js"></script>
+<link rel="stylesheet" type="text/css" href="/js_plugins/colorbox/colorbox.css" />    
+<style>
+div ,td, p .noTransition {
+    -moz-transition: none;
+    -webkit-transition: none;
+    -o-transition: color 0 ease-in;
+    transition: none;
+}
+</style>
+<script>
+  $(document).ready(function(){
+    
+    $(".iframe").colorbox({
+      iframe:true, width:"483", height:"320",
+      onClosed:function(){ parent.location.reload(); }
+    });
+
+  });
+</script>
+
+<header>
+  <h2 class="left">訂單管理</h2>
+  <nav class="left">
+    <%= link_to "待付款", pending_admin_orders_path()  %>
+    <%= link_to "需處理", admin_orders_path(), class: 'active' %>
+    <%= link_to "已出貨", shipped_admin_orders_path()%>    
+    <%= link_to "人為處理", human_involved_admin_orders_path()%>
+    <%= link_to "歷史訂單", history_admin_orders_path()%>
+  </nav>
+</header>
+<article>
+  <div class="list">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <th width="5%" align="center" class="icon"></th>
+
+        <th width="12%" align="center"><%= sort_link @q , :payment_type, "付款方式" %></th>
+        <th width="21%" align="left"><%= sort_link @q, :created_at, "訂單成立時間" %></th>
+        <th width="16%" align="left"><%= sort_link @q, :ordernum, "編號" %></th>
+        <th width="5%" align="center"><a href="javascript:void(0);">收款</a></th>
+        <th width="5%" align="center"><a href="javascript:void(0);">出貨</a></th>
+        <th width="30%"></th>
+      </tr>
+
+      <% @orders.each do |order| %>
+        <tr id="order_<%= order.id %>">
+          <td class="icon"></td>
+          <td align="center"><%= order.get_payment_type %></td>
+          <td><span class="time"><%= order.created_at.strftime("%Y-%m-%d %H:%M") %></span></td>
+          <td><%= link_to order.ordernum, admin_order_path(order), :class => "show_order close", :remote => true, :data => { order_id: order.id } %></td>
+          <td align="center"><%= is_order_paid(order) %></td>
+          <td align="center"><%= is_order_delivered(order) %></td>
+          <td>
+            <div class="tool">
+              <% order.aasm.events.each do |event| %>
+                <%= link_to get_event_display_name(event.to_s), "/admin/orders/#{order.id}/info_hub/#{event}" , class: "iframe uvs" %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+
+    </table>
+  </div>
+</article>
+
+<script type="text/javascript">
+$(".show_order").click(function(){
+  var $show_order = $("#show_order_" + $(this).data("order-id"))
+  if( $show_order.length > 0 ){
+    $show_order.stop().toggle();
+    return false
+  }
+  else{
+    return true;
+  }
+});
+</script>

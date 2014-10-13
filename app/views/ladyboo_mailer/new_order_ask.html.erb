@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+  <p>親愛的管理員，您好：</p>
+
+  <p>訂單編號：<%= @order.ordernum%>，</p>
+  <p>會員於訂單中留言：</p>
+  <p><%= @order.orderasks.last.description %></p>
+  <p>提醒您請盡速處理。！</p>
+
+  <p><%= link_to "後台登入頁link", new_admin_session_url ,target: "_blank" %></p>
+  
+  <%= render "ladyboo_mailer/footer" %>
+</body>
+</html>

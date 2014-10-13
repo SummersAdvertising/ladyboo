@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  tracking_url: MyString
+  normal_fee: 1
+  discount_fee: 1
+  discount_criteria: 1
+  iscod: MyString
+  shipping_condition: MyString
+
+two:
+  name: MyString
+  tracking_url: MyString
+  normal_fee: 1
+  discount_fee: 1
+  discount_criteria: 1
+  iscod: MyString
+  shipping_condition: MyString

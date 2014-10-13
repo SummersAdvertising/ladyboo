@@ -1,0 +1,122 @@
+<!-- <div> -->
+  <%# link_to "詳細內容", "../#{params[:product_id]}" %>
+  <%# link_to "庫存管理", "javascript:void(0);" %>
+<!-- </div> -->
+
+<!-- <a href="javascript:void(0);" class="toggle_new_stock">新增庫存</a> -->
+
+<%# @product_stocks.each do |stock| %>
+<%# end %>
+<header>
+<h2 class="left">商品管理</h2>
+
+<nav class="left">
+    <%= link_to "簡介", basic_info_admin_product_cate_product_path(@product_cate, @product)%>
+    <%= link_to "照片", productphoto_upload_admin_product_cate_product_path(@product_cate, @product)%>
+    <%= link_to "風味", taste_attributes_admin_product_cate_product_path(@product_cate, @product)%>
+    <%= link_to "其他", free_paragraph_admin_product_cate_product_path(@product_cate, @product)%>
+    <%= link_to "庫存", admin_product_cate_product_stocks_path(@product_cate, @product), class: "active" %>
+</nav>
+
+</header>
+<article>
+  <div class="hgroup">
+  </div>        
+  
+    <div class="list">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <% @product_stocks.each do |stock| %>
+      
+        <tr class="show_stock_<%= stock.id %>">
+          <td width="6%" valign="top">&nbsp;</td>
+          <td width="70%">
+            <%= stock.name %><%= show_stock_amount(stock) %><%# stocks_helper %>
+          </td>
+          <td width="18%" align="right">
+            <div class="tool">
+              <%= link_to "", "javascript:void(0);", :data => { :id => stock.id }, :class => "edit" %>
+              <%# link_to "", "stocks/#{stock.id}", :data => { :confirm => "將會刪除庫存，確定繼續？" }, :method => :delete, :class => "delete" %>
+            </div>
+          </td>
+        </tr>
+        
+        <tr class="edit_stock_<%= stock.id %> list-edit" style="display:none;">
+          <%= form_for(stock, :url => "product_stocks/#{stock.id}" ) do |f| %>
+          <td width="6%" valign="top">&nbsp;</td>
+          <td width="30%">
+            <%= f.text_field :name ,class: 'text' %>
+          </td>
+          <td width="30%">
+            <%= f.check_box :assign_amount, :id => "product_stock_assign_amount_#{stock.id}" %><%= f.label "assign_amount_#{stock.id}", "是否指定庫存量？" %>
+          </td>
+          <td width="10%">
+            <%= f.text_field :amount, :placeholder => "庫存量", class: 'text' %>
+          </td>
+          <td width="18%" align="right">
+            <div class="tool">
+              <a href="javascript: document.getElementById('edit_product_stock_<%= stock.id%>').submit();" class="uvs" data-no-turbolink = true >儲存</a>
+              <%= link_to("取消", "javascript:void(0);", :class => "uvs cancel_edit_stock" , :data => { :id => stock.id } )%>
+            </div>
+          </td>
+          <% end %>
+        </tr>
+  
+  
+        <!-- <tr class="list-new edit_stock" style="display:none;">
+          <%# form_for(@product_stock, :url => "stocks") do |f| %>
+          <td>
+            <%# f.text_field :name, :placeholder => "庫存名稱" %>
+            <%# f.check_box :assign_amount %><%# f.label :assign_amount, "是否指定庫存量？" %>
+            <%# f.text_field :amount, :placeholder => "庫存量" %>
+          </td>
+          <td align="right">
+            <%# f.submit "儲存" %>
+            <%# link_to "取消", :class => "cancel" %>
+          </td>
+          <%# end %>
+        </tr> -->
+        </table>
+      <% end %>
+    </div><!--form-->
+  
+
+    <div class="button"> 
+        <%= link_to image_tag("/images/admin/left.png")+"返回", admin_product_cate_path(@product.product_cate), class: "left" %>
+        <!-- <a href="javascript: document.getElementById('patchthisproduct').submit();" class="right highlight" data-no-turbolink = true >儲存<img src="<%# image_path("save.png") %>"></a> -->
+    </div>
+
+</article>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  // $(".toggle_new_stock").click(function(){
+  //   if($("tr[class*=edit_stock]:visible").length > 0){
+  //     alert("請先完成編輯中的產品庫存");
+  //   }
+  //   else{
+  //     $(".list-new").toggle();
+  //   }
+  // });
+
+  $(".edit").click(function(){
+    $active_id = $(this).data("id");
+    if($("tr[class*=edit_stock]:visible").length > 0){
+      alert("請先完成編輯中的產品庫存");
+    }
+    else{
+      toggle_edit_area($active_id);
+    }
+  });
+
+  $(".cancel_edit_stock").click(function(){
+    $active_id = $(this).data("id");
+    toggle_edit_area($active_id);
+  });
+
+  function toggle_edit_area(active_id){
+    $("tr.edit_stock_" + active_id).toggle();
+    $("tr.show_stock_" + active_id).toggle();
+  }
+});
+</script>

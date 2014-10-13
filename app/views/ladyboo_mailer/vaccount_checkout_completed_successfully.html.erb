@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+  <%= render "ladyboo_mailer/header_logo" %>  
+  
+  <p>親愛的會員 <%= @order.buyer_name%>，您好：</p>
+
+  <p>感謝您對ladyboo的支持，（訂單編號：<%= @order.ordernum%>）</p>
+  <p>您的匯款帳號已產生：<%= @order.accountinfo %>，請您於<%= @payment_window.days.from_now.strftime("%Y/%m/%d") %> 23:59:59前，</p>
+  <p>就近選擇任一部金融行庫或ATM自動提款機繳款，逾期訂單會自動取消，謝謝。</p>
+  
+  <p>銀行：玉山銀行 敦南分行（銀行代碼：808）</p>
+  <p>帳號：<%= @order.accountinfo.unpack('a5a5a4').join('-') %></p>
+
+  <p>為了保護您的個人資料安全，本通知信將不顯示訂單明細。</p>
+
+  <p>建議您可以<%= link_to "登入ladyboo網站", user_session_url ,target: "_blank" %>，查詢您的訂單以及處理進度。</p>
+
+  <%= render "ladyboo_mailer/footer" %>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<article>
+  <div class="hgroup">
+    <div class="user left"> <img src="/images/admin/avator.jpg">
+      <%= link_to @user.username , admin_user_path(@user) %>
+    </div>
+  </div>
+  <div class="list">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <th width="5%" align="center" class="icon"></th>
+        <th width="12%" align="center"><a href="javascript:void(0);">匯款方式</a></th>
+        <th width="21%" align="left"><a href="javascript:void(0);">時間</a></th>
+        <th width="16%" align="left"><a href="javascript:void(0);">編號</a></th>
+        <th width="5%" align="center"><a href="javascript:void(0);">收款</a></th>
+        <th width="5%" align="center"><a href="javascript:void(0);">出貨</a></th>
+        <th width="30%" align="right"></th>
+      </tr>
+      <tr>
+        <td class="icon"></td>
+        <td align="center"><%= @order.get_payment_type %></td>
+        <td><span class="time"><%= @order.created_at.strftime("%Y-%m-%d %H:%M") %></span></td>
+        <td><a href="javascript:void(0);"><%= @order.ordernum %></a></td>
+        <td align="center"><%= is_order_paid(@order) %></td>
+        <td align="center"><%= is_order_delivered(@order) %></td>
+        <td align="right">&nbsp;</td>
+      </tr>
+      <tr class="list-view">
+        <td colspan="7">
+          <div class="form">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">  
+                <tr>
+                  <th width="4%" align="left" valign="top">&nbsp;</th>
+                  <th width="61%" align="left" valign="top">明細</th>
+                  <th width="9%" align="center" valign="top">數量</th>
+                  <th width="12%" align="center" valign="top">單價</th>
+                  <th width="14%" align="center" valign="top">小計</th>
+                </tr>
+
+                <% @order.orderitems.each_with_index do |item, index| %>
+                  <tr>
+                    <td align="left"><%= index + 1%></td>
+                    <td align="left"><%= "#{ item.item_name }（#{ item.item_stockname }）" %></td>
+                    <td align="center"><%= item.amount %></td>
+                    <td align="center"><%= number_with_delimiter(item.item_price) %></td>
+                    <td align="center"><%= number_with_delimiter(item.item_price * item.amount) %></td>
+                  </tr>
+                <% end %>
+
+                <tr class="total">
+                  <td colspan="3">
+                    
+                    <% if !@order.order_memo.nil? && !@order.order_memo.empty?  %>
+                    附註:<br>  
+                      <% JSON.parse_if_json(@order.order_memo).each do | attr | %>
+                  
+                          <% @order.orderitems.each do |item| %>
+                           
+                            <% if attr[1]["stock_id"] ==  item.product_stock_id && attr[1]["needgrind"] == "true" %>
+                        
+                                <%= attr[1]["amount"] %>包
+                                <%= item.item_name %>
+                                <%= "不" unless attr[1]["needgrind"] == "true" %>需要研磨
+                                <%= attr[1]["grindlevel"] if attr[1]["needgrind"] == "true" %>
+                              <br>  
+                            <% end %>
+                           
+                          <% end %>
+                        
+                      <% end %>
+                    <% end %>
+                    
+                  </td>
+                  <td align="right">小計： </td>
+                  <td align="center"><%= number_with_delimiter(@sum = sum_order_items(@order.orderitems)) %><%# orders_helper %></td>
+                </tr>
+                <tr>
+                  <td colspan="3" align="left">&nbsp;</td>
+                  <td align="right">運費： </td>
+                  <td align="center"><%= number_with_delimiter( @shipping_fee = get_shipping_fee_from_order(@order) ) %><%# orders_helper %></td>
+                </tr>
+                <tr>
+                  <td colspan="3" align="left">&nbsp;</td>
+                  <td align="right">總結： </td>
+                  <td align="center"><%= number_with_delimiter( @sum + @shipping_fee )%><%# orders_helper %></td>
+                </tr>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  <div class="hgroup">
+    <div class="left" style="width:52%">
+      <h3>訂單資訊</h3>
+    </div>
+    <div class="left" style="width:48%">
+      <h3>收件人資訊</h3>
+    </div>
+  </div>
+  <div>
+    <div class="form left" style="width:48%">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <% if @order.payment_type == 'atm_transfer' %>
+        <tr>
+          <td width="25%">帳號後五碼：</td>
+          <td width="75%"><%= @order.accountinfo %></td>
+        </tr>
+        <% end %>
+         <% if @order.payment_type == 'Vaccount' %>
+        <tr>
+          <td width="25%">繳款帳號：</td>
+          <td width="75%"><%= @order.accountinfo.unpack('a5a5a4').join('-') %></td>
+        </tr>
+        <% end %>
+        <tr>
+          <td>運送地區：</td>
+          <td><%= ship_to_where(@order) %></td>
+        </tr>
+        <tr>
+          <td>出貨單號：</td>
+          <td><%= @order.package_tracking_no %> <%= fetch_tracking_url(@order) %></td>
+        </tr>
+        <% if @order.human_involved_memo %>
+        <tr>
+          <td valign="top">處理原因：</td>
+          <td><%= simple_format(@order.human_involved_memo) %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+    <div class="form right" style="width:48%">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="17%">姓名：</td>
+          <td width="83%"><%= @order.receiver_name %></td>
+        </tr>
+        <tr>
+          <td>電話：</td>
+          <td><%= @order.receiver_tel %></td>
+        </tr>
+        <tr>
+          <td valign="top">地址：</td>
+          <td><%= @order.receiver_address %></td>
+        </tr>
+        <% if @order.invoice_type == 'three-copies' %>
+        <tr>
+          <td>抬頭：</td>
+          <td><%= @order.invoice_title %></td>
+        </tr>
+        <tr>
+          <td>統編：</td>
+          <td><%= @order.invoice_companynum %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+  <div class="button"> 
+    <%# link_to image_tag("/images/admin/left.png")+"返回", admin_product_cate_path(@product.product_cate), class: "left" %>
+    <!-- <a class="right highlight">儲存
+      <img src="images/save.png"></a> -->
+  </div>
+</article>

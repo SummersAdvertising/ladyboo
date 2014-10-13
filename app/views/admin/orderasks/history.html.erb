@@ -1,0 +1,36 @@
+<header>
+  <h2 class="left">客服管理</h2>
+  <nav class="left">
+    <%= link_to "未處理", admin_orderasks_path() %>
+    <%= link_to "已處理", history_admin_orderasks_path , class: 'active' %>
+  </nav>
+</header>
+
+<article>
+  <div class="list">
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      
+      <% @orderasks.each do |orderask| %>
+        <tr id="orderask_<%= orderask.id %>">
+          <td width="6%" class="icon"></td>
+          <td width="21%">
+            <span class="time"><%= orderask.created_at.strftime("%Y-%m-%d %H:%M") %></span><br>
+            <%= link_to orderask.order.ordernum, detail_admin_order_path(orderask.order), target: "_blank" %>
+          </td>
+          <td width="60%">
+            <p><%= orderask.description %>
+            </p>
+          </td>
+         <td width="13%"></td>
+        </tr>
+      <% end %>
+
+    </table>
+  </div>
+
+  <div class="page">
+    <%= paginate @orderasks ,:window => 2 %>
+  </div>
+
+</article>

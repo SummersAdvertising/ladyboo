@@ -1,0 +1,32 @@
+    <header>
+      <h2 class="left">topic_collection<span> / 首頁管理</span></h2>
+      <nav class="left"></nav>
+      <div class="explain right"><p>圖片尺寸：</p></div>
+    </header>
+    <article>
+      <div class="form">
+        <%= form_for(@topic_collection, :url => admin_topic_collections_path(), html: { id: "newthistopic_collection" } ) do |f| %>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="7%">topic_collection名稱：</td>
+              <td width="31%">
+               <%= f.text_field :name %>
+              </td>
+              <td width="2%">&nbsp;</td>
+              <td width="7%">&nbsp;</td>
+              <td width="53%">
+               &nbsp; 
+              </td>
+            </tr>
+          </table>
+        <% end %>
+      </div>
+
+      <div class="button">
+        <%= link_to image_tag("/images/admin/left.png")+"返回", admin_topic_collections_path(), class: "left" %>
+        <a href="javascript: document.getElementById('newthistopic_collection').submit();" id="sendtheform" class="right highlight" data-no-turbolink = true >儲存
+          <img src="<%= image_path("/images/admin/up.png") %>">
+        </a>
+      </div>
+
+    </article>  

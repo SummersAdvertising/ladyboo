@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+  <%= render "ladyboo_mailer/header_logo" %>  
+  
+  <p>親愛的會員 <%= @order.buyer_name%>，您好：</p>
+
+  <p>感謝您對ladyboo的支持，</p>
+
+  <p>您所訂購的商品已經出貨，訂單編號： <%= @order.ordernum%> ，</p>
+  <p>預計2~3日內會送達，若您5日內仍未收到商品，請盡速與我們聯絡以利追蹤商品，</p>
+  <p>若您已經收到商品，請無須理會此封信件，謝謝！</p>
+
+  <%= render "ladyboo_mailer/footer" %>
+</body>
+</html>

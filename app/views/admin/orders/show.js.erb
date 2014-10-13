@@ -1,0 +1,4 @@
+var $active_tr = $("#order_<%= @order.id %>");
+var $order_detail = $('<%= (render partial: "show_order_detail", :locals => { order: @order }).gsub!(/\>\s+\</,'><').gsub!(/\s{2,}/,'').html_safe %>');
+
+$order_detail.insertAfter($active_tr).stop().show();

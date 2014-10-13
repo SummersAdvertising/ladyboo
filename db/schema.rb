@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141009075112) do
+ActiveRecord::Schema.define(version: 20141013040615) do
+
+  create_table "addressbooks", force: true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -100,6 +108,18 @@ ActiveRecord::Schema.define(version: 20141009075112) do
     t.datetime "updated_at"
   end
 
+  create_table "deliveries", force: true do |t|
+    t.string   "name"
+    t.string   "tracking_url"
+    t.integer  "normal_fee",         default: 600
+    t.integer  "discount_fee",       default: 0
+    t.integer  "discount_criteria",  default: 6000
+    t.string   "iscod"
+    t.string   "shipping_condition"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "galleries", force: true do |t|
     t.string   "file_name"
     t.string   "content_type"
@@ -111,6 +131,21 @@ ActiveRecord::Schema.define(version: 20141009075112) do
     t.integer  "ranking",         default: 999, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "lookbook_topicships", force: true do |t|
+    t.integer  "lookbook_id"
+    t.integer  "topic_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lookbooks", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "status",     default: "disable"
+    t.integer  "limit",      default: 1
   end
 
   create_table "measurements", force: true do |t|
@@ -125,6 +160,61 @@ ActiveRecord::Schema.define(version: 20141009075112) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "status"
+  end
+
+  create_table "orderasks", force: true do |t|
+    t.integer  "order_id"
+    t.text     "description"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "orderitems", force: true do |t|
+    t.integer  "order_id"
+    t.integer  "product_stock_id"
+    t.string   "item_name"
+    t.string   "item_stockname"
+    t.integer  "item_price"
+    t.integer  "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "orderlogs", force: true do |t|
+    t.integer  "order_id"
+    t.string   "content"
+    t.string   "inner_state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "orders", force: true do |t|
+    t.integer  "user_id"
+    t.string   "ordernum"
+    t.string   "buyer_name"
+    t.string   "buyer_tel"
+    t.string   "receiver_name"
+    t.string   "receiver_tel"
+    t.string   "receiver_address"
+    t.string   "payment_type"
+    t.string   "payment_status"
+    t.string   "invoice_type"
+    t.string   "invoice_companynum"
+    t.string   "invoice_title"
+    t.string   "aasm_state",          default: "hold"
+    t.string   "delivery_type"
+    t.string   "package_tracking_no"
+    t.text     "order_memo"
+    t.text     "human_involved_memo"
+    t.string   "accountinfo"
+    t.integer  "items_total"
+    t.integer  "shipping_fee"
+    t.string   "ship_to"
+    t.string   "shipped",             default: "no"
+    t.string   "paid",                default: "no"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "photos", force: true do |t|
@@ -162,6 +252,45 @@ ActiveRecord::Schema.define(version: 20141009075112) do
     t.text     "model"
     t.string   "highlight"
     t.string   "is_new"
+  end
+
+  create_table "stocks", force: true do |t|
+    t.integer  "product_id"
+    t.string   "name"
+    t.string   "description_1"
+    t.string   "description_2"
+    t.integer  "amount"
+    t.boolean  "assign_amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "topic_collection_topicships", force: true do |t|
+    t.integer  "topic_collection_id"
+    t.integer  "topic_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "topic_collections", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "status",     default: "disable"
+    t.integer  "limit",      default: 1
+  end
+
+  create_table "topic_productships", force: true do |t|
+    t.integer  "topic_id"
+    t.integer  "product_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "topics", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

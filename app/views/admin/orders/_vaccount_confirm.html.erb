@@ -1,0 +1,20 @@
+<div id="wrapper">
+  <div id="up">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td width="24%">繳款帳號：</td>
+            <td width="76%"><%= @order.accountinfo.unpack('a5a5a4').join('-') %></td>
+        </tr>
+        <tr>
+            <td width="24%">訂單金額：</td>
+            <% @sum = sum_order_items(@order.orderitems) %>
+            <% @shipping_fee = get_shipping_fee_from_order(@order)  %>
+            <td width="76%">$<%= number_with_delimiter(@sum + @shipping_fee) %></td>
+        </tr>
+    </table>
+  </div>
+  <div id="down">
+    <%= link_to "取消" , "javascript: void(0);" , class: "cancel" , id: "cancel" %>
+    <%= link_to "確認", "/admin/orders/#{@order.id}/#{params[:event]}" , :method => :post , class: "action_confirmed" , id: "send" %>  
+  </div>
+ </div> 

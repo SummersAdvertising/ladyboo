@@ -1,0 +1,16 @@
+<div id="wrapper">
+  <div id="up">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <%= form_for(@order, :url => "/admin/orders/#{@order.id}/#{params[:event]}", html: { id: "patchthisorder" } ) do |f| %>
+        <tr>
+          <td width="15%" valign="top">備註：</td>
+          <td width="85%"><%= f.text_area :human_involved_memo , class: 'text' %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <div id="down">
+    <%= link_to "取消" , "javascript: void(0);" , class: "cancel" , id: "cancel" %>
+    <a href="javascript: document.getElementById('patchthisorder').submit();" id="send" class="action_confirmed" data-no-turbolink = true >確定</a>
+  </div>
+</div>
