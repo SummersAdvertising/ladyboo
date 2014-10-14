@@ -1,0 +1,14 @@
+<aside class="col-sm-3 hidden-xs" id="aside-left">
+  <% levels = @categories.select { |v| v[2] == @current_root.id } %>
+  <% levels.each do | level1 | %>
+      <%= "<h5>#{level1[3]}</h5>".html_safe %>
+      <ul>
+        <% levels = @categories.select { |v| v[2] == level1[0] } %>
+        <% levels.each do | level2 | %>
+          <li>
+            <%= link_to level2[3], category_path(id: level2[0]) %>
+          </li>
+        <% end %>
+      </ul>
+  <% end %>
+</aside>

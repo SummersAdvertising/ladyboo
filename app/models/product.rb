@@ -2,12 +2,18 @@
 class Product < ActiveRecord::Base
 
   belongs_to :category
+  
+  belongs_to :article, :dependent => :destroy
+  has_many :stocks, dependent: :destroy
+
   has_many :pickups, dependent: :destroy
   has_many :measurements, dependent: :destroy
   has_many :galleries, -> { order('ranking, created_at') } , as: :attachable , dependent: :destroy
 
   has_many :topic_productships, dependent: :destroy
   has_many :topics , through: :topic_productships
+
+  
 
   scope :front_show_by_cate, ->(category_id) { where("category_id = ? AND status = ?", category_id, "enable") }
 

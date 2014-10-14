@@ -1,0 +1,26 @@
+<% content_for :header do %>
+  <div id="banner">
+    <div class="container row">
+      <div class="col-md-3 col-md-offset-9 col-sm-12">您的訂單</div>
+    </div>
+  </div>
+<% end %>  
+<article class="container-fluid">
+  <section class="container row">
+    <div class="col-md-8 col-md-offset-2" >
+      <ul id="step" class="hidden-xs">
+        <li>購物步驟</li>
+        <li>1. 明細確認</li>
+        <li>2. 付款及運送資訊</li>
+        <li>3. 最後確認</li>
+      </ul>
+      <div id="thx" class="text-center">
+        <p>交易失敗<br>
+        <%= "#{@returnparams[:ERR]} 建議採用其他方式結賬" if @returnparams[:ERR] %><br>
+        <br>
+        <%= link_to '返回首頁', root_url %></p>
+      </div>  <!--thx-->
+    </div>
+  </section>
+</article>
+<%# "虛擬帳號：#{@vaccount.to_s}" if @vaccount %>

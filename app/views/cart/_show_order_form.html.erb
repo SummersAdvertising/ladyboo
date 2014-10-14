@@ -1,0 +1,205 @@
+<%= form_for(order, :url => cart_index_path) do |f| %>
+  <div id="pay">
+    <h4 class="clearfix">付款方式 <span class="pull-right hidden-xs">單次實際付款金額未滿1500：運費80元 (離島運費100元)，滿1500：免運費</span></h4>
+    <div class="row">
+      
+      <div class="col-md-3">
+        <%= f.radio_button :payment_type, "atm_transfer", :checked => true %>
+        <label for="order_payment_type_atm_transfer">ATM 轉帳</label>
+      </div>
+      <div class="col-md-9">
+        <label for="order_payment_type_atm_transfer">匯款戶名：Ladyboo</label>
+      </div>
+      
+      <div class="col-md-3">
+        <%= f.radio_button :payment_type, "credit_card" %>
+        <label for="order_payment_type_credit_card">信用卡線上刷卡</label>
+      </div>
+      <div class="col-md-9">
+        <label for="order_payment_type_credit_card">一次付清  (可接受VISA, Master, JCB, 聯合信用卡, 美國運通)</label>
+      </div>
+
+      <div class="col-md-3">
+        <%= f.radio_button :payment_type, "paypal" %>
+        <label for="order_payment_type_paypal">PAYPAL</label>
+      </div>
+      <div class="col-md-9">
+        <label for="order_payment_type_paypal">PAYPAL</label>
+      </div>
+
+    </div>
+  </div>
+  <!--pay-->
+  <div id="info" class="clearfix">
+    <div class="col-md-7" id="info-people">
+      <h4 class="clearfix">填寫收件人資訊<span class="pull-right hidden-xs">
+        <input id="info_as_buyer" type="checkbox" checked><label for="info_as_buyer">同會員資料</label>
+      </span></h4>
+      <div class="column">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <th>收件人</th>
+            <td><%= f.text_field :receiver_name, :class => 'form-control', required: 'required' %>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <span class="hidden-xs">收件人姓名與寄送地址請填寫中文，以利辨識 </span>
+      <div class="column">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <th>行動電話</th>
+            <td><%= f.text_field :receiver_tel, :class => 'form-control', required: 'required' %></td>
+          </tr>
+        </table>
+      </div>
+      <span class="hidden-xs">
+        <input id="update_member_info" name="update_member_info" type="checkbox"><label for="update_member_info">同步更新為會員資料 </label>
+      </span> 
+      <div class="column">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <th>住址</th>
+            <td><%= f.text_field :receiver_address,:class => 'form-control', required: 'required' %></td>
+          </tr>
+        </table>
+      </div>
+      <br>
+      <span class="hidden-xs">
+        <% unless current_user.addressbooks.count >= 5 %>
+        <input type="checkbox" id="add_to_addressbook" name="add_to_addressbook"><label for="add_to_addressbook">設為常用地址 </label>
+        <% end %>
+      </span>
+      <div class="column clearfix hidden-xs" id="addr-list">
+        <h4>常用地址</h4>
+        <ul>
+          <% current_user.addressbooks.each do |addressbook| %>
+            <li>● <a href="javascript:void(0);" class="addressbook"><%= addressbook.address %></a></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-5" id="info-receipt">
+      <h4>發票資訊</h4>
+      發票
+      <%= f.select :invoice_type, [["二聯式", "two-copies"], ["三聯式", "three-copies"]] , class: "form-control" %>
+      <div class='invoice_block' style='display:none;'>
+        <div class="column">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <th>統一編號</th>
+              <td><%= f.text_field :invoice_companynum , class: 'form-control' %></td>
+            </tr>
+          </table>
+        </div>
+        <div class="column">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <th>發票抬頭</th>
+              <td><%= f.text_field :invoice_title , class: 'form-control' %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <br>
+      <span class="hidden-xs">※ 依統一發票使用辦法規定：個人戶(二聯式)發票一經開立，不得任意更改為公司戶(三聯式)發票。</span> 
+    </div>
+  </div>
+  <%= f.hidden_field :buyer_name, :value => current_user.username %>
+  <%= f.hidden_field :buyer_tel, :value => current_user.tel %>
+  <%= hidden_field_tag :current_user_address, current_user.address_to_receive , :class => 'text' %>
+  <%= f.hidden_field :ship_to , value: @ship_to %>
+
+<% end %>
+<!--info-->
+
+<script src="/js_plugins/mask/jquery.mask.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+  $("#order_invoice_type").change(function(){
+    ($(this).val() == "three-copies") ? $(".invoice_block").show() : $(".invoice_block").hide();
+  });
+  
+  $("#order_receiver_name").val($("#order_buyer_name").val());
+  $("#order_receiver_tel").val($("#order_buyer_tel").val());
+  $("#order_receiver_address").val($("#current_user_address").val());
+
+  $("#info_as_buyer").change(function(){
+    if($(this).prop('checked')){
+      $("#order_receiver_name").val($("#order_buyer_name").val());
+      $("#order_receiver_tel").val($("#order_buyer_tel").val());
+      $("#order_receiver_address").val($("#current_user_address").val());
+    }
+    else{
+      $("#order_receiver_name").val("");
+      $("#order_receiver_tel").val("");
+      $("#order_receiver_address").val("");
+    }
+  });
+
+  $("#next_step").click(function(){
+    $(".control_panel").hide();
+    $("#new_order").submit();
+  });
+
+  $("#new_order").submit(function(){
+    if (!$("#agree_privacy").is(":checked")) {
+        alertify.log('請同意站方規則及服務條款與隱私權政策');  
+        $(".control_panel").show();
+        //success
+        //error
+        return false;
+    };
+
+    if (!$("#new_order").valid())
+    {
+      $(".control_panel").show();
+      return false;
+    };
+
+    return true;
+  });
+
+  $(".addressbook").click(function(event){
+    event.preventDefault();
+    $("#order_receiver_address").val($(this).html());
+  });
+
+  $("#new_order").validate({
+    //debug: true,
+    rules: {
+      "order[receiver_name]": {required:true},
+      "order[receiver_address]": {required:true},
+      "order[receiver_tel]": {required:true},
+      "order[invoice_companynum]": {
+        required: { 
+          depends: function(element){
+            if ($('#order_invoice_type').val() == "three-copies")
+            {
+              return true;
+            }else { return false; }
+          }
+        },
+        maxlength: 8,
+        minlength: 8
+      },
+      "order[invoice_title]": {
+        required: {
+          depends: function(element){
+            if ($('#order_invoice_type').val() == "three-copies")
+            {
+              return true;
+            }else { return false; }
+          } 
+        }
+      }
+      
+    }
+  });
+
+  $('#order_invoice_companynum').mask('00000000');
+
+});
+
+</script>

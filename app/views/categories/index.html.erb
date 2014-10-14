@@ -1,0 +1,14 @@
+
+<ul>
+<% @categories.each do |category| %>
+<%# products_helper %>
+<%= show_category(@category, category) %>
+<% end %>
+</ul>
+
+<% @products.each do |product| %>
+<p><%= link_to(product.name, category_product_path(@category, product)) %></p>
+<% end %>
+
+<%# products_helper %>
+<%= no_products_msg(@products.length) %>

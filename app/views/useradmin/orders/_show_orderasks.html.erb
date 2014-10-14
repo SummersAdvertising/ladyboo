@@ -1,0 +1,12 @@
+<h3>聯絡客服</h3>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th>發問日期</th><th>內容</th><th>處理狀態</th>
+  </tr>
+
+  <% orderasks.each do |orderask| %>
+  <tr>
+    <td><%= orderask.created_at.strftime('%Y.%m.%d %H:%M') %></td><td><%= orderask.description %></td><td><%= orderask.get_status %></td>
+  </tr>
+  <% end %>
+</table>

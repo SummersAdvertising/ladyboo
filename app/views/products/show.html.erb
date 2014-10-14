@@ -1,0 +1,161 @@
+<link href="/css/product.css" rel="stylesheet">
+
+<article class="container-fluid">
+  
+  <div class="container">
+    <section class="row" id="product-show">
+      
+      <%= render 'aside_desktop' %>
+      <%# render 'aside_mobile' %><br>
+      
+      <article class="col-sm-9 col-xs-12">
+
+        
+        
+        <div class="row">
+          <div class="sliderContainer col-sm-4">
+            <!-- <span id="slider-prev"></span>  Product slider  <span id="slider-next"></span> -->
+
+            <div class="bxslider text-center" id="photo">            
+                <% @product.galleries.where(type: 'ProductPhotoGallery').each do |attach| %>
+                    <figure>
+                      <image src=<%= "#{attach.attachment.url}" %> class="img-responsive"/>
+                   </figure>
+                <% end %>            
+            </div>
+            <!--photo-->
+            <br>
+            <ul id="thumb">
+              <% @product.galleries.where(type: 'ProductPhotoGallery').each_with_index do |attach, index| %>
+              <li>
+                <a data-slide-index="<%= "#{index}" %>" href="">
+                  <image src=<%= "#{attach.attachment.url}" %> class="img-responsive" />
+                </a>
+              </li>
+              <% end %>
+            </ul>          
+          </div>
+
+          <div class="col-sm-8">
+            <h3><%= @product.name %></h3><%= @product.en_name %>
+            
+            <% unless @product.material.to_hash.length == 0 %>
+              <ul id="features">
+                <%= show_keypoints(@product.material) %>
+              </ul>
+            <% end %>
+
+            <% unless @product.wash.to_hash.length == 0 %>
+              <ul id="features">
+                <%= show_keypoints(@product.wash) %>
+              </ul>
+            <% end %>
+
+            <% unless @product.model.to_hash.length == 0 %>
+              <ul id="features">
+                <%= show_keypoints(@product.model) %>
+              </ul>
+            <% end %>
+          
+            
+            <% if @product.stocks.first.amount - @amount_in_cart > 0 && @product.stocks.first.assign_amount == true %>
+              <%= render partial: "add_to_cart", :locals => { stocks: @product.stocks, amount_in_cart: @amount_in_cart } %>
+            <% elsif @product.stocks.first.assign_amount == false %>
+              <%= render partial: "add_to_cart", :locals => { stocks: @product.stocks, amount_in_cart: @amount_in_cart } %>
+            <% else %>
+              <h3>已售完</h3>
+            <% end %>
+            
+          </div>
+        </div>
+        <!--intro-->
+        <div id="chart" class="row">
+          <div class="col-sm-5 text-center">
+            <% @product.galleries.select{ |v| v['type'] == "TasteAttributeGallery" }.each do |attach| %>
+                <image src=<%= "#{attach.attachment.url}" %> class="img-responsive" />
+            <% end %>
+          </div>
+          <div class="col-sm-7">
+            
+          </div>
+        </div>
+
+        <div class="content"  id="articleContent"></div>    
+        <input id="article_content" style="display:none;" type="text" value="<%= @product.article.content %>">
+        <!--gallery-->
+        <%# unless soldout  %>
+        <!-- <div id="buy-2" class="buy row">
+          <div class="col-sm-offset-3 col-sm-6 col-xs-offset-2 col-xs-8"> 
+            <a href="javascript: document.getElementById('add_to_cart_form').submit();" class="btn btn-block btn-lg" role="button" data-no-turbolink = true >我要購買</a>
+          </div>
+        </div> -->
+        <%# end %>
+        <% if @product.stocks.first.amount - @amount_in_cart > 0 && @product.stocks.first.assign_amount == true %>
+          <%= render partial: "quick_check_out", :locals => { stocks: @product.stocks, amount_in_cart: @amount_in_cart } %>
+        <% elsif @product.stocks.first.assign_amount == false %>
+          <%= render partial: "quick_check_out", :locals => { stocks: @product.stocks, amount_in_cart: @amount_in_cart } %>
+        <% else %>
+          <h3>已售完</h3>
+        <% end %>
+       
+      </article>
+      
+    </section>
+  </div>
+</article>
+
+<script src="/js_plugins/peditor/js/editor.js"></script>
+<script src="/js_plugins/peditor/js/editor_p.js"></script>
+<script src="/js_plugins/peditor/js/editor_img.js"></script>
+<script src="/js_plugins/peditor/js/editor_list.js"></script>
+<script src="/js_plugins/peditor/js/editor_video.js"></script>
+<script src="/js_plugins/peditor/js/jquery.imgareaselect.min.js"></script>
+<!-- bxSlider Javascript file -->
+<script src="/js_plugins/bxslider/jquery.bxslider.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/js_plugins/peditor/css/imgareaselect-default.css" />
+<script type="text/javascript">
+
+    editor.output();
+
+  $('#photo').bxSlider({      
+    pagerCustom: '#thumb',
+    controls: false
+  });  
+
+  $('#thumb').bxSlider({
+    randomStart:true,
+    pager:false,
+    slideWidth: 85,   
+    minSlides: 3,
+    maxSlides: 3,
+    slideMargin: 5
+  });
+    
+    $(function(){ 
+      var _showTab = 0;
+      var $defaultLi = $('.tab li').eq(_showTab).addClass('active');
+      $($defaultLi.find('a').attr('href')).siblings().hide();
+      $('.tab li').click(function() {   
+        var $this = $(this),
+          _clickTab = $this.find('a').attr('href');   
+        $this.addClass('active').siblings('.active').removeClass('active');   
+        $(_clickTab).stop(false, true).fadeIn().siblings().hide(); 
+        return false;
+        }).find('a').focus(function(){
+          this.blur();
+      });
+    });
+
+    $(function(){ 
+      $("#grind select").hide()
+      $("#grind input").click(function(){
+        if( $(this).is(":checked") ){
+          $("#grind select").show()
+        }
+        else{
+          $("#grind select").hide()
+        }
+      });
+    })    
+
+</script>

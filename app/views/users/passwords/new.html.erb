@@ -1,0 +1,49 @@
+<% content_for :header do %>
+  <div id="banner">
+    <div class="container row">
+      <div class="col-md-3 col-md-offset-9 col-sm-12">會員登入</div>
+    </div>
+  </div>
+<% end %>
+
+<article class="container-fluid">
+  <section class="container row" id="member-info">
+    <div class="col-md-10 col-md-offset-1 col-sm-12 row">
+      <article>
+      <%= devise_error_messages! %>
+      <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+          <h3>忘記密碼？</h3>
+          <%# devise_error_messages! %>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <th><img src="/images/mbr-03.jpg"><%= f.label :email %></th>
+              <td><%= f.email_field :email, :autofocus => true , class: 'form-control'%></td>
+            </tr>
+          </table>
+         
+          <div class="text-center">
+            <%= f.submit "密碼重設", class: "btn", data: {disable_with: "..."} %>
+          </div>
+        <% end %>
+      </article>
+    </div>
+  </section>
+</article>
+
+<script src="/js_plugins/jq_validation/jquery.validate.min.js"></script>
+<script src="/js_plugins/jq_validation/additional-methods.min.js"></script>
+<script src="/js_plugins/jq_validation/messages_zh_TW.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#new_user").validate({
+    //debug: true,
+    rules: {
+      "user[email]": {
+        required:true,
+        email: true
+      }
+    }
+  });
+  });
+</script>

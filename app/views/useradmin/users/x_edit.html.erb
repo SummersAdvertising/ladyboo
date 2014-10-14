@@ -1,0 +1,46 @@
+<%= form_for(@user,:url => useradmin_user_path, :html => {:id =>'EditUserForm' , :method => "PATCH"} ) do | f |%>
+<header>
+  <h2>Edit profile</h2>      
+</header>
+<article>              
+    <div class="form">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="12%">姓名：</td>
+          <td width="36%"><%= f.text_field :username, class: 'text' %></td>
+          <td width="4%">&nbsp;</td>
+          <td width="12%">Email：</td>
+          <td width="36%">
+            <%= @user.email %>
+          </td>
+        </tr>
+        <tr>
+          <td>新密碼：</td>
+          <td><%= f.password_field :password, class: 'text' , placeholder: '不變更可不輸入' %></td>
+          <td>&nbsp;</td>
+          <td>確認密碼：</td>
+          <td><%= f.password_field :password_confirmation, class: 'text' , placeholder: '不變更可不輸入' %></td>
+        </tr>
+        <tr>
+          <td>聯絡電話：</td>
+          <td>
+            <%= f.text_field :tel, class: 'text' %>
+          </td>
+          <td>&nbsp;</td>
+          <td>聯絡地址：</td>
+          <td>
+            <%= f.text_field :address %>
+          </td>
+        </tr>
+
+      </table>
+    </div>
+<% end %>
+
+  <div class="button">
+    
+      <a href=<%= useradmin_root_path %> class="left" ><img src="/images/useradmin/left.png">返回</a>
+    
+    <a class='right highlight'  onclick= "$('#EditUserForm').submit()">變更</a>
+  </div>
+<!--button--> 

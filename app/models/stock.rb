@@ -1,6 +1,6 @@
 #encoding: utf-8
-class ProductStock < ActiveRecord::Base
-  resourcify
+class Stock < ActiveRecord::Base
+  # resourcify
   
   belongs_to :product
 

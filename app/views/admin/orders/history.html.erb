@@ -53,7 +53,7 @@ div ,td, p .noTransition {
               付款方式：
             </td>
             <td width="35%">
-              <%= f.select :payment_type_eq, options_for_select([['-- 請選擇 --',nil],['ATM','atm_transfer'], ['信用卡', 'credit_card'], ['貨到付款','COD'], ['虛擬帳號','Vaccount']], nil), class: 'form-control' %>
+              <%= f.select :payment_type_eq, options_for_select([['-- 請選擇 --',nil],['ATM','atm_transfer'], ['信用卡', 'credit_card'], ['Paypal','paypal']], nil), class: 'form-control' %>
             </td>
             <td width="15%" style="padding:0 5px">
               狀態：

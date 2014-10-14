@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Ladyboo -cart</title>
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+
+
+   <script>
+    window.onload= function() {
+    <% if !flash[:notice].nil? %>
+     alertify['success']('<%= flash[:notice] %>', 2000);
+    <% end %>
+    
+    <% if !flash[:alert].nil? %>
+    alertify['error']("<%= flash[:alert].html_safe %>", 2000); 
+    <% end %>
+  }
+  </script>
+  <script>
+jQuery(function($){
+  $("a").focus(function(){
+    $(this).blur();
+  });
+});
+</script>
+
+</head>
+<body>
+
+  <%# render 'layouts/front_shared_header' %>
+  
+  <%= yield %>  
+
+  <%# render 'layouts/front_shared_footer' %>
+
+
+</body>
+
+</html>

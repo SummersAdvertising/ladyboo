@@ -54,4 +54,4 @@ database.yml
 /public/uploads
 /public/assets/*
 
-/app/helpers/esun_helper.rb
+/app/helpers/focas_helper.rb

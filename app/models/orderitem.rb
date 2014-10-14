@@ -42,10 +42,10 @@ class Orderitem < ActiveRecord::Base
 
   def self.rollback_stock(order) #do this when realtime payment failed
     @order_items = order.orderitems
-    @product_stocks = Stock.assigned_amount.where(:id => @order_items.map{ |item| item.product_stock_id })
+    @product_stocks = Stock.assigned_amount.where(:id => @order_items.map{ |item| item.stock_id })
 
     @product_stocks.each do |stock|
-      stock.amount += @order_items.detect{ |item| item.product_stock_id == stock.id }.amount
+      stock.amount += @order_items.detect{ |item| item.stock_id == stock.id }.amount
       stock.save
 
       if(stock.amount <= 0)

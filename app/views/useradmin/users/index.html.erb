@@ -1,0 +1,71 @@
+<% content_for :header do %>
+  <div id="banner">
+    <div class="container row">
+      <div class="col-md-3 col-md-offset-9 col-sm-12">會員帳戶</div>
+    </div>
+  </div>
+<% end %>  
+
+<article class="container-fluid">
+  <section class="container row" id="member-info">
+    <div class="col-md-10 col-md-offset-1 col-sm-12 row">
+      <div class="col-md-3">
+        <aside>
+          <h3 class="hidden-sm hidden-xs">帳戶管理</h3>
+          <ul>
+            <li><%= link_to '訂單管理', useradmin_orders_path %></li>
+            <li class="active"><%= link_to '會員資料', useradmin_users_path %></li>
+            <li><%= link_to '常用地址', useradmin_addressbooks_path %></li>
+          </ul>
+        </aside>
+      </div>
+      <div class="col-md-9">
+        <article>
+          <h3>修改會員資料</h3>
+          <%= form_for(@user,:url => useradmin_user_path(@user), :html => {:id =>'EditUserForm' , :method => "PATCH"} ) do | f |%>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <th width="40%"><img src="/images/mbr-02.jpg">姓名</th>
+                <td><%= f.text_field :username, class: 'form-control' %></td>
+              </tr>
+            </table>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <th width="40%"><img src="/images/mbr-03.jpg">email</th>
+                <td><div class='form-control'><%= @user.email %></div></td>
+              </tr>
+            </table>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <th width="40%"><img src="/images/mbr-04.jpg">設定密碼</th>
+                <td><%= f.password_field :password, class: 'form-control' , placeholder: '不變更可不輸入' %></td>
+              </tr>
+            </table>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <th width="40%"><img src="/images/mbr-04.jpg">確定密碼</th>
+                <td><%= f.password_field :password_confirmation, class: 'form-control' , placeholder: '不變更可不輸入' %></td>
+              </tr>
+            </table>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <th width="40%"><img src="/images/mbr-05.jpg">連絡電話</th>
+                <td><%= f.text_field :tel, class: 'form-control' %></td>
+              </tr>
+            </table>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <th width="40%"><img src="/images/mbr-06.jpg">地址</th>
+                <td><%= f.text_field :address, class: 'form-control' %></td>
+              </tr>
+            </table>
+            <div class="text-right">
+              <%= f.submit '確定完成', class: "btn pull-right" %>
+            </div>
+          <% end %>
+        </article>
+      </div>
+
+   </div>
+  </section>
+</article>

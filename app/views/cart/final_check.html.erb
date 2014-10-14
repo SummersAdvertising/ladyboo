@@ -1,0 +1,131 @@
+<% content_for :header do %>
+  <div id="banner">
+    <div class="container row">
+      <div class="col-md-3 col-md-offset-9 col-sm-12">您的訂單</div>
+    </div>
+  </div>
+<% end %>  
+
+<script src="/js_plugins/colorbox/jquery.colorbox-min.js"></script>
+<link rel="stylesheet" type="text/css" href="/js_plugins/colorbox/colorbox.css" />    
+<style>
+div ,td, p .noTransition {
+    -moz-transition: none;
+    -webkit-transition: none;
+    -o-transition: color 0 ease-in;
+    transition: none;
+}
+</style>
+<script>
+  $(document).ready(function(){
+    $(".confirm").click(function(){
+      
+      $(".confirm").toggle();
+      
+      $.colorbox({
+        inline:true, 
+        width:"50%",
+        escKey: false, 
+        closeButton: false,
+        overlayClose: false,
+        transition: "none",
+        open: true,
+        href: "#inline_content"
+      });
+      
+    });
+
+  });
+</script>
+
+<article class="container-fluid">
+  <section class="container row">
+    <div class="col-md-8 col-md-offset-2" >
+      <ul id="step" class="hidden-xs">
+        <li>購物步驟</li>
+        <li>1. 明細確認</li>
+        <li>2. 付款及運送資訊</li>
+        <li class="active">3. 最後確認</li>
+      </ul>
+      <div id="info">
+        <h4>付款方式： <%= @order.get_payment_type %></h4>
+        <% if @order.payment_type == 'atm_transfer' %>
+          <p>匯款戶名：咖碼股份有限公司<br>
+            銀行：玉山銀行 敦南分行 (銀行代碼:808) 帳號：0314-940-019559</p>
+        <% end %>
+        <h4>收件人資訊</h4>
+        <p>收件人：<%= @order.receiver_name%><br>
+          住址：<%= @order.receiver_address%><br>
+          行動電話：<%= @order.receiver_tel%></p>
+        <h4>發票資訊：<%= name_of_invoice(@order.invoice_type) %></h4>
+        <% if @order.invoice_type == 'three-copies' %>
+          <p>
+          統一編號：<%= @order.invoice_companynum%>     
+          發票抬頭：<%= @order.invoice_title %> 
+          </p>
+        <% end %>
+      </div>
+      <!--info-->
+      <h4 style="padding:2%">確認商品明細</h4>
+      <div id="order">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <th colspan="2">商品名稱</th>
+            <th width="12%">單價</th>
+            <th width="12%">數量</th>
+            <th width="12%">金額</th>
+            <th width="9%"></th>
+          </tr>
+          <%= render partial: "show_order_items_check", :locals => { order_items: @order_items } %>
+        </table>
+      </div>
+      <!--order-->
+      <div id="check" class="clearfix">
+        <div class="pull-right">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="62%" align="right">小計</td>
+              <td width="38%" align="right">$<%= @sum = sum_cart_items(@order_items) %> </td>
+            </tr>
+            <tr>
+              <td align="right">運費</td>
+              <td align="right">$<%= get_shipping_fee_by_type(@order)  %> </td>
+            </tr>
+            <tr>
+              <% if is_delivery_discounted?(@order, @sum) %>
+                <td align="right">滿額免運費</td>
+                <td align="right">$-<%= fetch_discount_price_when_checkout(@order.delivery_type) %>
+                </td>
+              <% end %>
+            </tr>
+            <tr>
+              <td colspan="2" align="right">&nbsp;</td>
+            </tr>
+            <tr>
+              <td align="right"><b>購物總金額</b></td>
+              <td align="right"><b>$<%= @sum + @order.shipping_fee %><%# cart_helper  %></b></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <!--check-->
+      <div id="next" class="clearfix">
+        <% if !@order.nil? %>
+          <%= link_to "確定購買", "#{root_url}cart/confirm", class: "confirm btn pull-right" %>
+          <p style='display:none' class="confirm"><strong>交易進行中 請稍後...</strong></p>
+        <% else %>
+            <%= params[:err] %>
+        <% end %>
+      </div>
+      <!--next--> 
+    </div>
+  </section>
+</article>
+
+<!-- This contains the hidden content for inline calls -->
+<div class="waiting" style='display:none'>
+  <div id='inline_content' style='padding:10px; background:#fff;'>
+    <p><strong>交易進行中 請稍後...</strong></p>
+    <p><%= image_tag("/images/loading.gif") %></p>
+  </div>
+</div>

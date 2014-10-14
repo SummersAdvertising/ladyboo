@@ -1,0 +1,76 @@
+<% content_for :header do %>
+  <div id="banner">
+    <div class="container row">
+      <div class="col-md-3 col-md-offset-9 col-sm-12">您的訂單</div>
+    </div>
+  </div>
+<% end %>  
+
+<article class="container-fluid">
+  <section class="container row">
+    <div class="col-md-8 col-md-offset-2" >
+      <ul id="step" class="hidden-xs">
+        <li>購物步驟</li>
+        <li>1. 明細確認</li>
+        <li class="active">2. 付款及運送資訊</li>
+        <li>3. 最後確認</li>
+      </ul>
+
+      <%= render partial: "show_order_form", :locals => { order: @order, order_items: @order_items } %>
+      
+      <h4 style="padding:2%">確認商品明細</h4>
+      <div id="order">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <th colspan="2">商品名稱</th>
+            <th width="12%">單價</th>
+            <th width="12%">數量</th>
+            <th width="12%">金額</th>
+            <th width="9%"></th>
+          </tr>
+
+          <%= render partial: "show_order_items_check", :locals => { order_items: @order_items } %>
+
+        </table>
+      </div>
+      <!--order-->
+      <div id="check" class="clearfix">
+        <div class="pull-right">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="62%" align="right"><b>小計</b></td>
+              <td width="38%" align="right"><b>$<%= @sum = sum_cart_items(@order_items) %><%# cart_helper  %></b></td>
+            </tr>            
+          </table>
+        </div>
+        <div class="pull-left">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="7%" valign="top">
+                <input type="checkbox" id="agree_privacy" class="checkbox">
+              </td>
+              <td width="93%" valign="top">
+                <label for="agree_privacy">
+                  我已仔細閱讀並明瞭「<a href="#">服務條款</a>」、「<a href="#">隱私權政策</a>」、
+                  「<a href="#">退貨須知</a>」等所載內容及其意義，茲同意該等條款規定，
+                  並願遵守網站現今、嗣後規範的各種規則。
+                </label>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <!--check-->
+      <div id="next" class="clearfix control_panel">
+        <%# link_to("上一步", cart_index_path, :id => "prev") %>
+        <%= link_to("確認結帳", "javascript: void(0);", :id => "next_step", class: "btn pull-right" ) %>
+        <%= link_to("繼續購物", categories_path, :id => "back", class: "btn pull-right") %>
+      </div>
+      <!--next--> 
+    </div>
+  </section>
+</article>
+
+<script src="/js_plugins/jq_validation/jquery.validate.min.js"></script>
+<script src="/js_plugins/jq_validation/additional-methods.min.js"></script>
+<script src="/js_plugins/jq_validation/messages_zh_TW.js"></script>

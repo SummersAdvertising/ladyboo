@@ -14,7 +14,10 @@
 //= require jquery_ujs
 //= require ckeditor/init
 //= require ckeditor/config.js
+//= require ckeditor/plugins/youtube/plugin
+//= require ckeditor/plugins/youtube/lang/zh
 //= require alertify
 //= require jquery.remotipart
 //= require jquery-ui/sortable
+//= require jquery-ui/accordion
 //= require_tree .

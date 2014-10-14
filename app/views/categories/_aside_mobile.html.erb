@@ -1,0 +1,24 @@
+<aside class="visible-xs" id="aside-up">
+  <% levels = @categories.select { |v| v[2] == @current_root.id } %>
+  <ul class="tab">
+    <% levels.each_with_index do | level1 , index| %>
+    <li>
+      <a href="<%= "#cate-#{index+1}" %>"><%= level1[3] %></a>
+    </li>
+    <% end %>
+  </ul>
+
+  <div class="sub">
+    <% levels = @categories.select { |v| v[2] == @current_root.id } %>
+    <% levels.each_with_index do | level1, index | %>
+        <ul id="<%= "cate-#{index+1}" %>">
+          <% levels = @categories.select { |v| v[2] == level1[0] } %>
+          <% levels.each do | level2 | %>
+            <li>
+              <%= link_to level2[3], category_path(id: level2[0]) %>
+            </li>
+          <% end %>
+        </ul>
+    <% end %>
+  </div>
+</aside>

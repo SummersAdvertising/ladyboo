@@ -1,0 +1,47 @@
+<article class="container-fluid">
+  <section class="container row">
+    <div class="col-md-8 col-md-offset-2" >
+      <ul id="step" class="hidden-xs">
+        <li>購物步驟</li>
+        <li>1. 明細確認</li>
+        <li>2. 付款及運送資訊</li>
+        <li>3. 最後確認</li>
+      </ul>
+      <div id="thx" class="text-center">
+        <p><%= image_tag("/images/loading.gif") %> 連線中...<br>
+        <br>
+        <br>
+        <br>
+      </div>  <!--thx-->
+    </div>
+  </section>
+</article>
+
+<%= form_tag("https://www.focas-test.fisc.com.tw/FOCAS_WEBPOS/online/", :id => "send_to_focas", style: "display:block;") do %>
+<%# hidden_field_tag %>
+<%= text_field_tag :MerchantID, get_focas_MID %>
+
+<%= text_field_tag :merID, get_focas_M %>
+
+<%= text_field_tag :TerminalID, "90010001" %>
+
+<%= text_field_tag :lidm, @order.ordernum %>
+
+<%= text_field_tag :purchAmt, ( @order_total = sum_order_items(@order.orderitems)+get_shipping_fee_from_order(@order)) %><br>
+
+<%= text_field_tag :AuthResURL, receive_result_cart_index_url %>
+
+<%= text_field_tag :enCodeType, 'UTF-8' %>
+
+<%= submit_tag %>
+
+<% end %>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  
+  // $("#send_to_focas").submit();
+
+  setTimeout(function() { window.location.href = '<%= "#{receive_result_cart_index_url}?ONO=#{@order.ordernum}&ERR=連線逾時" %>'; }, 15000);
+});
+</script>

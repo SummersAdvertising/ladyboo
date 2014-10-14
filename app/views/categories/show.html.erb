@@ -1,0 +1,98 @@
+<link href="/css/product.css" rel="stylesheet">
+
+<article class="container-fluid">
+  
+  <% if @category.parent_id != 0 && @parent_cate.galleries.first  %>
+    
+    <div class="banner visible-xs" style='background-image:url(<%= "#{@parent_cate.galleries.first.attachment.url}" %>)'></div>
+    
+  <% end %>
+  <div class="container">
+    <section class="row" id="product-list">
+      
+      <%= render 'aside_desktop' %>
+      <%# render 'aside_mobile' %>
+
+      <article class="col-sm-9 col-xs-12">
+        <% if @category.parent_id != 0 && @parent_cate.galleries.first  %>
+    
+          <div class="banner hidden-xs" style='background-image:url(<%= "#{@parent_cate.galleries.first.attachment.url}" %>)'>
+            
+          </div>
+          
+        <% end %>
+        
+       
+
+        <h3><%= @category.name %></h3>
+        
+          <% @products.each_with_index do |product, index| %>
+            <% if index % 3 == 0 %>
+              <div class="row list">   
+                <div class="col-sm-4 clearfix">   
+                  <%= list_product(product) %>
+                  <div class="pull-right">
+                    <p>
+                      <%= link_to category_product_path(@category, product) do %>
+                        <%= product.name%><br>
+                      <% end %>
+                      <% if product.price_for_sale > 0 %>
+                        優惠價 $<%= number_with_delimiter(product.price_for_sale) %> 元
+                      <% else %>
+                        優惠價 $<%= number_with_delimiter(product.price) %> 元
+                      <% end %> 
+                      <span>/ 原價 $<%= number_with_delimiter(product.price) %> 元</span>
+                      </p>
+                  </div>
+                </div>
+              
+            <% else %>
+              <div class="col-sm-4 clearfix">   
+                <%= list_product(product) %>
+                <div class="pull-right">
+                  <p>
+                    <%= link_to category_product_path(@category, product) do %>
+                      <%= product.name%><br>
+                    <% end %>
+                    <% if product.price_for_sale > 0 %>
+                      優惠價 $<%= number_with_delimiter(product.price_for_sale) %> 元
+                    <% else %>
+                      優惠價 $<%= number_with_delimiter(product.price) %> 元
+                    <% end %> 
+                    <span>
+                      / 原價 $<%= number_with_delimiter(product.price) %> 元
+                    </span>
+                  </p>
+                </div>
+              </div>
+            <% end %>
+            
+            <% if index % 3 == 2 %>
+              </div>
+            <% end %>
+
+          <% end %>
+
+          <%# products_helper %>
+          <%= no_products_msg(@products.length) %>
+       
+      </article>
+    </section>
+  </div>
+</article>
+<script>
+$(function(){ 
+  var _showTab = 0;
+  var $defaultLi = $('.tab li').eq(_showTab).addClass('active');
+  $($defaultLi.find('a').attr('href')).siblings().hide();
+  $('.tab li').click(function() {   
+    var $this = $(this),
+      _clickTab = $this.find('a').attr('href');   
+    $this.addClass('active').siblings('.active').removeClass('active');   
+    $(_clickTab).stop(false, true).fadeIn().siblings().hide(); 
+    return false;
+    }).find('a').focus(function(){
+      this.blur();
+  });
+});
+</script>

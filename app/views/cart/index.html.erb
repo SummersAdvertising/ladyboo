@@ -1,0 +1,76 @@
+<% content_for :header do %>
+  <div id="banner">
+    <div class="container row">
+      <div class="col-md-3 col-md-offset-9 col-sm-12">您的訂單</div>
+    </div>
+  </div>
+<% end %>  
+
+<article class="container-fluid">
+  <section class="container row">
+    <div class="col-md-8 col-md-offset-2" >
+      <ul id="step" class="hidden-xs">
+        <li>購物步驟</li>
+        <li class="active">1. 明細確認</li>
+        <li>2. 付款及運送資訊</li>
+        <li>3. 最後確認</li>
+      </ul>
+      <div id="order">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <th colspan="2">商品名稱</th>
+            <th width="12%">單價</th>
+            <th width="12%">數量</th>
+            <th width="12%">金額</th>
+            <th width="9%"></th>
+          </tr>
+          
+          <%= render partial: "show_order_items", :locals => { order_items: @order_items } %>
+          <%= no_order_items_msg(@order_items.length) %>
+          <%# cart_helper  %>
+
+        </table>
+      </div>
+      <div class="note visible-xs" style="color:#d72729">* 可左右滑動來檢閱購物明細</div>
+      <div id="loc" class="clearfix control_panel">   
+        <% if @order_items.length > 0 %>
+        <div class="pull-right">
+            <p>開始結帳，請先選本島、離島或海外取件</p>          
+            <%= button_to("本島", set_ship_to_cart_index_path('taiwan'), :class => "next btn pull-right", :role => 'button', data: {disable_with: "..."} ) %>
+            <%= button_to("離島", set_ship_to_cart_index_path('island'), :class => "next btn pull-right", :role => 'button', data: {disable_with: "..."} ) %>
+            <%= button_to("海外", set_ship_to_cart_index_path('overseas'), :class => "next btn pull-right", :role => 'button', data: {disable_with: "..."} ) %>
+        </div>      
+        <div class="pull-left">
+          <h4>運費說明：</h4><br>  
+* 消費金額未滿1500：運費80元，滿1500：免運費 <br><br>
+* 貨到付款：消費金額 未滿1500：運費+代收費 110元，滿1500：(免運費)代收費30元 <br><br>
+* 離島郵局寄送： 消費金額未滿1500：運費100元，滿1500：免運費<br>
+          <br>
+          <%= link_to("繼續購物", categories_path, :id => "back", class: "btn pull-right", role: "button" ) %>
+        </div>
+
+        <% else %>
+        <div class="pull-left">
+          <%= link_to("繼續購物", categories_path, :id => "back", class: "btn pull-right", role: "button" ) %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+</article>
+
+<%# "ORIGIN HASH=#{JSON.parse_if_json(cookies[:cart_cama])}" %><br>
+<%# "ORIGIN ATTR HASH=#{JSON.parse_if_json(cookies[:cart_cafe_attrs])}" %><br><br>
+
+<script type="text/javascript">
+$(".next").click(function(e){
+  <% if @order_items.length > 0 %>
+    $('.control_panel').hide();
+  <% else %>
+  <% flash.now[:notice] = "購物車內沒有商品" %>
+  
+  return false;
+  <% end %>
+
+});
+</script>

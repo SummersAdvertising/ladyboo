@@ -1,0 +1,107 @@
+<% content_for :header do %>
+  <div id="banner">
+    <div class="container row">
+      <div class="col-md-3 col-md-offset-9 col-sm-12">會員登入</div>
+    </div>
+  </div>
+<% end %>
+
+<article class="container-fluid">
+  <section class="container row" id="member-info">
+    <div class="col-md-10 col-md-offset-1 col-sm-12 row">
+      <article>
+      <%= devise_error_messages! %>
+      <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+          <h3>請填寫您的資料</h3>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <th><img src="/images/mbr-02.jpg">姓名</th>
+              <td><%= f.text_field :username ,class: "form-control", placeholder: '必填' %></td>
+            </tr>
+          </table>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <th><img src="/images/mbr-03.jpg">email</th>
+              <td><%= f.email_field :email ,class: "form-control", placeholder: '此為登入帳號' %></td>
+            </tr>
+          </table>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <th><img src="/images/mbr-04.jpg">設定密碼</th>
+              <td><%= f.password_field :password ,class: "form-control", placeholder: '至少8位數字或英文' %></td>
+            </tr>
+          </table>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <th><img src="/images/mbr-04.jpg">確定密碼</th>
+              <td><%= f.password_field :password_confirmation,class: "form-control" %></td>
+            </tr>
+          </table>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <th><img src="/images/mbr-05.jpg">連絡電話</th>
+              <td><%= f.text_field :tel ,class: "form-control" %></td>
+            </tr>
+          </table>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <th><img src="/images/mbr-06.jpg">地址</th>
+              <td><%= f.text_field :address ,class: "form-control" %></td>
+            </tr>
+          </table>
+          <div style="margin:10% auto 5% auto;width:440px">
+            <%= recaptcha_tags :display => { :theme => "clean" } %>
+          </div>
+          <div class="text-center">
+            <input type="checkbox" id="agree_privacy" >
+            <label for="agree_privacy">
+            我已閱讀 <a href="#" target="_blank">服務條款</a>，<a href="#" target="_blank">隱私條款</a> 並同意註冊成會員
+            </label><br>
+            <%= f.submit "加入會員", class: "btn", data: {disable_with: "..."} %>
+          </div>
+        <% end %>
+      </article>
+    </div>
+  </section>
+</article>
+
+<script src="/js_plugins/jq_validation/jquery.validate.min.js"></script>
+<script src="/js_plugins/jq_validation/additional-methods.min.js"></script>
+<script src="/js_plugins/jq_validation/messages_zh_TW.js"></script>
+
+<script type="text/javascript">
+$("#new_user").submit(function(){
+    if (!$("#agree_privacy").is(":checked")) {
+        alertify.log('請同意服務條款與隱私權政策');  
+        //success
+        //error
+        return false;
+    };
+    return true;
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#new_user").validate({
+    //debug: true,
+    rules: {
+      "user[user_name]": {required:true},
+      "user[email]": {
+        required:true,
+        email: true
+      },
+      "user[password]": {
+        required:true,
+        minlength: 8
+      },
+      "user[password_confirmation]": {
+        required:true,
+        minlength: 8,
+        equalTo: "#user_password"
+      },
+      "user[recaptcha_response_field]": {required:true}
+    }
+  });
+});
+</script>

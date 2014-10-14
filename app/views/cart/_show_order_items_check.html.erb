@@ -1,0 +1,19 @@
+<% order_items.each do |item| %>
+<tr>
+  <td width="12%" class="cover">
+    <% unless item[:product_id].nil? || item[:product_id].empty? %>
+       <% if Product.find_by_id(item[:product_id]).galleries.select{ |v| v['type'] == "ProductPhotoGallery" }.count > 0 %>
+          <%= image_tag Product.find_by_id(item[:product_id]).galleries.select{ |v| v['type'] == "ProductPhotoGallery" }.first.attachment.url %>
+      <% end %>
+    <% end %>
+  </td>
+  <td width="43%" class="name">
+    <%= generate_product_link(item) %>    
+  </td>
+  <td width="12%" align="center">$<%= item[:price_for_sale] > 0 ? item[:price_for_sale] : item[:price] %></td>
+  <td width="12%" align="center"><%= label_tag :amount, item[:amount], :disabled => true %></td>
+  <td width="12%" align="center">$<%= ( item[:price_for_sale] > 0 ? item[:price_for_sale] : item[:price] ) * item[:amount] %></td>
+  <td width="9%" align="center" class="delete">&nbsp;</td>
+</tr>
+
+<% end %>

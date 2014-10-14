@@ -1,0 +1,15 @@
+<% content_for :header do %>
+  <div id="banner">
+    <div class="container row">
+      <div class="col-md-3 col-md-offset-9 col-sm-12">會員帳戶</div>
+    </div>
+  </div>
+<% end %>  
+
+<%= form_for(@addressbook,:url => useradmin_addressbook_path(current_user,@addressbook), :html => {:id =>'EditAddressbookForm' , :method => "PATCH"} ) do | f |%>
+
+  <%= f.text_field :address, class: 'text' %>
+
+  <%= f.submit %>
+
+<% end %>

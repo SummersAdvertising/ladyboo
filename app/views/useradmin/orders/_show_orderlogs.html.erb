@@ -1,0 +1,12 @@
+<h3>訂單更動紀錄</h3>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th>日期</th><th>內容</th>
+  </tr>
+
+  <% orderlogs.each do |orderlog| %>
+  <tr>
+    <td><%= orderlog.created_at.strftime('%Y.%m.%d %H:%M') %></td><td><%= orderlog.content %></td>
+  </tr>
+  <% end %>
+</table>

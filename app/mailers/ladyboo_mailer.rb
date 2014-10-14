@@ -1,6 +1,16 @@
 class LadybooMailer < ActionMailer::Base
   default from: "from@example.com"
   
+  # send to user
+  def welcome(user)
+    attachments.inline['camalogo.jpg'] = with_logo_image
+    ActiveRecord::Base.connection_pool.with_connection do
+
+      @user = user
+      mail(:to => [ user.email ], :subject => "Ladyboo網站 會員註冊通知")
+    end
+  end
+
   def atm_checkout_completed_successfully(order)
     
     # origin

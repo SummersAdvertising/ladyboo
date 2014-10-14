@@ -1,0 +1,48 @@
+<% content_for :header do %>
+  <div id="banner">
+    <div class="container row">
+      <div class="col-md-3 col-md-offset-9 col-sm-12">會員帳戶</div>
+    </div>
+  </div>
+<% end %>  
+
+<article class="container-fluid">
+  <section class="container row" id="member-list">
+    <div class="col-md-10 col-md-offset-1 col-sm-12 row">
+      <div class="col-md-3">
+        <aside>
+          <h3 class="hidden-sm hidden-xs">帳戶管理</h3>
+          <ul>
+            <li class="active"><%= link_to '訂單管理', useradmin_orders_path %></li>
+            <li><%= link_to '會員資料', useradmin_users_path %></li>
+            <li><%= link_to '常用地址', useradmin_addressbooks_path %></li>
+          </ul>
+        </aside>
+      </div>
+      <div class="col-md-9">
+        <article>
+        <div id="order">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <th width="25%">訂單編號</th>
+              <th width="45%">訂單時間</th>
+              <th width="15%">付款方式</th>
+              <th width="15%">處理狀態</th>
+            </tr>
+            <% @orders.each do |order| %>
+            <tr>
+              <td align="center"><%= link_to order.ordernum, useradmin_order_path(order) %></td>
+              <td align="center"><%= order.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+              <td align="center"><%= order.get_payment_type %></td>
+              <td align="center"><%= order.get_payment_status %></td>
+            </tr>
+            <% end %>
+          </table>
+          </div>
+        </article>
+        <br>
+        <p style='text-align:center;'>目前僅提供一年內的交易資料，若您欲查詢一年前的資料，請您來信至service@camacafe.com詢問</p>
+      </div>
+    </div>
+  </section>
+</article>

@@ -1,0 +1,47 @@
+<% content_for :header do %>
+  <div id="banner">
+    <div class="container row">
+      <div class="col-md-3 col-md-offset-9 col-sm-12">會員帳戶</div>
+    </div>
+  </div>
+<% end %>  
+
+<article class="container-fluid">
+  <section class="container row" id="member-show">
+    <div class="col-md-10 col-md-offset-1 col-sm-12 row">
+      <div class="col-md-3">
+        <aside>
+          <h3 class="hidden-sm hidden-xs">帳戶管理</h3>
+          <ul>
+            <li class="active"><%= link_to '訂單管理', useradmin_orders_path %></li>
+            <li><%= link_to '會員資料', useradmin_users_path %></li>
+            <li><%= link_to '常用地址', useradmin_addressbooks_path %></li>
+          </ul>
+        </aside>
+      </div>
+      <div class="col-md-9">
+        <article>
+          <div id="order">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <thead>
+                 <tr>
+                    <td colspan="4"><span>訂單編號：<%= @order.ordernum %></span> <span>訂單時間：<%= @order.created_at.strftime("%Y.%m.%d %H:%M") %></span></td>
+                    <td align="right"><%= link_to "聯絡客服", new_useradmin_orderask_path %></td>
+                  </tr>
+              </thead>              
+            </table>
+          </div>
+          <div id="msg">
+            <%= form_for(@orderask, :url => useradmin_orderasks_path) do |f| %>
+              <%= f.text_area :description, :placeholder => "填寫您的問題，我們將進快與您連絡", :rows => "10", class: "form-control" %>
+              <div class="clearfix">
+                <%= f.submit "送 出", class:"btn pull-right", data: { disable_with: "..." } %>
+                <%= link_to '取 消' , useradmin_order_path(@order), class: "btn pull-right" ,role: "button"%>
+              </div>
+            <% end %>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</article>

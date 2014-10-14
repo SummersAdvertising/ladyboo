@@ -1,0 +1,15 @@
+<div id="buy-2" class="buy row">
+  <%= form_tag(add_cart_index_path, id: "quick_to_cart_form") do %>
+  <%= show_stocks(stocks) %>
+
+  <select name="cart[amount]" id="cart_amount" class="form-control" style="display:none" >
+    <%= show_stock_amount_options(stocks.first, amount_in_cart)%>
+  </select>
+
+
+  <div class="col-md-8 col-md-offset-0 col-sm-12 col-sm-offset-0 col-xs-6 col-xs-offset-3">
+    <%= submit_tag "我要購買", class: "btn btn-block btn-lg" , role:"button", data: {disable_with: "加入購物車..."} %>
+  </div>
+  <!--buy--> 
+  <% end %>
+</div>

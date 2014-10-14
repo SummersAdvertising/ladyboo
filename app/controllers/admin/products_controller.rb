@@ -3,7 +3,7 @@ class Admin::ProductsController < AdminController
   
   before_action :set_product_with_category, only: [:create, :show]
   before_action :set_product, only: [:edit,:update,:destroy]
-  #before_action :get_product_cate, only: [:create]
+  #before_action :get_category, only: [:create]
   
   def show
     # @com_accessories = @product.accessories.where(type: 'ComplimentaryAccessory').includes(:galleries)
@@ -19,6 +19,7 @@ class Admin::ProductsController < AdminController
   def create
 
     @product = Product.create()
+    @product.article = Article.new
 
     @category = Category.find_by_id(params[:category_id])
     @category.products << @product
@@ -27,6 +28,7 @@ class Admin::ProductsController < AdminController
       if( @product.errors.any? )
         format.html { redirect_to :back, alert: "新增失敗" }
       else
+        @product.stocks.create
         format.html { redirect_to edit_admin_category_product_path(@category, @product) }
       end
     end
@@ -130,7 +132,7 @@ class Admin::ProductsController < AdminController
     respond_to do |format|
       if @product.save
         format.html { redirect_to :back, notice: '更新成功' }
-        #format.html { redirect_to admin_product_cate_product_path(@product.product_cate_id, @product) }
+        #format.html { redirect_to admin_category_product_path(@product.category_id, @product) }
       else
         format.html { render :back, notice: @product.errors.full_messages }
       end      
