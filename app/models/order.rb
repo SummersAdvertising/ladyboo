@@ -4,7 +4,7 @@ class Order < ActiveRecord::Base
 
   include Wisper::Publisher
   
-  @@sendmail = false
+  @@sendmail = true
 
   belongs_to :user
   has_many :orderitems, :dependent => :destroy

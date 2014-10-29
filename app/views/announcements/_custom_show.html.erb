@@ -1,0 +1,24 @@
+<div class="cover">
+  <% if @announcement.galleries.select{ |v| v['type'] == "AnnouncementCoverGallery" }.first %>
+    <% announcement_cover_url = @announcement.galleries.select{ |v| v['type'] == "AnnouncementCoverGallery" }.first.attachment.url %>
+    <%= image_tag announcement_cover_url  if announcement_cover_url %>
+  <% end %>
+</div>
+<!--cover-->
+
+<div class="title">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td class="date">
+        <div><b><%= @announcement.created_at.strftime("%d")%></b><br>
+          <%= @announcement.created_at.strftime("%-m")%>
+        </div>
+      </td>
+      <td><h3><%= @announcement.title %></h3></td>
+    </tr>
+  </table>
+</div>
+<!--title-->
+<% if @community.ck_context %>
+  <%= @community.ck_context.html_safe %>
+<% end %>

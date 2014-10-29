@@ -1,0 +1,41 @@
+    <header>
+      <h2 class="left">lookbook<span> / 首頁管理</span></h2>
+      <nav class="left">
+        <%= link_to 'Lookbook', edit_admin_lookbook_path(@lookbook)%>
+        <%= link_to 'WideCover', admin_lookbook_photo_path(@lookbook) %>
+        <%= link_to 'Lookbook Tile', admin_lookbook_tiles_path(@lookbook)%>
+      </nav>
+      <div class="explain right"><p>圖片尺寸：</p></div>
+    </header>
+    <article>
+      <div class="form">
+        <%= form_for(@lookbook, :url => admin_lookbook_upload_photo_path(@lookbook), html: { id: "patchthislookbook" , :multipart => true } ) do |f| %>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="7%">Lookbook名稱：</td>
+              <td width="31%">
+               <%= @lookbook.name %>
+               <%= f.hidden_field :name %>
+              </td>
+              <td width="2%">&nbsp;</td>
+              <td width="7%">&nbsp;</td>
+              <td width="53%">
+                <% if @gallery_count > 0 %>
+                  <%= render 'admin/common/show_by_type', target: @lookbook, target_title: '圖', type: 'LookbookWideCoverGallery', allow_dragable: false %>
+                <% else %>
+                  Wide Cover <%= render 'admin/common/upload_by_type', target_title: '圖' %>
+                <% end %>
+              </td>
+            </tr>
+          </table>
+        <% end %>
+      </div>
+
+      <div class="button">
+        <%= link_to image_tag("/images/admin/left.png")+"返回", admin_lookbooks_path(), class: "left" %>
+        <a href="javascript: document.getElementById('patchthislookbook').submit();" id="sendtheform" class="right highlight" data-no-turbolink = true >變更
+          <img src="<%= image_path("/images/admin/up.png") %>">
+        </a>
+      </div>
+
+    </article> 

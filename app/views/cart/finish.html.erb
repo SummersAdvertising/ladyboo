@@ -1,30 +1,39 @@
-<% content_for :header do %>
-  <div id="banner">
-    <div class="container row">
-      <div class="col-md-3 col-md-offset-9 col-sm-12">您的訂單</div>
+
+<div class="xlg-margin"></div><!-- Space 間隔-->
+
+<div class="container">
+  <header class="content-title"><!-- Start .content-title 標題 -->
+    <div class="title-bg">
+      <h2 class="title cart">YOUR CART<span>購物車</span></h2>
     </div>
-  </div>
-<% end %>  
-<article class="container-fluid">
-  <section class="container row">
-    <div class="col-md-8 col-md-offset-2" >
-      <ul id="step" class="hidden-xs">
-        <li>購物步驟</li>
-        <li>1. 明細確認</li>
-        <li>2. 付款及運送資訊</li>
-        <li>3. 最後確認</li>
+  </header><!-- End .content-title -->
+
+  <div class="container">
+    <header class="stepTag"><!-- Start .stepTag 步驟標籤 -->
+      <ul>
+        <li><span>確認購物明細<br>Confirm order</span></li>
+          <li><span>選擇付款方式<br>Payment</span></li>
+          <li><span>運費計算<br>Shipping</span></li>
+          <li class="active"><span>完成訂購<br>Confirmation</span></li>
       </ul>
-      <div id="thx" class="text-center">
-        <p>感謝您的選購<br>
-        ●<br>
-        您可至信箱查看本次訂單<br>
-        <br>
-        <span>我們收到訂單後即進入備貨、出貨流程，正常訂單約3-7個工作天配送完成(不包括假日)<br>
-        星期五下午5點以後的訂單會在下一個星期的星期一被處理</span><br>
-        <br>
-        <%= link_to '返回首頁', root_url %></p>
-      </div>  <!--thx-->
+    </header><!-- End .stepTag 步驟標籤 -->
+    <h1 class="h1_2">感謝您的選購 ,Thanks！</h1>
+    <div class="thankPanel">
+      <table class="table thanks">
+      <tr>
+          <td><p class="text-center">您可至電子信箱查看本次訂單<br>
+          Check your order status through the order confirmation email. </p><hr></td>
+      </tr>
+      <tr>
+          <td>
+            台灣地區：系統收到訂單後即進入備貨、出貨流程, 非預購商品及正常訂單約 3~7 個工作天配送完成，外島地區約 7~10 個工作天配送完成 (以上皆不包括假日)，星期五下午 5 點以後的訂單會在下一個星期的星期一被處理，一律以系統顯示訂單出貨。<br><br>
+
+            International Orders (EMS): All orders will be processed and delivered within 10~14 days (excluding weekends and holidays). Orders placed on Friday after 5 pm GMT +8 (Taiwan Time Zone) will be processed on the following Monday, your order status in your membership account will be updated to “shipped” once your order is shipped. <%# link_to '返回首頁', root_url %></p>
+          </td>
+      </tr>
+    </table>
     </div>
-  </section>
-</article>
-<%# "虛擬帳號：#{@vaccount.to_s}" if @vaccount %>
+    
+  </div><!-- End .container -->
+  
+</div><!-- End .container -->

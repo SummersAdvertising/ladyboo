@@ -1,0 +1,19 @@
+ <div id="lookbook-layout-4" class="row"><!-- Start #lookbook-layout-4 主題穿搭區塊四 -->
+  <% @tiles.each do |tile| %>
+    <div class="col-md-6 layout">
+      <%= "#{tile.id} - Ranking: [#{tile.ranking}]" %><br>
+      <% if tile.galleries.select{ |v| v['type'] == 'TileCoverGallery' }.first %>
+        <%= image_tag(tile.galleries.select{ |v| v['type'] == 'TileCoverGallery' }.first.attachment.url, class: 'img-responsive')  %>
+      <% end %>
+      <%= link_to lookbook_path(@lookbook), class: 'link' do %>
+        <ul>
+          <li><%= tile.context_1 %></li>
+          <li><%= tile.context_2 %></li>
+          <li><%= tile.context_3 %></li>
+          <li><%= tile.context_4 %></li>
+          <li><%= tile.context_5 %></li>
+        </ul>
+      <% end %>
+    </div>
+  <% end %>
+</div><!-- End #lookbook-layout-4 主題穿搭區塊四 -->

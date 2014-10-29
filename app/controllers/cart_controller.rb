@@ -3,10 +3,12 @@ class CartController < ApplicationController
   require "cart"
   include CartHelper
   include OrdersHelper
-  #Sinclude EsunHelper
+  include FocasHelper
 
   layout "cart"
   
+  skip_before_filter :verify_authenticity_token, :only => [:receive_result]
+
   before_action :record_login_redirect_path, :only => [:check]
   before_action :authenticate_user!, :only => [:check, :create, :post_order, :final_check, :confirm]
   before_action :set_ship_var, :only => [:check]
@@ -66,7 +68,7 @@ class CartController < ApplicationController
   end
 
   def create
-    begin
+    # begin
       @order = current_user.orders.new(order_params)
 
       respond_to do |format|
@@ -85,8 +87,13 @@ class CartController < ApplicationController
           
           session[:temp_order] = encrypted_data
           
+          if @order.payment_type == 'paypal'          
+            format.html { redirect_to express_checkout_cart_index_path() }
+          else
+            format.html { redirect_to final_check_cart_index_path() }  
+          end
       
-          format.html { redirect_to final_check_cart_index_path() }
+          
         else
           
           @order_items = Cart.check_items_in_cart(cookies[:cart_ladyboo], "for_cart")
@@ -96,11 +103,11 @@ class CartController < ApplicationController
           format.html { render action: "check"}
         end
       end
-    rescue
-      flash[:notice] = "Oops..."
-      reset_everything_about_cart
-      redirect_to root_path
-    end
+    # rescue
+    #   flash[:notice] = "Oops..."
+    #   reset_everything_about_cart
+    #   redirect_to root_path
+    # end
   end
   
   def final_check
@@ -125,7 +132,7 @@ class CartController < ApplicationController
         cart_sum = sum_cart_items(@order_items)
 
         # ORDER ATTRIBUTES
-        @order.update({ shipping_fee: define_shipping_fee(@order, cart_sum)} )
+        @order.update({ shipping_fee: define_shipping_fee(@order, cart_sum), token: params[:token], payerid: params[:PayerID]} )
       end
     rescue
       flash[:notice] = "Oops..."
@@ -250,6 +257,38 @@ class CartController < ApplicationController
 
         redirect_to fail_cart_index_path(params)
       end
+    elsif ( !@order.nil? && @order.payment_type == "paypal" && run_out_of_stock == false)
+      begin 
+        @ordersum = sum_order_items(@order.orderitems) + get_shipping_fee_from_order(@order)
+
+        #paypal test: final check page detail
+        response = EXPRESS_GATEWAY.purchase(@ordersum*100,
+          { token: @order.token,
+            payer_id: @order.payerid,
+            currency: "TWD",
+          }
+        )
+        
+        #ActiveMerchant::Billing::PaypalExpressResponse:0x00000105fa29d0 
+        #@params={"timestamp"=>"2014-10-15T07:40:06Z", "ack"=>"Failure", "correlation_id"=>"b7368bd0ec903", "version"=>"72", "build"=>"13298800", "do_express_checkout_payment_response_details"=>nil, "message"=>"Invalid token.", "error_codes"=>"10410", "Timestamp"=>"2014-10-15T07:40:06Z", "Ack"=>"Failure", "CorrelationID"=>"b7368bd0ec903", "Errors"=>{"ShortMessage"=>"Invalid token", "LongMessage"=>"Invalid token.", "ErrorCode"=>"10410", "SeverityCode"=>"Error"}, "Version"=>"72", "Build"=>"13298800", "DoExpressCheckoutPaymentResponseDetails"=>nil}, @message="Invalid token.", @success=false, @test=true, @authorization=nil, @fraud_review=false, @avs_result={"code"=>nil, "message"=>nil, "street_match"=>nil, "postal_match"=>nil}, @cvv_result={"code"=>nil, "message"=>nil}>
+        
+        if response.success?
+          order_goto_next_state(@order)
+          redirect_to finish_cart_index_path()
+        else
+          #something went wrong
+          redirect_to cart_index_path, alert: "交易失敗 請重新下單" 
+        end
+        
+
+      rescue
+        @order.subscribe(Orderlog.new) 
+        #roll back stock
+        Orderitem.rollback_stock(@order)
+        @order.checkout_failed!
+
+        redirect_to fail_cart_index_path(params)
+      end
     elsif (!@order.nil? && run_out_of_stock == false)
       begin
         order_goto_next_state(@order)
@@ -285,16 +324,32 @@ class CartController < ApplicationController
   end
 
   def receive_result
-    # reconsider timeout situation
-    @order = Order.includes(:orderitems).find_by_ordernum(params[:ONO])
-    
-    @ordersum = sum_order_items(@order.orderitems) + get_shipping_fee_from_order(@order)
+    # {"authCode"=>"PP9010",
+    #  "lastPan4"=>"5100",
+    #  "status"=>"0",
+    #  "merID"=>"54158359",
+    #  "xid"=>"O-OBJECT-20141015143412.607-0027",
+    #  "lidm"=>"CR97298383830",
+    #  "cardBrand"=>"VISA",
+    #  "pan"=>"490723******5100",
+    #  "errcode"=>"00",
+    #  "currency"=>"",
+    #  "errDesc"=>"",
+    #  "authRespTime"=>"20141015143439",
+    #  "amtExp"=>"0",
+    #  "authAmt"=>"101"}
 
-    if(params[:RC] == "00" && params[:M] == comfirm_esun_key(@order.ordernum, params))
+    # reconsider timeout situation
+
+    if(params[:errcode] == "00" && params[:status] == "0")
+      @order = Order.includes(:orderitems).find_by_ordernum(params[:lidm])
+      #@ordersum = sum_order_items(@order.orderitems) + get_shipping_fee_from_order(@order)
 
       order_goto_next_state(@order) #@order.checkout_succeeded_general!
       redirect_to finish_cart_index_path  
     else
+      @order = Order.includes(:orderitems).find_by_ordernum(params[:ONO])
+
       @order.subscribe(Orderlog.new)  
       #roll back stock
       Orderitem.rollback_stock(@order)
@@ -309,6 +364,7 @@ class CartController < ApplicationController
     @returnparams = params
     # cookies.delete(:cart_ladyboo)
     session[:final] = nil
+    
   end
 
   def finish
@@ -324,11 +380,11 @@ class CartController < ApplicationController
       @stock = Stock.find_by_id(params[:cart][:stock])
       
       # for grind attribute
-      item_attributes = Hash.new
-      item_attributes["stock_id"] = @stock.id
-      item_attributes["amount"] = params[:cart][:amount]
-      item_attributes["needgrind"] = params[:cart][:needgrind]
-      item_attributes["grindlevel"] = params[:cart][:grindlevel]
+      # item_attributes = Hash.new
+      # item_attributes["stock_id"] = @stock.id
+      # item_attributes["amount"] = params[:cart][:amount]
+      # item_attributes["needgrind"] = params[:cart][:needgrind]
+      # item_attributes["grindlevel"] = params[:cart][:grindlevel]
       
       if(@stock)
         @result = Cart.check_stock(cookies[:cart_ladyboo], @stock, params[:cart][:amount].to_i)
@@ -352,10 +408,14 @@ class CartController < ApplicationController
     @result = Cart.plus_stock(cookies[:cart_ladyboo], params[:id])
     cookies[:cart_ladyboo] = @result[:cart_items]
 
-    @cart_message = @result[:cart_message]
+    @cart_message = @result[:cart_message] unless @result[:cart_message].empty?
 
     respond_to do |format|
-      format.html { redirect_to cart_index_path, alert: @cart_message }
+      if @cart_message
+        format.html { redirect_to cart_index_path, alert: @cart_message }
+      else
+        format.html { redirect_to cart_index_path, notice: '更新購物車！' }
+      end
     end
   end
 
@@ -363,10 +423,14 @@ class CartController < ApplicationController
     @result = Cart.minus_stock(cookies[:cart_ladyboo], params[:id])
     cookies[:cart_ladyboo] = @result[:cart_items]
 
-    @cart_message = @result[:cart_message]
+    @cart_message = @result[:cart_message] unless @result[:cart_message].empty?
 
     respond_to do |format|
-      format.html { redirect_to cart_index_path }
+      if @cart_message
+        format.html { redirect_to cart_index_path, alert: @cart_message }
+      else
+        format.html { redirect_to cart_index_path, notice: '更新購物車！' }
+      end
     end
   end
 
@@ -392,9 +456,65 @@ class CartController < ApplicationController
     end
   end
 
+  #paypal - test: check out with paypal 
+  def express_checkout
+    crypt = ActiveSupport::MessageEncryptor.new(Ladyboo::Application.config.secret_key_base)
+    
+    begin
+      ordernum = crypt.decrypt_and_verify(session[:temp_order])
+    rescue => e
+      redirect_to cart_index_path, notice: "交易過期 請重新下單" and return
+    end
+
+    begin
+      if Order.find_by_ordernum(ordernum).nil?
+        #something wrong page
+        redirect_to cart_index_path, notice: "交易過期 請重新下單" and return
+        #redirect_to final_check_cart_index_path(err: "Something went wrong!") 
+      else
+        @order = Order.find_by_ordernum(ordernum) #Order.where("ordernum = ? ", ordernum).first
+        @order_items = Cart.check_items_in_cart(cookies[:cart_ladyboo], "for_cart")
+
+        cart_sum = sum_cart_items(@order_items)
+        shipping_fee = define_shipping_fee(@order, cart_sum)
+        total_amount = cart_sum + shipping_fee
+        
+        express_items = Array.new
+        @order_items.each do |item|
+          element = {name: item[:name], description: item[:stock_name], quantity: item[:amount].to_s, amount: item[:price_for_sale].to_i*100}
+          express_items << element
+        end
+        #shipping
+        if shipping_fee > 0 
+          ship_element = {name: '運費', description: ship_to_where(@order), quantity: '1', amount: shipping_fee.to_i*100}
+          express_items << ship_element
+        end
+        p total_amount
+        response = EXPRESS_GATEWAY.setup_purchase(total_amount.to_i*100,
+          { ip: request.remote_ip,
+          return_url: final_check_cart_index_url,
+          cancel_return_url: cart_index_url,
+          currency: "TWD",
+          no_shipping: 1,
+          allow_guest_checkout: false,
+          items: express_items#[{name: "Order", description: "Order description", quantity: "1", amount: total_amount*100}]
+          }
+        )
+        
+        redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
+      end
+    rescue
+      flash[:notice] = "Oops..."
+      reset_everything_about_cart
+      redirect_to root_path
+    end
+    
+
+  end
+
   private
     def order_params
-      params.require(:order).permit(:buyer_name, :buyer_tel, :receiver_name, :receiver_tel, :receiver_address, :payment_type, :delivery_type, :order_memo, :invoice_type, :invoice_title , :invoice_companynum, :ship_to)
+      params.require(:order).permit(:buyer_name, :buyer_tel, :receiver_name, :receiver_tel, :receiver_address, :payment_type, :delivery_type, :order_memo, :invoice_type, :invoice_title , :invoice_companynum, :ship_to, :payerid, :token, :invoice_address)
     end
 
     def order_goto_next_state(order)

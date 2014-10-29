@@ -8,11 +8,11 @@
   
   <p>親愛的會員 <%= @order.buyer_name%>，您好：</p>
 
-  <p>感謝您對ladyboo的支持，（訂單編號：<%= @order.ordernum%>）</p>
+  <p>感謝您對 LadyBoo的支持，（訂單編號：<%= @order.ordernum%>）</p>
 
   <p>為了保護您的個人資料安全，本通知信將不顯示訂單明細。</p>
 
-  <p>建議您可以<%= link_to "登入ladyboo網站", user_session_url ,target: "_blank" %>，查詢您的訂單以及處理進度。</p>
+  <p>建議您可以<%= link_to "登入 LadyBoo網站", user_session_url ,target: "_blank" %>，查詢您的訂單以及處理進度。</p>
 
   <%= render "ladyboo_mailer/footer" %>
 </body>

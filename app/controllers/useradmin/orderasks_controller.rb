@@ -1,6 +1,8 @@
 #encoding: utf-8
 class Useradmin::OrderasksController < UseradminController
   
+  before_action :authenticate_user!
+  
   def new
     @order = current_user.orders.find_by_id(params[:id])
     
@@ -11,7 +13,6 @@ class Useradmin::OrderasksController < UseradminController
       redirect_to useradmin_orders_path #, alert: "找不到訂單"
     end
 
-
   end
 
   def create
@@ -21,7 +22,7 @@ class Useradmin::OrderasksController < UseradminController
     respond_to do |format| 
       if @order.save
         format.html { redirect_to useradmin_order_path(@order) } 
-        CamaMailer.new_order_ask(@order).deliver
+        LadyboomailerJob.new.async.perform(LadybooMailer, :new_order_ask, @order)
       else
         @orderask = @order.orderasks.new
         #flash[:notice] = @order.errors.first[1]

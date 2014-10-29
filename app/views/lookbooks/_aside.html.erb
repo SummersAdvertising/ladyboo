@@ -1,0 +1,38 @@
+<aside class="col-md-3 col-sm-4 col-xs-12 sidebar"><!-- Start #sidebar 左清單 --> 
+  <div class="widget"><!-- End .widget --> 
+
+    <div class="panel-group custom-accordion sm-accordion categoryTitle" id="category-filter"><!-- Start .panel-group 分類面板 --> 
+      <div class="accordion-header">
+        <div class="accordion-title markTitle">穿搭主題 <span>Lookbook</span></div>
+      </div>
+      
+      <% @topics.each do | topic | %>     
+        <div class="panel"><!-- Start .panel 分類 --> 
+          <div class="accordion-header">
+            <div class="accordion-title"><span><%= link_to topic.name, lookbook_topic_path(@lookbook, topic) %></span></div>
+            <a class="accordion-btn"></a>
+          </div>
+          <div id='<%= "category-list-#{topic.id}" %>' class="collapse in"><!-- Start .category-list 子面板 --> 
+            
+            <div class="panel-body">
+          
+            </div>
+            
+          </div><!-- End .category-list -->
+        </div>
+      <% end %>
+      
+    </div><!-- End .panel-group --> 
+  </div><!-- End .widget -->
+  
+
+  <div class="widget related"><!-- Start .related 瀏覽歷史 --> 
+    <h3 class="title">Recently Viewed<span>已瀏覽過的商品</span></h3>
+    <div class="related-slider flexslider sidebarslider">
+      <ul class="related-list clearfix">
+        <%= list_recently_viewed(session[:recently_viewed]) %>
+      </ul>
+    </div>
+    <!-- End .related-slider --> 
+  </div>
+</aside><!-- End #sidebar -->

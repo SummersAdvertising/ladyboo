@@ -1,0 +1,59 @@
+<link rel="stylesheet" href="/css/prodList.css">
+<link rel="stylesheet" href="/css/pageSearch.css">
+
+<% content_for :breadcrumb do %>
+  <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; <%= link_to 'FAVORITES', 'javascript:void(0);' %>
+<% end %>
+
+<div class="xlg-margin"></div><!-- Space 間隔 -->
+  <div class="container"><!-- Start .container -->
+    <header class="content-title"><!-- Start .content-title 標題 -->
+        <div class="title-bg">
+          <h2 class="title favorites">FAVORITES<span>我的最愛</span></h2>
+        </div>
+      </header><!-- End .content-title -->
+    <div class="main-content"><!-- Start .main-content 主要商品列表 -->
+      <div class="category-item-container"><!-- Start .category-item-container -->
+        <div class="row"><!-- Start .row -->
+          <% @tracking_lists.includes(:product, :categories,:galleries).each_with_index do |tracking_item, index| %>
+          <div class="col-md-4 col-sm-6 col-xs-12"><!-- Start 商品區塊 -->
+            <% current_product = tracking_item.product %>
+            <% current_category = tracking_item.product.category %>
+            <div class="item">
+              <div class="item-image-container">
+                <figure>
+                  <% if current_product.galleries.select{ |v| v['type'] == 'ProductCoverGallery' }.count > 0 %>
+                    <%= link_to category_product_path(current_category, current_product) do %>
+                      <%= image_tag(current_product.galleries.select{ |v| v['type'] == 'ProductCoverGallery' }.first.attachment.url, class: 'item-image', alt: "item#{index+1}", width: '230px', height: '270px') %>
+                    <% end %>
+                  <% end %>
+                </figure>
+                <% if current_product.highlight.present? %>
+                  <div class="item-price-container"> 
+                    <span class="item-price"><%= current_product.highlight %></span>
+                  </div><!-- .item-price 粉紅標示 -->
+                <% end %>
+                <% if current_product.is_new? %>
+                  <span class="new-rect">NEW</span><!-- .new-rect 新貨標示 -->  
+                <% end %>
+                </div><!-- End .item-image-container --> 
+                <div class="item-meta-container"><!-- Start .item-meta-container 商品文字說明 --> 
+                  <h3 class="item-name">
+                    <%= link_to category_product_path(current_product.category, current_product) do %>
+                      <%= current_product.name %><br><%= current_product.en_name %>
+                    <% end %>
+                  </h3>
+                  <span class="item-price-original">NT$  <%= number_with_delimiter(current_product.price) %></span> 
+                  <span class="item-price-sale">NT$ <%= number_with_delimiter(current_product.price_for_sale) %></span>
+                  <div class="item-action"> 
+                    <%= link_to '取消追蹤', useradmin_tracking_list_path(tracking_item), :method => :delete, :data => {:confirm => "確認取消追蹤？"}, class: "favDelete" %>
+                    <a class='inline icon-button icon-compare pdquickview' data-pd='<%= current_product.id %>' ></a> 
+                  </div>
+                </div><!-- End .item-meta-container -->   
+            </div><!-- End .item 商品 -->
+          </div>
+        <% end %>
+      </div><!-- End .row --> 
+    </div><!-- End .category-item-container -->
+ </div><!-- End .category-item-container -->
+</div><!-- End .container -->

@@ -13,7 +13,7 @@ class Admin::PickupsController < AdminController
   #new
   def new
     @pickup = Pickup.new
-    @products = Product.order(updated_at: :desc).all
+    @products = Product.where.not(id: Pickup.pluck(:product_id)).order(updated_at: :desc)
   end
 
   def create

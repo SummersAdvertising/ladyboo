@@ -4,7 +4,7 @@ module ProductsHelper
   def show_keypoints(all_keypoints)
     keypoints_detail = ""
     all_keypoints.each do |k,v| 
-      keypoints_detail << "<li>#{v}</li>" unless v.empty?
+      keypoints_detail << "#{v}<br>".html_safe unless v.empty?
     end
 
     return keypoints_detail.html_safe

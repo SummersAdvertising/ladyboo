@@ -35,5 +35,17 @@ end
 class CategoryCoverGallery < Gallery
 end
 
+class ProductCoverGallery < Gallery
+end
+
 class ProductPhotoGallery < Gallery
+end
+
+class TopicCoverGallery < Gallery
+end
+
+class TopicBannerGallery < Gallery
+end
+
+class TileCoverGallery < Gallery
 end

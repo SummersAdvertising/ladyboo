@@ -1,117 +1,147 @@
-<%= form_for(order, :url => cart_index_path) do |f| %>
-  <div id="pay">
-    <h4 class="clearfix">付款方式 <span class="pull-right hidden-xs">單次實際付款金額未滿1500：運費80元 (離島運費100元)，滿1500：免運費</span></h4>
-    <div class="row">
-      
-      <div class="col-md-3">
-        <%= f.radio_button :payment_type, "atm_transfer", :checked => true %>
-        <label for="order_payment_type_atm_transfer">ATM 轉帳</label>
-      </div>
-      <div class="col-md-9">
-        <label for="order_payment_type_atm_transfer">匯款戶名：Ladyboo</label>
-      </div>
-      
-      <div class="col-md-3">
-        <%= f.radio_button :payment_type, "credit_card" %>
-        <label for="order_payment_type_credit_card">信用卡線上刷卡</label>
-      </div>
-      <div class="col-md-9">
-        <label for="order_payment_type_credit_card">一次付清  (可接受VISA, Master, JCB, 聯合信用卡, 美國運通)</label>
-      </div>
+  <h1>1. 選擇付款方式<br>　PAYMENT</h1>
 
-      <div class="col-md-3">
-        <%= f.radio_button :payment_type, "paypal" %>
-        <label for="order_payment_type_paypal">PAYPAL</label>
-      </div>
-      <div class="col-md-9">
-        <label for="order_payment_type_paypal">PAYPAL</label>
-      </div>
+  <div class="cartPanel">
+    <%= form_for(order, :url => cart_index_path) do |f| %>
+    <table class="table comfirm">
+      <tr>
+          <td colspan="2"><p>單筆訂單金額 800 元以下運費 80 元 (離島地區 100 元)，單筆訂單 800 元以上享有免郵資優惠。<br>
+  International Orders under NTD 6000 (depending on the up to date currency rate, approximately USD 200), delivery fee is NTD 600 (depending on 
+  the up to date currency rate, approximately USD 20), order over NTD 6000 (depending on the up to date currency rate , approximately USD 200) 
+  will receive free shipping.</p><hr></td>
+      </tr>
+      <tr>
+          <td>
+            <div class="input-group custom-checkbox">
+              <%= f.radio_button :payment_type, "atm_transfer", :checked => true %>
+              <label for="order_payment_type_atm_transfer">ATM 轉帳<br>ATM Transfer</label>
+            </div>
+          </td>
+          <td class="paymentDetail atm">
+            <label for="order_payment_type_atm_transfer">
+              <span>匯款戶名：女駙服飾有限公司</span>　<span>國泰世華銀行 信義分行(總行代碼013)</span>　<span>帳號：888-88-888888-8</span><br>
+              ※ limited to Taiwan customers.
+            </label>
+          </td>
+      </tr>
+      <tr>
+          <td>
+            <div class="input-group custom-checkbox">
+               <%= f.radio_button :payment_type, "credit_card" %>
+               <label for="order_payment_type_credit_card">信用卡<br>Credit Cards</label>
+            </div>
+          </td>
+          <td class="paymentDetail">
+            <label for="order_payment_type_credit_card">
+              線上刷卡一次付清（可接受 Visa, Master, Union Pay and American Express）<br>
+              Visa, Master, Union Pay and American Express<br>
+              <span class="note">* Please note: At check out, the final amount is based on NTD, 1 NTD equals to approximately 0.03 USD.</span>
+            </label>
+          </td>
+      </tr>
+      <tr>
+          <td>
+             <div class="input-group custom-checkbox">
+              <%= f.radio_button :payment_type, "paypal" %>
+              <label for="order_payment_type_paypal">paypal</label>
+             </div>
+          </td>
+          <td>
+            <label for="order_payment_type_paypal">
+              <%= image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif") %>
+            </label>
+          </td>
+      </tr>
 
-    </div>
+    </table>
   </div>
-  <!--pay-->
-  <div id="info" class="clearfix">
-    <div class="col-md-7" id="info-people">
-      <h4 class="clearfix">填寫收件人資訊<span class="pull-right hidden-xs">
-        <input id="info_as_buyer" type="checkbox" checked><label for="info_as_buyer">同會員資料</label>
-      </span></h4>
-      <div class="column">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <th>收件人</th>
-            <td><%= f.text_field :receiver_name, :class => 'form-control', required: 'required' %>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <span class="hidden-xs">收件人姓名與寄送地址請填寫中文，以利辨識 </span>
-      <div class="column">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <th>行動電話</th>
-            <td><%= f.text_field :receiver_tel, :class => 'form-control', required: 'required' %></td>
-          </tr>
-        </table>
-      </div>
-      <span class="hidden-xs">
-        <input id="update_member_info" name="update_member_info" type="checkbox"><label for="update_member_info">同步更新為會員資料 </label>
-      </span> 
-      <div class="column">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <th>住址</th>
-            <td><%= f.text_field :receiver_address,:class => 'form-control', required: 'required' %></td>
-          </tr>
-        </table>
-      </div>
-      <br>
-      <span class="hidden-xs">
-        <% unless current_user.addressbooks.count >= 5 %>
-        <input type="checkbox" id="add_to_addressbook" name="add_to_addressbook"><label for="add_to_addressbook">設為常用地址 </label>
-        <% end %>
-      </span>
-      <div class="column clearfix hidden-xs" id="addr-list">
-        <h4>常用地址</h4>
-        <ul>
-          <% current_user.addressbooks.each do |addressbook| %>
-            <li>● <a href="javascript:void(0);" class="addressbook"><%= addressbook.address %></a></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-    <div class="col-md-5" id="info-receipt">
-      <h4>發票資訊</h4>
-      發票
-      <%= f.select :invoice_type, [["二聯式", "two-copies"], ["三聯式", "three-copies"]] , class: "form-control" %>
-      <div class='invoice_block' style='display:none;'>
-        <div class="column">
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <th>統一編號</th>
-              <td><%= f.text_field :invoice_companynum , class: 'form-control' %></td>
-            </tr>
-          </table>
-        </div>
-        <div class="column">
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <th>發票抬頭</th>
-              <td><%= f.text_field :invoice_title , class: 'form-control' %></td>
-            </tr>
-          </table>
-        </div>
-      </div>
-      <br>
-      <span class="hidden-xs">※ 依統一發票使用辦法規定：個人戶(二聯式)發票一經開立，不得任意更改為公司戶(三聯式)發票。</span> 
-    </div>
-  </div>
-  <%= f.hidden_field :buyer_name, :value => current_user.username %>
-  <%= f.hidden_field :buyer_tel, :value => current_user.tel %>
-  <%= hidden_field_tag :current_user_address, current_user.address_to_receive , :class => 'text' %>
-  <%= f.hidden_field :ship_to , value: @ship_to %>
+  
+  <h1>2. 確認訂單<br>　CONFIRM</h1>
+  <table class="table orderItem">
+    <tr>
+        <th>商品名稱 Name</th>
+        <th>售價 Price</th>
+        <th>數量 Quantity</th>
+        <th>總額 Subtotal</th>
+    </tr>
 
+    <%= render partial: "show_order_items_nop", :locals => { order_items: @order_items } %>
+   
+    <tr>
+      <td colspan="4" class="tableBottom">購物小計 Subtotal  <span class="subtotal">NT$ <%= @sum = sum_cart_items(@order_items) %></span></td>
+    </tr>
+  </table>
+  
+  <h1>3. 填寫配送資料與發票<br>　DELIVERY &amp; BILLING </h1>
+  <div class="cartPanel delivery">
+      <div class="row portfolio-item-container" data-max-col="2">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <h2>填寫收件人資訊 <span>Shipping information</span></h2>
+          <div class="input-group custom-checkbox">
+            <input id="info_as_buyer" type="checkbox" checked>
+            <span class="checbox-container"><i class="fa fa-check"></i></span>
+            <label for="info_as_buyer">同會員資料 Same as membership information</label>
+          </div>
+          <div class="input-group input-container">
+              <span class="input-group-addon"><span class="input-text">收件人大名</span></span>
+              <%= f.text_field :receiver_name, :class => 'form-control input-lg', required: 'required', placeholder: "Name of recipient" %>
+          </div>
+          <div class="input-group input-container">
+              <span class="input-group-addon"><span class="input-text">手機號碼</span></span>
+              <%= f.text_field :receiver_tel, :class => 'form-control input-lg', required: 'required', placeholder: "Phone number " %>
+          </div>
+          <div class="input-group input-container">
+              <span class="input-group-addon"><span class="input-text">收件地址</span></span>
+              <%= f.text_field :receiver_address,:class => 'form-control input-lg', required: 'required', placeholder: "Address" %>
+          </div>
+
+          <div class="input-group custom-checkbox primaryAdd">
+            <% unless current_user.addressbooks.count >= 5 %>
+              <input type="checkbox" id="add_to_addressbook" name="add_to_addressbook">
+              <span class="checbox-container"><i class="fa fa-check"></i></span>
+              <label for="add_to_addressbook">設為常用地址 Set as primary address</label>
+            <% end %>
+          </div>
+
+          <div class="input-group custom-checkbox primaryAdd">
+            <input type="checkbox" id="update_member_info" name="update_member_info">
+            <span class="checbox-container"><i class="fa fa-check"></i></span>
+            <label for="update_member_info">同步更新為會員資料 </label>
+          </div>
+
+          <ul class="primaryAdd2">
+            <span>常用地址 Primary Address</span>
+            <% current_user.addressbooks.each do |addressbook| %>
+              <li id="commonAdd1"><a href="javascript:;" class="addressbook" ><%= addressbook.address %></a></li>
+            <% end %>
+          </ul>
+        </div>
+        
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <h2>發票資訊</h2><a id="receiptLink" href="#" title="電子發票說明 Receipt info e-receipt">電子發票說明  Receipt info e-receipt</a>
+          <p>核准文號：北區國稅北縣三字第 000000000000 號<br>※ 依統一發票使用辦法規定：個人戶（二聯式）發票一經開立，不得任意更改為公司戶（三聯式）發票。</p>
+          <label>發票
+          <%= select_tag "order[invoice_type]", generate_invoice_options, data: {} , class: 'form-control' %>
+          </label>
+          <div class="input-group input-container invoice_block" style="display:none;">
+              <span class="input-group-addon"><span class="input-text">統一編號</span></span>
+              <%= f.text_field :invoice_companynum , class: 'form-control input-lg', placeholder: "Tax ID" %>
+          </div>
+          <div class="input-group input-container invoice_block" style="display:none;">
+              <span class="input-group-addon"><span class="input-text">發票抬頭</span></span>
+              <%= f.text_field :invoice_title , class: 'form-control input-lg',placeholder: "Name on receipt" %>
+          </div>
+          <div class="input-group input-container">
+              <span class="input-group-addon"><span class="input-text">發票地址</span></span>
+              <%= f.text_field :invoice_address , class: 'form-control input-lg',placeholder: "發票地址" %>
+          </div>
+        </div>
+      </div>
+      <%= f.hidden_field :buyer_name, :value => current_user.username %>
+      <%= f.hidden_field :buyer_tel, :value => current_user.tel %>
+      <%= hidden_field_tag :current_user_address, current_user.address_to_receive , :class => 'text' %>
+      <%= f.hidden_field :ship_to , value: @ship_to %>
+  </div>
 <% end %>
-<!--info-->
 
 <script src="/js_plugins/mask/jquery.mask.min.js"></script>
 <script type="text/javascript">
@@ -124,6 +154,8 @@ $(document).ready(function(){
   $("#order_receiver_name").val($("#order_buyer_name").val());
   $("#order_receiver_tel").val($("#order_buyer_tel").val());
   $("#order_receiver_address").val($("#current_user_address").val());
+  $("#order_invoice_address").val($("#current_user_address").val());
+  
 
   $("#info_as_buyer").change(function(){
     if($(this).prop('checked')){

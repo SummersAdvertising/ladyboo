@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>cama 現烘咖啡專門店 -[cama café]</title>
+  <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+  <![endif]-->
+  <meta charset="utf-8">
+  <meta name="Robots" content="index,follow"/>
+  <meta http-equiv="content-language" content="zh-TW" />
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="/css/admin/reset.css">
+  <link rel="stylesheet" href="/css/admin/iframe.css">
+</head>
+<body>
+<%# using by admin iframe pages %>
+<%= yield %>
+
+</body>
+</html>

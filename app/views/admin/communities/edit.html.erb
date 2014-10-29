@@ -31,7 +31,7 @@
         <td width="7%">封面：</td>
         <td width="93%">
           <div class="thumb">
-            <% @community.galleries.select{ |v| v['type'] == "AnnouncementCoverGallery" }.each do |attach| %>
+            <% @community.galleries.select{ |v| v['type'] == "CommunityCoverGallery" }.each do |attach| %>
               <image src=<%= "#{attach.attachment.url}" %> />
               <%= link_to '', admin_gallery_path(attach.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete', title: '刪除' %>
             <% end %>

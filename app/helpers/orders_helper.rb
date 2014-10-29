@@ -109,6 +109,8 @@ module OrdersHelper
         "本島"
       when 'island'
         "離島"
+      when 'overseas'
+        "海外"
     end
   end
 

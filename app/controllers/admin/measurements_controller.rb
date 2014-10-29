@@ -2,7 +2,7 @@
 class Admin::MeasurementsController < AdminController
   
   before_action :set_product, only: [:index, :new, :create, :edit, :update]
-  before_action :set_measurement, only: [:edit, :update]
+  before_action :set_measurement, only: [:edit, :update, :destroy]
 
   def index
     @measurements = @product.measurements
@@ -41,6 +41,13 @@ class Admin::MeasurementsController < AdminController
         format.html { render :back, notice: @measurement.errors.full_messages }
       end      
     end
+  end
+
+  def destroy
+    
+    @measurement.destroy
+    
+    redirect_to :back
   end
 
   private

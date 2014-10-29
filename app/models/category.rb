@@ -2,7 +2,8 @@
 class Category < ActiveRecord::Base
 
   has_many :products, dependent: :destroy
-
+  has_many :stocks, through: :products
+  
   belongs_to :daddy, :class_name => "Category", :foreign_key => 'parent_id' 
   has_many :children,  :class_name => "Category", :foreign_key => 'parent_id'
   has_many :galleries, -> { order('ranking, created_at') } , as: :attachable , dependent: :destroy

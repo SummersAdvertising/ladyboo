@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141013125408) do
+ActiveRecord::Schema.define(version: 20141027112546) do
 
   create_table "addressbooks", force: true do |t|
     t.integer  "user_id"
@@ -66,8 +66,8 @@ ActiveRecord::Schema.define(version: 20141013125408) do
   create_table "banners", force: true do |t|
     t.string   "title"
     t.string   "description"
-    t.integer  "ranking",     default: 999, null: false
-    t.integer  "status"
+    t.integer  "ranking",     default: 999,      null: false
+    t.string   "status",      default: "enable"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -104,6 +104,15 @@ ActiveRecord::Schema.define(version: 20141013125408) do
     t.string   "status"
     t.integer  "article_id"
     t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "contacts", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "subject"
+    t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -215,6 +224,10 @@ ActiveRecord::Schema.define(version: 20141013125408) do
     t.string   "paid",                default: "no"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "token"
+    t.string   "payerid"
+    t.date     "fillout_date"
+    t.string   "invoice_address"
   end
 
   create_table "photos", force: true do |t|
@@ -229,8 +242,8 @@ ActiveRecord::Schema.define(version: 20141013125408) do
     t.string   "title"
     t.string   "description"
     t.integer  "product_id"
-    t.integer  "ranking",     default: 999, null: false
-    t.integer  "status"
+    t.integer  "ranking",     default: 999,      null: false
+    t.string   "status",      default: "enable"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -252,7 +265,19 @@ ActiveRecord::Schema.define(version: 20141013125408) do
     t.text     "model"
     t.string   "highlight"
     t.string   "is_new"
+    t.string   "product_no"
   end
+
+  create_table "roles", force: true do |t|
+    t.string   "name"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
+  add_index "roles", ["name"], name: "index_roles_on_name"
 
   create_table "stocks", force: true do |t|
     t.integer  "product_id"
@@ -263,6 +288,18 @@ ActiveRecord::Schema.define(version: 20141013125408) do
     t.boolean  "assign_amount"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "tiles", force: true do |t|
+    t.integer  "lookbook_id"
+    t.string   "context_1"
+    t.string   "context_2"
+    t.string   "context_3"
+    t.string   "context_4"
+    t.string   "context_5"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "ranking",     default: 999
   end
 
   create_table "topic_collection_topicships", force: true do |t|
@@ -293,6 +330,16 @@ ActiveRecord::Schema.define(version: 20141013125408) do
     t.datetime "updated_at"
   end
 
+  create_table "tracking_lists", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tracking_lists", ["product_id"], name: "index_tracking_lists_on_product_id"
+  add_index "tracking_lists", ["user_id"], name: "index_tracking_lists_on_user_id"
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -310,9 +357,17 @@ ActiveRecord::Schema.define(version: 20141013125408) do
     t.string   "address_to_receive"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "birthday"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "users_roles", id: false, force: true do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+  end
+
+  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
 
 end

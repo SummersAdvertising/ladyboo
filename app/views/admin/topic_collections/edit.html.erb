@@ -1,21 +1,23 @@
     <header>
       <h2 class="left">topic_collection<span> / 首頁管理</span></h2>
-      <nav class="left"></nav>
+      <nav class="left">
+        <%= link_to 'Basic', edit_admin_topic_collection_path(@topic_collection) %>
+      </nav>
       <div class="explain right"><p>圖片尺寸：</p></div>
     </header>
     <article>
       <div class="form">
-        <%= form_for(@topic_collection, :url => admin_topic_collection_path(@topic_collection), html: { id: "patchthistopic_collection" } ) do |f| %>
+        <%= form_for(@topic_collection, :url => admin_topic_collection_path(@topic_collection), html: { id: "patchthistopic_collection" , :multipart => true } ) do |f| %>
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-              <td width="7%">Lookbook名稱：</td>
+              <td width="7%">topic_collection名稱：</td>
               <td width="31%">
                <%= f.text_field :name %>
               </td>
               <td width="2%">&nbsp;</td>
               <td width="7%">&nbsp;</td>
               <td width="53%">
-               &nbsp;
+                
               </td>
             </tr>
           </table>

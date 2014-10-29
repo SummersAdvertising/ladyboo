@@ -1,64 +1,89 @@
-<% content_for :header do %>
-  <div id="banner">
-    <div class="container row">
-      <div class="col-md-3 col-md-offset-9 col-sm-12">您的訂單</div>
-    </div>
-  </div>
-<% end %>  
 
-<article class="container-fluid">
-  <section class="container row">
-    <div class="col-md-8 col-md-offset-2" >
-      <ul id="step" class="hidden-xs">
-        <li>購物步驟</li>
-        <li class="active">1. 明細確認</li>
-        <li>2. 付款及運送資訊</li>
-        <li>3. 最後確認</li>
+<div class="xlg-margin"></div><!-- Space 間隔-->
+<div class="container">
+  <header class="content-title"><!-- Start .content-title 標題 -->
+    <div class="title-bg">
+      <h2 class="title cart">YOUR CART<span>購物車</span></h2>
+    </div>
+  </header><!-- End .content-title -->
+
+  <div class="container">
+    <header class="stepTag"><!-- Start .stepTag 步驟標籤 -->
+      <ul>
+        <li class="active"><span>確認購物明細<br>Confirm order</span></li>
+          <li><span>選擇付款方式<br>Payment</span></li>
+          <li><span>運費計算<br>Shipping</span></li>
+          <li><span>完成訂購<br>Confirmation</span></li>
       </ul>
-      <div id="order">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <th colspan="2">商品名稱</th>
-            <th width="12%">單價</th>
-            <th width="12%">數量</th>
-            <th width="12%">金額</th>
-            <th width="9%"></th>
-          </tr>
-          
-          <%= render partial: "show_order_items", :locals => { order_items: @order_items } %>
-          <%= no_order_items_msg(@order_items.length) %>
-          <%# cart_helper  %>
+    </header><!-- End .stepTag 步驟標籤 -->
+    <div class="mTitle">共計3件商品於購物車<br />3 Products In Yout Cart</div>
 
-        </table>
-      </div>
-      <div class="note visible-xs" style="color:#d72729">* 可左右滑動來檢閱購物明細</div>
-      <div id="loc" class="clearfix control_panel">   
-        <% if @order_items.length > 0 %>
-        <div class="pull-right">
-            <p>開始結帳，請先選本島、離島或海外取件</p>          
-            <%= button_to("本島", set_ship_to_cart_index_path('taiwan'), :class => "next btn pull-right", :role => 'button', data: {disable_with: "..."} ) %>
-            <%= button_to("離島", set_ship_to_cart_index_path('island'), :class => "next btn pull-right", :role => 'button', data: {disable_with: "..."} ) %>
-            <%= button_to("海外", set_ship_to_cart_index_path('overseas'), :class => "next btn pull-right", :role => 'button', data: {disable_with: "..."} ) %>
-        </div>      
-        <div class="pull-left">
-          <h4>運費說明：</h4><br>  
-* 消費金額未滿1500：運費80元，滿1500：免運費 <br><br>
-* 貨到付款：消費金額 未滿1500：運費+代收費 110元，滿1500：(免運費)代收費30元 <br><br>
-* 離島郵局寄送： 消費金額未滿1500：運費100元，滿1500：免運費<br>
-          <br>
-          <%= link_to("繼續購物", categories_path, :id => "back", class: "btn pull-right", role: "button" ) %>
-        </div>
 
-        <% else %>
-        <div class="pull-left">
-          <%= link_to("繼續購物", categories_path, :id => "back", class: "btn pull-right", role: "button" ) %>
-        </div>
+    <table class="table orderItem">
+      <tr>
+          <th>商品名稱 Name</th>
+          <th>售價 Price</th>
+          <th>數量 Quantity</th>
+          <th>總額 Subtotal</th>
+      </tr>
+
+      <%= render partial: "show_order_items", :locals => { order_items: @order_items } %>
+      <%= no_order_items_msg(@order_items.length) %>
+      <%# cart_helper  %>
+      
+      <tr>
+        <td colspan="4" class="tableBottom">購物小計 Subtotal  <span class="subtotal">NT$ <%= number_with_delimiter(sum_cart_items(@order_items) )%></span></td>
+      </tr>
+    </table>
+
+  <div class="row portfolio-item-container choose control_panel" data-max-col="2">
+    <% if @order_items.length > 0 %>
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <p><span class="note">貼心提醒 Note：</span>單筆訂單金額 800 元以下運費 80 元（外島地區運費100元），單筆訂單800 元以上享有免郵資優惠。<br>
+          International Orders under $6000 TWD (depending on the up to date currency rate, approximately USD 200), delivery fee is $600 TWD (depending on the up to date currency rate, approximately USD 20), order over $6000 TWD (depending on the up to date currency rate , approximately USD 200) will receive free shipping.</p>
+        <p class="text-right">
+        <%= link_to categories_path, :id => "back", class: "btn btn-custom-2", role: "button" do %>
+          繼續購物<br>CONTINUE SHOPPING
         <% end %>
+        </p>
       </div>
-    </div>
-  </section>
-</article>
+      
+      <div class="col-md-6 col-sm-6 col-xs-6 choosePlace">
+        <p>開始結帳，請先選擇國內、離島、或海外取件。<br><br>
+        Checkout, please choose Taiwandomestic,other parts of Taiwan or international pickup.</p>
+          <!-- <p class="text-center"> -->
+            <%= button_to set_ship_to_cart_index_path('taiwan'), :class => "btn btn-custom-3 next", data: {disable_with: "..."} do %>
+              國 內<br>Taiwan Domestic
+            <% end %>&nbsp;&nbsp;
+            <%= button_to set_ship_to_cart_index_path('island'), :class => "btn btn-custom-3 next", data: {disable_with: "..."} do %>
+              離 島<br>Other Parts of Taiwan
+            <% end %>&nbsp;&nbsp;
+            <%= button_to set_ship_to_cart_index_path('overseas'), :class => "btn btn-custom-3 next", data: {disable_with: "..."} do %>
+              海 外<br>International
+            <% end %>
+          <!-- </p> -->
+      </div>
+          
 
+      <% else %>
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <p class="text-right">
+            <%= link_to categories_path, :id => "back", class: "btn btn-custom-2", role: "button" do %>
+              繼續購物<br>CONTINUE SHOPPING
+            <% end %>
+          </p>
+        </div>
+
+      <% end %>
+
+    </div>
+
+  </div><!-- End .container -->
+</div><!-- End .container -->
+
+<div class="xlg-margin"></div><!-- Space 間隔 -->
+    
 <%# "ORIGIN HASH=#{JSON.parse_if_json(cookies[:cart_cama])}" %><br>
 <%# "ORIGIN ATTR HASH=#{JSON.parse_if_json(cookies[:cart_cafe_attrs])}" %><br><br>
 

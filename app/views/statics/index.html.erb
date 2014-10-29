@@ -1,20 +1,44 @@
 <!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8"> <![endif]-->
+<!--[if IE 9]> <html class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
 <html>
+<!--<![endif]-->
+
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
   <title>Ladyboo</title>
+  <meta name="description" content="Responsive modern ecommerce Html5 Template">
+  <!--[if IE]> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href='//fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic%7CPT+Gudea:400,700,400italic%7CPT+Oswald:400,700,300' rel='stylesheet' id="googlefont">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/prettyPhoto.css">
+  <link rel="stylesheet" href="/css/revslider.css">
+  <link rel="stylesheet" href="/css/owl.carousel.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/colorbox.css" />
+  
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/index.css">
+  
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+  <!-- Favicon and Apple Icons -->
+  <link href='/images/favicon.ico' rel='shortcut icon' />
+  <link href="/images/favicon.ico" rel="icon" type="image/x-icon" />
+  <link rel="shortcut icon" href="/images/favicon.ico" type="image/vnd.microsoft.icon">
+  <link rel="icon" href="/images/favicon.ico" type="image/vnd.microsoft.icon">
+
   <!--[if lt IE 9]>
-    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//js/html5shiv.js"></script>
+    <script src="//js/respond.min.js"></script>
   <![endif]-->
+
 
    <script>
     window.onload= function() {
@@ -30,13 +54,501 @@
   
 </head>
 <body>
-  static / index
-  <%# render 'layouts/index_header' %>
+  <div id="fb-root"></div>
+  <script>
+  // (function(d, s, id) {
+  //     var js, fjs = d.getElementsByTagName(s)[0];
+  //     if (d.getElementById(id)) return;
+  //     js = d.createElement(s); js.id = id;
+  //     js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&appId=477202859073516&version=v2.0";
+  //     fjs.parentNode.insertBefore(js, fjs);
+  //   }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+  <div id="wrapper">
+    <!--Header Start**************************************************************************************************************--> 
+    <header id="header">
+      <div id="header-top"><!-- Start #header-top上方黑色區塊 -->
+        <div class="container">
+          <div class="header-top-left">
+            <div class="btn-group">
+              <% unless user_signed_in? %>
+                <%= link_to new_user_session_path, method: 'get', class: "btn btn-custom dropdown-toggle" do  %>
+                  <span class="hide-for-xs">會員登入 Login</span><span class="hide-for-lg"><span class="login-menu-icon"></span></span> 
+                <% end %>
+              <% end %>
+              <% if user_signed_in? %>
+                <%= link_to destroy_user_session_path, method: 'delete', class: "btn btn-custom dropdown-toggle" ,method: :delete do %>
+                  <span class="hide-for-xs">會員登出 Logout</span><span class="hide-for-lg"><span class="login-menu-icon"></span></span> 
+                <% end %>
+
+                <%= link_to useradmin_root_path, class: "btn btn-custom dropdown-toggle" do %>
+                  <span class="hide-for-xs"><%= "#{current_user.username} 您好" %></span><span class="hide-for-lg"><span class="login-menu-icon"></span></span> 
+                <% end %>
+
+              <% end %>
+            </div>
+          </div><!-- End .header-top-left -->
+          
+          <div class="header-top-right"><!-- Start .header-top-right -->
+            <div class="dropdown-cart-menu-container pull-right">
+
+              <%= render 'cart/quickview' %>
+
+            </div><!-- End .dropdown-cart-menu-container -->
+            <div class="header-top-dropdowns pull-right">
+              <% if user_signed_in? %>
+                <div class="btn-group">
+                  <%= link_to useradmin_tracking_lists_path, class: "btn btn-custom" do %>
+                    <span class="hide-for-xs"><span class="love-menu-icon"></span> 我的最愛 Favorites</span><span class="hide-for-lg"><span class="love-menu-icon"></span></span>
+                  <% end %>
+                </div>
+              <% end %>
+            </div><!-- End .header-top-dropdowns -->
+          </div><!-- End .header-top-right --> 
+        </div><!-- End .container -->
+      </div><!-- End #header-top -->
+   
+      
+      <div id="inner-header"><!-- Start #inner-header 上方白色區塊 --> 
+        <div id="main-nav-container">
+          <div class="container">
+            <div id="menu-wrapper" class="clearfix">
+              <div class="logo-container"><!-- Start .logo-container -->
+                <h1 class="logo clearfix"> <span>LadyBoo</span> 
+                  <%= link_to root_path, title: "Venedor eCommerce Template" do %>
+                    <img src="/images/logo.png" alt="Venedor Commerce Template" width="184" height="60">
+                  <% end %>
+                </h1>
+              </div><!-- End .logo-container -->
+              <div id="menu-right-side" class="clerfix">
+                <div id="quick-access"><!-- Start #quick-access 搜尋鍵 -->
+                  <form class="form-inline quick-search-form" role="form" action="#">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Search here">
+                    </div>
+                    <button type="submit" id="quick-search" class="btn btn-custom"></button>
+                  </form>
+                </div><!-- End #quick-access -->
+                <nav id="main-nav"><!-- Start #main-nav 選單區 -->
+                  <div id="responsive-nav"><!-- Start #responsive-nav 手機螢幕選單按鈕 -->
+                    <div id="responsive-nav-button"><span id="responsive-nav-button-icon"></span></div> 
+                  </div><!-- End #responsive-nav -->
+                  
+                  <ul class="menu clearfix"><!-- Start .menu 選單列 -->
+                    
+                    <li class="mega-menu-container">
+                      <%= link_to categories_path do %>
+                        品牌總覽<br>
+                        SHOP
+                      <% end %>
+                      <div class="mega-menu clearfix"><!-- Start .mega-menu -->
+                        <% @root_node = Category.return_root_node unless @root_node %>
+                        <% @hierarchy = Category.get_level_hierarchy() unless @hierarchy %>
+                        <% levels = @hierarchy.select { |v| v[2] == @root_node.id } %>
+                          <% levels.each do | level1 | %>
+                            <div class="col-5">
+                              <a href="javascript:void(0);" class="mega-menu-title"><%= level1[3] %></a><!-- End .mega-menu-title -->
+                              <ul class="mega-menu-list clearfix">
+                                <% levels = @hierarchy.select { |v| v[2] == level1[0] } %>
+                                <% levels.each do | level2 | %>
+                                  <li>
+                                    <%= link_to level2[3], category_path(id: level2[0]) %>
+                                  </li>
+                                <% end %>
+                              </ul>
+                            </div>
+                          <% end %>
+                      </div><!-- End .mega-menu -->
+                    </li>
+                    
+                    <li  class="mega-menu-container"> 
+                      <a href="javascript:void(0);">主題專輯<br>LOOK BOOK</a>
+                      <div class="mega-menu clearfix"><!-- Start .mega-menu -->
+                        <% lookbook = Lookbook.where(status: 'enable').first %>
+                        <% if lookbook %>
+                          <div class="col-5">
+                            <%= link_to lookbook.name, lookbook_path(lookbook), class: "mega-menu-title" %><!-- End .mega-menu-title -->
+                            <ul class="mega-menu-list clearfix">
+                              <% lookbook.topics.each do | topic | %>
+                                <li>
+                                  <%= link_to topic.name , lookbook_topic_path(lookbook,topic) %>
+                                </li>
+                              <% end %>
+                            </ul>
+                          </div>
+                        <% end %>
+                        <% topic_collections = TopicCollection.all.limit(4) %>
+                        <% if topic_collections %>
+                          <div class="col-5">
+                            <a href="javascript:void(0);" class="mega-menu-title">系列主題</a><!-- End .mega-menu-title -->
+                            <ul class="mega-menu-list clearfix">
+                              <% topic_collections.each do | collection | %>
+                                <li>
+                                  <%= link_to collection.name , topic_collection_path(collection) %>
+                                </li>
+                              <% end %>
+                            </ul>
+                          </div>
+                        <% end %>
+                      </div>
+                    </li>
+
+                    <li>
+                      <%= link_to page_pages_path('size') do %>
+                        尺寸說明<br>
+                        SIZE
+                      <% end %>
+                    </li>
+                    
+                    <li>
+                      <%= link_to about_pages_path do %>
+                        品牌精神<br>
+                        ABOUT US
+                      <% end %>
+                      <ul>
+                        <li><%= link_to "最新消息", announcements_path %></li>
+                        <li><%= link_to "社群迴響", communities_path %></li>
+                      </ul>
+                    </li>
+                    
+                    <li>
+                      <%= link_to contacts_path do %>
+                        聯絡客服<br>
+                        CONTACT US
+                      <% end %>
+                    </li>
+
+                  </ul><!-- End .menu -->
+                </nav><!-- End #main-nav -->
+              </div><!-- End .menu-right-side -->
+            </div><!-- End .menu-wrapper -->
+          </div><!-- End .container --> 
+        </div><!-- End .main-nav-container --> 
+      </div><!-- End #inner-header --> 
+
+      
+    </header>
+    <!--Header End**************************************************************************************************************--> 
+    <div class="container bottom"> <div class="bgBottom index"></div></div><!-- .bgBottom 下方背景圖 -->
+     <!--Container Start**************************************************************************************************************-->
+    <section id="content">
+      <% if @banners.count > 0 %>
+        <div id="slider-bg"><!-- Start #slider-bg 上方橫福 -->
+          <div class="container">
+            <div id="slider-rev-container">
+              <div id="slider-rev">
+                <ul>
+                  <% @banners.each do |banner| %>
+                    <% if banner.galleries.first %>
+                      <li data-transition="flip" data-slotamount="15" data-masterspeed="400">
+                        <%= link_to banner.description, target: "_blank" do %>
+                        <img src=<%= "#{banner.galleries.first.attachment.url}" %> />
+                        <% end %>
+                      </li>
+                     <% end %>
+                  <% end %>
+                </ul>
+              </div><!-- End #slider-rev --> 
+            </div><!-- End #slider-rev-container --> 
+          </div><!--End .container--> 
+        </div><!-- End #slider-bg 上方橫福 -->
+      <% end %>
+      
+      <div class="xlg-margin"></div><!-- Space 間隔-->
+      
+      <% if @topic_collections.count > 0 %>
+        <div id="home-banners"><!-- Start #home-banners 系列主題 -->
+          <div class="container">
+            <div class="row home-banners">
+              <% @topic_collections.each do |collection| %>
+                <div class="col-md-3 col-sm-3 col-xs-6"> 
+                  <% if collection.galleries.select{ |v| v['type'] == 'TopicCoverGallery' }.first %>
+                    <%= link_to( image_tag(collection.galleries.select{ |v| v['type'] == 'TopicCoverGallery' }.first.attachment.url, class: 'img-responsive', width: 100, height: 100 ) , topic_collection_path(collection)) %>
+                  <% end %>
+                  <%= collection.name %><br>
+                </div>
+              <% end %>
+            </div><!-- End .home-banners --> 
+          </div><!--End .container--> 
+        </div><!-- End #home-banners 系列主題 -->
+      <% end %>
+      <div class="xlg-margin"></div><!-- Space 間隔 -->
+      <% if @lookbook %>
+        <div id="lookbook"><!-- Start #lookbook 主題穿搭 -->
+          <div class="container">
+            <header class="content-title"><!-- Start .content-title 標題 -->
+              <div class="title-bg">
+                <h2 class="title lookbook">LOOKBOOK<span>穿搭主題</span></h2>
+              </div>
+            </header><!-- End .content-title 標題 -->
+            
+              <% case @lookbook.limit %>
+                <% when 1 %>
+                  <%= render 'lookbooks/layout_1' %>
+                <% when 2 %>
+                  <%= render 'lookbooks/layout_2' %>
+                <% when 3 %>
+                  <%= render 'lookbooks/layout_3' %>
+                <% when 4 %>
+                  <%= render 'lookbooks/layout_4' %>
+                <% else %>
+              <% end %>
+        
+          </div>
+        </div><!-- End #lookbook 主題穿搭 -->
+      <% end %>
   
+      <div class="xlg-margin"></div><!-- Space 間隔 -->
+      
+      <% if @pickups.count > 0 %>
+        <div id="pickup"><!-- Start #pickup 明星商品 -->
+          <section id="favoritesBg">
+              <div class="container">
+                <div class="bgFav"></div><!-- .bgFav 粉紅色背景 -->
+              </div>
+          </section>
+          <div class="container">
+            <div class="hot-items carousel-wrapper">
+              <header class="content-title"><!-- Start .content-title 標題 -->
+                <div class="title-bg">
+                  <h2 class="title pickup">PICK UP<span>明星商品</span></h2>
+                </div>
+              </header><!-- End .content-title 標題 -->
+              
+              <div class="carousel-controls"><!-- Start .carousel-controls 上下頁按鈕 -->
+                <div id="hot-items-slider-prev" class="carousel-btn carousel-btn-prev"> </div>
+                <div id="hot-items-slider-next" class="carousel-btn carousel-btn-next carousel-space"> </div>
+              </div><!-- End .carousel-controls 上下頁按鈕 -->
+              
+              <div class="hot-items-slider owl-carousel"><!-- Start .hot-items-slider 明星商品 -->
+
+                <% @pickups.each do |pickup| %>
+                  <div class="item"><!-- Start .item 商品 --> 
+                    <div class="item-image-container">
+                      <figure> 
+                        <%= link_to category_product_path(pickup.product.category, pickup.product), title: pickup.product.name do %>
+                          <%= image_tag(pickup.product.galleries.select{ |v| v['type'] == 'ProductCoverGallery' }.first.attachment.url, class: "img-responsive") unless pickup.product.galleries.select{ |v| v['type'] == 'ProductCoverGallery' }.first.nil? %>
+                        <% end %>
+                      </figure>
+                      <% if pickup.product.highlight.present? %>
+                      <div class="item-price-container"> <span class="item-price"><%= pickup.product.highlight%></span></div><!-- .item-price 粉紅標示 -->
+                      <% end %>
+                      <% if pickup.product.is_new? %>
+                        <span class="new-rect">NEW</span><!-- .new-rect 新貨標示 -->  
+                      <% end %>
+                    </div>
+                    <div class="item-meta-container"><!-- Start .item-meta-container 商品文字說明 --> 
+                      <h3 class="item-name">
+                        <%= link_to category_product_path(pickup.product.category, pickup.product) do %>
+                          <%= pickup.product.name %><br><%= pickup.product.en_name %>
+                        <% end %>
+                      </h3>
+                      <span class="item-price-original">NT$  <%= number_with_delimiter(pickup.product.price) %></span> <span class="item-price-sale">NT$ <%= number_with_delimiter(pickup.product.price_for_sale) %></span>
+                      <div class="item-action"> 
+                        <% if current_user %>
+                          <%= form_for(@tracking_list,:url => useradmin_tracking_lists_path(@tracking_list), :html => {:id =>'NewTrackingListForm' } ) do | f |%>
+                            <%= f.hidden_field :user_id, value: current_user.id , class: 'text' %>
+                            <%= f.hidden_field :product_id, value: pickup.product.id, class: 'text' %>
+                            <%= f.submit "", class: "icon-button icon-like"  %>
+                            <a class='inline icon-button icon-compare pdquickview' data-pd='<%= pickup.product.id %>'></a> 
+                          <% end %>
+                          <%# <a href="javascript: document.getElementById('NewTrackingListForm').submit();" class="icon-button icon-like" data-no-turbolink = true ></a> %>
+                        <% else %>
+                          <%= link_to '', useradmin_tracking_lists_path, class: "icon-button icon-like" %>
+                          <a class='inline icon-button icon-compare pdquickview' data-pd='<%= pickup.product.id %>'></a> 
+                        <% end %>
+                        
+                      </div>
+                    </div><!-- End .item-meta-container 商品文字說明 --> 
+                  </div><!-- End .item 商品 -->
+                <% end %>
+              </div><!-- End .hot-items-slider 明星商品Slider SHOW -->
+
+            </div><!-- End .hot-items --> 
+          </div><!-- End .container --> 
+        </div><!-- End #pickup 明星商品 -->
+      <% end %>
+    </section>
+    <!--Container End**************************************************************************************************************--> 
+
+  <!--Footer Start**************************************************************************************************************-->
+  <footer id="footer">
+    <div id="footer-bottom"><!-- Start #footer-bottom --> 
+      <div class="container">
+        <div class="row"><!-- Start .row --> 
+        <a href="#" id="scroll-top" title="Scroll to Top"><i class="fa fa-angle-up"></i><br>Top</a><!-- #scroll-top 回上方按鈕 -->
+          <div class="col-md-6 col-sm-2 col-xs-12 footer-social-links-container"><!-- Facebook Start --> 
+            <a href="https://www.facebook.com/LadyBooTW" target="_blank">LadyBoo’s Facebook</a>
+            <div class="fb-like" data-href="https://www.facebook.com/LadyBooTW" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+          </div><!-- Facebook End --> 
+          <div class="col-md-6 col-sm-10 col-xs-12 footer-text-container">
+            <p>
+              <%= link_to "隱私權聲明 PRIVACY", page_pages_path("privacy") %>
+              <%= link_to "服務條款 TERMS & CONDITIONS", page_pages_path("terms") %>
+              <%= link_to 'admin', new_admin_session_path %>
+            </p>
+          </div>
+        </div><!-- End .row --> 
+      </div><!-- End .container --> 
+    </div><!-- End #footer-bottom -->
+  </footer>
+  <!--Footer End**************************************************************************************************************--> 
+  </div>
+  
+  <%# render 'layouts/index_header' %>
   <%# render 'layouts/front_shared_footer' %>
-  <%= link_to 'admin', new_admin_session_path %>||
-  <%= link_to 'Categories', categories_path %>||
-  <%= link_to 'Cart', cart_index_path %>||
+  
+  <%# link_to '帳戶', useradmin_orders_path if user_signed_in? %>
+  <%# link_to '註冊', new_user_registration_path unless user_signed_in? %>
+
+<script src="/js/bootstrap.min.js"></script> 
+<script src="/js/jquery.flexslider-min.js"></script> 
+<script src="/js/owl.carousel.min.js"></script> 
+<script src="/js/jquery.themepunch.plugins.min.js"></script> 
+<script src="/js/jquery.themepunch.revolution.min.js"></script> 
+<script src="/js/jquery.colorbox.js"></script> 
+<script src="/js/jquery.bxslider.min.js"></script> 
+<script src="/js/main.js"></script> 
+
+
+
+<script>
+  $(function() {
+    // Slider Revolution
+    jQuery('#slider-rev').revolution({
+      delay:8000,
+      startwidth:1170,
+      startheight:600,
+      onHoverStop:"true",
+      hideThumbs:250,
+      navigationHAlign:"center",
+      navigationVAlign:"bottom",
+      navigationHOffset:0,
+      navigationVOffset:12,
+      soloArrowLeftHalign:"left",
+      soloArrowLeftValign:"center",
+      soloArrowLeftHOffset:0,
+      soloArrowLeftVOffset:0,
+      soloArrowRightHalign:"right",
+      soloArrowRightValign:"center",
+      soloArrowRightHOffset:0,
+      soloArrowRightVOffset:0,
+      touchenabled:"on",
+      stopAtSlide:-1,
+      stopAfterLoops:-1,
+      dottedOverlay:"none",
+      fullWidth:"on",
+      shadow:0         
+      });
+
+    //lightBox
+    $(".layout img").click(function(){
+      $(this).siblings(".link").animate({bottom:0},250)
+    })
+    // $(".inline").click(function(){
+      
+    // })
+    
+    
+  });          
+</script>
+
+
+  <!--LightBox Start**************************************************************************************************************-->
+<div id="lightBox">
+  <div id="inline_content">
+
+  </div>
+</div>
+<!--LightBox End**************************************************************************************************************-->
+<script type="text/javascript">
+$(function() {
+  // Slider Revolution
+  jQuery('#slider-rev').revolution({
+    delay:8000,
+    startwidth:1170,
+    startheight:600,
+    onHoverStop:"true",
+    hideThumbs:250,
+    navigationHAlign:"center",
+    navigationVAlign:"bottom",
+    navigationHOffset:0,
+    navigationVOffset:12,
+    soloArrowLeftHalign:"left",
+    soloArrowLeftValign:"center",
+    soloArrowLeftHOffset:0,
+    soloArrowLeftVOffset:0,
+    soloArrowRightHalign:"right",
+    soloArrowRightValign:"center",
+    soloArrowRightHOffset:0,
+    soloArrowRightVOffset:0,
+    touchenabled:"on",
+    stopAtSlide:-1,
+    stopAfterLoops:-1,
+    dottedOverlay:"none",
+    fullWidth:"on",
+    shadow:0         
+    });
+
+  //lightBox
+  $(".layout img").click(function(){
+    $(this).siblings(".link").animate({bottom:0},250)
+  })
+
+  var widthMove = $(window).width();
+  move();
+  
+  function move(){
+    if(widthMove<588){
+      topHeight1 = $('.main-content').height();
+      topHeight2 = $('.related').height();
+      topHeight3 = $('.sidebar').height();
+      $('#quick-search').click(function(){alert(topHeight1)});
+      $('#content').css({height:1400+topHeight1,overflow:'hidden'});
+      $('.sidebar').css({'margin-left':'-10px'})
+      $('#category-filter').css({position:'absolute',top:topHeight1+topHeight2+100,width:'100%'});
+      $('.related').css({position:'absolute',top:topHeight1+100,width:'96%','margin-left':'10px'});
+    }else{
+      $('#category-filter').css({position:'static'});
+      $('.related').css({position:'static'});
+      $('.sidebar').css({'margin-left':'0px'});
+      $('#content').css({height:'auto',overflow:'hidden'});
+    }
+  }
+  $(window).resize(function(){
+    widthMove = $(window).width();
+    move();
+  });
+});          
+
+</script>
+
+<script type="text/javascript">
+  $(".pdquickview").click(function(){
+      pd_id = $(this).data("pd").toString();
+      $.ajax({
+      type: "GET",
+      url: "/products/"+pd_id+"/quickview",
+      data: { },
+      success: function(data){
+        $(".inline").colorbox({
+          inline:true, 
+          width:"925",
+          height:"480",
+          href: "#inline_content",
+          open: true
+        });
+
+        return false   
+      },
+      error: function(data){
+        return false  
+      }
+    });
+  });
+</script>
+
 </body>
 
 </html>

@@ -1,0 +1,39 @@
+
+<span class="item-price-original"> 原價 Price  $ <%= number_with_delimiter(@product.price) %></span><br>
+<span class="item-price-sale">
+  <% if @product.price_for_sale > 0 %>
+      優惠價 Favorable NT$ <%= number_with_delimiter(@product.price_for_sale) %>
+  <% else %>
+      優惠價 Favorable NT$ <%= number_with_delimiter(@product.price) %></p>
+  <% end %></span><br>       
+<br>
+
+<%= form_tag(add_cart_index_path, id: "add_to_cart_form") do %>
+<div class="product-add clearfix">
+  <label>尺寸
+  <% if(stocks.length > 0) %>
+    <%= select_tag( "cart[stock]", generate_stock_options(stocks,amount_in_cart), data: {category: @category.id, product: @product.id} , class: 'form-control', id: 'qv_cart_stock') %>
+  <% else %>
+    <% hidden_field_tag( "cart[stock]", 0 ) %>
+  <% end %>
+  </label>
+  <label id="cart_amount_options">
+  </label>
+</div>
+<br><br><br>
+  <%= link_to "看詳細商品資訊>>" , category_product_path(@product.category, @product), id: "prodDetail" %>
+    <br>
+  <%= button_tag "加入購物車<span>ADD TO CART</span>".html_safe, class: "btn item-add-btn", data: {disable_with: "加入購物車..."} %>
+<% end %>
+
+<% if current_user %>
+  <% tracking_list = TrackingList.new %>
+  <%= form_for(tracking_list,:url => useradmin_tracking_lists_path(tracking_list), :html => {:id =>'NewTrackingListForm' } ) do | f |%>
+    <%= f.hidden_field :user_id, value: current_user.id , class: 'text' %>
+    <%= f.hidden_field :product_id, value: @product.id, class: 'text' %>
+    <%= f.submit "", class: "icon-button icon-like"  %>
+  <% end %>
+<% else %>
+  <%= link_to '', useradmin_tracking_lists_path, class: "icon-button icon-like" %>
+<% end %>
+

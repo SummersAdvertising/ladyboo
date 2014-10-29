@@ -1,54 +1,44 @@
-<% content_for :header do %>
-  <div id="banner">
-    <div class="container row">
-      <div class="col-md-3 col-md-offset-9 col-sm-12">會員登入</div>
+<link rel="stylesheet" href="/css/pageLogin.css">
+
+  <div class="xlg-margin"></div>
+  
+  <div id="lookbook">
+    <div class="container">
+      <header class="content-title">
+        <div class="title-bg">
+          <h2 class="title login">LOGIN<span>會員登入</span></h2>
+        </div>
+      </header>
+      <div class="layout member">
+       <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), html: { id: "login-form" } ) do |f| %>
+         <p>請輸入您的信箱與密碼<br>If you have an account with us, please log in.</p>
+          <div class="input-group input-container contact-email">
+            <span class="input-group-addon"><span class="input-icon input-icon-email"></span><span class="input-text">電子信箱</span></span>
+            <%= f.email_field :email, :autofocus => true, placeholder: "Email" ,class: 'form-control input-lg', required: true %>
+          </div>
+          <div class="input-group input-container contact-password">
+            <span class="input-group-addon"><span class="input-icon input-icon-password"></span><span class="input-text">密碼</span></span>
+            <%= f.password_field :password, placeholder: "password", class: "form-control input-lg", required: true %>
+          </div>        
+          <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+            <fieldset class="half-margin">
+              <div class="input-group custom-checkbox">
+               <%= link_to new_password_path(resource_name) do %>
+                忘記密碼?<br>Forgotten your password?
+               <% end %>
+              </div>
+            </fieldset>             
+          <% end -%>
+          <p class="text-right">
+            <%= f.submit "登入", class: 'btn btn-custom-3' , data: {disable_with: "..."} %>
+
+            <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+              <%= link_to "加入會員 JOIN", new_registration_path(resource_name), class: "btn btn-custom-2" %>
+            <% end -%>    
+          </p>
+        <% end %>
+      </div>
     </div>
   </div>
-<% end %>
- 
-
-<article class="container-fluid">
-
-  <section class="container row" id="member-login">
-    <div class="col-md-6 col-md-offset-3 col-sm-12 row">
-      <article>
-        <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-          <div class="text-center"> 
-            <img src="/images/mbr-07.png" class="img-responsive">
-          </div>
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <th width="10%">
-                <img src="/images/mbr-08.jpg" class="img-responsive">
-              </th>
-              <td width="90%">
-                <%= f.email_field :email, :autofocus => true, placeholder: "email" ,class: 'form-control' %>
-              </td>
-            </tr>
-          </table>
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <th width="10%">
-                <img src="/images/mbr-09.jpg" class="img-responsive">
-              </th>
-              <td width="90%">
-                <%= f.password_field :password, placeholder: "密碼", class: "form-control" %>
-              </td>
-            </tr>
-          </table>
-          <div class="text-right"> 
-            <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-              <%= link_to "忘記密碼", new_password_path(resource_name) %>
-            <% end -%>
-            <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-              <%= link_to "加入會員", new_registration_path(resource_name) %>
-            <% end -%>          
-          </div>
-          <div class="text-center">
-            <%= f.submit "登入", class: 'btn' , data: {disable_with: "..."} %>
-          </div>
-        <% end %>
-      </article>
-    </div>
-  </section>
-</article>
+  
+  <div class="xlg-margin"></div>

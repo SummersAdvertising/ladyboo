@@ -1,0 +1,16 @@
+<header>
+  <h2 class="left">TopicCollection<span> / 所有系列主題</span></h2>
+  <nav class="left"></nav>
+</header>
+<article>
+  
+  <div class="gallery">
+    <% @lookbooks.each do |lookbook| %>
+
+      <div>
+        <%= link_to "#{lookbook.name}" , lookbook_path(lookbook) %>
+      </div><br>
+
+    <% end %>    
+  </div>
+</article>

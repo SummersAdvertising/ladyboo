@@ -1,0 +1,42 @@
+<script src="/js_plugins/colorbox/jquery.colorbox-min.js"></script>
+
+<script src="/js_plugins/peditor/js/editor.js"></script>
+<script src="/js_plugins/peditor/js/editor_p.js"></script>
+<script src="/js_plugins/peditor/js/editor_img.js"></script>
+<script src="/js_plugins/peditor/js/editor_list.js"></script>
+<script src="/js_plugins/peditor/js/editor_video.js"></script>
+<script src="/js_plugins/peditor/js/jquery.imgareaselect.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/js_plugins/peditor/css/imgareaselect-default.css" />
+<link rel="stylesheet" type="text/css" href="/js_plugins/colorbox/colorbox.css" />      
+
+<div class="cover">
+  <% if @announcement.galleries.select{ |v| v['type'] == "AnnouncementCoverGallery" }.first %>
+    <% announcement_cover_url = @announcement.galleries.select{ |v| v['type'] == "AnnouncementCoverGallery" }.first.attachment.url %>
+    <%= image_tag announcement_cover_url  if announcement_cover_url %>
+  <% end %>
+</div>
+<!--cover-->
+<input id="article_content" style="display:none;" type="text" value="<%= @announcement.article.content %>">
+
+<div class="title">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td class="date">
+        <div><b><%= @announcement.created_at.strftime("%d")%></b><br>
+          <%= @announcement.created_at.strftime("%-m")%>月
+        </div>
+      </td>
+      <td><h3><%= @announcement.title %></h3></td>
+    </tr>
+  </table>
+</div>
+<!--title-->
+<div class="content"  id="articleContent"></div>    
+
+
+<script type="text/javascript">
+
+    editor.output();  
+
+</script>

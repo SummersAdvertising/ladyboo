@@ -42,5 +42,14 @@ module CartHelper
       "三聯式發票"
     end
   end
+  
+  def generate_invoice_options
+    @invoice_types = String.new
+    #[["二聯式", "two-copies"], ["三聯式", "three-copies"]]
+    @invoice_types += "<option value='two-copies'>二聯式</option>"
+    @invoice_types += "<option value='three-copies'>三聯式</option>"
+    
+    return @invoice_types.html_safe
+  end
 
 end

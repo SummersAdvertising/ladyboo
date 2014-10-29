@@ -148,17 +148,7 @@
   </div>
   
 </article>
-<% Lookbook.find(2).topics.each do |topic| %>
-  <% topic.products.each do |product| %>
-    <%= topic.name %> <%= product.name %> <br>
-  <% end %>
-<% end %>
-<br>
-<% TopicCollection.find(2).topics.each do |topic| %>
-  <% topic.products.each do |product| %>
-    <%= topic.name %> <%= product.name %> <br>
-  <% end %>
-<% end %>
+
 <script type="text/javascript">
 $(document).ready(function(){
   $(".toggle_new_category").click(function(){

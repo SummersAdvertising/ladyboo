@@ -1,0 +1,174 @@
+.title.account { width: 330px; }
+/*Side TAB---------------------------------------------------------*/
+.tab-container { border: none; }
+.accordion-title { color: #434343; padding-left: 20px; font: 1.2em Helvetica, "Microsoft JhengHei", "微軟正黑體"; }
+.accordion-title.markTitle { padding-left: 0; }
+.categoryTitle { border-top-width: 5px; border-top-style: solid; border-top-color: #c9006e; }
+.accordion-title { color: #434343; padding-left: 20px; font: 1.1em Helvetica, "Microsoft JhengHei", "微軟正黑體";padding-top:10px;padding-bottom:4px; }
+.accordion-title.markTitle { padding-left: 0;font: 1.3em Helvetica, "Microsoft JhengHei", "微軟正黑體"; }
+.accordion-header { background: #FFFFFF; padding: 10px 20px; position: relative; }
+.sm-accordion.custom-accordion .panel-body { padding: 0px!important; background: #FFF; border: none; color: #565957; }
+.category-filter-list li { color: #565957; background-image: url(../images/img_list.gif); background-repeat: no-repeat; background-position: 20px center; border: 1px solid #f2f2f2; margin-bottom: 0; margin-top: 0; width: 100%; height: 55px; background-color: #FFF; }
+.category-filter-list li a { width: 100%; height: 100%; display: block; padding-left: 20px; padding-top: 15px; padding-bottom: 10px; padding-left: 40px; }
+.tab-container .nav-tabs > li.active > a { background-color: #fff799; background-image: url(../images/img_list.gif); background-repeat: no-repeat; background-position: 20px center; }
+.tab-container .nav-tabs > li.active > a:hover { background-color: #fff799; background-image: url(../images/img_list.gif); background-repeat: no-repeat; background-position: 20px center; }
+.tab-container .nav-tabs > li.active { background-image: url(../images/img_list.gif); background-repeat: no-repeat; background-position: 40px center; }
+.nav-tabs { border-bottom: none; }
+.category-filter-list.jscrollpane { overflow-y: hidden; }
+.accordion-btn { background-image: url('../images/btn_aside.png'); background-color: transparent; background-position: right center; border: none; border-radius: 0; overflow: hidden; display: block; }
+.accordion-btn:hover, .accordion-btn:focus { background-color: transparent; background-image: url('../images/btn_aside.png'); background-position: right 40px; }
+.sm-accordion .accordion-btn.opened { background-image: none; width: 100%; height: 150%; top: -15px; }
+.sm-accordion .accordion-btn.collapsed { background-position: right 40px; background-image: url('../images/btn_aside.png'); width: 100%; height: 150%; top: -15px; }
+.tab-container .tab-content .tab-pane { padding: 20px; border: 1px solid #eeeeee; background-color: #FFF; position: relative; }
+.tab-container .tab-content { padding: 0 0px 0 330px; }
+.tab-container .tab-content .tab-pane { padding: 0; }
+@media (max-width: 1200px) and (min-width: 768px) {
+#content .container { width: 100%; }
+.col-md-3 { width: 240px; padding: 0; }
+}
+@media (min-width: 991px) and (max-width: 1200px) {
+.tab-container .tab-content { padding-left: 270px; }
+.table { padding: 0; margin: 0; }
+.tab-container .tab-content .tab-pane { padding: 0; }
+}
+ @media (min-width: 899px) and (max-width: 990px) {
+.tab-container .tab-content { padding-left: 260px; }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+.title.account { width: 20%; min-width: 310px; }
+}
+@media (max-width: 900px) {
+.sidebar { display: block; width: 100%; padding-top: 20px; margin-left: auto; margin-right: auto; height: 300px; }
+.tab-container .tab-content { padding-left: 0px; }
+}
+@media (max-width: 767px) {
+#content { padding-top: 40px; }
+#content .container { padding: 0 10px; }
+.title.account { width: 280px; }
+.sidebar { display: block; padding-left: 0px; padding-right: 0px; }
+.tab-container .tab-content { width: 100%; padding-left: 0px; padding-right: 0px; }
+}
+/*TAB1---------------------------------------------------------*/
+.tab-container .tab-content .tab-pane#orderList { padding: 0px; }
+.table { border: none!important; }
+.table > tbody > tr > td, .table > tbody > tr > th { padding: 20px 5px; border: none!important; font-size: 0.9em; }
+.table > tbody > tr:nth-child(even) { background-color: #EEE; }
+.table > tbody > tr:nth-child(odd) { background-color: #FFF; }
+.table > tbody > tr > th { font-weight: normal; }
+@media (max-width: 767px) {
+#orderList .table > tbody > tr > th { display: none; }
+#orderList .table > tbody > tr > td { display: block; padding: 10px 20px; text-align: left; }
+#orderList:before { content: '訂單列表'; background-color: #434343; color: #FFF; display: block; text-align: center; padding: 10px 0; margin-top: 10px; }
+#listNo:before { content: '訂單編號　' }
+#listTime:before { content: '訂單時間　' }
+#listPayment:before { content: '付款方式　' }
+#listStatus:before { content: '處理狀態　' }
+}
+/*orderInfo---------------------------------------------------------*/
+.tab-container .tab-content .tab-pane#orderInfo { padding: 10px 0px; }
+#orderInfo .tagOrder { display: inline-block; width: 32%; color: #434343; font-size: 0.9em; text-align: center; }
+#orderInfo .text-right { padding: 10px 20px; }
+#orderInfo .table > tbody > tr > th { padding: 10px 5px; color: #434343; }
+#orderInfo .table > tbody > tr > td { vertical-align: middle; }
+.orderItem > tbody > tr:nth-child(even) { background-color: #FFF; }
+.orderItem > tbody > tr:nth-child(odd) { background-color: #EEE; }
+#orderInfo img { float: left; margin-left: 10px; }
+#orderInfo td p { float: left; margin-left: 10px; text-align: left; }
+#orderInfo hr { width: 96%; margin: 0 auto; }
+#orderInfo .text-right { width: 100%; margin-bottom: 0; }
+.form-control.transferInput { background-color: #e8e8e8; display: inline-block; border: none; border-radius: 0px; margin-bottom: 10px; }
+#transfer-account { width: 250px; }
+#transfer-date { width: 150px; }
+#contactForm { position: relative; background-color: #434343; height: 400px; padding: 20px; position: absolute; left: 0; top: 45px; width: 100%; display: none; }
+#tag { position: absolute; right: 100px; ; top: -18px; }
+#contactForm .form-control { width: 100%; border-redius: 0px; height: 300px; margin-bottom: 20px; }
+#contactForm .btn-custom-2.cancle { background-color: #646464; border: none; margin-right: 10px; }
+#contactForm .btn-custom-2:hover { background-color: #999; border: none; }
+#contactForm .btn-custom-3 { background-color: #c9006e; border: none; }
+#contactForm .btn-custom-3:hover { background-color: #c9006e; border: none; }
+@media (max-width: 1099px) and (min-width: 768px) {
+#orderInfo .tagOrder span { display: block; }
+#orderInfo .tagOrder { width: 32%; }
+#contactForm { top: 62px; }
+}
+@media (max-width: 767px) {
+#orderInfo .table > tbody > tr > th { display: none; }
+#orderInfo .table > tbody > tr > td { display: block; padding: 0px 10px; text-align: center; }
+#orderInfo:before { content: '訂單內容 Order Info'; background-color: #434343; color: #FFF; display: block; text-align: center; padding: 10px 0; margin-top: 10px; }
+#orderInfo .tagOrder { width: 100%; display: block; margin: 0; text-align: left; padding: 5px 10px; }
+.orderItem > tbody > tr:nth-child(even) { background-color: #EEE; }
+.orderItem > tbody > tr:nth-child(odd) { background-color: #FFF; }
+#orderInfo img { float: none; margin: 20px auto 0 auto; }
+#orderInfo td p { float: none; margin: 0 auto 0 auto; text-align: center; }
+#infoNo { display: none; }
+#infoPrice:before { content: '價格 Price：' }
+#infoQuantity:before { content: '數量 Quantity：' }
+#infoSubtotal:before { content: '總額 Subtotal：'; }
+#infoSubtotal:after { content: '\a\a'; white-space: pre; }
+#contactForm { top: 160px; height: 440px; }
+#tag { position: absolute; left: 60px; ; top: -36px; right: auto; }
+#contactForm .btn-custom-2.cancle { margin: 0px; }
+#contactForm .text-right { width: 100%; margin-bottom: 0; padding: 0; }
+#contactForm .md-margin { margin-bottom: 10px !important }
+}
+/*TAB2---------------------------------------------------------*/
+.tab-container .tab-content .tab-pane#personal { padding: 20px 80px; }
+#edit-form .input-group .input-group-addon { width: 125px; border-radius: 2px 0 0 2px; padding: 0px 10px; line-height: 44px; min-width: 125px; }
+#edit-form .input-group { width: 85%; }
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+#edit-form .input-group select.form-control { background-image: url(../images/bg_selectBirthday.jpg); }
+#edit-form .input-group select.form-control:hover { background-image: url(../images/bg_selectBirthday2.jpg); }
+}
+#edit-form .input-group select.form-control { height: 47px; width: 25%; float: left; margin: 0;}
+#edit-form .register-birthday p { float: left; padding-bottom: 0; padding-right: 8px; padding-left: 8px; margin: 0; line-height: 45px; font-size: 1.0em; }
+#edit-form .edit-birthday p { float: left; padding-bottom: 0; padding-right: 8px; padding-left: 8px; margin: 0; line-height: 45px; font-size: 1.0em; }
+@media (min-width: 992px) and (max-width: 1200px) {
+#edit-form .input-group select.form-control { width: 23%; }
+.tab-container .tab-content .tab-pane#personal { padding: 20px 60px; }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+#edit-form .input-group select.form-control { width: 23%; }
+.tab-container .tab-content .tab-pane#personal { padding: 20px 20px; }
+}
+@media (max-width: 767px) {
+#personal:before { content: '會員資料 Personal details'; background-color: #434343; color: #FFF; display: block; text-align: center; padding: 10px 0; margin-top: 10px; }
+.tab-container .tab-content .tab-pane#personal { padding: 0px; }
+#edit-form { padding: 20px 10px; }
+#edit-form .input-group { width: 100%; }
+#edit-form .input-group .input-group-addon { width: 115px; padding: 0px 4px; min-width: 115px; }
+#edit-form .edit-birthday .input-group-addon { display: block; float: left; }
+#edit-form .input-group select.form-control#edit-month { clear: both; width: 38%; }
+#edit-form .input-group select.form-control#edit-date { width: 38%; }
+#edit-form .input-group select.form-control#edit-year { margin-bottom: 20px; width: 47%; }
+}
+/*TAB3---------------------------------------------------------*/
+.tab-container .tab-content .tab-pane#address { padding: 20px 80px; }
+#address .input-group .input-group-addon { width: 125px; border-radius: 2px 0 0 2px; padding: 0px 10px; line-height: 44px; min-width: 125px; }
+#address p { padding-bottom: 20px; }
+#address .input-group { float: left; width: 80%; }
+#address .text-left { display: block; padding-top: 40px; }
+#address .btn-custom-1 { background-color: #f2f2f2; border-color: #e4e2e2; padding: 12px 10px; margin-left: 5px; margin-bottom: 32px; }
+#address .btn-custom-3:hover { -webkit-box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.4); box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.4); background-color: #f858b7; }
+@media (min-width: 1041px) and (max-width: 1200px) {
+#address .input-group { width: 80%; }
+.tab-container .tab-content .tab-pane#address { padding: 20px 60px; }
+}
+@media (min-width: 991px) and (max-width: 1040px) {
+#address .input-group { width: 75%; }
+.tab-container .tab-content .tab-pane#address { padding: 20px 40px; }
+}
+@media (min-width: 768px) and (max-width: 990px) {
+#address .input-group { width: 75%; }
+.tab-container .tab-content .tab-pane#address { padding: 20px 30px; }
+.addEdit, .addDelete { width: 10%; }
+}
+@media (max-width: 767px) {
+#address:before { content: '常用地址 Primary address'; background-color: #434343; color: #FFF; display: block; text-align: center; padding: 10px 0; margin: 10px -10px 0 -10px; }
+#address p { padding-top: 20px; }
+#address .input-group { width: 100%; margin-bottom: 10px; }
+.tab-container .tab-content .tab-pane#address { padding: 10px 10px; overflow: hidden; }
+.addEdit, .addDelete { float: right; }
+#address .btn-custom-1 { padding: 6px 15px; margin-left: 5px; margin-bottom: 20px; }
+#address .input-group .input-group-addon { width: 80px; min-width: 80px; padding: 0px 4px; }
+#address .btn-custom-3 { display: block; clear: both; }
+}

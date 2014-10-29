@@ -1,101 +1,110 @@
-<% content_for :header do %>
-  <div id="banner">
-    <div class="container row">
-      <div class="col-md-3 col-md-offset-9 col-sm-12">會員帳戶</div>
-    </div>
-  </div>
-<% end %>  
+<% content_for :breadcrumb do %>
+  <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; <%= link_to 'ACCOUNT', 'javascript:void(0);' %>
+<% end %>
 
-<article class="container-fluid">
-  <section class="container row" id="member-info">
-    <div class="col-md-10 col-md-offset-1 col-sm-12 row">
-      <div class="col-md-3">
-        <aside>
-          <h3 class="hidden-sm hidden-xs">帳戶管理</h3>
-          <ul>
-            <li><%= link_to '訂單管理', useradmin_orders_path %></li>
-            <li><%= link_to '會員資料', useradmin_users_path %></li>
-            <li class="active"><%= link_to '常用地址', useradmin_addressbooks_path %></li>
-          </ul>
-        </aside>
+<div id="lookbook">
+  <div class="xlg-margin hidden-xs"></div>
+  <!-- Space 間隔 -->
+  <div class="container"><!-- Start .container -->
+    <header class="content-title">
+      <div class="title-bg">
+        <h2 class="title account">ACCOUNT<span>會員帳戶</span></h2>
       </div>
-      <div class="col-md-9">
-        <article>
-        <h3>常用地址</h3>
-          <% unless current_user.addressbooks.count >= 5 %>
+    </header>
+    <div class="row"><!-- Start .row -->
+      
+      <div class="tab-container left product-detail-tab clearfix">
+        <aside class="col-md-3 col-sm-4 col-xs-12 sidebar"><!-- Start #sidebar 左清單 -->
+          
+          <div class="panel-group custom-accordion sm-accordion categoryTitle" id="category-filter"><!-- Start .panel-group 分類面板 -->
+            <div class="accordion-header">
+              <div class="accordion-title markTitle">帳戶管理<span>ACCOUNT</span></div>
+            </div>
+            <ul class="category-filter-list jscrollpane nav-tabs">
+              <li>
+                <%= link_to '訂單管理 Order history', useradmin_orders_path %>
+              </li>
+              <li>
+                <%= link_to '會員資料 Personal details', useradmin_users_path %>
+              </li>
+              <li class="active">
+                <%= link_to '常用地址 Primary address', useradmin_addressbooks_path %>
+              </li>
+              <li>
+                <%= link_to '我的最愛 My Favorites', useradmin_tracking_lists_path %>
+              </li>
+            </ul>
+          </div>
+          <!-- End .panel-group --> 
+          
+        </aside>
+        <!-- End #sidebar -->
+        <div class="tab-content clearfix">
+
+           <div class="tab-pane active" id="address">
+            <p>設定常用地址 Edit primary address</p>
+            <% unless current_user.addressbooks.count >= 5 %>
             <div class="text-right">
-              <%= link_to 'javascript:void(0);', class: "right highlight toggle_new_addressbook" do %>
+              <%= link_to 'javascript:void(0);', class: "btn btn-custom-3 toggle_new_addressbook" do %>
                 新增項目<img src="/images/admin/add.png">
               <% end %>
             </div>
-          <% end %>
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <% end %>
+            
             <% @addressbooks.each_with_index do |addressbook, index| %>
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr class="show_addressbook_<%= addressbook.id %>" >
-                <th><img src="/images/mbr-06.jpg">地址</th>
-                <td>
-                <div style="position:relative">
-                  <%= addressbook.address %> 
-                  <div class="tool">
-                    <%= link_to "編輯", "javascript:void(0);", :data => { :id => addressbook.id }, :class => "edit", title:"編輯" %>
-                    <%= link_to "刪除", useradmin_addressbook_path(addressbook), :method => :delete, :data => {:confirm => "確定刪除？"}, :class => "delete", title: "刪除" %>
-                  </div>
-                </div>   
-                </td>
-
-              </tr>
+              <%# show %>
+              <div class="input-group show_addressbook_<%= addressbook.id %>"> <span class="input-group-addon"><span class="input-icon input-icon-address"></span><span class="input-text">地 址</span></span>
+                <%= addressbook.address %> 
+                <%= link_to "編輯", "javascript:void(0);", :data => { :id => addressbook.id }, :class => "edit btn btn-custom-1 addEdit", title:"編輯" %>
+                <%= link_to "刪除", useradmin_addressbook_path(addressbook), :method => :delete, :data => {:confirm => "確定刪除？"}, :class => "delete btn btn-custom-1 addDelete", title: "刪除" %>
+              </div>
               
-              <tr class="list-edit edit_addressbook_<%= addressbook.id %>" style="display:none;">
+              <%# edit %>
+              <div class="input-group list-edit edit_addressbook_<%= addressbook.id %>" style="display:none;"> <span class="input-group-addon"><span class="input-icon input-icon-address"></span><span class="input-text">地 址</span></span>
                 <%= form_for(addressbook, :url => useradmin_addressbook_path(addressbook) , html: { id: "patchthisaddressbook_#{addressbook.id}"}) do |f| %>
-                
-                <th><img src="/images/mbr-06.jpg">地址</th>
-                <td>
-                  <div style="position:relative">
-                    <%= f.text_field :address, class:"text", placeholder: "編輯常用地址", class: 'form-control' %>
-                    <div class="tool">
-                    <a href="javascript: document.getElementById('patchthisaddressbook_<%= addressbook.id %>').submit();" class="uvs" data-no-turbolink = true >儲存</a>
-                    <%= link_to "取消", "javascript:void(0);" ,:data => { :id => addressbook.id }, :class => "uvs" %>
-                  </div>
-                  </div>
-                </td>
+                  <%= f.text_field :address, class:"text", placeholder: "編輯常用地址", class: 'form-control input-lg' %>
                 <% end %>
-              </tr>
-
-              </table>
+                <a href="javascript: document.getElementById('patchthisaddressbook_<%= addressbook.id %>').submit();" class="uvs btn btn-custom-1 addEdit" data-no-turbolink = true >儲存</a>
+                <%= link_to "取消", "javascript:void(0);" ,:data => { :id => addressbook.id }, :class => "uvs btn btn-custom-1 addDelete" %>
+              </div>
+              
             <% end %>
 
             <% unless current_user.addressbooks.count >= 5 %>
-            <!-- new -->
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr class="list-new list-edit new_addressbook" style="display:none;">
+              <!-- new -->
+              <div class="input-group list-new new_addressbook" style="display:none;"> <span class="input-group-addon"><span class="input-icon input-icon-address"></span><span class="input-text">地 址</span></span>
                 <%= form_for(@new_addressbook, :url => useradmin_addressbooks_path , html: {id: "create_new_addressbook" }) do |f| %>
-                <th><img src="/images/mbr-06.jpg">地址</th>
-                <td>
-                  <div style="position:relative">
-                    <%= f.text_field :address, class:"text", placeholder: "編輯常用地址", class: 'form-control' %>
-                    <div class="tool">
-                    <a href="javascript: document.getElementById('create_new_addressbook').submit();" class="uvs" data-no-turbolink = true >儲存</a>
-                    <%= link_to "取消", "javascript:void(0);" , :class => "uvs cancel_new_addressbook" %>
-                  </div>
-                  </div>
-                </td>
+                  <%= f.text_field :address, class:"text", placeholder: "編輯常用地址", class: 'form-control input-lg new_address_input' %>
                 <% end %>
-              </tr>
-            </table>
+                <a href="javascript: document.getElementById('create_new_addressbook').submit();" class="uvs  btn btn-custom-1 addEdit" data-no-turbolink = true >儲存</a>
+                <%= link_to "取消", "javascript:void(0);" , :class => "uvs cancel_new_addressbook btn btn-custom-1 addDelete" %>
+              </div>
             <% end %>
-          </table>
-        </article>
+            
+          </div>
+          <!-- End .tab-pane --> 
+        </div>
+        <!-- End .tab-content --> 
       </div>
+      <!-- End .tab-container --> 
+      
     </div>
-  </section>
-</article>
+    <!-- End .row --> 
+    
+  </div>
+  <!-- End .container -->
+  
+  <div class="lg-margin2x visible-sm visible-xs"></div>
+  <!-- Space 間隔--> 
+  
+</div>
+<!-- End .lookbook --> 
 
 <script type="text/javascript">
 $(document).ready(function(){
   $(".toggle_new_addressbook").click(function(){
 
-    if($("tr[class*=new_addressbook]:visible").length > 0){
+    if($("div[class*=new_addressbook]:visible").length > 0){
       alert("請先完成編輯中的地址");
     }
     else{
@@ -111,7 +120,7 @@ $(document).ready(function(){
 
   $(".edit").click(function(){
     $active_id = $(this).data("id");
-    if($("tr[class*=edit_addressbook]:visible").length > 0){
+    if($("div[class*=edit_addressbook]:visible").length > 0){
       alert("請先完成編輯中的地址");
     }
     else{
@@ -125,8 +134,8 @@ $(document).ready(function(){
   });
 
   function toggle_edit_area(active_id){
-    $("tr.edit_addressbook_" + active_id).toggle();
-    $("tr.show_addressbook_" + active_id).toggle();
+    $("div.edit_addressbook_" + active_id).toggle();
+    $("div.show_addressbook_" + active_id).toggle();
   }
 });
 </script>

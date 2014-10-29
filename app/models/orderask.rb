@@ -12,7 +12,7 @@ class Orderask < ActiveRecord::Base
   validates_presence_of :description, message: '請填寫內容'
 
   before_validation :check_attrs
-  after_create :deliver_notice
+  #after_create :deliver_notice
 
   def check_attrs
     self.status = "new" if self.status.blank?
@@ -27,7 +27,7 @@ class Orderask < ActiveRecord::Base
     end
   end
 
-  def deliver_notice
+  # def deliver_notice
     
-  end
+  # end
 end

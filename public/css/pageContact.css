@@ -1,0 +1,57 @@
+.layout.contact { background-color: #434343; padding: 30px 20px 10px 20px;margin-bottom:10px;}
+.layout.contact .input-group.input-container .form-control { border-radius: 0 2px 2px 0; }
+.contact-name { float: left; width: 44%; margin-bottom: 20px; }
+.contact-email { float: right; width: 55%; margin-bottom: 10px; }
+.contact-subject { width: 100%; margin-bottom: 15px; clear: both; }
+.layout.contact .input-group .input-group-addon { width: 110px; border-radius: 2px 0 0 2px; padding: 0px 10px; line-height: 44px; }
+#content .btn-custom-2.cancle { background-color: #646464; border: none; margin-right: 10px; }
+#content .btn-custom-2:hover { background-color: #999; border: none; }
+#content .btn-custom-3 { background-color: #c9006e; border: none; }
+#content .btn-custom-3:hover { background-color: #c9006e; border: none; }
+#contact-message { padding-top: 10px; resize: none; }
+#content .code { background-color: #FFF; border: solid 1px #eee; width: 100%; padding: 10px; }
+.code div{ float:left;height:47px; vertical-align: middle; padding:0px 20px;}
+.code p{ height:47px;margin:0;padding: 6px 20px;}
+#content .code .input-group .form-control{ background-color: #F2F2F2; color: #B3B3B3; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none;}
+#content .code .input-group{ margin-bottom:0;}
+#content .md-margin{ margin-bottom:0!important;}
+.portfolio-item h2 { font-weight: normal; font-family: Helvetica, "Microsoft JhengHei", "微軟正黑體"; font-size: 1.2em; color: #c9006e; margin-bottom: 20px; }
+.portfolio-item p { font-size: 0.9em; line-height: 1.8em; color: #434343; }
+.portfolio-item .table { font-size: 0.9em; line-height: 1.3em; }
+.portfolio-item-container { margin-bottom: 60px; border: none; }
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td { padding: 10px 20px 10px 20px; line-height: 1.5; text-align: left; background-color: #FFF; border-bottom-width: 1px; border-top-style: none; border-bottom-style: solid; border-bottom-color: #e5e5e5; height: 120px; vertical-align: middle; }
+.table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td { border-top: none !important; border-right: none !important; }
+.note { color: #ba6de0; }
+.title.contact { width: 360px; }
+.title.policy { width: 630px; }
+.bgBottom.about { display: none; }
+@media (max-width: 1008px) {
+.layout.contact .input-group.input-container { width: 100%; display: table; margin-bottom: 10px; padding: 0; }
+.contact-email { float: left; }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+.title.contact { width: 20%; min-width: 340px; }
+.title.policy { width: 20%; min-width: 610px; }
+.input-lg { display: block; }
+}
+@media (min-width: 768px) and (max-width: 1050px) {
+#content .code {text-align:center;padding-bottom:20px; }
+.code div{ float:none;display:inline-block;height:47px; padding:0px 20px;}
+.code p{ clear:both;text-align:center;padding-top:20px;}
+}
+@media (max-width: 767px) {
+.title.contact { width: 280px; margin-left: 10px; }
+.title.policy { width: 280px; margin-left: 10px; }
+.title.policy span { display: block; margin-top: 10px; }
+.layout.contact .input-group.input-container { display: block; }
+.layout.contact .input-group.input-container { width: 100%; display: table; padding: 0; }
+.btn-custom-2,.btn-custom-3 { display: block; margin: 10px auto; }
+.btn-custom-2.cancle { margin: 5px auto; }
+#content .btn-custom-2.cancle{margin-right:auto;}
+.md-margin { margin-bottom: 10px !important; }
+#content .code { height:240px; }
+.code div{ float:none;display:block;height:47px; padding:0px 20px;}
+.code p{ text-align:center;padding-top:20px;}
+.layout.contact { padding-bottom: 20px; }
+.row { padding-right: 0 15px; margin: 0; }
+}

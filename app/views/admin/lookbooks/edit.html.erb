@@ -1,11 +1,14 @@
     <header>
       <h2 class="left">lookbook<span> / 首頁管理</span></h2>
-      <nav class="left"></nav>
+      <nav class="left">
+        <%= link_to 'Lookbook', edit_admin_lookbook_path(@lookbook)%>
+        <%= link_to 'Lookbook Tile', admin_lookbook_tiles_path(@lookbook)%>
+      </nav>
       <div class="explain right"><p>圖片尺寸：</p></div>
     </header>
     <article>
       <div class="form">
-        <%= form_for(@lookbook, :url => admin_lookbook_path(@lookbook), html: { id: "patchthislookbook" } ) do |f| %>
+        <%= form_for(@lookbook, :url => admin_lookbook_path(@lookbook), html: { id: "patchthislookbook", multipart: true } ) do |f| %>
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td width="7%">Lookbook名稱：</td>
@@ -14,8 +17,18 @@
               </td>
               <td width="2%">&nbsp;</td>
               <td width="7%">關聯主題數：</td>
-              <td width="53%">
+              <td width="23%">
                <%= f.text_field :limit %>
+              </td>
+              <td width="10%">顯示在首頁：</td>
+              <td width="20%">
+               <%= f.check_box :status, { class: 'checkbox'  }, "enable", "disable" %> 是<br>
+              </td>
+            </tr>
+            <tr>
+              <td colspan='7'>
+                <%# render 'admin/common/upload_by_type', target_title: '圖' if @gallery_count < @lookbook.limit %>
+                <%# render 'admin/common/show_by_type', target: @lookbook, target_title: '圖', type: 'LookbookPhotoGallery', allow_dragable: true  if @gallery_count > 0 %>
               </td>
             </tr>
           </table>
@@ -32,6 +45,23 @@
     </article>  
     <br>
     <%= "此穿搭主題限制關聯主題數：#{@lookbook.limit}, 已關聯主題數：#{@lookbook.lookbook_topicships.count}" %><br>
+
+    <article>
+      <br>== tile(版型) ==<br>
+      <div id='dragable_container' style='width:100%;'>
+        <% @lookbook.tiles.each do |tile| %>
+          <div class='dragable Tilecontainer' style='float:left;' <%= "id=Tilecontainer_#{tile.id.to_s}" %> >
+            <%= link_to "#{tile.id} - Ranking: [#{tile.ranking}]", admin_lookbook_tiles_path(@lookbook) %>
+            <br>
+            <% if tile.galleries.select{ |v| v['type'] == 'TileCoverGallery' }.first %>
+              <%= link_to( image_tag(tile.galleries.select{ |v| v['type'] == 'TileCoverGallery' }.first.attachment.url, class: 'img-responsive', width: 100, height: 100 ) , 'javascript:void(0);') %>
+            <% end %>
+          </div>
+        <% end %>  
+      </div>
+      <p style='clear: left;'>End of Tiles</p>
+    </article>
+
     <% if @lookbook.lookbook_topicships.count < @lookbook.limit %>
       <article>
         <%= form_for(@lookbook_topicship, :url => admin_lookbook_topicships_path(), html: { id: "newthislookbook_topicship" } ) do |f| %>
@@ -66,19 +96,71 @@
 
       </article>
     <% end %>
-    <br>== 已關聯主題產品 ==<br>
-      <% @lookbook.topics.each do |topic| %>
-        
-        <% topic.products.each do |product| %>
-          <%=topic.name%><%= product.name %> = <%= product.price %> / <%= product.price_for_sale %>
-          <br>
-        <% end %>
-      <% end %>
+    
       <br>== 刪除關聯主題 ==<br>
       <% @lookbook.lookbook_topicships.each do |ship| %>
         <%= Topic.find(ship.topic_id).name %>
         <%= link_to '刪除', admin_lookbook_topicship_path(ship.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete', title: '刪除' %>
       <% end %>
+
     <article>
-      
+      <br>== 已關聯主題產品 ==<br>
+      <% @lookbook.topics.each do |topic| %>
+        <% topic.products.each do |product| %>
+          <%=topic.name%><%= product.name %> = <%= product.price %> / <%= product.price_for_sale %>
+          <br>
+        <% end %>
+      <% end %>  
     </article>
+
+  <script>
+  $(function() {
+    var prevEvent = null;
+      $( "#dragable_container" ).sortable({
+        items: "> .dragable" ,
+        placeholder: "ui-state-highlight",
+        update: function( event, ui ) {
+            
+          if(event.timeStamp == prevEvent){
+            return null;
+          }
+          
+          prevEvent = event.timeStamp;  
+          var newRankings_array = $('#dragable_container').sortable('toArray');
+          var orderSet = [];
+          $.each(newRankings_array, function( index, value){
+                orderSet.push(value.replace("Tilecontainer_",""));
+            });
+            var order2Push = JSON.stringify(orderSet);
+            
+            $.ajaxSetup({
+              headers: {
+                  'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+
+          // reorder 
+          $.ajax({
+            type: "PATCH",
+            url: "/admin/tiles/"+orderSet[0]+"/reorder",
+            data: { tiles: {  reorderset: orderSet } },
+            success: function(data){
+              //$("#dragable_container > .thumb").attr('class', 'thumb left Attachcontainer dragable');
+              //$("#dragable_container > .thumb:first").attr('class', 'cover thumb left Attachcontainer dragable');
+              alertify['success'](data[0][1], 2000);
+              
+              return false   
+            },
+            error: function(data){
+            
+              return false  
+            }
+          });
+
+        }
+      });
+      
+        
+      $( "#dragable_container" ).disableSelection();
+    });  
+  </script>

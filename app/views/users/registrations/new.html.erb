@@ -1,76 +1,81 @@
-<% content_for :header do %>
-  <div id="banner">
-    <div class="container row">
-      <div class="col-md-3 col-md-offset-9 col-sm-12">會員登入</div>
+  <link rel="stylesheet" href="/css/pageRegister.css">
+    
+  <div class="xlg-margin"></div>
+  <div id="lookbook">
+  <div class="container">
+    <header class="content-title">
+      <div class="title-bg">
+        <h2 class="title register">REGISTER<span>加入會員</span></h2>
+      </div>
+    </header>
+    <div class="layout member">
+      <%= devise_error_messages! %>
+      <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: {id: 'register-form' }) do |f| %>
+        <p>請填寫您的資料＊為必填欄位<br>Your personal details *required</p>
+         
+          <div class="input-group input-container register-name">
+            <span class="input-group-addon"><span class="input-icon input-icon-user"></span><span class="input-text">姓名＊</span></span>
+            <%= f.text_field :username ,class: "form-control input-lg", placeholder: 'Name', required: true %>
+          </div>
+          <div class="input-group input-container register-email">
+            <span class="input-group-addon"><span class="input-icon input-icon-email"></span><span class="input-text">電子信箱＊</span></span>
+            <%= f.email_field :email ,class: "form-control input-lg", placeholder: '此為登入帳號', required: true %>
+          </div><span class="emailNote">訂單將寄送至此信箱<br>We'll send your order confirmation here</span>
+          <div class="input-group input-container register-phone">
+            <span class="input-group-addon"><span class="input-icon input-icon-phone"></span><span class="input-text">連絡電話</span></span>
+            <%= f.text_field :tel ,class: "form-control input-lg", placeholder: "Phone" %>
+          </div>
+          <div class="input-group input-container register-birthday">
+            <span class="input-group-addon"><span class="input-icon input-icon-birthday"></span><span class="input-text">出生日期＊</span></span>
+
+            <%= f.date_select :birthday, start_year: Date.current.year, end_year: Date.current.year-100, use_two_digit_numbers: true, with_css_classes: true , prompt: { day: '-- 日 --', month: '-- 月 --', year: '-- 年 --' } %>
+          </div>
+          <div class="input-group input-container register-password">
+              <span class="input-group-addon"><span class="input-icon input-icon-password"></span><span class="input-text">設定密碼＊</span></span>
+              <%= f.password_field :password ,class: "form-control input-lg", placeholder: '至少8位數字或英文', required: true %>
+          </div>
+          <div class="input-group input-container register-password">
+              <span class="input-group-addon"><span class="input-icon input-icon-password"></span><span class="input-text">確認密碼＊</span></span>
+              <%= f.password_field :password_confirmation,class: "form-control input-lg", required: true %>
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon"><span class="input-icon input-icon-address"></span><span class="input-text">地址</span></span>
+            <%= f.text_field :address ,class: "form-control input-lg", placeholder: "Address"%>
+          </div>
+          <fieldset class="half-margin">
+              <div class="input-group custom-checkbox">
+
+               <input type="checkbox" name="forgotten" id="agree_privacy" value="">
+                <span class="checbox-container">
+                  <i class="fa fa-check"></i>
+                </span>
+                <label for="forgotten">
+                  我已閱讀<a href="#" title="服務條款">服務條款</a>
+                  並同意註冊成為會員<br>I have reed and agree to the 
+                  <a href="#" title="Privacy Policy">Privacy Policy</a>.
+                </label>
+              </div>
+          </fieldset>           
+          <div class="code">
+            <div class="input-group input-container">
+                <%= recaptcha_tags :display => { :theme => "clean" } %>
+            </div>
+          </div>    
+          <p class="text-left">
+            <%= f.submit "加入會員 JOIN", class: "btn btn-custom-2", data: {disable_with: "..."} %>
+          </p>
+      <% end %>
+
     </div>
   </div>
-<% end %>
-
-<article class="container-fluid">
-  <section class="container row" id="member-info">
-    <div class="col-md-10 col-md-offset-1 col-sm-12 row">
-      <article>
-      <%= devise_error_messages! %>
-      <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-          <h3>請填寫您的資料</h3>
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <th><img src="/images/mbr-02.jpg">姓名</th>
-              <td><%= f.text_field :username ,class: "form-control", placeholder: '必填' %></td>
-            </tr>
-          </table>
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <th><img src="/images/mbr-03.jpg">email</th>
-              <td><%= f.email_field :email ,class: "form-control", placeholder: '此為登入帳號' %></td>
-            </tr>
-          </table>
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <th><img src="/images/mbr-04.jpg">設定密碼</th>
-              <td><%= f.password_field :password ,class: "form-control", placeholder: '至少8位數字或英文' %></td>
-            </tr>
-          </table>
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <th><img src="/images/mbr-04.jpg">確定密碼</th>
-              <td><%= f.password_field :password_confirmation,class: "form-control" %></td>
-            </tr>
-          </table>
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <th><img src="/images/mbr-05.jpg">連絡電話</th>
-              <td><%= f.text_field :tel ,class: "form-control" %></td>
-            </tr>
-          </table>
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <th><img src="/images/mbr-06.jpg">地址</th>
-              <td><%= f.text_field :address ,class: "form-control" %></td>
-            </tr>
-          </table>
-          <div style="margin:10% auto 5% auto;width:440px">
-            <%= recaptcha_tags :display => { :theme => "clean" } %>
-          </div>
-          <div class="text-center">
-            <input type="checkbox" id="agree_privacy" >
-            <label for="agree_privacy">
-            我已閱讀 <a href="#" target="_blank">服務條款</a>，<a href="#" target="_blank">隱私條款</a> 並同意註冊成會員
-            </label><br>
-            <%= f.submit "加入會員", class: "btn", data: {disable_with: "..."} %>
-          </div>
-        <% end %>
-      </article>
-    </div>
-  </section>
-</article>
+  <div class="xlg-margin"></div>
 
 <script src="/js_plugins/jq_validation/jquery.validate.min.js"></script>
 <script src="/js_plugins/jq_validation/additional-methods.min.js"></script>
 <script src="/js_plugins/jq_validation/messages_zh_TW.js"></script>
 
 <script type="text/javascript">
-$("#new_user").submit(function(){
+$("#register-form").submit(function(){
     if (!$("#agree_privacy").is(":checked")) {
         alertify.log('請同意服務條款與隱私權政策');  
         //success
@@ -83,7 +88,7 @@ $("#new_user").submit(function(){
 
 <script type="text/javascript">
   $(document).ready(function(){
-    $("#new_user").validate({
+    $("#register-form").validate({
     //debug: true,
     rules: {
       "user[user_name]": {required:true},

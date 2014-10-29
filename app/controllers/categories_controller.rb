@@ -24,7 +24,7 @@ class CategoriesController < ApplicationController
       redirect_to categories_path and return if @category.nil?
       
       @parent_cate = Category.find(@category.parent_id)
-      @products = Product.front_show_by_cate(params[:id].to_i)
+      @products = Product.includes(:galleries, :category, :stocks).front_show_by_cate(params[:id].to_i).page(params[:page])
     rescue
       redirect_to categories_path
     end

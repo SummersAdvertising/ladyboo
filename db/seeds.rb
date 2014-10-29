@@ -12,6 +12,8 @@
 
 # Lookbook.create([{name: 'look-1'},{name: 'look-2'},{name: 'look-3'},{name: 'look-4'}])
 
+# 要加入tile ? #
+
 # LookbookTopicship.create([{lookbook_id: 1, topic_id: 1},{lookbook_id: 2, topic_id: 1},{lookbook_id: 2, topic_id: 2},{lookbook_id: 3, topic_id: 1},{lookbook_id: 3, topic_id: 2},{lookbook_id: 3, topic_id: 3},{lookbook_id: 4, topic_id: 1},{lookbook_id: 4, topic_id: 2},{lookbook_id: 4, topic_id: 3},{lookbook_id: 4, topic_id: 4}])
 
 # TopicCollection.create([{name: 'collect-1'},{name: 'collect-2'},{name: 'collect-3'},{name: 'collect-4'}])
@@ -22,3 +24,6 @@
 # Delivery.create({name: '本島', tracking_url: 'http://www.t-cat.com.tw/inquire/trace.aspx', normal_fee: 80, shipping_condition: 'taiwan', iscod: 'no', discount_criteria: 800 ,discount_fee: 0})
 # Delivery.create({name: '離島', tracking_url: 'http://postserv.post.gov.tw/webpost/CSController?cmd=POS4001_1&_SYS_ID=D&_MENU_ID=189&_ACTIVE_ID=190', normal_fee: 100, shipping_condition: 'island', iscod: 'no', discount_criteria: 800 ,discount_fee: 0})
 # Delivery.create({name: '海外', tracking_url: 'http://postserv.post.gov.tw/webpost/CSController?cmd=POS4001_1&_SYS_ID=D&_MENU_ID=189&_ACTIVE_ID=190', normal_fee: 600, shipping_condition: 'overseas', iscod: 'no', discount_criteria: 6000 ,discount_fee: 0})
+
+#user role
+# Role.create({name: 'member'})

@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="/css/pageAbout.css">
+
+<% content_for :breadcrumb do %>
+  <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; <%= link_to 'ABOUT US', page_pages_path('about') %>
+  &nbsp; > &nbsp; <%= link_to '最新消息', 'javascript:void(0);' %>
+<% end %>
+
+<div class="xlg-margin"></div><!-- Space 間隔 -->
+  <div class="container">
+    <div class="xs-margin"></div><!-- Space 間隔 -->
+    <div class="row">
+        <header class="content-title"><!-- Start .content-title 標題 -->
+          <div class="title-bg">
+            <h2 class="title news">NEWS<span>最新消息</span></h2>
+          </div>
+        </header><!-- End .content-title -->
+        
+        <div class="col-md-9 col-sm-8 col-xs-12 articles-container"><!-- Start 內文 -->         
+            
+            <% @announcements.each do |announcement| %>
+              <article class="article"><!-- Start .article -->
+                <div class="article-meta-date"> <span><%= announcement.created_at.strftime("%d")%></span> <%= announcement.created_at.strftime("%b")%> </div>
+                <div class="article-meta-year"><%= announcement.created_at.strftime("%Y")%></div>
+                <figure class="article-media-container"> 
+                  <% if announcement.galleries.select{ |v| v['type'] == "AnnouncementCoverGallery" }.first %>
+                    <% announcement_cover_url = announcement.galleries.select{ |v| v['type'] == "AnnouncementCoverGallery" }.first.attachment.url %>
+                      <%= image_tag announcement_cover_url if announcement_cover_url %>
+                  <% end %>
+                </figure>
+                <h2><%= announcement.title %></h2>
+                <div class="article-content-container">
+                  <span>
+                  <% if announcement.ck_context %>
+                    <%= announcement.ck_context.html_safe %>
+                  <% end %>
+                  </span>
+                </div>
+              </article><!-- End .article -->
+            <% end %>
+
+            <div class="pagination-container clearfix"><!-- Start .pagination-container 頁碼 -->
+              <ul class="pagination">
+                <%= paginate @announcements ,:window => 2 %>
+              </ul>
+            </div><!-- End .pagination-container -->
+
+        </div><!-- End 內文 -->
+        
+    </div><!-- End .row --> 
+  </div>  <!-- End .container --> 

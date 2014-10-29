@@ -1,0 +1,46 @@
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="80">
+      <ul id="qv-thumb">
+        <% @product.galleries.where(type: 'ProductPhotoGallery').each_with_index do |attach, index| %>
+          <li>
+            <a data-slide-index='<%= index %>' >
+              <img src=<%= "#{attach.attachment.url}" %> />
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    </td>
+    <td width="420">
+      <div id= 'qv-bxslider' class="bxslider">
+        <% @product.galleries.where(type: 'ProductPhotoGallery').each do |attach| %>
+          <img src=<%= "#{attach.attachment.url}" %> />
+        <% end %>
+      </div>
+    </td>
+    <td><div class="cb-info">
+        <h4><%= @product.name %><br><%= @product.en_name %></h4>
+        <% if check_with_stock(@product) %>
+          <%= render partial: "qv_add_to_cart", :locals => { stocks: @product.stocks, amount_in_cart: @amount_in_cart, product: @product } %>
+        <% else %>
+          <h3>已售完</h3>
+        <% end %>
+    </td>
+  </tr>
+</table>
+
+  <script type="text/javascript">
+    // $('#qv-thumb li a').removeClass('active'); 
+    // $('#qv-thumb li a:first').addClass('active');
+    // $('.qv-bxslider').css({'-webkit-transition': '0s', 'transition': '0s', '-webkit-transform': 'translate3d(0px, -380px, 0px)'}); 
+  
+    $('#qv-bxslider').bxSlider({
+      // randomStart:true,
+      slideWidth: 380,   
+      mode:'vertical',
+      pagerCustom:'#qv-thumb',
+      controls: false
+    }); 
+
+    
+  </script>

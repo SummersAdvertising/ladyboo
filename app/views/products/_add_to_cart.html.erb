@@ -1,34 +1,35 @@
+<div class="md-margin"></div>
 <%= form_tag(add_cart_index_path, id: "add_to_cart_form") do %>
-<%= show_stocks(stocks) %>
-<!--features-->
-<div id="price" class="row">
-  
-  <div class="col-md-5 col-sm-7">
-    <% if @product.price_for_sale > 0 %>
-    <b>優惠價 $<%= number_with_delimiter(@product.price_for_sale) %> 元</b>
-    <% else %>
-      <b>優惠價 $<%= number_with_delimiter(@product.price) %> 元</b>
-    <% end %>
+  <div class="product-add clearfix">
+    <label>尺寸
+      <%= show_stocks(stocks,amount_in_cart, @category.id, @product.id) %>
+    </label>
     <br>
-    <span>原價 $<%= number_with_delimiter(@product.price) %> 元</span>
-    
-  </div>
-  
-  <div class="col-md-3 col-sm-5">
-    <!-- <option disabled="disabled" selected="selected">請選擇數量</option> -->
-    <select name="cart[amount]" id="cart_amount" class="form-control" >
-      <%= show_stock_amount_options(stocks.first, amount_in_cart)%>
-    </select>
-  </div>
-  
-</div>
-<!--price-->
-<div id="buy-1" class="buy row">
-  <div class="col-md-8 col-md-offset-0 col-sm-12 col-sm-offset-0 col-xs-6 col-xs-offset-3">
-    <%= submit_tag "我要購買", class: "btn btn-block btn-lg" , role:"button", data: {disable_with: "加入購物車..."} %>
-  </div>
-  <!--buy--> 
-</div>
+    <%# get into ajax patial %>
+    <label id="cart_amount_options">
+    </label>
+  </div><!-- End .product-add -->
 
-
+  <div class="price">
+    <p>售價 Price <span class="old-price">NT$ <%= number_with_delimiter(@product.price) %></span></p>
+    <% if @product.price_for_sale > 0 %>
+      <p class="item-price">優惠價 Favorable NT$ <%= number_with_delimiter(@product.price_for_sale) %></p>
+    <% else %>
+      <p class="item-price">優惠價 Favorable NT$ <%= number_with_delimiter(@product.price) %></p>
+    <% end %>
+  </div>
+  <hr>
+  <br>
+  <%= button_tag "<span>加入購物車</span><br>ADD TO CART".html_safe, class: "btn mainBtn", data: {disable_with: "加入購物車..."} %>
+<% end %>
+<% if current_user %>
+  <% tracking_list = TrackingList.new %>
+  <%= form_for(tracking_list,:url => useradmin_tracking_lists_path(tracking_list), :html => {:id =>'NewTrackingListForm' } ) do | f |%>
+    <%= f.hidden_field :user_id, value: current_user.id , class: 'text' %>
+    <%= f.hidden_field :product_id, value: @product.id, class: 'text' %>
+    <%= f.submit "", class: "icon-button icon-like"  %>
+  <% end %>
+<% else %>
+  <%= link_to '', useradmin_tracking_lists_path, class: "icon-button icon-like" %>
+  <!-- <a class='inline icon-button icon-fb' href="#inline_content">FB</a> -->
 <% end %>

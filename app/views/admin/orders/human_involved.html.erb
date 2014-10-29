@@ -37,8 +37,8 @@ div ,td, p .noTransition {
         <th width="12%" align="center"><%= sort_link @q , :payment_type, "付款方式" %></th>
         <th width="21%" align="left"><%= sort_link @q, :created_at, "訂單成立時間" %></th>
         <th width="16%" align="left"><%= sort_link @q, :ordernum, "編號" %></th>
-        <th width="5%" align="center"><a href="javascript:void(0);">收款</a></th>
-        <th width="5%" align="center"><a href="javascript:void(0);">出貨</a></th>
+        <th width="5%" align="center"><%= sort_link @q, :paid, "收款" %></th>
+        <th width="5%" align="center"><%= sort_link @q, :shipped, "出貨" %></th>
         <th width="30%"></th>
       </tr>
 

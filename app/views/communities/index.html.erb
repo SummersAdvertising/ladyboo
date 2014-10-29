@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="/css/pageAbout.css">
+
+<% content_for :breadcrumb do %>
+  <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; <%= link_to 'ABOUT US', page_pages_path('about') %>
+  &nbsp; > &nbsp; <%= link_to '社群迴響', 'javascript:void(0);' %>
+<% end %>
+
+<div class="xlg-margin"></div><!-- Space 間隔 -->
+  <div class="container">
+    <div class="xs-margin"></div><!-- Space 間隔 -->
+    <div class="row">
+        <header class="content-title"><!-- Start .content-title 標題 -->
+          <div class="title-bg">
+            <h2 class="title news">COMMUNITY<span>社群迴響</span></h2>
+          </div>
+        </header><!-- End .content-title -->
+        
+        <div class="col-md-9 col-sm-8 col-xs-12 articles-container"><!-- Start 內文 -->         
+            
+            <% @communities.each do |community| %>
+              <article class="article"><!-- Start .article -->
+                <div class="article-meta-date"> <span><%= community.created_at.strftime("%d")%></span> <%= community.created_at.strftime("%b")%> </div>
+                <div class="article-meta-year"><%= community.created_at.strftime("%Y")%></div>
+                <figure class="article-media-container"> 
+                  <% if community.galleries.select{ |v| v['type'] == "CommunityCoverGallery" }.first %>
+                    <% community_cover_url = community.galleries.select{ |v| v['type'] == "CommunityCoverGallery" }.first.attachment.url %>
+                      <%= image_tag community_cover_url if community_cover_url %>
+                  <% end %>
+                </figure>
+                <h2><%= community.title %></h2>
+                <div class="article-content-container">
+                  <span>
+                  <% if community.ck_context %>
+                    <%= community.ck_context.html_safe %>
+                  <% end %>
+                  </span>
+                </div>
+              </article><!-- End .article -->
+            <% end %>
+
+            <div class="pagination-container clearfix"><!-- Start .pagination-container 頁碼 -->
+              <ul class="pagination">
+                <%= paginate @communities ,:window => 2 %>
+              </ul>
+            </div><!-- End .pagination-container -->
+
+        </div><!-- End 內文 -->
+        
+    </div><!-- End .row --> 
+  </div>  <!-- End .container --> 

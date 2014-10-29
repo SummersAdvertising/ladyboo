@@ -36,7 +36,13 @@ CKEDITOR.editorConfig = function( config ) {
       items: ['Image', 'HorizontalRule', 'PageBreak','-', 'Youtube']
     }
   ];
-  config.toolbar = 'Pure';
+  config.toolbar_Linkonly = [
+    '/', {
+      name: 'links',
+      items: ['Link', 'Unlink']
+    }
+  ];
+  config.toolbar = 'Linkonly';
   config.allowedContent = true;
   return true;
 };

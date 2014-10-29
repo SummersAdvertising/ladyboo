@@ -27,21 +27,27 @@
 
 <%= text_field_tag :lidm, @order.ordernum %>
 
-<%= text_field_tag :purchAmt, ( @order_total = sum_order_items(@order.orderitems)+get_shipping_fee_from_order(@order)) %><br>
+<%= text_field_tag :purchAmt, ( @order_total = sum_order_items(@order.orderitems)+get_shipping_fee_from_order(@order)) %>
 
 <%= text_field_tag :AuthResURL, receive_result_cart_index_url %>
 
-<%= text_field_tag :enCodeType, 'UTF-8' %>
+<%# text_field_tag :LocalDate, Time.now.strftime('%Y%m%d') %>
 
-<%= submit_tag %>
+<%# text_field_tag :LocalTime, Time.now.strftime('%H%M%S') %>
+
+<%# text_field_tag :reqToken, compute_focas_token(@order.ordernum, @order_total) %>
+
+<%# text_field_tag :enCodeType, 'UTF-8' %>
+
+<%= submit_tag %><br>
 
 <% end %>
 
 <script type="text/javascript">
 $(document).ready(function(){
   
-  // $("#send_to_focas").submit();
+  $("#send_to_focas").submit();
 
-  setTimeout(function() { window.location.href = '<%= "#{receive_result_cart_index_url}?ONO=#{@order.ordernum}&ERR=連線逾時" %>'; }, 15000);
+  setTimeout(function() { window.location.href = '<%= "#{receive_result_cart_index_url}?ONO=#{@order.ordernum}" %>'; }, 15000);
 });
 </script>

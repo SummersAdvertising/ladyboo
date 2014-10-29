@@ -1,71 +1,99 @@
-<% content_for :header do %>
-  <div id="banner">
-    <div class="container row">
-      <div class="col-md-3 col-md-offset-9 col-sm-12">會員帳戶</div>
-    </div>
-  </div>
-<% end %>  
+<% content_for :breadcrumb do %>
+  <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; <%= link_to 'ACCOUNT', 'javascript:void(0);' %>
+<% end %>
 
-<article class="container-fluid">
-  <section class="container row" id="member-info">
-    <div class="col-md-10 col-md-offset-1 col-sm-12 row">
-      <div class="col-md-3">
-        <aside>
-          <h3 class="hidden-sm hidden-xs">帳戶管理</h3>
-          <ul>
-            <li><%= link_to '訂單管理', useradmin_orders_path %></li>
-            <li class="active"><%= link_to '會員資料', useradmin_users_path %></li>
-            <li><%= link_to '常用地址', useradmin_addressbooks_path %></li>
-          </ul>
-        </aside>
+<div id="lookbook">
+  <div class="xlg-margin hidden-xs"></div>
+  <!-- Space 間隔 -->
+  <div class="container"><!-- Start .container -->
+    <header class="content-title">
+      <div class="title-bg">
+        <h2 class="title account">ACCOUNT<span>會員帳戶</span></h2>
       </div>
-      <div class="col-md-9">
-        <article>
-          <h3>修改會員資料</h3>
-          <%= form_for(@user,:url => useradmin_user_path(@user), :html => {:id =>'EditUserForm' , :method => "PATCH"} ) do | f |%>
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <th width="40%"><img src="/images/mbr-02.jpg">姓名</th>
-                <td><%= f.text_field :username, class: 'form-control' %></td>
-              </tr>
-            </table>
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <th width="40%"><img src="/images/mbr-03.jpg">email</th>
-                <td><div class='form-control'><%= @user.email %></div></td>
-              </tr>
-            </table>
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <th width="40%"><img src="/images/mbr-04.jpg">設定密碼</th>
-                <td><%= f.password_field :password, class: 'form-control' , placeholder: '不變更可不輸入' %></td>
-              </tr>
-            </table>
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <th width="40%"><img src="/images/mbr-04.jpg">確定密碼</th>
-                <td><%= f.password_field :password_confirmation, class: 'form-control' , placeholder: '不變更可不輸入' %></td>
-              </tr>
-            </table>
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <th width="40%"><img src="/images/mbr-05.jpg">連絡電話</th>
-                <td><%= f.text_field :tel, class: 'form-control' %></td>
-              </tr>
-            </table>
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <th width="40%"><img src="/images/mbr-06.jpg">地址</th>
-                <td><%= f.text_field :address, class: 'form-control' %></td>
-              </tr>
-            </table>
-            <div class="text-right">
-              <%= f.submit '確定完成', class: "btn pull-right" %>
+    </header>
+    <div class="row"><!-- Start .row -->
+      
+      <div class="tab-container left product-detail-tab clearfix">
+        <aside class="col-md-3 col-sm-4 col-xs-12 sidebar"><!-- Start #sidebar 左清單 -->
+          
+          <div class="panel-group custom-accordion sm-accordion categoryTitle" id="category-filter"><!-- Start .panel-group 分類面板 -->
+            <div class="accordion-header">
+              <div class="accordion-title markTitle">帳戶管理<span>ACCOUNT</span></div>
             </div>
-          <% end %>
-        </article>
+            <ul class="category-filter-list jscrollpane nav-tabs">
+              <li>
+                <%= link_to '訂單管理 Order history', useradmin_orders_path %>
+              </li>
+              <li class="active">
+                <%= link_to '會員資料 Personal details', useradmin_users_path %>
+              </li>
+              <li>
+                <%= link_to '常用地址 Primary address', useradmin_addressbooks_path %>
+              </li>
+              <li>
+                <%= link_to '我的最愛 My Favorites', useradmin_tracking_lists_path %>
+              </li>
+            </ul>
+          </div>
+          <!-- End .panel-group --> 
+          
+        </aside>
+        <!-- End #sidebar -->
+        <div class="tab-content clearfix">
+          
+          <div class="tab-pane active" id="personal">
+            <%= form_for(@user,:url => useradmin_user_path(@user), :html => {:id =>'EditUserForm' , :method => "PATCH"} ) do | f |%>
+              <p>修改會員資料 Edit your membership info </p>
+                <div class="input-group input-container edit-name">
+                  <span class="input-group-addon"><span class="input-icon input-icon-user"></span><span class="input-text">姓名</span></span>
+                  <%= f.text_field :username ,class: "form-control input-lg", placeholder: 'Name', required: true %>
+                </div>
+                <div class="input-group input-container edit-email">
+                  <span class="input-group-addon"><span class="input-icon input-icon-email"></span><span class="input-text">電子信箱</span></span>
+                  <%= @user.email %>
+                </div>
+                <div class="input-group input-container edit-phone">
+                  <span class="input-group-addon"><span class="input-icon input-icon-phone"></span><span class="input-text">連絡電話</span></span>
+                  <%= f.text_field :tel ,class: "form-control input-lg", placeholder: "Phone" %>
+                </div>
+                <div class="input-group input-container edit-birthday">
+                  <span class="input-group-addon"><span class="input-icon input-icon-birthday"></span><span class="input-text">出生日期</span></span>
+                  <%= f.date_select :birthday, start_year: Date.current.year, end_year: Date.current.year-100, use_two_digit_numbers: true, with_css_classes: true , prompt: { day: '-- 日 --', month: '-- 月 --', year: '-- 年 --' } %>
+                </div>
+                <div class="input-group input-container edit-password">
+                    <span class="input-group-addon"><span class="input-icon input-icon-password"></span><span class="input-text">設定密碼</span></span>
+                    <%= f.password_field :password, class: 'form-control input-lg' , placeholder: '不變更可不輸入' %>
+                </div>
+                <div class="input-group input-container edit-password">
+                    <span class="input-group-addon"><span class="input-icon input-icon-password"></span><span class="input-text">確認密碼</span></span>
+                    <%= f.password_field :password_confirmation, class: 'form-control input-lg' , placeholder: '不變更可不輸入' %>
+                </div>
+                <div class="input-group">
+                  <span class="input-group-addon"><span class="input-icon input-icon-address"></span><span class="input-text">地址</span></span>
+                  <%= f.text_field :address ,class: "form-control input-lg", placeholder: "Address"%>
+                </div>
+                <p class="text-left">
+                  <%= f.submit '儲 存 SAVE', class: "btn btn-custom-3" %>
+                </p>
+            <% end %>
+              
+              
+          </div>
+          <!-- End .tab-pane -->
+     
+        </div>
+        <!-- End .tab-content --> 
       </div>
-
-   </div>
-  </section>
-</article>
+      <!-- End .tab-container --> 
+      
+    </div>
+    <!-- End .row --> 
+    
+  </div>
+  <!-- End .container -->
+  
+  <div class="lg-margin2x visible-sm visible-xs"></div>
+  <!-- Space 間隔--> 
+  
+</div>
+<!-- End .lookbook --> 

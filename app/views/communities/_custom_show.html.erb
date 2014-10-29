@@ -1,0 +1,24 @@
+<div class="cover">
+  <% if @community.galleries.select{ |v| v['type'] == "CommunityCoverGallery" }.first %>
+    <% community_cover_url = @community.galleries.select{ |v| v['type'] == "CommunityCoverGallery" }.first.attachment.url %>
+    <%= image_tag community_cover_url  if community_cover_url %>
+  <% end %>
+</div>
+<!--cover-->
+
+<div class="title">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td class="date">
+        <div><b><%= @community.created_at.strftime("%d")%></b><br>
+          <%= @community.created_at.strftime("%-m")%>
+        </div>
+      </td>
+      <td><h3><%= @community.title %></h3></td>
+    </tr>
+  </table>
+</div>
+<!--title-->
+<% if @community.ck_context %>
+  <%= @community.ck_context.html_safe %>
+<% end %>

@@ -1,0 +1,127 @@
+<link rel="stylesheet" href="/css/pageContact.css">
+
+<% content_for :breadcrumb do %>
+  <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; <%= link_to 'CONTACT US', 'javascript:void(0);' %>
+<% end %>
+
+  <div class="xlg-margin"></div><!-- Space 間隔 -->
+  <div class="container">
+    <header class="content-title"><!-- Start .content-title 標題 -->
+      <div class="title-bg">
+        <h2 class="title contact">CONTACT US<span>聯絡客服</span></h2>
+      </div>
+    </header><!-- End .content-title 標題 -->
+    <%= form_for @contact , url: contacts_path(@contact)  do |f| %>
+      <div class="layout contact">
+        <div class="input-group input-container contact-name">
+          <span class="input-group-addon"><span class="input-icon input-icon-user"></span><span class="input-text">姓名</span></span>
+            <%= f.text_field :name, class: 'form-control input-lg' , :required => true , placeholder: "Name"%>
+        </div>
+         <div class="input-group input-container contact-email">
+            <span class="input-group-addon"><span class="input-icon input-icon-email"></span><span class="input-text">電子信箱</span></span>
+            <%= f.text_field :email, class: 'form-control input-lg' , :required => true , placeholder: "Email"%>
+        </div>
+        <div class="input-group input-container contact-subject">
+            <span class="input-group-addon"><span class="input-icon input-icon-subject"></span><span class="input-text">主旨</span></span>
+            <%= f.text_field :subject, class: 'form-control input-lg' , :required => true , placeholder: "Subject"%>
+        </div>
+        <div class="input-group textarea-container">
+          <%= f.text_area :content, class: "form-control" , cols: "30", rows: "10" , placeholder:"請輸入您的留言，我們會儘快為您服務。Please leave a message, we will contact within 24 hours." %>
+        </div>
+      </div>
+      <div class="code">
+          <div class="input-group input-container">
+            <%= recaptcha_tags :display => { :theme => "clean" } %>
+          </div>          
+           <p class="text-right">
+              <!-- <input type="reset" value="取　消 CANCEL" class="btn btn-custom-2 md-margin cancle"> -->
+            <%= f.submit '送　出 Submit', class: "btn btn-custom-3 md-margin" %>
+           </p>
+      </div>
+    <% end %>
+  </div><!-- End .container -->
+  <div class="xlg-margin"></div><!-- Space 間隔 -->
+
+  
+  <div class="container">
+    <header class="content-title"><!-- Start .content-title 標題 -->
+      <div class="title-bg">
+        <h2 class="title policy">Return/ Exchange Policy<span>退換貨須知</span></h2>
+      </div>
+    </header><!-- End .content-title 標題 -->
+    <div class="row portfolio-item-container" data-max-col="2">
+      <div class="col-md-6 col-sm-6 col-xs-6 portfolio-item photography">
+          <h2>關於退貨，換貨</h2>
+          <p>台灣地區的訂單，在商品抵達後 7 天之內，我們接受退換貨。其他國家的訂單，在商品抵達後 21 天之內，我們接受退換貨。僅限交換商品仍有庫存的情況下可辦理退換。若希望退換商品已無庫存而無法更換時，我們會用電子郵件告知。商品抵達後若已超過上列的天數，請恕無法辦理退貨或退換。請於下方列印「退貨/換貨」的表格，填寫好後與商品一併寄回。<br><br>
+寄回的商品必須有快捷、掛號、包裹郵件號碼。下述情況概不接受退換貨: 已經使用過的商品，無包裝盒、包裝袋、標牌、附屬品(請務必將所有配件、與送抵時相同之所有內容全數退還)，經修改過或洗滌過的商品，因使用出現受損或沾染污漬的商品，最低折扣商品。</p>
+      </div>        
+      <div class="col-md-6 col-sm-6 col-xs-6 portfolio-item photography"> 
+          <h2>Return/ Exchange Policy</h2>
+          <p>Returns and exchanges are accepted on merchandise within 7 days of receipt for domestic purchases and 21 days for international purchases base on stock availability. For returns after this time period, we reserve the right to deny the return. All customers who wish to return their orders should print and fill out our 「return/exchange 」form then send it back with the items that you wish to return/exchange.
+
+All returns must be shipped via traceable and insured mail in original packaging. Only items that HAVE TAGS ON, HAVE NOT BEEN WORN, ALTERED, DAMAGED IN ANYWAY OR WASHED may be returned or exchanged. Items on FINALE SALE are not returnable.</p>
+      </div>
+    </div><hr />
+    
+    <div class="row portfolio-item-container" data-max-col="2">        
+      <div class="col-md-6 col-sm-6 col-xs-6 portfolio-item photography">
+          <h2>換 貨</h2>
+          <p>換貨僅限更換與訂購之相同商品一次(可換另一色、另一個尺寸)。
+顧客如果想要更換另一個商品，我們建議，請在填寫表格時勾選退貨抵用金，並再重新至我們的網站訂購。</p>
+      </div>        
+      <div class="col-md-6 col-sm-6 col-xs-6 portfolio-item photography">
+          <h2>Exchanges</h2>
+          <p>Customers may exchange items for the same item in a different size or color.
+Please note that currently we only offer one time size or color exchanges. If you wish to exchange your item for an alternative style, we suggest that when you are filling out the form, choose the return for a store credit box then purchase the new item separately when the credit is posted to your account.
+</p>
+      </div>          
+    </div><hr />
+    
+    <div class="row portfolio-item-container" data-max-col="2">
+      <div class="col-md-6 col-sm-6 col-xs-6 portfolio-item photography">
+          <h2>退 款</h2>
+          <p>當我們收到退貨包裹後，就會開始處理退款事宜。退款會以顧客原先結帳時的付款方式退還。請參閱退款須知表格。處理完畢後，我們會用電子郵件告知。請注意，顧客的銀行可能需要一段作業時間。</p>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-6 portfolio-item photography">
+          <h2>Refund</h2>
+          <p>Once your package has been received by us, your refund will be processed in the original form of payment. *Please refer to our refund chart for more information. We will send you an e-mail to the address listed on your account when this transaction has taken place. Please note that your banking institution may require additional days to process and post this transaction to your account once they have received the information from us.
+</p>
+      </div>
+    </div><hr />
+    
+    <div class="row portfolio-item-container" data-max-col="2">
+      <div class="col-md-6 col-sm-6 col-xs-6 portfolio-item photography">
+          <h2>退款須知表格</h2>
+          <p><table class="table">
+               <tr>
+                 <td>1. 信用卡：1~2周。申請刷退後，顧客的銀行可能 需要一段作業時間。
+                 </td>
+               </tr>
+               <tr>
+                 <td>2. 現金：如果訂購時是選擇貨到現金付款的方式，我們會採予銀行轉賬方式
+  退款。請務必在退換貨表格上填寫正確銀行資料-銀行代碼、分行代碼、帳
+  號 、戶名。
+                 </td>
+               </tr>
+         </table><p></p>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-6 portfolio-item photography"> 
+          <h2>Refund Chart</h2>
+          <p><table class="table">
+               <tr>
+                 <td>1. Credit Card:Around 1~2 weeks. Your banking. institution may require 
+  additional days to process and post this transaction to your account.
+                 </td>
+               </tr>
+               <tr>
+                 <td>2. Cash:2~3 weeks. If you paid by cash when the package was delivered, we
+   will refund you by bank transfer. Please provide us with your bank 
+   information on the return/exchange form.
+                 </td>
+               </tr>
+         </table><p></p><span class="note">*Customers using international credit cards, please note: The refund amount might change slightly due to currency rates.</span>
+      </div>
+    </div>
+    <p class="text-center"><button class="btn mainBtn" onClick="location.href='#'"><span>退換貨表格下載</span><br>International Return And Exchange<br>Form Download</button></p>
+  </div><!-- End .container -->
+  <div class="xlg-margin"></div><!-- Space 間隔 -->

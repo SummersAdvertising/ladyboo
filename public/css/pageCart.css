@@ -1,0 +1,153 @@
+#content,#content a { font-size: 1.1em!important; }
+/*步驟標籤------------------------------------------------------------------------------------------*/
+.stepTag { background-image: url(../images/bg_cartStep.png); background-repeat: no-repeat; width: 100%; overflow: hidden; background-size: contain; padding-bottom: 40px; }
+.stepTag ul { padding: 0; margin: 0; }
+.stepTag ul li { float: left; color: #646464; line-height: 1.2em; width: 10%; padding-top: 10px; margin-left: 7%; margin-right: 8%; font-size: 0.9em; }
+.stepTag ul li.active span { border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #c9006e; color: #f858b7; display: inline-block; }
+#content h1 { color: #EEE; background-color: #313131; height: 72px; margin: 0; padding-top: 20px; padding-bottom: 20px; padding-left: 20px; font-family: Helvetica, "Microsoft JhengHei", "微軟正黑體"; font-style: italic; font-size: 1em; line-height: 1.2em; }
+.note { color: #c9006e; font-weight: bold; font-size: 0.9em; }
+.title.cart { width: 320px; }
+@media (max-width:1200px) {
+#content .container { width: 100%; padding: 0 5px; }
+}
+@media (min-width:970px) and (max-width:1100px) {
+.stepTag ul li { padding-top: 5px; }
+}
+@media (min-width:800px) and (max-width:969px) {
+.stepTag ul li { padding-top: 5px; margin-left: 6%; margin-right: 6%; width: 13%; font-size: 0.9em; }
+}
+@media(max-width:799px) {
+.stepTag { display: none; }
+#content .container { padding: 0 10px; }
+}
+@media (min-width:768px) and (max-width:1100px) {
+.title.cart { width: 20%; width: 300px; }
+}
+@media(max-width:767px) {
+#content h1 { height: 50px; padding-top: 10px; font-size: 0.9em; }
+.title.cart { width: 280px; margin-left: 10px; }
+#content .container { padding: 0; }
+}
+/*步驟一*/
+/*共用確認訂單------------------------------------------------------------------------------------------*/
+/*下方------------------------------------------------------------------------------------------*/
+.choosePlace p {  color: #434343; line-height: 1.5em; padding: 10px 0; }
+#content .choose .btn-custom-3{padding:8px 20px;}
+.choose h4 {  font-family: Helvetica, "Microsoft JhengHei", "微軟正黑體";color:#c9006e;font-size:1.2em;font-weight:bold;}
+.choosePlace { border: 2px double #AAA; }
+.choose .text-center { padding-top: 102px; }
+/*@media screen and (-webkit-min-device-pixel-ratio:0) {
+.choosePlace { -webkit-border-image: url(../images/frame.png) 30 30 round; -o-border-image: url(../images/frame.png) 30 30 round; border-image: url(../images/frame.png) 30 30 round; }
+}*/
+
+@media (max-width:1200px) {
+.choose .text-center { padding-top: 20px; }
+.choosePlace .btn { float: right; margin: 5px; clear: both; }
+.custom-checkbox { padding-right: 10px; }
+}
+@media(max-width:767px) {
+.choosePlace { overflow: hidden; }
+.choosePlace .btn { float: right; margin: 5px; clear: both; }
+.choosePlace p { padding: 10px; }
+#content .col-xs-6 { width: 100%; float: none; margin: 0 auto; padding: 0; }
+.choose .text-center { padding-top: 20px; }
+#content .row { margin-left: 10px; margin-right: 10px; }
+}
+/*步驟二*/
+/*1.選擇付款方式------------------------------------------------------------------------------------------*/
+.cartPanel { background-color: #FFF; padding: 0 60px; border: solid 1px #e0e0e0; margin-bottom: 40px; }
+.comfirm { border: none!important; }
+.comfirm > tbody > tr > td { border: none!important; text-align: left; padding: 10px 10px;  }
+.comfirm p { text-align: left; padding-top: 10px;  }
+input[type=radio] {position: absolute;left: -5px;}
+@media(max-width:767px) {
+.cartPanel { padding: 0 0px; margin-bottom: 20px; }
+.comfirm .input-group { margin-bottom: -10px; }
+.comfirm > tbody > tr > td.paymentDetail { padding-left: 40px; }
+.comfirm > tbody > tr > td { display: block; padding: 5px 10px; margin: 0; }
+}
+/*2.確認訂單------------------------------------------------------------------------------------------*/
+.orderItem { border-color: #EEE!important; margin-bottom: 40px; }
+.orderItem > tbody > tr > th { padding: 10px 5px; color: #646464; background-color: #eeeeee; border: solid 1px #e0e0e0; font-weight: normal; }
+.orderItem > tbody > tr > td { vertical-align: middle; background-color: #FFF; border-color: #e0e0e0!important; }
+.orderItem img { float: left; margin-left: 10px; }
+.orderItem td p { float: left; margin-left: 30px; text-align: left; }
+.orderItem .tableBottom { color: #EEE; background-color: #313131; height: 72px; margin: 0; padding-top: 20px; padding-bottom: 20px; padding-right: 20px;  text-align: right; }
+.subtotal { color: #f858b7; }
+.mTitle { background-color: #313131; text-align: center; color: #FFF; line-height: 1.4em; padding: 10px 0; display: none; }
+@media(max-width:767px) {
+.mTitle { display: block; }
+.orderItem > tbody > tr > th { display: none; }
+.orderItem > tbody > tr { border-bottom: solid 1px #EEE!important; }
+.orderItem > tbody > tr > td { display: block; padding: 5px 10px; text-align: center; border: none!important; }
+.orderItem > tbody > tr:nth-child(even) { background-color: #EEE; }
+.orderItem > tbody > tr:nth-child(odd) { background-color: #FFF; }
+.orderItem img { float: none; margin: 20px auto 10px auto; }
+.orderItem td p { float: none; margin: 0 auto 0 auto; text-align: center; }
+.itemPrice:before { content: '售價 Price：' }
+.itemQuantity:before { content: '數量 Quantity：'; }
+.itemSubtotal:before { content: '小計 Subtotal：'; }
+.close-button { display: block; margin: 10px auto 20px auto; }
+.atm span { display: block; margin: -10px 0; }
+.orderItem .tableBottom { height: 60px;  text-align: center; padding: 20px 0; }
+}
+/*3.填寫資料------------------------------------------------------------------------------------------*/
+.delivery h2 { font-family: Helvetica, "Microsoft JhengHei", "微軟正黑體"; font-size: 1.2em; color: #c9006e; font-weight: normal; padding-top: 20px; display: inline-block; }
+#content a#receiptLink {  text-decoration: underline; color: #448aca; margin-left: 20px;font-size: 0.9em!important; }
+.delivery .input-group-addon { min-width: 130px; color: #434343; padding-left: 20px; font-size: 1em; }
+.delivery p { font-size: 0.9em; color: #646464; line-height: 1.7em; }
+select.form-control { width: 100px; }
+.delivery label {  }
+.primaryAdd { float: right; }
+.primaryAdd2 { clear: both; list-style:inside; padding-bottom:20px; color:#c9006e; }
+.primaryAdd2 span{ display:block;color:#313131; }
+.primaryAdd2 label { padding-left: 10px; }
+ @media(max-width:767px) {
+.delivery h2 span { display: block; }
+.delivery .input-group-addon { min-width: 100px; padding-left: 15px; }
+#receiptLink { display: block; margin: 0; }
+}
+/*下方------------------------------------------------------------------------------------------*/
+#content .btn-custom-2, #content .btn-custom-3 { border: none; padding: 8px 25px; line-height: 1.2em; font-size: 0.9em; }
+#content .btn-custom-3:hover { -webkit-box-shadow: inset 1px 1px 6px 2px rgba(0, 0,0, 0.2); box-shadow: inset 1px 1px 6px 2px rgba(0, 0, 0, 0.2); background-color: #C9006E; }
+#content .btn-custom-2:hover { background-color: #C9006E; }
+#content .text-right { padding-top: 20px; }
+@media(max-width:767px) {
+.custom-checkbox .checbox-container { left: 10px; }
+#content .btn-custom-2, #content .btn-custom-3 { display: block; float: right; margin: 5px; clear: both; }
+}
+/*步驟三*/
+/*1.付款方式------------------------------------------------------------------------------------------*/
+.txtPayment { color: #c9006e; font-size: 1.4em!important; }
+.cartPanel.payment { padding: 0 20px }
+.payment .table > tbody > tr > td { vertical-align: middle; }
+@media(max-width:767px) {
+.cartPanel.payment { padding: 0 0 10px 0; }
+}
+/*共用確認訂單------------------------------------------------------------------------------------------*/
+/*2.訂單明細------------------------------------------------------------------------------------------*/
+.orderItem .tableBottom2 { color: #EEE; background-color: #313131; height: 72px; margin: 0; padding-top: 20px; padding-bottom: 20px; padding-right: 20px;  text-align: right; }
+.orderItem .tableBottom2 hr { border-color: #a0a0a0; width: 200px; margin-right: 0; margin-top: 10px; margin-bottom: 10px; }
+@media(max-width:767px) {
+.orderItem .tableBottom2 { height: 140px;  line-height: 2em; text-align: center; padding: 20px 0; }
+.orderItem .tableBottom2 hr { margin: 0 auto; }
+}
+/*3.訂單資訊------------------------------------------------------------------------------------------*/
+.delivery2 { padding-bottom: 40px; }
+.delivery2 h2 { font-family: Helvetica, "Microsoft JhengHei", "微軟正黑體"; font-size: 1.2em; color: #c9006e; font-weight: normal; padding: 20px 0; }
+.delivery2 p { font-size: 1em; color: #646464; line-height: 1.7em; padding-bottom: 10px; }
+ @media(max-width:767px) {
+.delivery2 h2 { padding-bottom: 0px; }
+}
+/*步驟四*/
+/*-------------*/
+.thankPanel { background-color: #FFF; padding: 0 40px; border: solid 1px #e0e0e0; margin-bottom: 40px; width: 85%; margin-left: auto; margin-right: auto; }
+#content h1.h1_2 { background-color: #c9006e; height: 52px; text-align: center; line-height: 52px; width: 85%; margin-left: auto; margin-right: auto; margin-top: 40px; padding: 0; }
+.thanks { border: none!important; }
+.thanks > tbody > tr > td { border: none!important; text-align: left; padding: 10px 10px;  }
+.thanks p { text-align: center; padding-top: 10px; font-size: 1.3em; line-height: 1.8em; }
+ @media(max-width:767px) {
+#content h1.h1_2 { width: 94%; margin-top: 0px; }
+.thankPanel { width: 94%; padding: 0 5px; }
+.thanks p { font-size: 1.1em; }
+}

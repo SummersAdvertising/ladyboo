@@ -1,0 +1,25 @@
+
+<% order_items.each do |item| %>
+  <tr>
+    <td>
+      <% unless item[:product_id].nil? || item[:product_id].empty? %>
+        <% if Product.find_by_id(item[:product_id]).galleries.select{ |v| v['type'] == "ProductCoverGallery" }.count > 0 %>
+          <%= image_tag Product.find_by_id(item[:product_id]).galleries.select{ |v| v['type'] == "ProductCoverGallery" }.first.attachment.url, width: 100, height: 100 %>
+        <% end %>
+      <% end %>
+      <p>NO. <%= item[:product_no] %><br> 
+      <%= generate_product_link(item) %><br> 
+      <%= item[:en_name] %><br> 
+      <%= item[:stock_name] %></p>
+    </td>
+    <td><span class="itemPrice">NT$ <%= number_with_delimiter( item[:price_for_sale] > 0 ? item[:price_for_sale] : item[:price] )%></span></td>
+    <td>
+      <span class="itemPrice">
+        <%= label_tag :amount, item[:amount], :disabled => true %>
+      </span>
+    </td>
+    <td>
+      <span class="itemSubtotal">NT$ <%= number_with_delimiter( ( item[:price_for_sale] > 0 ? item[:price_for_sale] : item[:price] ) * item[:amount] ) %></span>
+    </td>
+  </tr>
+<% end %>

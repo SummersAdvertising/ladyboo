@@ -1,0 +1,21 @@
+.title.privacy { width: 330px; }
+.title.right { width: 740px; }
+.title.terms { width: 510px; }
+.privacy h2 { font-family: Helvetica, "Microsoft JhengHei", "微軟正黑體"; font-size: 1.2em; color: #c9006e; ; }
+.privacy p, .privacy ol, .right p, .right ol { font-size: 0.9em; margin-bottom: 40px; }
+.privacy ol li { margin-bottom: 20px; margin-top: 0; padding-top: 0; }
+.privacy ol li { list-style-type: decimal; margin-left: 20px; }
+.privacy a { color: #ba6de0; }
+@media (min-width: 768px) and (max-width: 991px) {
+.title.privacy { width: 20%; min-width: 310px; }
+.title.right { width: 20%; min-width: 720px; }
+.title.terms { width: 20%; min-width: 490px; }
+}
+@media (max-width: 767px) {
+.title.privacy { width: 280px; margin-left: 10px; }
+.title.right { width: 300px; margin-left: 10px; }
+.title.right span { display: block; margin-top: 10px; }
+.title.terms { width: 280px; margin-left: 10px; }
+.title.terms span { display: block; margin-top: 10px; }
+.privacy, .right { margin: 0; padding: 0 10px; }
+}

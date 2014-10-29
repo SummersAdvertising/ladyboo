@@ -1,5 +1,6 @@
 #encoding: utf-8
 class Useradmin::OrdersController < UseradminController
+  before_action :authenticate_user!
   before_action :order_params, only: [:atm_transfered]
   
   def index
@@ -38,7 +39,7 @@ class Useradmin::OrdersController < UseradminController
   private
 
   def order_params
-    params.require(:order).permit(:accountinfo)
+    params.require(:order).permit(:accountinfo, :fillout_date)
   end
 
 end

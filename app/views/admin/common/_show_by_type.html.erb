@@ -2,19 +2,77 @@
 <%# target_title: display name for user %>
 <%# target: object %>
 <%# type: gallery type %>
-
-<div class="form">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td width="7%"><%= target_title %>：</td>
-      <td width="93%">
-        <div class="thumb">
-          <% target.galleries.select{ |v| v['type'] == type }.each do |attach| %>
-            <image src=<%= "#{attach.attachment.url}" %> />
-            <%= link_to '刪除', admin_gallery_path(attach.id), method: :delete, data: { confirm: '確認刪除?' }, class: 'delete', title: '刪除' %>
-          <% end %>
-        </div>
-      </td>
-    </tr>
-  </table>
+<div class="hgroup">
+  <h3 class="left">圖片預覽 <% if allow_dragable %><span>(可拖拉排序)</span><% end %></h3>          
 </div>
+
+<div class="gallery" id="listAttachs">
+
+  <% target.galleries.select{ |v| v['type'] == type }.each_with_index do |attach, i| %>
+    <% if i == 0 %>
+      <div style='float:left;' class="thumb left cover Attachcontainer dragable" <%= "id=Attachcontainer_#{attach.id.to_s}" %>> 
+    <% else %>
+      <div style='float:left;' class="thumb left Attachcontainer dragable" <%= "id=Attachcontainer_#{attach.id.to_s}" %>> 
+    <% end %>
+    <image src=<%= "#{attach.attachment.url}" %> />
+
+    <%= link_to '刪除', admin_gallery_path(attach.id), method: :delete, data: { confirm: '確認刪除?' }, class: 'delete', title: '刪除' %>
+    </div>
+  <% end %>
+
+</div>
+
+<% if allow_dragable %>
+<script>
+  $(function() {
+    var prevEvent = null;
+      $( "#listAttachs" ).sortable({
+        //connectWith: ".renamelevelcontainer",
+        items: "> .dragable" ,
+        placeholder: "ui-state-highlight",
+        update: function( event, ui ) {
+            
+          if(event.timeStamp == prevEvent){
+            return null;
+          }
+          
+          prevEvent = event.timeStamp;  
+          var newRankings_array = $('#listAttachs').sortable('toArray');
+          var orderSet = [];
+          $.each(newRankings_array, function( index, value){
+                orderSet.push(value.replace("Attachcontainer_",""));
+            });
+            var order2Push = JSON.stringify(orderSet);
+            
+            $.ajaxSetup({
+              headers: {
+                  'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+
+          //multiple reorder 
+          $.ajax({
+            type: "PATCH",
+            url: "/admin/galleries/"+orderSet[0]+"/multiple_reorder",
+            data: { gallerries: {  reorderset: orderSet } },
+            success: function(data){
+              $("#listAttachs > .thumb").attr('class', 'thumb left Attachcontainer dragable');
+              $("#listAttachs > .thumb:first").attr('class', 'cover thumb left Attachcontainer dragable');
+              alertify['success'](data[0][1], 2000);
+              
+              return false   
+            },
+            error: function(data){
+            
+              return false  
+            }
+          });
+
+        }
+      });
+      
+        
+      $( "#listAttachs" ).disableSelection();
+    });  
+</script>
+<% end %>

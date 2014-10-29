@@ -1,75 +1,40 @@
-<% content_for :header do %>
-  <div id="banner">
-    <div class="container row">
-      <div class="col-md-3 col-md-offset-9 col-sm-12">您的訂單</div>
-    </div>
-  </div>
-<% end %>  
+  <div class="xlg-margin"></div><!-- Space 間隔-->
+  <div class="container">
+    <header class="content-title"><!-- Start .content-title 標題 -->
+      <div class="title-bg">
+        <h2 class="title cart">YOUR CART<span>購物車</span></h2>
+      </div>
+    </header><!-- End .content-title -->
 
-<article class="container-fluid">
-  <section class="container row">
-    <div class="col-md-8 col-md-offset-2" >
-      <ul id="step" class="hidden-xs">
-        <li>購物步驟</li>
-        <li>1. 明細確認</li>
-        <li class="active">2. 付款及運送資訊</li>
-        <li>3. 最後確認</li>
-      </ul>
-
+    <div class="container">
+      <header class="stepTag"><!-- Start .stepTag 步驟標籤 -->
+        <ul>
+          <li><span>確認購物明細<br>Confirm order</span></li>
+            <li class="active"><span>選擇付款方式<br>Payment</span></li>
+            <li><span>運費計算<br>Shipping</span></li>
+            <li><span>完成訂購<br>Confirmation</span></li>
+        </ul>
+      </header><!-- End .stepTag 步驟標籤 -->
+      
       <%= render partial: "show_order_form", :locals => { order: @order, order_items: @order_items } %>
       
-      <h4 style="padding:2%">確認商品明細</h4>
-      <div id="order">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <th colspan="2">商品名稱</th>
-            <th width="12%">單價</th>
-            <th width="12%">數量</th>
-            <th width="12%">金額</th>
-            <th width="9%"></th>
-          </tr>
+      <div class="input-group custom-checkbox">
+        <input type="checkbox" id="agree_privacy" class="checkbox" checked>
+        <span class="checbox-container"><i class="fa fa-check"></i></span>
+           我已仔細閱讀並明瞭<a href="terms.html" title="服務條款">「服務條款」</a>、<a href="privacy.html" title="隱私權政策">「隱私權政策」</a>、<a href="privacy.html" title="智慧財產權聲明">「智慧財產權聲明」</a>等所載內容及其意義，茲同意該等條款規定，並願遵守網站現今、嗣後規範的各種規則。
+    I've read through, understand and accept LadyBoos online policies: <a href="privacy.html" title="PRIVACT">PRIVACT</a>, <a href="terms.html" title="TERMS &amp; CONDITIONS">TERMS &amp; CONDITIONS</a> .
+        <p class="text-right">
+          <%= link_to categories_path, :id => "back", class: "btn btn-custom-2" do %>
+            繼續購物<br>Back to shop
+          <% end %>
+          <%= link_to "javascript: void(0);", :id => "next_step", class: "btn btn-custom-3" do %>
+            確認結帳<br>Confirm order
+          <% end %>
+        </p>
+      </div>
+    </div><!-- End .container -->
 
-          <%= render partial: "show_order_items_check", :locals => { order_items: @order_items } %>
-
-        </table>
-      </div>
-      <!--order-->
-      <div id="check" class="clearfix">
-        <div class="pull-right">
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <td width="62%" align="right"><b>小計</b></td>
-              <td width="38%" align="right"><b>$<%= @sum = sum_cart_items(@order_items) %><%# cart_helper  %></b></td>
-            </tr>            
-          </table>
-        </div>
-        <div class="pull-left">
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <td width="7%" valign="top">
-                <input type="checkbox" id="agree_privacy" class="checkbox">
-              </td>
-              <td width="93%" valign="top">
-                <label for="agree_privacy">
-                  我已仔細閱讀並明瞭「<a href="#">服務條款</a>」、「<a href="#">隱私權政策</a>」、
-                  「<a href="#">退貨須知</a>」等所載內容及其意義，茲同意該等條款規定，
-                  並願遵守網站現今、嗣後規範的各種規則。
-                </label>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
-      <!--check-->
-      <div id="next" class="clearfix control_panel">
-        <%# link_to("上一步", cart_index_path, :id => "prev") %>
-        <%= link_to("確認結帳", "javascript: void(0);", :id => "next_step", class: "btn pull-right" ) %>
-        <%= link_to("繼續購物", categories_path, :id => "back", class: "btn pull-right") %>
-      </div>
-      <!--next--> 
-    </div>
-  </section>
-</article>
+  </div><!-- End .container -->
 
 <script src="/js_plugins/jq_validation/jquery.validate.min.js"></script>
 <script src="/js_plugins/jq_validation/additional-methods.min.js"></script>

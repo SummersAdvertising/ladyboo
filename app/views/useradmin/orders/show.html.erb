@@ -1,145 +1,138 @@
-<% content_for :header do %>
-  <div id="banner">
-    <div class="container row">
-      <div class="col-md-3 col-md-offset-9 col-sm-12">會員帳戶</div>
-    </div>
-  </div>
-<% end %>  
+<% content_for :breadcrumb do %>
+  <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; <%= link_to 'ACCOUNT', 'javascript:void(0);' %>
+<% end %>
 
-<article class="container-fluid">
-  <section class="container row" id="member-show">
-    <div class="col-md-10 col-md-offset-1 col-sm-12 row">
-      <div class="col-md-3">
-        <aside>
-          <h3 class="hidden-sm hidden-xs">帳戶管理</h3>
-          <ul>
-            <li class="active"><%= link_to '訂單管理', useradmin_orders_path %></li>
-            <li><%= link_to '會員資料', useradmin_users_path %></li>
-            <li><%= link_to '常用地址', useradmin_addressbooks_path %></li>
-          </ul>
-        </aside>
+<div id="lookbook">
+  <div class="xlg-margin hidden-xs"></div>
+  <!-- Space 間隔 -->
+  <div class="container"><!-- Start .container -->
+    <header class="content-title">
+      <div class="title-bg">
+        <h2 class="title account">ACCOUNT<span>會員帳戶</span></h2>
       </div>
-      <div class="col-md-9">
-        <article>
-          <div id="order">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <thead>
-                <tr>
-                  <td colspan="4"><span>訂單編號：<%= @order.ordernum %></span> <span>訂單時間：<%= @order.created_at.strftime("%Y.%m.%d %H:%M") %></span></td>
-                  <td align="right">
-                    <%= link_to "聯絡客服", new_useradmin_orderask_path %>
-                  </td>
-                </tr>
-              </thead>
+    </header>
+    <div class="row"><!-- Start .row -->
+      
+      <div class="tab-container left product-detail-tab clearfix">
+        <aside class="col-md-3 col-sm-4 col-xs-12 sidebar"><!-- Start #sidebar 左清單 -->
+          
+          <div class="panel-group custom-accordion sm-accordion categoryTitle" id="category-filter"><!-- Start .panel-group 分類面板 -->
+            <div class="accordion-header">
+              <div class="accordion-title markTitle">帳戶管理<span>ACCOUNT</span></div>
+            </div>
+            <ul class="category-filter-list jscrollpane nav-tabs">
+              <li class="active">
+                <%= link_to '訂單管理 Order history', useradmin_orders_path %>
+              </li>
+              <li>
+                <%= link_to '會員資料 Personal details', useradmin_users_path %>
+              </li>
+              <li>
+                <%= link_to '常用地址 Primary address', useradmin_addressbooks_path %>
+              </li>
+              <li>
+                <%= link_to '我的最愛 My Favorites', useradmin_tracking_lists_path %>
+              </li>
+            </ul>
+          </div>
+          <!-- End .panel-group --> 
+          
+        </aside>
+        <!-- End #sidebar -->
+        <div class="tab-content clearfix">
+          
+          <div class="tab-pane active" id="orderInfo">
+            <p class="tagOrder">訂單編號 NO:<span id="orderNum"><%= @order.ordernum %></span></p>
+            <p class="tagOrder">訂購時間 Order time: <span id="orderTime"><%= @order.created_at.strftime("%Y/%m/%d %H:%M") %></span></p>
+            <p class="tagOrder">
+              <%= link_to "聯絡客服 CONTACT US", new_useradmin_orderask_path %>
+            </p>
+            
+            <table class="table orderItem">
               <tr>
-                <th colspan="2">商品名稱</th>
-                <th width="15%">單價</th>
-                <th width="15%">數量</th>
-                <th width="15%">金額</th>
+                <th>商品名稱 Name</th>
+                <th>售價 Price</th>
+                <th>數量 Quantity</th>
+                <th>總額 Subtotal</th>
               </tr>
-    
               <% @order.orderitems.each do |item| %>
                 <tr>
-                  <td width="12%">
+                  <td>
                     <% unless get_product_of(item).nil? %>
-                       <% if get_product_of(item).galleries.select{ |v| v['type'] == "ProductPhotoGallery" }.count > 0 %>
-                          <%= image_tag get_product_of(item).galleries.select{ |v| v['type'] == "ProductPhotoGallery" }.first.attachment.url %>
+                      <% if get_product_of(item).galleries.select{ |v| v['type'] == "ProductCoverGallery" }.count > 0 %>
+                        <%= image_tag get_product_of(item).galleries.select{ |v| v['type'] == "ProductCoverGallery" }.first.attachment.url, width:100, height: 100 %>
                       <% end %>
+
+                      <p>NO. <%= get_product_of(item).product_no %><br>
                     <% end %>
+                    
+                    <a><%= "#{ item.item_name }" %></a><br>
+                    <% unless get_product_of(item).nil? %>
+                      <%= get_product_of(item).en_name %>
+                    <% end %>
+                    <br> 
+                    <%= item.item_stockname %></p>
                   </td>
-                  <td width="43%" class="name">
-                    <a><%= "#{ item.item_name }" %></a>
-                  </td>
-                  <td align="center">$<%= number_with_delimiter(item.item_price) %></td>
-                  <td align="center"><%= item.amount %></td>
-                  <td align="center">$<%= number_with_delimiter(item.item_price * item.amount) %></td>
+                  <td><span id="infoPrice">$ <%= number_with_delimiter(item.item_price) %> TWD</span></td>
+                  <td><span id="infoQuantity"><%= item.amount %></span></td>
+                  <td><span id="infoSubtotal">$ <%= number_with_delimiter(item.item_price * item.amount) %> TWD</span></td>
                 </tr>
-
-                <% if get_product_of(item) && get_product_of(item).grindable == 1 %>
-                  <% if !@order.order_memo.nil? && !@order.order_memo.empty?  %>
-                    <tbody class="detail">
-                       <% JSON.parse_if_json(@order.order_memo).each do | attr | %> 
-                        <% if attr[1]["stock_id"] ==  item.product_stock_id  %> <%# && attr[1]["needgrind"] == "true" %>
-                          <tr>
-
-                            <td>&nbsp;</td>
-                            <td class='name'>
-                              <%= "不磨" unless attr[1]["needgrind"] == "true" %>
-                              <%= "研磨" if attr[1]["needgrind"] == "true" %>
-                              <%= attr[1]["grindlevel"] if attr[1]["needgrind"] == "true" %>
-                            </td>
-                            <td>&nbsp;</td>
-                            <td align='center'>
-                              <%= attr[1]["amount"] %>
-                              <%# item.item_name %>
-                            </td>
-                            <td>&nbsp;</td>
-                          </tr>
-                          <% end %>
-                      <% end %>
-                    </tbody>
-                  <% end %>
-                <% end %>
-
               <% end %>
             </table>
-          </div>
-          <div id="total">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <td width="71%" align="right">購物小計</td>
-                <td width="29%" align="right">$<%= number_with_delimiter(@sum = sum_order_items(@order.orderitems)) %><%# orders_helper %> </td>
-              </tr>
-              <tr>
-                <td align="right">
-                  運費</td>
-                <td align="right">
-                  $<%= number_with_delimiter(@shipping_fee = get_shipping_fee_from_order(@order))  %><%# orders_helper %> </td>
-              </tr>
-              <tr>
-                <td width="71%" align="right">訂單總計</td>
-                <td width="29%" align="right">$<%= number_with_delimiter(@sum + @shipping_fee) %> <%# orders_helper %> </td>
-              </tr>
-            </table>
-          </div>
-          <div id="form"> 訂單狀態：<%= @order.get_payment_status %><%# orderlogs_helper %><br>
+            <hr>
+            <p class="text-right"> 購物小計 Subtotal  $<span><%= number_with_delimiter(@sum = sum_order_items(@order.orderitems)) %></span> TWD<br>
+              運費 Delivery   $<span><%= number_with_delimiter(@shipping_fee = get_shipping_fee_from_order(@order))  %></span> TWD<br>
+              總計 Total  $<span><%= number_with_delimiter(@sum + @shipping_fee) %></span> TWD<br>
+            </p>
+            <hr>
+            <p class="text-right">
+            訂單狀態：<%= @order.get_payment_status %><%# orderlogs_helper %><br>
             <% unless @order.package_tracking_no.nil? || @order.package_tracking_no.empty? %>
             出貨單號：<%= @order.package_tracking_no %><%= fetch_tracking_url(@order) %> <br>
             <% end %>
-            <br>
+            </p>
             <% if @order.payment_status == 'order_placed_ATM' && @order.payment_type == 'atm_transfer' && @order.accountinfo.nil? %>
-              付款方式： ATM轉帳<br>
-              匯款戶名：咖碼股份有限公司<br>
-              銀行：玉山銀行 敦南分行 (銀行代碼:808) <br>
-              帳號：0314-940-019559 <br>
-              <br>
-              <h4>匯款後登錄確認</h4>
-                <%= form_for(@order, :url => atm_transfered_useradmin_order_path(@order), html: { id: "patchthisorder", class: "form-inline" } ) do |f| %>
-                  <div class="form-group">請輸入匯款帳號後五碼 </div>
-                  <div class="form-group">
-                    <%= f.text_field :accountinfo , class: 'form-control accountinfo', required: 'required' %>
-                  </div>
-                  <div class="form-group">
-                    <%= f.submit "送 出", class: "btn", data: { disable_with: "..." } %>
-                  </div>
-                <% end %>
+              <p class="text-right">
+                付款方式： ATM轉帳<br>
+                匯款戶名：咖碼股份有限公司<br>
+                銀行：玉山銀行 敦南分行 (銀行代碼:808) <br>
+                帳號：0314-940-019559 <br>
+              </p>
+              <hr>
 
-                <script src="/js_plugins/mask/jquery.mask.min.js"></script>
-                <script type="text/javascript">
-                $(document).ready(function(){
-                  $('.accountinfo').mask('00000');
-                });
-                </script>
-            <% end %>
+              <%= form_for(@order, :url => atm_transfered_useradmin_order_path(@order), html: { id: "patchthisorder", class: "form-inline text-right" } ) do |f| %>
+                請輸入匯款帳號後五碼<br> Last 5 digits of your bank account
+                <br><%= f.text_field :accountinfo , class: 'form-control accountinfo transferInput', required: 'required' %>
+                <br>匯款時間 Date of transfer
+                <br><%= f.date_select :fillout_date, use_two_digit_numbers: true, discard_year: true,with_css_classes: true , prompt: { day: '-- 日 --', month: '-- 月 --' } %>
+                <br><br><br><br>
+                <%= f.submit "送 出 SUBMIT", class: "btn btn-custom-2", data: { disable_with: "..." } %>
+              <% end %>
+              
 
-            <% if @order.payment_status != 'shipped' && @order.payment_type == 'Vaccount' && @order.accountinfo.present? %>
-              付款方式： 虛擬帳號 <br>
-              銀行：玉山銀行 敦南分行 (銀行代碼:808) <br>
-              帳號：<%= @order.accountinfo.unpack('a5a5a4').join('-') %> <br>
+              <script src="/js_plugins/mask/jquery.mask.min.js"></script>
+              <script type="text/javascript">
+              $(document).ready(function(){
+                $('.accountinfo').mask('00000');
+              });
+              </script>
             <% end %>
           </div>
-        </article>
+          <!-- End .tab-pane -->
+        
+        </div>
+        <!-- End .tab-content --> 
       </div>
+      <!-- End .tab-container --> 
+      
     </div>
-  </section>
-</article>
+    <!-- End .row --> 
+    
+  </div>
+  <!-- End .container -->
+  
+  <div class="lg-margin2x visible-sm visible-xs"></div>
+  <!-- Space 間隔--> 
+  
+</div>
+<!-- End .lookbook --> 

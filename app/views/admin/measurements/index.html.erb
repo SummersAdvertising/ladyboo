@@ -15,8 +15,10 @@
   <%= measurement.title %>
   == <%= measurement.context_1 %> == <%= measurement.context_2 %> == <%= measurement.context_3 %> 
   == <%= measurement.context_4 %> == <%= measurement.context_5 %> == <%= measurement.context_6 %> 
-  [<%= link_to 'edit', edit_admin_category_product_measurement_path(params[:category_id], params[:product_id],measurement) %>| delete ]
+  [<%= link_to 'edit', edit_admin_category_product_measurement_path(params[:category_id], params[:product_id],measurement) %>| 
+  <%= link_to "delete", admin_category_product_measurement_path(@product.category,@product,measurement), :data => { :confirm => "確定繼續？" }, :method => :delete, :class => "delete", title: "刪除" %>
+   ]
   <br>
 <% end %>
-
-<%= link_to 'return' ,admin_category_product_path(params[:category_id], params[:product_id]) %>
+<br>
+<%= link_to 'return' ,admin_category_path(params[:category_id]) %>

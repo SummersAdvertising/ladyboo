@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="/css/pageProdPickup.css">
+<link rel="stylesheet" href="/css/prodList.css">
+
+<% content_for :breadcrumb do %>
+  <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; <%= link_to 'Lookbook', 'javascript:void(0);' %>
+  &nbsp; > &nbsp; <%= link_to "#{@lookbook.name}", 'javascript:void(0);' %>
+<% end %>
+
+<% if @topic.galleries.select{ |v| v['type'] == 'TopicBannerGallery' }.first  %>
+  <% content_for :header do %>
+    <div id="prodTop"><!-- Start #prodTop 上方橫福 --> 
+      <div class="container">
+        <div class="col-md-12">
+          <div class="row">
+            <img id="bannerImg" src=<%= "#{@lookbook.galleries.select{ |v| v['type'] == 'TopicBannerGallery' }.first.attachment.url}" %>>
+            <img id="bannerFrame" src="/images/frame_bannerPickup.png">
+          </div>
+        </div>
+      </div>
+    </div><!-- End #prodTop --> 
+  <% end %>
+<% end %>
+
+
+<div class="xlg-margin hidden-xs"></div><!-- Space 間隔 -->
+<div class="container"><!-- Start .container -->
+  
+  <%= render 'aside' %>
+  
+  <%= render 'product_grid' %>
+
+</div><!-- End .container -->

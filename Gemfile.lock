@@ -27,6 +27,17 @@ GEM
       activesupport (= 4.1.4)
       builder (~> 3.1)
       erubis (~> 2.7.0)
+    active_utils (2.2.3)
+      activesupport (>= 2.3.11)
+      i18n
+    activemerchant (1.44.1)
+      active_utils (~> 2.2.0)
+      activesupport (>= 3.2.14, < 5.0.0)
+      builder (>= 2.1.2, < 4.0.0)
+      i18n (>= 0.6.9)
+      json (~> 1.7)
+      nokogiri (~> 1.4)
+      offsite_payments (~> 2.0.0)
     activemodel (4.1.4)
       activesupport (= 4.1.4)
       builder (~> 3.1)
@@ -98,6 +109,9 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mailgun_rails (0.6.2)
+      rails (>= 3.2.13)
+      rest-client (>= 1.6.7)
     meta_request (0.3.4)
       callsite (~> 0.0, >= 0.0.11)
       rack-contrib (~> 1.1)
@@ -105,12 +119,26 @@ GEM
     mime-types (1.25.1)
     mini_magick (3.8.1)
       subexec (~> 0.2.1)
+    mini_portile (0.6.0)
     minitest (5.4.2)
+    money (6.3.0)
+      i18n (>= 0.6.4, <= 0.7.0.dev)
     multi_json (1.10.1)
     mysql2 (0.3.16)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
+    netrc (0.8.0)
+    nokogiri (1.6.3.1)
+      mini_portile (= 0.6.0)
+    offsite_payments (2.0.1)
+      active_utils (~> 2.2.0)
+      activesupport (>= 3.2.14, < 5.0.0)
+      builder (>= 2.1.2, < 4.0.0)
+      i18n (~> 0.5)
+      json (~> 1.7)
+      money (< 7.0.0)
+      nokogiri (~> 1.4)
     orm_adapter (0.5.0)
     polyamorous (1.1.0)
       activerecord (>= 3.0)
@@ -143,6 +171,9 @@ GEM
     remotipart (1.2.1)
     responders (1.1.1)
       railties (>= 3.2, < 4.2)
+    rest-client (1.7.2)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     rolify (3.4.1)
     sass (3.2.19)
     sass-rails (4.0.3)
@@ -204,6 +235,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
+  activemerchant
   cancan
   capistrano (= 3.0.1)
   capistrano-ext
@@ -215,6 +247,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   kaminari
+  mailgun_rails
   meta_request
   mini_magick
   mysql2

@@ -1,0 +1,16 @@
+<header>
+  <h2 class="left">TopicCollection<span> / 所有系列主題</span></h2>
+  <nav class="left"></nav>
+</header>
+<article>
+  
+  <div class="gallery">
+    <% @topic_collections.each do |topic_collection| %>
+
+      <div>
+        <%= link_to "#{topic_collection.name}" , topic_collection_path(topic_collection) %>
+      </div><br>
+
+    <% end %>    
+  </div>
+</article>

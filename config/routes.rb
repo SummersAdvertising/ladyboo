@@ -7,13 +7,65 @@ Rails.application.routes.draw do
 
   resources :pages, :controller => :statics do 
     collection do
+      get "about" => "statics#about", :as => "about"
       get ':page', :action => :show, :as => :page
     end
   end
 
   resources :categories, :only => [ :index, :show] do 
-    resources :products, :only => [:show]
+    resources :products, :only => [ :show] do
+      # member do 
+      #   get :fetch_stock_amount
+      #   get 'quickview' , :action => 'quickview'
+      # end
+    end
   end
+
+  resources :products, only: [:show] do 
+    member do 
+      get 'quickview' , :action => 'quickview'
+    end
+    collection do 
+      get :fetch_stock_amount
+    end
+  end
+
+  resources :contacts, only: [:index, :create]
+
+  resources :announcements, only: [:index]
+  resources :communities, only: [:index]
+
+  resources :topic_collections, :only => [ :show ] do
+    resources :topics, :only => [:show] do 
+      resources :categories, :only => [ :index, :show] do
+        resources :products, only: [:show] do 
+          member do 
+            get 'quickview' , :action => 'quickview'
+          end
+          collection do 
+            get :fetch_stock_amount
+          end
+        end
+      end
+    end
+  end
+
+
+  resources :lookbooks, :only => [:show] do 
+    resources :topics, :only => [:show] do 
+      resources :categories, :only => [ :index, :show] do
+        resources :products, only: [:show] do 
+          member do 
+            get 'quickview' , :action => 'quickview'
+          end
+          collection do 
+            get :fetch_stock_amount
+          end
+        end
+      end
+    end 
+  end
+
   # cart
   resources :cart, :only => [:index, :create] do
     collection do
@@ -26,15 +78,18 @@ Rails.application.routes.draw do
       get "fail"
       #金流串接
       get "post_order/:id" => "cart#post_order", :as => "post_order"
-      get "receive_result" => "cart#receive_result"
+      match "receive_result" => "cart#receive_result", via: [:get, :post]
 
+      #paypal
+      get "express_checkout" => "cart#express_checkout"
+      
       match "add" => "cart#add" , :via => :post
     end
 
     member do
-      match "plus/:index" => "cart#plus" , :via => :post , :as => "plus"
-      match "minus/:index" => "cart#minus" , :via => :post , :as => "minus"
-      match "delete_by_attribute/:index" => "cart#delete_by_attribute", :via => :post , :as => "delete_by_attribute"
+      match "plus" => "cart#plus" , :via => :post , :as => "plus"
+      match "minus" => "cart#minus" , :via => :post , :as => "minus"
+      # match "delete_by_attribute/:index" => "cart#delete_by_attribute", :via => :post , :as => "delete_by_attribute"
       match "delete" => "cart#delete" , :via => :delete
 
     end
@@ -44,7 +99,7 @@ Rails.application.routes.draw do
     
     resources :users, :only => [:index ,:update]
     resources :addressbooks , :only => [:index, :create, :destroy ,:update]
-    
+    resources :tracking_lists , :only => [:index, :create, :destroy ,:update]
     
     resources :orders, :only => [:index, :show] do
       member do
@@ -68,6 +123,12 @@ Rails.application.routes.draw do
     
     resources :categories do 
       resources :products do
+        post  'peditor/:id/createPhoto'       => 'peditor#createPhoto'
+
+        get   '/free_paragraph'       => 'products#free_paragraph'
+        patch  '/free_paragraph'       => 'products#update_parapraph'
+
+        resources :stocks, :only => [:index, :create, :update, :destroy]
 
         get   '/photos'       => 'products#photo', as: 'photo'
         patch  '/upload_photo'       => 'products#upload_photo'
@@ -81,11 +142,33 @@ Rails.application.routes.draw do
 
     resources :banners
     resources :pickups
-    resources :topics
+    
+    resources :topics do
+      get   '/photos'       => 'topics#photo', as: 'photo'
+      patch  '/upload_photo'       => 'topics#upload_photo'
+    end
+
     resources :topic_productships
-    resources :lookbooks
+
+    resources :lookbooks do 
+      resources :tiles
+
+      get   '/photos'       => 'lookbooks#photo', as: 'photo'
+      patch  '/upload_photo'       => 'lookbooks#upload_photo'
+
+    end
+
+    resources :tiles do
+      member do
+        patch 'reorder' , :action => 'reorder'
+      end 
+    end
+
     resources :lookbook_topicships
-    resources :topic_collections
+    resources :topic_collections do 
+      get   '/photos'       => 'topic_collections#photo', as: 'photo'
+      patch  '/upload_photo'       => 'topic_collections#upload_photo'
+    end
     resources :topic_collection_topicships
 
     resources :announcements do 
@@ -200,6 +283,6 @@ Rails.application.routes.draw do
   end #admin scope end
   
   
-  # get '(*url)'   => 'errors#index'
+  #get '(*url)'   => 'errors#index'
   
 end

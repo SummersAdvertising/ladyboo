@@ -13,6 +13,8 @@ class Product < ActiveRecord::Base
   has_many :topic_productships, dependent: :destroy
   has_many :topics , through: :topic_productships
 
+  has_many :tracking_lists
+
   
 
   scope :front_show_by_cate, ->(category_id) { where("category_id = ? AND status = ?", category_id, "enable") }
@@ -29,7 +31,10 @@ class Product < ActiveRecord::Base
   validates_numericality_of :price_for_sale , :only_integer => true , :greater_than => 0
 
   #before_destroy { |record| Banner.destroy_all "product_id = #{record.id}"  }
+  after_create :create_default_stocks
   after_create :create_default_measurements
+
+  paginates_per 12
 
   def check_attrs
     self.name = "未命名商品" if self.name.blank?
@@ -37,6 +42,7 @@ class Product < ActiveRecord::Base
     self.price = 9999 if self.price.blank?
     self.price_for_sale = 9999 if self.price_for_sale.blank?
     self.status = "disable" if self.status.blank?
+    self.product_no = generate_product_no if self.product_no.blank?
   end
 
   def get_status
@@ -52,8 +58,15 @@ class Product < ActiveRecord::Base
     self.status == "enable" ? true : false
   end
 
-  private
+  def is_new?
+    self.is_new == "yes" ? true : false
+  end
 
+  private
+  def create_default_stocks
+    Stock.create({product_id: self.id, description_1: '預設', description_2: '庫存', amount: 0, assign_amount: true})
+  end
+  
   def create_default_measurements
     #k-v pair: title:context
     @default_mesurements = [
@@ -80,6 +93,22 @@ class Product < ActiveRecord::Base
     
     Measurement.create(@default_mesurements)
 
+  end
+
+  def generate_product_no(digits = 10)
+   
+    type = Time.now().strftime("%Y%m")
+    self.product_no ||= loop do
+     # Make a random number.
+     random = "#{type}#{Array.new(digits){rand(10)}.join}"
+     # Use the random  number if no other order exists with it.
+     if self.class.exists?(product_no: random)
+       # If over half of all possible options are taken add another digit.
+       digits += 1 if self.class.count > (10 ** digits / 2)
+     else
+       break random
+     end
+    end
   end
 
 end

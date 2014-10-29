@@ -10,7 +10,7 @@ class Admin::ProductsController < AdminController
     # @opt_accessories = @product.accessories.where(type: 'OptionalAccessory').includes(:galleries)
     # @features = @product.features.includes(:galleries)
     # @colors = @product.colors.includes(:galleries)
-    # @cover = @product.galleries.where(type: 'ProductCover')
+    # @cover = @product.galleries.where(type: 'ProductCoverGallery')
     # @sliders = @product.galleries.where(type: 'ProductSlider') 
     # @photos = @product.galleries.where(type: 'ProductPhotoGallery')
     # @dms = @product.galleries.where(type: 'ProductDMFile')
@@ -28,14 +28,13 @@ class Admin::ProductsController < AdminController
       if( @product.errors.any? )
         format.html { redirect_to :back, alert: "新增失敗" }
       else
-        @product.stocks.create
         format.html { redirect_to edit_admin_category_product_path(@category, @product) }
       end
     end
   end
 
   def edit
-    @gallery_count = @product.galleries.select{ |v| v['type'] == "ProductCover" }.count
+    @gallery_count = @product.galleries.select{ |v| v['type'] == "ProductCoverGallery" }.count
   end
 
   # def slider
@@ -90,6 +89,9 @@ class Admin::ProductsController < AdminController
   #     end      
   #   end
   # end
+  def free_paragraph
+    @product = Product.find_by_id(params[:product_id])
+  end
 
   def photo
     @product = Product.find_by_id(params[:product_id])
@@ -125,9 +127,24 @@ class Admin::ProductsController < AdminController
     else 
       display_name = "#{@product.name}-product-#{@product.galleries.count + 1}"
     end
-    @latestAttach = ProductCover.create(:attachment => params[:attachment], :attachable => @product, :file_name => display_name) if params[:attachment]
+    @latestAttach = ProductCoverGallery.create(:attachment => params[:attachment], :attachable => @product, :file_name => display_name) if params[:attachment]
 
-    @product.update(product_params.merge({:status => "enable"})) 
+    @product.update(product_params.merge({:status => "enable"}))
+    
+    respond_to do |format|
+      if @product.save
+        format.html { redirect_to :back, notice: '更新成功' }
+        #format.html { redirect_to admin_category_product_path(@product.category_id, @product) }
+      else
+        format.html { render :back, notice: @product.errors.full_messages }
+      end      
+    end
+
+  end
+
+  def update_parapraph
+    @product = Product.find_by_id(params[:product_id])
+    @product.article.update( params.require(:article).permit(:content) )
     
     respond_to do |format|
       if @product.save
@@ -162,7 +179,8 @@ class Admin::ProductsController < AdminController
       :name, :en_name, :price, :price_for_sale, :attachment,
       :status, :ranking, :article_id, :ck_context, :is_new,
       :highlight,
-      :material_1, :material_2, :wash_1, :wash_2, :wash_3, :model_1, :model_2)
+      :material_1, :material_2, :wash_1, :wash_2, :wash_3, :model_1, :model_2,
+      :product_no)
   end
 
 end

@@ -1,9 +1,13 @@
 #encoding: utf-8
 class User < ActiveRecord::Base
-  # resourcify
-  # rolify
+
+  rolify :role_cname => 'Role'
+  after_create :assign_member_role
+  
   has_many :orders
   has_many :addressbooks
+  has_many :tracking_lists
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

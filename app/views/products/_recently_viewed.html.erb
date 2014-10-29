@@ -1,0 +1,23 @@
+<% products.each_with_index do |product, index| %>
+  
+  <%= "<li>".html_safe if (index)%3 == 0 %><!-- Start li 顯示三個 -->
+  
+  <div class="related-product clearfix"><!-- Start .related-product -->
+    <figure>
+      <% if product.galleries.select{ |v| v['type'] == 'ProductCoverGallery' }.first %>
+        <%= link_to( image_tag(product.galleries.select{ |v| v['type'] == 'ProductCoverGallery' }.first.attachment.url, width: '100px', height: '100px' ) , category_product_path(product.category, product), alt: "item#{index}" ) %>
+      <% end %>  
+    </figure>
+    <h5>
+      <p class="item-name">
+        <%= link_to category_product_path(product.category, product) do %>
+          <%= product.name %><br><%= product.en_name %>
+        <% end %>
+      </p>
+    </h5>
+    <div class="related-price">$<%= number_with_delimiter(product.price_for_sale) %></div> 
+  </div><!-- End .related-product -->
+  
+  <%= "</li>".html_safe if (index)%3 == 2 %><!-- End li -->
+
+<% end %>

@@ -1,6 +1,9 @@
 #encoding: utf-8
 class Pickup < ActiveRecord::Base
   belongs_to :product
+  
+  has_many :galleries, through: :product
+  has_many :categories, through: :product
 
   before_validation :check_attrs
   validates_presence_of :description
@@ -10,8 +13,6 @@ class Pickup < ActiveRecord::Base
 
   def check_attrs
     self.title = "未命名 Pickup" if self.title.blank?
-    self.description = " " if self.description.blank?
-    self.status = "enable"
     self.description = "javascript:void(0);" if self.description.blank?
   end
 

@@ -1,108 +1,193 @@
-<link href="/css/product.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/pageProduct.css">
 
-<article class="container-fluid">
-  
+<% content_for :breadcrumb do %>
+  <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; <%= link_to 'SHOP', categories_path %>
+  &nbsp; > &nbsp; <%= link_to "#{@product.category.daddy.name} #{@product.category.name}", category_path(@product.category) %>
+<% end %>
+
+<div id="prodTop"><!-- Start #prodTop 上方黑色產品介紹區塊 --> 
   <div class="container">
-    <section class="row" id="product-show">
-      
-      <%= render 'aside_desktop' %>
-      <%# render 'aside_mobile' %><br>
-      
-      <article class="col-sm-9 col-xs-12">
-
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12 photo"><!-- Start .product-viewer 左邊圖片區 -->
+          
+          
+          <!-- <span id="slider-prev"></span>  Product slider  <span id="slider-next"></span> -->
         
-        
-        <div class="row">
-          <div class="sliderContainer col-sm-4">
-            <!-- <span id="slider-prev"></span>  Product slider  <span id="slider-next"></span> -->
-
-            <div class="bxslider text-center" id="photo">            
-                <% @product.galleries.where(type: 'ProductPhotoGallery').each do |attach| %>
-                    <figure>
-                      <image src=<%= "#{attach.attachment.url}" %> class="img-responsive"/>
-                   </figure>
-                <% end %>            
-            </div>
-            <!--photo-->
-            <br>
-            <ul id="thumb">
+          <div id="product-image-container">
+            <div id="pd_photo">
+            <% @product.galleries.where(type: 'ProductPhotoGallery').each do |attach| %>
+                <figure>
+                  <img src=<%= "#{attach.attachment.url}" %>  />
+                  <a id="zoom" href="javascript:;" title="放大"></a> 
+               </figure>
+            <% end %>   
+            </div>         
+          </div>
+          
+          <!--photo-->
+          <div id="product-image-carousel-container">
+            <ul id="pd_photo_thumb" class='celastislide-list'>
               <% @product.galleries.where(type: 'ProductPhotoGallery').each_with_index do |attach, index| %>
-              <li>
+              <li class='markLi'>
                 <a data-slide-index="<%= "#{index}" %>" href="">
-                  <image src=<%= "#{attach.attachment.url}" %> class="img-responsive" />
+                  <image src=<%= "#{attach.attachment.url}" %> width='100px' height='100px' />
                 </a>
               </li>
               <% end %>
             </ul>          
           </div>
+          
+          
+          <div class="zoom-section"></div><!--zoom-section end-->
+        </div><!-- End .product-viewer 左邊圖片區 -->
 
-          <div class="col-sm-8">
-            <h3><%= @product.name %></h3><%= @product.en_name %>
-            
+        
+        <div class="col-md-6 col-sm-12 col-xs-12 product"><!-- Start .product 右邊文字區 -->
+          <div class="lg-margin visible-sm visible-xs"></div><!-- Space 間隔 -->
+          <h1 class="title product-name"><%= @product.name %><span><%= @product.en_name %></span></h1>
+          <span>NO. <%= @product.product_no %></span>
+          <hr>
+          <ul class="product-list">
             <% unless @product.material.to_hash.length == 0 %>
-              <ul id="features">
+              <li>
                 <%= show_keypoints(@product.material) %>
-              </ul>
+              </li>
             <% end %>
 
             <% unless @product.wash.to_hash.length == 0 %>
-              <ul id="features">
+              <li>
                 <%= show_keypoints(@product.wash) %>
-              </ul>
+              </li>
             <% end %>
 
             <% unless @product.model.to_hash.length == 0 %>
-              <ul id="features">
+              <li>
                 <%= show_keypoints(@product.model) %>
-              </ul>
+              </li>
             <% end %>
-          
-            
-            <% if @product.stocks.first.amount - @amount_in_cart > 0 && @product.stocks.first.assign_amount == true %>
-              <%= render partial: "add_to_cart", :locals => { stocks: @product.stocks, amount_in_cart: @amount_in_cart } %>
-            <% elsif @product.stocks.first.assign_amount == false %>
-              <%= render partial: "add_to_cart", :locals => { stocks: @product.stocks, amount_in_cart: @amount_in_cart } %>
-            <% else %>
-              <h3>已售完</h3>
-            <% end %>
-            
-          </div>
-        </div>
-        <!--intro-->
-        <div id="chart" class="row">
-          <div class="col-sm-5 text-center">
-            <% @product.galleries.select{ |v| v['type'] == "TasteAttributeGallery" }.each do |attach| %>
-                <image src=<%= "#{attach.attachment.url}" %> class="img-responsive" />
-            <% end %>
-          </div>
-          <div class="col-sm-7">
-            
-          </div>
-        </div>
+          </ul>
+          <%# 條件要改 %>
+          <% if check_with_stock(@product) %>
+            <%= render partial: "add_to_cart", :locals => { stocks: @product.stocks, amount_in_cart: @amount_in_cart, product: @product } %>
+          <% else %>
+            <h3>已售完</h3>
+          <% end %>
+         </div><!-- End .product 右邊文字區 -->
 
+      </div><!-- End .row --> 
+    </div><!-- End .col-md-12 --> 
+  </div><!-- End .container --> 
+</div><!-- End #prodTop --> 
+
+<div class="xlg-margin"></div><!-- Space 間隔-->
+
+<div class="container">
+  <div class="xs-margin"></div><!-- Space 間隔-->
+  <div class="row">
+    <div class="col-md-9 col-sm-12 col-xs-12">
+      <div class="prodCon"><!-- Start .prodCon 中間白色文字介紹區 -->
         <div class="content"  id="articleContent"></div>    
         <input id="article_content" style="display:none;" type="text" value="<%= @product.article.content %>">
-        <!--gallery-->
-        <%# unless soldout  %>
-        <!-- <div id="buy-2" class="buy row">
-          <div class="col-sm-offset-3 col-sm-6 col-xs-offset-2 col-xs-8"> 
-            <a href="javascript: document.getElementById('add_to_cart_form').submit();" class="btn btn-block btn-lg" role="button" data-no-turbolink = true >我要購買</a>
-          </div>
-        </div> -->
-        <%# end %>
-        <% if @product.stocks.first.amount - @amount_in_cart > 0 && @product.stocks.first.assign_amount == true %>
-          <%= render partial: "quick_check_out", :locals => { stocks: @product.stocks, amount_in_cart: @amount_in_cart } %>
-        <% elsif @product.stocks.first.assign_amount == false %>
-          <%= render partial: "quick_check_out", :locals => { stocks: @product.stocks, amount_in_cart: @amount_in_cart } %>
-        <% else %>
-          <h3>已售完</h3>
-        <% end %>
-       
-      </article>
+      </div><!-- End .prodCon 中間白色文字介紹區 -->
       
-    </section>
-  </div>
-</article>
+      <div class="lg-margin"></div><!-- Space 間隔-->
+      <% if @measurements.count > 1 %>
+      <div class="tableSize"><!-- Start .tableSize 中間黑色尺寸區 -->
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-bordered">
+          <tr>
+            <th scope="col" class="tableTitle">SIZE</th>
+            <th scope="col">XS</th>
+            <th scope="col">S</th>
+            <th scope="col">M</th>
+            <th scope="col">L</th>
+            <th scope="col">XL</th>
+            <th scope="col">F</th>
+          </tr>
+          <% @measurements.each do |measurement| %>
+            <tr>
+              <td class="tableTitle"><%= measurement.title %></td>
+              <td><%= measurement.context_1 %></td>
+              <td><%= measurement.context_2 %></td>
+              <td><%= measurement.context_3 %></td>
+              <td><%= measurement.context_4 %></td>
+              <td><%= measurement.context_5 %></td>
+              <td><%= measurement.context_6 %></td>
+            </tr>
+          <% end %>
+          <tr>
+            <td colspan="7" class="tableNote"><ol><li>以平放測量，單位為公分。<br>
+              Flat on table in cm</li>
+              <li>每批商品製程時間不同，可能會有一些色差或長度 1-2cm 的差異，消費者請於購買前確認可接受上述差異，下單後勿以上述差異辦
+              理退換貨。<br>
+              Eaxc batch of products is processed at different times, there may be some differences in color or length ( 1-2cm), please make sure these differences are acceptable before placing an order.</li></ol> </td>
+          </tr>
+        </table>
+      </div><!-- End .tableSize 中間黑色尺寸區 -->
+      <% end %>
+    </div>
+    
+    <div class="lg-margin2x visible-sm visible-xs"></div><!-- Space 間隔 -->
+    <div class="col-md-3 col-sm-12 col-xs-12 sidebar"><!-- Start .sidebar 右邊欄位 -->
+     
+      <div class="widget related"><!-- Start .related 瀏覽歷史 --> 
+        <h3 class="title">Recently Viewed<span>已瀏覽過的商品</span></h3>
+          <div class="related-slider flexslider sidebarslider">
+            <ul class="related-list clearfix">
+              <%= list_recently_viewed(session[:recently_viewed]) %>
+            </ul>
+          </div>
+          <!-- End .related-slider --> 
+        </div>
+      </div><!-- End .sidebar 右邊欄位 -->
+
+  </div><!-- End .row --> 
+</div><!-- End .container -->
+
+<div class="lg-margin"></div><!-- Space 間隔 -->
+
+  <% if current_user %>
+    <% tracking_lists = current_user.tracking_lists %>
+    <% if tracking_lists.count >= 1 %>
+      <section id="favoritesBg"><!-- Start .favoritesBg 粉紅背景 -->
+        <div class="container">
+          <div class="bgFav"></div>
+        </div>
+      </section><!-- End .favoritesBg 粉紅背景 -->
+
+      <div class="container favorites"><!-- Start .favorites 我的最愛 -->
+        <div class="purchased-items-container carousel-wrapper">
+          <header class="content-title"><!-- Start .content-title 標題 -->
+            <div class="title-bg">
+              <h2 class="title favorites">Favorites<span>我的最愛</span></h2>
+            </div>
+          </header><!-- End .content-title 標題 -->
+          <div class="carousel-controls"><!-- Start .carousel-controls 上下頁按鈕 -->
+            <div id="brand-slider-prev" class="carousel-btn carousel-btn-prev"></div>
+            <div id="brand-slider-next" class="carousel-btn carousel-btn-next carousel-space"></div>
+          </div><!-- End .carousel-controls 上下頁按鈕 -->
+          <div class="brand-slider owl-carousel">
+            <% tracking_lists.includes(:product, :categories,:galleries).each_with_index do |tracking_item, index| %>
+              <% current_product = tracking_item.product %>
+              <% current_category = tracking_item.product.category %>
+              <div class="item">
+                <div class="item-image-container">
+                  <figure>
+                    <% if current_product.galleries.select{ |v| v['type'] == 'ProductCoverGallery' }.count > 0 %>
+                      <%= link_to category_product_path(current_category, current_product) do %>
+                        <%= image_tag(current_product.galleries.select{ |v| v['type'] == 'ProductCoverGallery' }.first.attachment.url, class: 'item-image', alt: "item#{index+1}") %>
+                      <% end %>
+                    <% end %>
+                  </figure>
+                  <%= link_to '', useradmin_tracking_list_path(tracking_item), :method => :delete, :data => {:confirm => "取消追蹤？"}, :class => "favDelete", title: "刪除" %>
+                </div><!-- End .item-image-container --> 
+              </div><!-- End .item -->
+            <% end %>
+          </div><!-- End .brand-slider --> 
+        </div><!-- End .carousel-wrapper --> 
+      </div><!-- End .favorites 我的最愛 -->
+    <% end %>
+  <% end %>
 
 <script src="/js_plugins/peditor/js/editor.js"></script>
 <script src="/js_plugins/peditor/js/editor_p.js"></script>
@@ -110,52 +195,28 @@
 <script src="/js_plugins/peditor/js/editor_list.js"></script>
 <script src="/js_plugins/peditor/js/editor_video.js"></script>
 <script src="/js_plugins/peditor/js/jquery.imgareaselect.min.js"></script>
-<!-- bxSlider Javascript file -->
 <script src="/js_plugins/bxslider/jquery.bxslider.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/js_plugins/peditor/css/imgareaselect-default.css" />
+
 <script type="text/javascript">
+  // $('#pd_photo_thumb li a').removeClass('active'); 
+  // $('#pd_photo_thumb li a:first').addClass('active');
+  // $('.bxslider').css({'-webkit-transition': '0s', 'transition': '0s', '-webkit-transform': 'translate3d(0px, -380px, 0px)'}); 
 
-    editor.output();
+  editor.output();
 
-  $('#photo').bxSlider({      
-    pagerCustom: '#thumb',
+  $('#pd_photo').bxSlider({      
+    pagerCustom: '#pd_photo_thumb',
     controls: false
   });  
 
-  $('#thumb').bxSlider({
+  $('#pd_photo_thumb').bxSlider({
     randomStart:true,
     pager:false,
-    slideWidth: 85,   
-    minSlides: 3,
-    maxSlides: 3,
-    slideMargin: 5
+    slideWidth: 380,   
+    minSlides: 6,
+    maxSlides: 6,
+    controls: false,
+    slideMargin: 0
   });
-    
-    $(function(){ 
-      var _showTab = 0;
-      var $defaultLi = $('.tab li').eq(_showTab).addClass('active');
-      $($defaultLi.find('a').attr('href')).siblings().hide();
-      $('.tab li').click(function() {   
-        var $this = $(this),
-          _clickTab = $this.find('a').attr('href');   
-        $this.addClass('active').siblings('.active').removeClass('active');   
-        $(_clickTab).stop(false, true).fadeIn().siblings().hide(); 
-        return false;
-        }).find('a').focus(function(){
-          this.blur();
-      });
-    });
-
-    $(function(){ 
-      $("#grind select").hide()
-      $("#grind input").click(function(){
-        if( $(this).is(":checked") ){
-          $("#grind select").show()
-        }
-        else{
-          $("#grind select").hide()
-        }
-      });
-    })    
 
 </script>

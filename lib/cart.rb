@@ -112,7 +112,7 @@ class Cart
   def self.check_items_in_cart(cookies_cart, for_cart_or_order)
     @cart_items = JSON.parse_if_json(cookies_cart) || Hash.new
 
-    @stocks = Stock.includes(:product).where(:id => @cart_items.keys)
+    @stocks = Stock.includes(:product, :galleries).where(:id => @cart_items.keys)
 
     @order_items = Array.new
 
@@ -132,12 +132,14 @@ class Cart
       when "for_cart"
         @product_attrs = { 
           :id => stock.id, 
-          :name => stock.product.name, 
+          :name => stock.product.name,
+          :en_name => stock.product.en_name, 
           :stock_name => stock.name, 
           :image => nil, 
           :price => stock.product.price.to_i, 
           :price_for_sale => stock.product.price_for_sale.to_i ,
-          :product_id => stock.product.id.to_s
+          :product_id => stock.product.id.to_s,
+          :product_no => stock.product.product_no.to_s
         }
       when "for_order"
         @product_attrs = { 
@@ -169,7 +171,7 @@ class Cart
         #@cart_cafe_attrs.delete(attr[0]) if attr[1]["stock_id"] == stock_id
       # @cart_cafe_attrs[attr_index]["amount"] = (@cart_cafe_attrs[attr_index]["amount"].to_i + 1)
       #end    
-
+      #@cart_message = "更新購物車！"
     else
       @cart_message = "放入購物車的商品數量超過商品庫存！"
     end
@@ -186,6 +188,7 @@ class Cart
     else
       @cart_items.delete(stock_id)
     end
+    #@cart_message = "更新購物車！"
 
     return { cart_items: @cart_items.to_json, cart_message: @cart_message}
   end

@@ -48,8 +48,14 @@ gem 'simple_form'
 
 gem 'recaptcha', :require => "recaptcha/rails"
 
+gem 'mailgun_rails'
+# https://github.com/comfy/active_link_to
+#gem 'active_link_to'
+
 gem 'whenever', :require => false
 gem 'sucker_punch', '~> 1.0'
+
+gem 'activemerchant'
 
 group :production, :staging do
   gem 'mysql2'

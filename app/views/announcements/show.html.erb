@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="/css/pageAbout.css">
+
+<article class="container-fluid">
+  <section class="row container" id="news-show">
+    <div class="col-sm-8 col-sm-offset-2 col-xs-12">
+      
+      <% if @announcement.type == "CustomizedAnnouncement" %>
+
+        <%= render 'custom_show' %>
+
+      <% elsif %>
+        
+        <%= render 'peditor_show' %>
+
+      <% end %>      
+      
+      
+      <div class="page">
+        <ul class="pagination">
+          <li class="previous">
+          <% if @previous_announcement %>
+            <%= link_to announcement_path(@previous_announcement) do%>
+              <img src="/images/nws-03.gif">
+            <% end %>
+          <% else %>
+            <%= link_to announcements_path() do%>
+              <img src="/images/nws-03.gif">
+            <% end %>
+          <% end %>
+          </li>
+          <li class="menu">
+            <%= link_to announcements_path do %>
+              <img src="/images/nws-05.png">
+            <% end %>
+          </li>
+          <li class="next">
+            <% if @next_announcement %>
+              <%= link_to announcement_path(@next_announcement) do%>
+                <img src="/images/nws-04.gif">
+              <% end %>
+            <% else %>
+              <%= link_to announcements_path() do%>
+                <img src="/images/nws-04.gif">
+              <% end %>
+            <% end %>
+          </li>
+        </ul>
+      </div><!--page-->
+
+
+    </div>
+  </section>
+</article>

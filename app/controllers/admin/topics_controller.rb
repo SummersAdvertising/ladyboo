@@ -37,6 +37,8 @@ class Admin::TopicsController < AdminController
 
   # GET /admin/topics/1/edit
   def edit
+    @gallery_count = @topic.galleries.select{ |v| v['type'] == "TopicCoverGallery" }.count
+
     exclude_ids = @topic.products.pluck(:id)
     if exclude_ids.length != 0
       @products = Product.where('id not in (?)', exclude_ids)
@@ -50,7 +52,14 @@ class Admin::TopicsController < AdminController
   # PATCH/PUT /admin/topics/1
   # PATCH/PUT /admin/topics/1.json
   def update
-  
+    
+    if params[:filename].present? 
+      display_name = params[:filename] 
+    else 
+      display_name = "#{@topic.name}-topic-#{@topic.galleries.count + 1}"
+    end
+    @latestAttach = TopicCoverGallery.create(:attachment => params[:attachment], :attachable => @topic, :file_name => display_name) if params[:attachment]
+
     @topic.update ( admin_topic_params )
     
     respond_to do |format|
@@ -63,6 +72,32 @@ class Admin::TopicsController < AdminController
       end
     end
 
+  end
+
+  def photo
+    @topic = Topic.find_by_id(params[:topic_id])
+    @gallery_count = @topic.galleries.select{ |v| v['type'] == "TopicBannerGallery" }.count
+  end
+
+  def upload_photo
+    @topic = Topic.find_by_id(params[:topic_id])
+    #deal with attachment
+    if params[:filename].present? 
+      display_name = params[:filename] 
+    else 
+      display_name = "#{@topic.name}-topic-#{@topic.galleries.count + 1}"
+    end
+    @latestAttach = TopicBannerGallery.create(:attachment => params[:attachment], :attachable => @topic, :file_name => display_name) if params[:attachment]
+
+    @topic.update(admin_topic_params) 
+    
+    respond_to do |format|
+      if @topic.save
+        format.html { redirect_to :back, notice: '更新成功' }
+      else
+        format.html { render :back, notice: @topic.errors.full_messages }
+      end      
+    end
   end
 
   # DELETE /admin/topics/1
@@ -84,7 +119,7 @@ class Admin::TopicsController < AdminController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def admin_topic_params
-    params.require(:topic).permit(:name)
+    params.require(:topic).permit(:name, :attachment)
   end
 
 end

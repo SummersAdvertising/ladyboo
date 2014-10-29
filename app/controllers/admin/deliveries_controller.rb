@@ -1,6 +1,6 @@
 #encoding: utf-8
 class Admin::DeliveriesController < AdminController
-  authorize_resource
+  #authorize_resource
   before_action :set_delivery, :except => [:index]
 
   def index

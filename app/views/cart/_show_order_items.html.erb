@@ -1,25 +1,32 @@
 
 <% order_items.each do |item| %>
-<tr>
-  <td width="12%" class="cover">
-    <% unless item[:product_id].nil? || item[:product_id].empty? %>
-       <% if Product.find_by_id(item[:product_id]).galleries.select{ |v| v['type'] == "ProductPhotoGallery" }.count > 0 %>
-          <%= image_tag Product.find_by_id(item[:product_id]).galleries.select{ |v| v['type'] == "ProductPhotoGallery" }.first.attachment.url %>
+  <tr>
+    <td>
+      <% unless item[:product_id].nil? || item[:product_id].empty? %>
+        <% if Product.find_by_id(item[:product_id]).galleries.select{ |v| v['type'] == "ProductCoverGallery" }.count > 0 %>
+          <%= image_tag Product.find_by_id(item[:product_id]).galleries.select{ |v| v['type'] == "ProductCoverGallery" }.first.attachment.url, width: 100, height: 100 %>
+        <% end %>
       <% end %>
-    <% end %>
-  </td>
-  <td width="43%" class="name">
-    <%= generate_product_link(item) %>
-    
-  </td>
-  <td width="12%" align="center">$<%= item[:price_for_sale] > 0 ? item[:price_for_sale] : item[:price] %></td>
-  <td width="12%" align="center"><%= label_tag :amount, item[:amount], :disabled => true %></td>
-  <td width="12%" align="center">$<%= ( item[:price_for_sale] > 0 ? item[:price_for_sale] : item[:price] ) * item[:amount] %></td>
-  <td width="9%" align="center" class="delete">
-    <%= link_to delete_cart_path(item[:id]), :method => :delete do %>
-      <img src="/images/ord-03.png">
-    <% end %>
-  </td>
-</tr>
-
+      <p>NO. <%= item[:product_no] %><br> 
+      <%= generate_product_link(item) %><br> 
+      <%= item[:en_name] %><br> 
+      <%= item[:stock_name] %></p>
+    </td>
+    <td><span class="itemPrice">NT$ <%= number_with_delimiter( item[:price_for_sale] > 0 ? item[:price_for_sale] : item[:price] ) %></span></td>
+    <td>
+    <div class="custom-quantity-input">
+        <%= text_field_tag :amount, item[:amount], :disabled => true %>
+        <!-- <input type="text" name="quantity" value="1"> -->
+        <%= link_to plus_cart_path(item[:id]), :method => :post, class: "quantity-btn quantity-input-up" do %>
+          <i class="fa fa-angle-up"></i>
+        <% end %>
+        <%= link_to minus_cart_path(item[:id]), :method => :post, class: "quantity-btn quantity-input-down" do %>
+          <i class="fa fa-angle-down"></i>
+        <% end %>
+    </div>
+    </td>
+    <td><span class="itemSubtotal">NT$ <%= number_with_delimiter( ( item[:price_for_sale] > 0 ? item[:price_for_sale] : item[:price] ) * item[:amount] ) %></span>
+      <%= link_to '', delete_cart_path(item[:id]), :method => :delete , class: 'close-button' %>
+    </td>
+  </tr>
 <% end %>

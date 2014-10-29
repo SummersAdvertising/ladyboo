@@ -1,34 +1,32 @@
-<% content_for :header do %>
-  <div id="banner">
-    <div class="container row">
-      <div class="col-md-3 col-md-offset-9 col-sm-12">會員登入</div>
-    </div>
-  </div>
-<% end %>
+<link rel="stylesheet" href="/css/pageLogin.css">
 
-<article class="container-fluid">
-  <section class="container row" id="member-info">
-    <div class="col-md-10 col-md-offset-1 col-sm-12 row">
-      <article>
-      <%= devise_error_messages! %>
-      <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-          <h3>忘記密碼？</h3>
-          <%# devise_error_messages! %>
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <th><img src="/images/mbr-03.jpg"><%= f.label :email %></th>
-              <td><%= f.email_field :email, :autofocus => true , class: 'form-control'%></td>
-            </tr>
-          </table>
-         
-          <div class="text-center">
-            <%= f.submit "密碼重設", class: "btn", data: {disable_with: "..."} %>
-          </div>
-        <% end %>
-      </article>
+<div class="xlg-margin"></div>
+<div id="lookbook">
+<div class="container">
+  <header class="content-title">
+    <div class="title-bg">
+      <h2 class="title forgotten">FORGOTTEN PASSWORD<span>忘記密碼</span></h2>
     </div>
-  </section>
-</article>
+  </header>
+  <div class="layout member">
+    <%= devise_error_messages! %>
+    <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, id: 'login-form' }) do |f| %>
+        
+      <p>請輸入您的信箱<br>Enter your email address.</p>
+      <div class="input-group input-container contact-email">
+        <span class="input-group-addon"><span class="input-icon input-icon-email"></span><span class="input-text">電子信箱</span></span>
+        <td><%= f.email_field :email, :autofocus => true , class: 'form-control input-lg', placeholder: "Email" %></td>
+      </div>
+      <br><br>
+      <p class="text-right">
+        <%= f.submit "密碼重設 RESET", class: "btn btn-custom-3", data: {disable_with: "..."} %>
+      </p>
+    <% end %>
+    <br><br><br><br>
+  </div>
+</div>
+
+<div class="xlg-margin"></div>
 
 <script src="/js_plugins/jq_validation/jquery.validate.min.js"></script>
 <script src="/js_plugins/jq_validation/additional-methods.min.js"></script>

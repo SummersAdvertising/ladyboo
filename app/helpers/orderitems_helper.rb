@@ -6,7 +6,7 @@ module OrderitemsHelper
 
   def get_product_of(item)
 
-    stock = Stock.find_by_id(item.product_stock_id)
+    stock = Stock.find_by_id(item.stock_id)
     
     if stock 
       if stock.product

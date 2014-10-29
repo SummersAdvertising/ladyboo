@@ -1,0 +1,101 @@
+<link rel="stylesheet" href="/css/pageAbout.css">
+
+<% content_for :breadcrumb do %>
+  <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; <%= link_to 'ABOUT US', 'javascript:void(0);' %>
+<% end %>
+
+<div class="xlg-margin"></div><!-- Space 間隔 -->
+
+<div class="container">
+  <header class="content-title"><!-- Start .content-title 標題 -->
+    <div class="title-bg">
+      <h2 class="title about">ABOUT US<span>品牌精神</span></h2>
+    </div>
+  </header><!-- End .content-title -->
+
+  <div class="col-md-10 col-md-offset-1 layout about"><!-- Start 內文 -->
+    <div class="img-responsive" id="aboutBanner"></div><!-- #aboutBanner 品牌精神圖 -->
+    <p>
+      <br>
+      創造出妳自己的風格,讓自己看起來獨一無二，而別人也能了解妳的與眾不同。下了伸展台的時尚，很困難也很容易，對 LadyBoo 來說，時尚是了解自己，也懂得欣賞自己、妝點自己，是不必盲目跟風，就穿搭出別人學不來的獨特有型，我們更相信，因為熱愛一切美好事物而自信開心的妳，自然而然散發出迷人魅力，也是一種時尚定義。<br>
+      <br>
+      「有時候，一些簡單的改變與調整，就可以創造意想不到的結果」，這是 LadyBoo 創立品牌的初衷，而「蕾絲服飾」就是我們想與妳分享的簡單時尚：衣著加上蕾絲，輕輕鈎織出女人細緻多變的美，為平常的自己加上一點新鮮想像，讓穿著風情也跟著搖曳繽紛起來，當妳看見光影、看見身體像花綻開的優美姿態，欣賞自己的眼光開始不一樣，別人也會捨不得離開目光，細細品味如此精彩的妳。<br>
+      <br>
+      蕾絲是一半的美感哲學，一半辛辣一半甜，一半表露自我一半讓人無法猜透，偶爾妳是小露性感的小女人,有時妳是追求輕鬆自在的大女孩，LadyBoo 希望衣服的樣式由我們為妳設計挑選，想穿出哪一種與眾不同的個性時尚表情，讓妳的心情來決定。</p>
+    </div><!-- End 內文 -->
+  </div>
+
+  <div class="xlg-margin"></div><!-- Space 間隔 -->
+  <div class="container">
+    <div class="xs-margin"></div><!-- Space 間隔 -->
+    <div class="row">
+
+      <header class="content-title"><!-- Start .content-title 標題 -->
+        <div class="title-bg">
+          <h2 class="title news">NEWS<span>最新消息</span></h2>
+        </div>
+        <div class="readmore-controls">
+          <%= link_to 'Read More', announcements_path , title: '更多最新消息', id: 'readMore' %>
+        </div>
+      </header><!-- End .content-title -->
+
+      <div class="col-md-9 col-sm-8 col-xs-12 articles-container"><!-- Start 內文 -->         
+        
+        <% @announcements.each do |announcement| %>
+          <article class="article"><!-- Start .article -->
+            <div class="article-meta-date"> <span><%= announcement.created_at.strftime("%d")%></span> <%= announcement.created_at.strftime("%b")%> </div>
+            <div class="article-meta-year"><%= announcement.created_at.strftime("%Y")%></div>
+            <figure class="article-media-container"> 
+              <% if announcement.galleries.select{ |v| v['type'] == "AnnouncementCoverGallery" }.first %>
+                <% announcement_cover_url = announcement.galleries.select{ |v| v['type'] == "AnnouncementCoverGallery" }.first.attachment.url %>
+                  <%= image_tag announcement_cover_url if announcement_cover_url %>
+              <% end %>
+            </figure>
+            <h2><%= announcement.title %></h2>
+            <div class="article-content-container">
+              <span>
+              <% if announcement.ck_context %>
+                <%= announcement.ck_context.html_safe %>
+              <% end %>
+              </span>
+            </div>
+          </article><!-- End .article -->
+        <% end %>
+      </div>
+        
+
+      <header class="content-title"><!-- Start .content-title 標題 -->
+        <div class="title-bg">
+          <h2 class="title community">COMMUNITY<span>社群迴響</span></h2>
+        </div>
+        <div class="readmore-controls">
+          <%= link_to 'Read More', announcements_path, title: '更多社群迴響', id: 'readMore' %>
+        </div>
+      </header><!-- End .content-title -->
+
+      <div class="col-md-9 col-sm-8 col-xs-12 articles-container"><!-- Start 內文 -->         
+       <% @communities.each do |community| %>
+          <article class="article"><!-- Start .article -->
+            <div class="article-meta-date"> <span><%= community.created_at.strftime("%d")%></span> <%= community.created_at.strftime("%b")%> </div>
+            <div class="article-meta-year"><%= community.created_at.strftime("%Y")%></div>
+            <figure class="article-media-container"> 
+              <% if community.galleries.select{ |v| v['type'] == "CommunityCoverGallery" }.first %>
+                <% community_cover_url = community.galleries.select{ |v| v['type'] == "CommunityCoverGallery" }.first.attachment.url %>
+                  <%= image_tag community_cover_url if community_cover_url %>
+              <% end %>
+            </figure>
+            <h2><%= community.title %></h2>
+            <div class="article-content-container">
+              <span>
+              <% if community.ck_context %>
+                <%= community.ck_context.html_safe %>
+              <% end %>
+              </span>
+            </div>
+          </article><!-- End .article -->
+        <% end %>
+      </div>
+      
+      </div><!-- End .row --> 
+    </div><!-- End .container -->  
+

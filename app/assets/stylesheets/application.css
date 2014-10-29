@@ -11,6 +11,8 @@
  * file per style scope.
  *
  *= ckeditor/.
+ *= require alertify/core
+ *= require alertify/default
  *= require_tree .
  *= require_self
  */
