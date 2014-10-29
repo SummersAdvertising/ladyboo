@@ -50,6 +50,9 @@
               <%= f.text_field :context_5, class:"text", placeholder: "", style:"width:50%" %>
               <!-- COVER UPLOAD -->
               <%= file_field_tag :attachment, class: 'file' unless tile.galleries.count > 0 %>
+
+              <%= f.select :topic_id, options_for_select(@lookbook.topics.collect { |topic|
+            [topic.name, topic.id] }, tile.topic_id), {}, { id: 'topic_select' } %>
             </div>
           </td>          
           <td align="right" valign="top" width="18%">

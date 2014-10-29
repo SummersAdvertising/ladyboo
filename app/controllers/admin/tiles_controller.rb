@@ -81,6 +81,6 @@ class Admin::TilesController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tile_params
-      params.require(:tile).permit(:context_1, :context_2, :context_3, :context_4, :context_5, :attachment)
+      params.require(:tile).permit(:context_1, :context_2, :context_3, :context_4, :context_5, :attachment, :topic_id)
     end
 end

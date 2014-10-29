@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141027112546) do
+ActiveRecord::Schema.define(version: 20141029140158) do
 
   create_table "addressbooks", force: true do |t|
     t.integer  "user_id"
@@ -300,6 +300,7 @@ ActiveRecord::Schema.define(version: 20141027112546) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "ranking",     default: 999
+    t.integer  "topic_id"
   end
 
   create_table "topic_collection_topicships", force: true do |t|

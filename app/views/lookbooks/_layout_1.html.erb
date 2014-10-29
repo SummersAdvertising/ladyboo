@@ -1,13 +1,14 @@
  <div id="lookbook-layout-1" class="row"><!-- Start #lookbook-layout-1 主題穿搭區塊一 -->
   <div class="col-md-10 col-md-offset-1 layout"> 
     <% @tiles.each do |tile| %>
-        <%= link_to lookbook_path(@lookbook) do %>
+      <% if tile.topic %>
+        <%= link_to lookbook_topic_path(@lookbook, tile.topic) do %>
           <%= "#{tile.id} - Ranking: [#{tile.ranking}]" %><br>
           <% if tile.galleries.select{ |v| v['type'] == 'TileCoverGallery' }.first %>
             <%= image_tag(tile.galleries.select{ |v| v['type'] == 'TileCoverGallery' }.first.attachment.url, class: 'img-responsive')  %>
           <% end %>
         <% end %>
-        <%= link_to lookbook_path(@lookbook), class: 'link' do %>
+        <%= link_to lookbook_topic_path(@lookbook, tile.topic), class: 'link' do %>
           <ul>
             <li><%= tile.context_1 %></li>
             <li><%= tile.context_2 %></li>
@@ -16,6 +17,7 @@
             <li><%= tile.context_5 %></li>
           </ul>
         <% end %>
+      <% end %>
     <% end %>
   </div>
 </div><!-- End #lookbook-layout-1 主題穿搭區塊一 -->

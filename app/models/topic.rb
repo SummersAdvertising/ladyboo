@@ -9,5 +9,5 @@ class Topic < ActiveRecord::Base
   has_many :lookbooks , through: :lookbook_topicships
 
   has_many :categories, through: :products
-  
+
 end
