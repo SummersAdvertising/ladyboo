@@ -19,11 +19,7 @@ require "rvm/capistrano"
 # 使用 bundler
 # require 'bundler/capistrano'
 # 使 capistrano 的訊息能上色, 若沒有安裝相關 gem 則會提示
-begin
-  require 'capistrano_colors'
-rescue LoadError
-  puts "`gem install capistrano_colors` to get output more userfriendly." 
-end
+
 # require 'capistrano/rvm'
 # require 'capistrano/rbenv'
 # require 'capistrano/chruby'

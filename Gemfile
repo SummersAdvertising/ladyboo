@@ -74,7 +74,7 @@ group :development do
   gem 'xray-rails'
   
   gem 'capistrano-bundler', '~> 1.1.2'
-  gem 'capistrano_colors'
+  
   gem 'rvm-capistrano'
   gem 'capistrano-ext'
 

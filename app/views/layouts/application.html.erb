@@ -117,12 +117,9 @@
               </div><!-- End .logo-container -->
               <div id="menu-right-side" class="clerfix">
                 <div id="quick-access"><!-- Start #quick-access 搜尋鍵 -->
-                  <form class="form-inline quick-search-form" role="form" action="#">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Search here">
-                    </div>
-                    <button type="submit" id="quick-search" class="btn btn-custom"></button>
-                  </form>
+                  
+                  <%= render 'common/search_form' %>
+
                 </div><!-- End #quick-access -->
                 <nav id="main-nav"><!-- Start #main-nav 選單區 -->
                   <div id="responsive-nav"><!-- Start #responsive-nav 手機螢幕選單按鈕 -->
@@ -162,7 +159,7 @@
                         <% lookbook = Lookbook.where(status: 'enable').first %>
                         <% if lookbook %>
                           <div class="col-5">
-                            <%= link_to lookbook.name, lookbook_path(lookbook), class: "mega-menu-title" %><!-- End .mega-menu-title -->
+                            <%= link_to lookbook.name, 'javascript:void(0);', class: "mega-menu-title" %><!-- End .mega-menu-title -->
                             <ul class="mega-menu-list clearfix">
                               <% lookbook.topics.each do | topic | %>
                                 <li>

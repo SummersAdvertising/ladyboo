@@ -65,7 +65,6 @@ GEM
       sshkit (~> 1.2)
     capistrano-ext (1.2.1)
       capistrano (>= 1.0.0)
-    capistrano_colors (0.5.5)
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -246,7 +245,6 @@ DEPENDENCIES
   capistrano
   capistrano-bundler (~> 1.1.2)
   capistrano-ext
-  capistrano_colors
   carrierwave
   ckeditor
   coffee-rails (~> 4.0.0)

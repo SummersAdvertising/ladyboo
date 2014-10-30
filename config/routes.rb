@@ -21,6 +21,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :products, only: [:search] do
+    collection do
+      match 'search' => 'products#search', via: [:post], as: :search  
+    end
+  end
+
   resources :products, only: [:show] do 
     member do 
       get 'quickview' , :action => 'quickview'

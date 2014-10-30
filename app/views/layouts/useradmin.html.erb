@@ -91,11 +91,13 @@
               <%= render 'cart/quickview' %>
             </div><!-- End .dropdown-cart-menu-container -->
             <div class="header-top-dropdowns pull-right">
-              <div class="btn-group">
-                <%= button_to useradmin_tracking_lists_path, method: 'get', class: "btn btn-custom" do %>
-                  <span class="hide-for-xs"><span class="love-menu-icon"></span> 我的最愛 Favorites</span><span class="hide-for-lg"><span class="love-menu-icon"></span></span>
-                <% end %>
-              </div>
+              <% if user_signed_in? %>
+                <div class="btn-group">
+                  <%= link_to useradmin_tracking_lists_path, class: "btn btn-custom" do %>
+                    <span class="hide-for-xs"><span class="love-menu-icon"></span> 我的最愛 Favorites</span><span class="hide-for-lg"><span class="love-menu-icon"></span></span>
+                  <% end %>
+                </div>
+              <% end %>
             </div><!-- End .header-top-dropdowns -->
           </div><!-- End .header-top-right --> 
         </div><!-- End .container -->
@@ -115,12 +117,9 @@
               </div><!-- End .logo-container -->
               <div id="menu-right-side" class="clerfix">
                 <div id="quick-access"><!-- Start #quick-access 搜尋鍵 -->
-                  <form class="form-inline quick-search-form" role="form" action="#">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Search here">
-                    </div>
-                    <button type="submit" id="quick-search" class="btn btn-custom"></button>
-                  </form>
+                  
+                  <%= render 'common/search_form' %>
+                  
                 </div><!-- End #quick-access -->
                 <nav id="main-nav"><!-- Start #main-nav 選單區 -->
                   <div id="responsive-nav"><!-- Start #responsive-nav 手機螢幕選單按鈕 -->
@@ -194,20 +193,21 @@
                     </li>
                     
                     <li>
-                      <%# redo: method about %>
-                      <%= link_to page_pages_path('about') do %>
+                      <%= link_to about_pages_path do %>
                         品牌精神<br>
                         ABOUT US
                       <% end %>
                       <ul>
-                        <li><a href="news.html">最新消息</a></li>
-                        <li><a href="community.html">社群迴響</a></li>
+                        <li><%= link_to "最新消息", announcements_path %></li>
+                        <li><%= link_to "社群迴響", communities_path %></li>
                       </ul>
                     </li>
                     
                     <li>
-                      <a href="contact.html">聯絡客服<br>
-                      CONTACT US</a>
+                      <%= link_to contacts_path do %>
+                        聯絡客服<br>
+                        CONTACT US
+                      <% end %>
                     </li>
 
                   </ul><!-- End .menu -->

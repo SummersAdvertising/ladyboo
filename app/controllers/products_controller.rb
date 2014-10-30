@@ -59,7 +59,7 @@ class ProductsController < ApplicationController
   def quickview
 
     # begin
-      @product = Product.includes(:galleries).find_by_id(params[:id])
+      @product = Product.where(status: 'enable').includes(:galleries).find_by_id(params[:id])
 
       if @product #params[:category_id]
         @category_id = @product.category.id
@@ -85,6 +85,11 @@ class ProductsController < ApplicationController
     #   redirect_to categories_path
     # end
 
+  end
+
+  def search
+    @q = Product.where(status: 'enable').search(params[:q])
+    @products = @q.result(distinct: true).includes(:galleries, :category).page(params[:page])
   end
 
   private

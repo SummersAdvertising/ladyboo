@@ -1,0 +1,75 @@
+<link rel="stylesheet" href="/css/prodList.css">
+<link rel="stylesheet" href="/css/pageSearch.css">
+
+<div class="xlg-margin"></div><!-- Space 間隔 -->
+
+<div class="container"><!-- Start .container -->
+  <header class="content-title"><!-- Start .content-title 標題 -->
+      <div class="title-bg">
+        <h2 class="title search">SEARCH<span>搜尋</span></h2>
+      </div>
+    </header><!-- End .content-title -->
+    <p>Search results for “<span id="keyword"><% params[:q].values.each do |quote| %>&nbsp;<%= quote %><% end %>&nbsp;</span>”</p>
+    <div class="xlg-margin hidden-xs"></div><!-- Space 間隔 -->
+  <div class="main-content"><!-- Start .main-content 主要商品列表 -->
+    <div class="category-item-container"><!-- Start .category-item-container -->
+      <div class="row"><!-- Start .row -->
+      
+        <% @products.each_with_index do |product, index| %>
+          <div class="col-md-4 col-sm-6 col-xs-12"><!-- Start 商品區塊 -->
+            <div class="item">
+              <div class="item-image-container">
+                <figure>
+                  <% if product.galleries.select{ |v| v['type'] == 'ProductCoverGallery' }.count > 0 %>
+                   <%= link_to( image_tag(product.galleries.select{ |v| v['type'] == 'ProductCoverGallery' }.first.attachment.url) , category_product_path(product.category, product), title: "#{product.name} #{product.en_name}" ) %>
+                  <% end %>
+                </figure>
+                <% if product.highlight.present? %>
+                  <div class="item-price-container"> <span class="item-price"><%= product.highlight%></span></div><!-- .item-price 粉紅標示 -->
+                <% end %>
+                <% if product.is_new? %>
+                  <span class="new-rect">NEW</span><!-- .new-rect 新貨標示 -->  
+                <% end %>
+             </div>
+             <div class="item-meta-container"><!-- Start .item-meta-container 商品文字說明 --> 
+                <h3 class="item-name">
+                  <%= link_to category_product_path(product.category, product) do %>
+                    <%= product.name %><br><%= product.en_name %>
+                  <% end %>
+                </h3>
+                <span class="item-price-original">NT$  <%= number_with_delimiter(product.price) %></span> <span class="item-price-sale">
+                <% if product.price_for_sale > 0 %>
+                  NT$ <%= number_with_delimiter(product.price_for_sale) %>
+                <% else %>
+                  NT$ <%= number_with_delimiter(product.price) %>
+                <% end %> 
+                </span>
+                <div class="item-action"> 
+                  <% if current_user %>
+                    <% tracking_list = TrackingList.new %>
+                    <%= form_for(tracking_list,:url => useradmin_tracking_lists_path(tracking_list), :html => {:id =>'NewTrackingListForm' } ) do | f |%>
+                      <%= f.hidden_field :user_id, value: current_user.id , class: 'text' %>
+                      <%= f.hidden_field :product_id, value: product.id, class: 'text' %>
+                      <%= f.submit "Favorite", class: "icon-button icon-like" %>
+                      <a class='inline icon-button icon-compare pdquickview' data-pd='<%= product.id %>' ></a> 
+                    <% end %>
+                  <% else %>
+                    <%= link_to '', useradmin_tracking_lists_path, class: "icon-button icon-like" %>
+                    <a class='inline icon-button icon-compare pdquickview' data-pd='<%= product.id %>' ></a> 
+                  <% end %>
+                </div>
+              </div><!-- End .item-meta-container 商品文字說明 --> 
+            </div><!-- End .item --> 
+          </div><!-- End 商品區塊 -->
+
+        <% end %>
+
+        <%# products_helper %>
+        <%= no_products_msg(@products.length) %>    
+        
+      </div><!-- End .row --> 
+    </div><!-- End .category-item-container -->
+    
+ </div><!-- End .category-item-container -->
+    
+</div><!-- End .container -->
