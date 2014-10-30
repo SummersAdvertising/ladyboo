@@ -5,7 +5,7 @@
     </header>
     <article>
       <div class="form">
-        <%= form_for(@topic, :url => admin_topics_path(), html: { id: "newthistopic" } ) do |f| %>
+        <%= form_for(@topic, :url => admin_topics_path(), html: { id: "NewTopicForm" } ) do |f| %>
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td width="7%">主題名稱：</td>
@@ -37,20 +37,20 @@
     <script type="text/javascript">
       //JQ Validate
       $(document).ready(function() {
-        $("#NewTopiclForm").validate({
+        $("#NewTopicForm").validate({
           //debug: true,
-          // rules: {
-          //   attachment: {required:true}//,
-            //"topic[description]": {required:true}
-          // }
+          rules: {
+            // attachment: {required:true}//,
+            "topic[name]": {required:true}
+          }
 
         });
 
         $("#sendtheform").click(function(e){
           e.preventDefault();
-          if($("#NewTopiclForm").valid())
+          if($("#NewTopicForm").valid())
           {
-            $("#NewTopiclForm").submit();
+            $("#NewTopicForm").submit();
           }
         });
 

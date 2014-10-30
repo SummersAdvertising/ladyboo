@@ -15,9 +15,9 @@
                <%= f.text_field :name %>
               </td>
               <td width="2%">&nbsp;</td>
-              <td width="7%">&nbsp;</td>
+              <td width="7%">顯示：</td>
               <td width="53%">
-                
+                <%= f.check_box :status, { class: 'checkbox'  }, "enable", "disable" %> 是<br>
               </td>
             </tr>
           </table>

@@ -20,6 +20,10 @@ class StaticsController < ApplicationController
 
   end
 
+  def search
+    
+  end
+
   def about
     @announcements = Announcement.for_index.limit(3)
     @communities = Community.for_index.limit(3)

@@ -61,6 +61,8 @@ group :production, :staging do
   gem 'mysql2'
 end
 
+gem 'capistrano'#, "3.0.1"
+
 group :development do
   gem 'thin'
   gem 'meta_request'
@@ -70,8 +72,10 @@ group :development do
   gem 'sqlite3'
   #gem 'sextant'
   gem 'xray-rails'
-  gem 'capistrano', "3.0.1"
-  gem 'capistrano-rvm'
+  
+  gem 'capistrano-bundler', '~> 1.1.2'
+  gem 'capistrano_colors'
+  gem 'rvm-capistrano'
   gem 'capistrano-ext'
 
 end
