@@ -1,3 +1,4 @@
+#encoding: utf-8
 class LadybooMailer < ActionMailer::Base
   include OrdersHelper
   #require this lib when sending email by MailGun API

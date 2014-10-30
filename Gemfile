@@ -71,5 +71,7 @@ group :development do
   #gem 'sextant'
   gem 'xray-rails'
   gem 'capistrano', "3.0.1"
+  gem 'capistrano-rvm'
   gem 'capistrano-ext'
+
 end

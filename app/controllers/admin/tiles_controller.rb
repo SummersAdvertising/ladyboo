@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Admin::TilesController < AdminController
   #authorize_resource
   before_action :set_tile, only: [:update ,:destroy]
