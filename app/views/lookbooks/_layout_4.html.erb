@@ -2,7 +2,6 @@
   <% @tiles.each do |tile| %>
     <% if tile.topic %>
       <div class="col-md-6 layout">
-        <%= "#{tile.id} - Ranking: [#{tile.ranking}]" %><br>
         <%= link_to lookbook_topic_path(@lookbook, tile.topic) do %>
           <% if tile.galleries.select{ |v| v['type'] == 'TileCoverGallery' }.first %>
             <%= image_tag(tile.galleries.select{ |v| v['type'] == 'TileCoverGallery' }.first.attachment.url, class: 'img-responsive')  %>

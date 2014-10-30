@@ -3,7 +3,6 @@
     <% if tile.topic %>
       <div class="col-md-6 layout">
         <%= link_to lookbook_topic_path(@lookbook, tile.topic) do %>
-          <%= "#{tile.id} - Ranking: [#{tile.ranking}]" %><br>
           <% if tile.galleries.select{ |v| v['type'] == 'TileCoverGallery' }.first %>
             <%= image_tag(tile.galleries.select{ |v| v['type'] == 'TileCoverGallery' }.first.attachment.url, class: 'img-responsive')  %>
           <% end %>

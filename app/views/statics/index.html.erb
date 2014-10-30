@@ -266,7 +266,6 @@
                   <% if collection.galleries.select{ |v| v['type'] == 'TopicCoverGallery' }.first %>
                     <%= link_to( image_tag(collection.galleries.select{ |v| v['type'] == 'TopicCoverGallery' }.first.attachment.url, class: 'img-responsive', width: 100, height: 100 ) , topic_collection_path(collection)) %>
                   <% end %>
-                  <%= collection.name %><br>
                 </div>
               <% end %>
             </div><!-- End .home-banners --> 
