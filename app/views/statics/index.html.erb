@@ -14,7 +14,6 @@
   <link href='//fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic%7CPT+Gudea:400,700,400italic%7CPT+Oswald:400,700,300' rel='stylesheet' id="googlefont">
   <link rel="stylesheet" href="/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/css/prettyPhoto.css">
   <link rel="stylesheet" href="/css/revslider.css">
   <link rel="stylesheet" href="/css/owl.carousel.css">
   <link rel="stylesheet" href="/css/style.css">
@@ -79,7 +78,7 @@
               <% end %>
               <% if user_signed_in? %>
                 <%= link_to destroy_user_session_path, method: 'delete', class: "btn btn-custom dropdown-toggle" ,method: :delete do %>
-                  <span class="hide-for-xs">會員登出 Logout</span><span class="hide-for-lg"><span class="login-menu-icon"></span></span> 
+                  <span class="hide-for-xs">會員登出 Logout</span><span class="hide-for-lg"><span class="logout-menu-icon"></span></span> 
                 <% end %>
 
                 <%= link_to useradmin_root_path, class: "btn btn-custom dropdown-toggle" do %>
@@ -203,10 +202,6 @@
                         品牌精神<br>
                         ABOUT US
                       <% end %>
-                      <ul>
-                        <li><%= link_to "最新消息", announcements_path %></li>
-                        <li><%= link_to "社群迴響", communities_path %></li>
-                      </ul>
                     </li>
                     
                     <li>
@@ -409,46 +404,7 @@
 
 
 
-<script>
-  $(function() {
-    // Slider Revolution
-    jQuery('#slider-rev').revolution({
-      delay:8000,
-      startwidth:1170,
-      startheight:600,
-      onHoverStop:"true",
-      hideThumbs:250,
-      navigationHAlign:"center",
-      navigationVAlign:"bottom",
-      navigationHOffset:0,
-      navigationVOffset:12,
-      soloArrowLeftHalign:"left",
-      soloArrowLeftValign:"center",
-      soloArrowLeftHOffset:0,
-      soloArrowLeftVOffset:0,
-      soloArrowRightHalign:"right",
-      soloArrowRightValign:"center",
-      soloArrowRightHOffset:0,
-      soloArrowRightVOffset:0,
-      touchenabled:"on",
-      stopAtSlide:-1,
-      stopAfterLoops:-1,
-      dottedOverlay:"none",
-      fullWidth:"on",
-      shadow:0         
-      });
 
-    //lightBox
-    $(".layout img").click(function(){
-      $(this).siblings(".link").animate({bottom:0},250)
-    })
-    // $(".inline").click(function(){
-      
-    // })
-    
-    
-  });          
-</script>
 
 
   <!--LightBox Start**************************************************************************************************************-->
@@ -458,6 +414,7 @@
   </div>
 </div>
 <!--LightBox End**************************************************************************************************************-->
+
 <script type="text/javascript">
 $(function() {
   // Slider Revolution
@@ -492,30 +449,7 @@ $(function() {
     $(this).siblings(".link").animate({bottom:0},250)
   })
 
-  var widthMove = $(window).width();
-  move();
   
-  function move(){
-    if(widthMove<588){
-      topHeight1 = $('.main-content').height();
-      topHeight2 = $('.related').height();
-      topHeight3 = $('.sidebar').height();
-      $('#quick-search').click(function(){alert(topHeight1)});
-      $('#content').css({height:1400+topHeight1,overflow:'hidden'});
-      $('.sidebar').css({'margin-left':'-10px'})
-      $('#category-filter').css({position:'absolute',top:topHeight1+topHeight2+100,width:'100%'});
-      $('.related').css({position:'absolute',top:topHeight1+100,width:'96%','margin-left':'10px'});
-    }else{
-      $('#category-filter').css({position:'static'});
-      $('.related').css({position:'static'});
-      $('.sidebar').css({'margin-left':'0px'});
-      $('#content').css({height:'auto',overflow:'hidden'});
-    }
-  }
-  $(window).resize(function(){
-    widthMove = $(window).width();
-    move();
-  });
 });          
 
 </script>

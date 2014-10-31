@@ -5,10 +5,12 @@
 .layout.member a { text-decoration: underline; }
 #login-form .input-group .input-group-addon { width: 120px; border-radius: 2px 0 0 2px; padding: 0px 10px; line-height: 44px; min-width: 120px; }
 .input-group { width: 50%; margin-bottom: 30px; }
+#content a{text-decoration: none;}
 .custom-checkbox input[type="checkbox"]:checked + .checbox-container { background: #c9006e !important; border-color: #c9006e; }
 label { font-size: 1.0em; font-weight: normal; color: #646464; }
 #login-form .text-right { width: 50%; }
-#content .btn-custom-2, #content .btn-custom-3{font-size:0.8em;}
+#content .btn-custom-2, #content .btn-custom-3{font-size: 0.8em!important;}
+.text-right{padding-top: 40px;}
 @media (min-width: 992px) and (max-width: 1200px) {
 }
 @media (min-width: 768px) and (max-width: 991px) {
@@ -25,8 +27,8 @@ label { font-size: 1.0em; font-weight: normal; color: #646464; }
 .input-group .input-group-addon { width: 105px; border-radius: 2px 0 0 2px; padding: 0px 10px; line-height: 44px; min-width: 105px; padding: 0 5px; }
 #content .row { padding-right: 0 15px; margin: 0; }
 .layout.member .input-group select.form-control { float: left; }
-.layout.member p { float: left; }
-.btn-custom-2, .btn-custom-3 { font-size: 1.0em!important; display: block; }
+.layout.member p.text-right { float: left; text-align: left;}
+#content .btn-custom-2, #content .btn-custom-3{ font-size: 1em!important; margin-top: 20px; }
 .input-group { width: 100%; }
 #content .container { padding: 0 10px; }
 .half-margin { font-size: 0.9em; }

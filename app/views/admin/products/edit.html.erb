@@ -21,7 +21,6 @@ product#edit
   
     <%= simple_form_for(@product, :url => admin_category_product_path(params[:category_id] , @product), html: { id: "patchthisproduct", :multipart => true } ) do |f| %>
     名稱：<%= f.input_field :name %><br>
-    英文名稱：<%= f.input_field :en_name %><br>
     價格：<%= f.input_field :price %><br>
     優惠價：<%= f.input_field :price_for_sale %><br>
 

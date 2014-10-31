@@ -34,14 +34,16 @@
 .choosePlace p {  color: #434343; line-height: 1.5em; padding: 10px 0; }
 #content .choose .btn-custom-3{padding:8px 20px;}
 .choose h4 {  font-family: Helvetica, "Microsoft JhengHei", "微軟正黑體";color:#c9006e;font-size:1.2em;font-weight:bold;}
-.choosePlace { border: 2px double #AAA; }
-.choose .text-center { padding-top: 102px; }
+.choosePlace { border: 2px double #AAA; padding-bottom: 10px;}
+.choosePlace form{ display: inline-block;}
+.choose .text-center { padding-top: 105px; }
 /*@media screen and (-webkit-min-device-pixel-ratio:0) {
 .choosePlace { -webkit-border-image: url(../images/frame.png) 30 30 round; -o-border-image: url(../images/frame.png) 30 30 round; border-image: url(../images/frame.png) 30 30 round; }
 }*/
 
 @media (max-width:1200px) {
-.choose .text-center { padding-top: 20px; }
+.choose .text-center { padding-top: 20px; text-align: right;}
+.choosePlace form{ display: block;}
 .choosePlace .btn { float: right; margin: 5px; clear: both; }
 .custom-checkbox { padding-right: 10px; }
 }
