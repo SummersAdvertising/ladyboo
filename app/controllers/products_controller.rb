@@ -88,8 +88,16 @@ class ProductsController < ApplicationController
   end
 
   def search
+    
     @q = Product.where(status: 'enable').search(params[:q])
     @products = @q.result(distinct: true).includes(:galleries, :category).page(params[:page])
+
+    if @products.count > 0
+      "#{@products.count} 項有關產品"
+    else
+      "查無有關產品"
+    end
+
   end
 
   private
