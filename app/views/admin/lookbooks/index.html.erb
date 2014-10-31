@@ -18,7 +18,7 @@
     <div class="thumb left">
       <%= link_to '刪除', admin_lookbook_path(lookbook), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete', title: '刪除' %>
       <%= link_to "編輯Lookbook", edit_admin_lookbook_path(lookbook) %>
-      <%= lookbook.name %>  /  <%= lookbook.status %>
+      <%= lookbook.name %>  /  <%= lookbook.status %> / <%= lookbook.limit %>分割
     </div>
 
     <% end %>    

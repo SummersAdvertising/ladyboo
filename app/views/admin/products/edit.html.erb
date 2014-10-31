@@ -19,29 +19,29 @@ product#edit
         <p class="alert"><%= alert %></p>
   <div class="form">
   
-    <%= simple_form_for(@product, :url => admin_category_product_path(params[:category_id] , @product), html: { id: "patchthisproduct", :multipart => true } ) do |f| %>
-    名稱：<%= f.input_field :name %><br>
-    英文名稱：<%= f.input_field :en_name %><br>
-    價格：<%= f.input_field :price %><br>
-    優惠價：<%= f.input_field :price_for_sale %><br>
+    <%= form_for(@product, :url => admin_category_product_path(params[:category_id] , @product), html: { id: "patchthisproduct", :multipart => true } ) do |f| %>
+    名稱：<%= f.text_field :name %><br>
+    英文名稱：<%= f.text_field :en_name %><br>
+    價格：<%= f.text_field :price %><br>
+    優惠價：<%= f.text_field :price_for_sale %><br>
 
     材質<br>
-    desc.<%= f.input_field :material_1 %><br>
-    desc.<%= f.input_field :material_2 %><br>
+    desc.<%= f.text_field :material_1 %><br>
+    desc.<%= f.text_field :material_2 %><br>
 
     洗滌說明<br>
-    desc.<%= f.input_field :wash_1 %><br>
-    desc.<%= f.input_field :wash_2 %><br>
-    desc.<%= f.input_field :wash_3 %><br>
+    desc.<%= f.text_field :wash_1 %><br>
+    desc.<%= f.text_field :wash_2 %><br>
+    desc.<%= f.text_field :wash_3 %><br>
     
     模特兒資料<br>
-    desc.<%= f.input_field :model_1 %><br>
-    desc.<%= f.input_field :model_2 %><br>
+    desc.<%= f.text_field :model_1 %><br>
+    desc.<%= f.text_field :model_2 %><br>
 
     is_new<br>
     is_new.<%= f.check_box :is_new, { class: 'checkbox'  }, "yes", "no" %> 是<br>
     highlight<br>
-    highlight.<%= f.input_field :highlight %><br>
+    highlight.<%= f.text_field :highlight %><br>
 
     <% if @gallery_count > 0 %>
       <%= render 'admin/common/show_by_type', target: @product, target_title: '圖', type: 'ProductCoverGallery', allow_dragable: false %>

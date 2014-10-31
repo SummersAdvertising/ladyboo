@@ -27,8 +27,9 @@ class Product < ActiveRecord::Base
   before_validation :check_attrs
 
   validates_presence_of :name, :price, :price_for_sale, :category_id
-  validates_numericality_of :price , :only_integer => true , :greater_than_or_equal_to => :price_for_sale, :unless => "price_for_sale.nil?" 
   validates_numericality_of :price_for_sale , :only_integer => true , :greater_than => 0
+  validates_numericality_of :price , :only_integer => true , :greater_than_or_equal_to => :price_for_sale, :unless => "price_for_sale.nil?" 
+  
 
   #before_destroy { |record| Banner.destroy_all "product_id = #{record.id}"  }
   after_create :create_default_stocks

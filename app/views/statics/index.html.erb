@@ -175,7 +175,7 @@
                             </ul>
                           </div>
                         <% end %>
-                        <% topic_collections = TopicCollection.all.limit(4) %>
+                        <% topic_collections = TopicCollection.where(status: 'enable').all.limit(4) %>
                         <% if topic_collections %>
                           <div class="col-5">
                             <a href="javascript:void(0);" class="mega-menu-title">系列主題</a><!-- End .mega-menu-title -->

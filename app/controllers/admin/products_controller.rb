@@ -136,7 +136,7 @@ class Admin::ProductsController < AdminController
         format.html { redirect_to :back, notice: '更新成功' }
         #format.html { redirect_to admin_category_product_path(@product.category_id, @product) }
       else
-        format.html { render :back, notice: @product.errors.full_messages }
+        format.html { redirect_to :back, notice: @product.errors.full_messages }
       end      
     end
 
