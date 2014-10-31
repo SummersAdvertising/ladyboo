@@ -9,9 +9,9 @@
 #content .btn-custom-3 { background-color: #c9006e; border: none; }
 #content .btn-custom-3:hover { background-color: #c9006e; border: none; }
 #contact-message { padding-top: 10px; resize: none; }
-#content .code { background-color: #FFF; border: solid 1px #eee; width: 100%; padding: 10px; }
-.code div{ float:left;height:47px; vertical-align: middle; padding:0px 20px;}
-.code p{ height:47px;margin:0;padding: 6px 20px;}
+#content .code { background-color: #FFF; border: solid 1px #eee; width: 100%; padding: 10px;height:120px; }
+.code > div{ float:left;vertical-align: middle;}
+.code p{ margin:0;padding: 30px 20px;}
 #content .code .input-group .form-control{ background-color: #F2F2F2; color: #B3B3B3; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none;}
 #content .code .input-group{ margin-bottom:0;}
 #content .md-margin{ margin-bottom:0!important;}
@@ -25,6 +25,7 @@
 .title.contact { width: 360px; }
 .title.policy { width: 630px; }
 .bgBottom.about { display: none; }
+#contact_content{padding: 20px;}
 @media (max-width: 1008px) {
 .layout.contact .input-group.input-container { width: 100%; display: table; margin-bottom: 10px; padding: 0; }
 .contact-email { float: left; }
@@ -36,8 +37,7 @@
 }
 @media (min-width: 768px) and (max-width: 1050px) {
 #content .code {text-align:center;padding-bottom:20px; }
-.code div{ float:none;display:inline-block;height:47px; padding:0px 20px;}
-.code p{ clear:both;text-align:center;padding-top:20px;}
+
 }
 @media (max-width: 767px) {
 .title.contact { width: 280px; margin-left: 10px; }
@@ -48,10 +48,10 @@
 .btn-custom-2,.btn-custom-3 { display: block; margin: 10px auto; }
 .btn-custom-2.cancle { margin: 5px auto; }
 #content .btn-custom-2.cancle{margin-right:auto;}
-.md-margin { margin-bottom: 10px !important; }
-#content .code { height:240px; }
-.code div{ float:none;display:block;height:47px; padding:0px 20px;}
-.code p{ text-align:center;padding-top:20px;}
+#content .md-margin { margin-bottom: 10px !important; }
+#content .code { height:200px; padding:20px 0;}
+.code div{ float:none;display:block;height:47px; padding:0px;width: 100%;}
+.code p{ text-align:center;padding-top:80px;padding-bottom: 10px;}
 .layout.contact { padding-bottom: 20px; }
-.row { padding-right: 0 15px; margin: 0; }
+#content .row { padding-right: 0 15px; margin: 0; }
 }

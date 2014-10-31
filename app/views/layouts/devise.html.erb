@@ -14,7 +14,6 @@
   <link href='//fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic%7CPT+Gudea:400,700,400italic%7CPT+Oswald:400,700,300' rel='stylesheet' id="googlefont">
   <link rel="stylesheet" href="/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/css/prettyPhoto.css">
   <link rel="stylesheet" href="/css/revslider.css">
   <link rel="stylesheet" href="/css/owl.carousel.css">
   <link rel="stylesheet" href="/css/style.css">
@@ -77,7 +76,7 @@
               <% end %>
               <% if user_signed_in? %>
                 <%= link_to destroy_user_session_path, method: 'delete', class: "btn btn-custom dropdown-toggle" ,method: :delete do %>
-                  <span class="hide-for-xs">會員登出 Logout</span><span class="hide-for-lg"><span class="login-menu-icon"></span></span> 
+                  <span class="hide-for-xs">會員登出 Logout</span><span class="hide-for-lg"><span class="logout-menu-icon"></span></span> 
                 <% end %>
                 <%= link_to useradmin_root_path, class: "btn btn-custom dropdown-toggle" do %>
                   <span class="hide-for-xs"><%= "#{current_user.username} 您好" %></span><span class="hide-for-lg"><span class="login-menu-icon"></span></span> 
@@ -197,10 +196,6 @@
                         品牌精神<br>
                         ABOUT US
                       <% end %>
-                      <ul>
-                        <li><%= link_to "最新消息", announcements_path %></li>
-                        <li><%= link_to "社群迴響", communities_path %></li>
-                      </ul>
                     </li>
                     
                     <li>

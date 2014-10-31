@@ -19,6 +19,7 @@ product#edit
         <p class="alert"><%= alert %></p>
   <div class="form">
   
+
     <%= form_for(@product, :url => admin_category_product_path(params[:category_id] , @product), html: { id: "patchthisproduct", :multipart => true } ) do |f| %>
     名稱：<%= f.text_field :name %><br>
     英文名稱：<%= f.text_field :en_name %><br>

@@ -51,7 +51,7 @@
       <div class="col-md-6 col-sm-6 col-xs-6 choosePlace">
         <p>開始結帳，請先選擇國內、離島、或海外取件。<br><br>
         Checkout, please choose Taiwandomestic,other parts of Taiwan or international pickup.</p>
-          <!-- <p class="text-center"> -->
+          <div class="text-center">
             <%= button_to set_ship_to_cart_index_path('taiwan'), :class => "btn btn-custom-3 next", data: {disable_with: "..."} do %>
               國 內<br>Taiwan Domestic
             <% end %>&nbsp;&nbsp;
@@ -61,7 +61,7 @@
             <%= button_to set_ship_to_cart_index_path('overseas'), :class => "btn btn-custom-3 next", data: {disable_with: "..."} do %>
               海 外<br>International
             <% end %>
-          <!-- </p> -->
+          </div>
       </div>
           
 

@@ -917,3 +917,4 @@ function checkSupport(elemname, pluginname) {
 	$('.mega-menu').find('.col-5:eq(5)').css('clear','both');
 
 }());
+     

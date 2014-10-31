@@ -4,18 +4,21 @@
 #wrapper { position: relative }
 .bottom { right:auto;left:16%; }
 .bgBottom.index { background-image: url(../images/bg_footer2.png); height: 169px; width: 284px; }
-.bgBottom { position: absolute; bottom: 1px; left: -100px; }
+.bgBottom { position: absolute; bottom: 20px; left: -100px; }
  @media (min-width: 768px) and (max-width: 1200px) {
 .title.lookbook { width: 20%; min-width: 320px; }
 .title.pickup { width: 20%; min-width: 280px; }
+.bgBottom { bottom: 0px;}
 }
 @media (min-width: 768px) and (max-width: 991px) {
+.bgBottom { bottom: 0px;}
 }
 @media (max-width: 767px) {
 .title.lookbook { width: 260px; }
 .title.pickup { width: 200px; }
 .title-bg { padding-left: 0px; }
 #content .container { padding-left: 10px; padding-right: 10px; }
+
 }
 /*-------------------------------------------------------------------------------------------穿搭---*/
 .layout { position: relative; overflow: hidden; margin-bottom: 5% }

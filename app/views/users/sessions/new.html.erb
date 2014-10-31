@@ -21,16 +21,16 @@
             <%= f.password_field :password, placeholder: "password", class: "form-control input-lg", required: true %>
           </div>        
           <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-            <fieldset class="half-margin">
-              <div class="input-group custom-checkbox">
+            
+              
                <%= link_to new_password_path(resource_name) do %>
                 忘記密碼?<br>Forgotten your password?
                <% end %>
-              </div>
-            </fieldset>             
+              
+                        
           <% end -%>
           <p class="text-right">
-            <%= f.submit "登入", class: 'btn btn-custom-3' , data: {disable_with: "..."} %>
+            <%= f.submit "登入 LOGIN", class: 'btn btn-custom-3' , data: {disable_with: "..."} %>
 
             <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
               <%= link_to "加入會員 JOIN", new_registration_path(resource_name), class: "btn btn-custom-2" %>
