@@ -103,7 +103,7 @@
               <%= form_for(@order, :url => atm_transfered_useradmin_order_path(@order), html: { id: "patchthisorder", class: "form-inline text-right" } ) do |f| %>
                 請輸入匯款帳號後五碼<br> Last 5 digits of your bank account
                 <br><%= f.text_field :accountinfo , class: 'form-control accountinfo transferInput', required: 'required' %>
-                <br>匯款時間 Date of transfer
+                <br>匯款日期 Date of transfer
                 <br><%= f.date_select :fillout_date, use_two_digit_numbers: true, discard_year: true,with_css_classes: true , prompt: { day: '-- 日 --', month: '-- 月 --' } %>
                 <br><br><br><br>
                 <%= f.submit "送 出 SUBMIT", class: "btn btn-custom-2", data: { disable_with: "..." } %>

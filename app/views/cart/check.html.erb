@@ -21,8 +21,10 @@
       <div class="input-group custom-checkbox">
         <input type="checkbox" id="agree_privacy" class="checkbox" checked>
         <span class="checbox-container"><i class="fa fa-check"></i></span>
-           我已仔細閱讀並明瞭<a href="terms.html" title="服務條款">「服務條款」</a>、<a href="privacy.html" title="隱私權政策">「隱私權政策」</a>、<a href="privacy.html" title="智慧財產權聲明">「智慧財產權聲明」</a>等所載內容及其意義，茲同意該等條款規定，並願遵守網站現今、嗣後規範的各種規則。
-    I've read through, understand and accept LadyBoos online policies: <a href="privacy.html" title="PRIVACT">PRIVACT</a>, <a href="terms.html" title="TERMS &amp; CONDITIONS">TERMS &amp; CONDITIONS</a> .
+           我已仔細閱讀並明瞭<a href="terms.html" title="服務條款">「服務條款」</a>、<a href="privacy.html" title="隱私權政策">「隱私權政策」</a>等所載內容及其意義，茲同意該等條款規定，並願遵守網站現今、嗣後規範的各種規則。
+    I've read through, understand and accept LadyBoos online policies: 
+        <%= link_to "PRIVACY", page_pages_path("privacy") %>, 
+        <%= link_to "TERMS & CONDITIONS", page_pages_path("terms") %>.
         <p class="text-right">
           <%= link_to categories_path, :id => "back", class: "btn btn-custom-2" do %>
             繼續購物<br>Back to shop

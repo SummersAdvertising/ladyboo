@@ -50,9 +50,9 @@
                   <i class="fa fa-check"></i>
                 </span>
                 <label for="forgotten">
-                  我已閱讀<a href="#" title="服務條款">服務條款</a>
+                  我已閱讀<%= link_to "服務條款", page_pages_path("terms") %>
                   並同意註冊成為會員<br>I have reed and agree to the 
-                  <a href="#" title="Privacy Policy">Privacy Policy</a>.
+                  <%= link_to "Terms & Conditions", page_pages_path("terms") %>.
                 </label>
               </div>
           </fieldset>           
