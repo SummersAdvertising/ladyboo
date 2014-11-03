@@ -10,7 +10,6 @@ class Banner < ActiveRecord::Base
 
   def check_attrs
     self.title = "未命名 Banner" if self.title.blank?
-    self.description = " " if self.description.blank?
     self.status = "enable"
     self.description = "javascript:void(0);" if self.description.blank?
   end

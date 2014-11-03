@@ -10,4 +10,6 @@ class Topic < ActiveRecord::Base
 
   has_many :categories, through: :products
 
+  validates_presence_of :name
+
 end

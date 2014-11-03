@@ -1,0 +1,44 @@
+ <article>
+  <div class="hgroup">
+    <div class="user left"> <img src="/images/admin/avator.jpg"><a href="javascript:void(0);"><%= @user.username %></a> </div>
+  </div>
+  <div class="form">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="7%">電話：</td>
+        <td width="42%"><%= @user.tel %></td>
+        <td width="2%"></td>
+        <td width="7%">Email：</td>
+        <td width="42%"><%= @user.email %></td>
+      </tr>
+      <tr>
+        <td>地址：</td>
+        <td colspan="4"><%= @user.address %></td>
+      </tr>
+    </table>
+  </div>
+  <div class="hgroup">
+    <h3>訂單紀錄</h3>
+  </div>
+  <div class="list">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <% @orders.each do |order| %>    
+      <tr>
+        <td width="12%"><%= order.get_payment_status %></td>
+        <td width="73%">
+          <%= link_to order.ordernum, detail_admin_order_path(order) ,target: "_blank" %>
+        </td>
+        <td width="15%"><%= order.created_at.strftime("%Y-%m-%d") %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+  <div class= "page" id="user_pager">
+    <%= paginate @orders ,:window => 2 %>
+  </div>
+  
+  <div class="button"> 
+    <%= link_to image_tag("/images/admin/left.png")+"返回", admin_users_path(), class: "left" %>
+  </div>
+
+</article>

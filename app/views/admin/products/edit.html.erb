@@ -40,9 +40,9 @@ product#edit
     desc.<%= f.text_field :model_2 %><br>
 
     is_new<br>
-    is_new.<%= f.check_box :is_new, { class: 'checkbox'  }, "yes", "no" %> 是<br>
+    NEW標簽：<%= f.check_box :is_new, { class: 'checkbox'  }, "yes", "no" %> 是<br>
     highlight<br>
-    highlight.<%= f.text_field :highlight %><br>
+    促銷文字<%= f.text_field :highlight, class: 'highlight_text' %><br>
 
     <% if @gallery_count > 0 %>
       <%= render 'admin/common/show_by_type', target: @product, target_title: '圖', type: 'ProductCoverGallery', allow_dragable: false %>
@@ -68,7 +68,6 @@ product#edit
 
 <script type="text/javascript">
 $(document).ready(function(){
-
-    
+  
 });
 </script>

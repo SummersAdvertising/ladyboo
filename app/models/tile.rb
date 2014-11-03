@@ -8,4 +8,6 @@ class Tile < ActiveRecord::Base
   default_scope -> { order('ranking, created_at') }
   scope :by_lookbook, ->(lookbook_id) { where("lookbook_id = ?", lookbook_id).order('ranking, created_at') }
 
+  validates :topic_id, numericality: { greater_than_or_equal_to: 1 }
+
 end

@@ -15,7 +15,6 @@ class Product < ActiveRecord::Base
 
   has_many :tracking_lists
 
-  
 
   scope :front_show_by_cate, ->(category_id) { where("category_id = ? AND status = ?", category_id, "enable") }
 
@@ -25,7 +24,7 @@ class Product < ActiveRecord::Base
 
   #callback
   before_validation :check_attrs
-
+  
   validates_presence_of :name, :price, :price_for_sale, :category_id
   validates_numericality_of :price_for_sale , :only_integer => true , :greater_than => 0
   validates_numericality_of :price , :only_integer => true , :greater_than_or_equal_to => :price_for_sale, :unless => "price_for_sale.nil?" 

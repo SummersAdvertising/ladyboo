@@ -281,7 +281,12 @@ Rails.application.routes.draw do
         get 'history', action: 'history'
       end
     end
-
+    resources :users , :only => [:index, :show] do 
+      collection do 
+        get 'export', action: 'export'
+        #get 'search', action: 'search'
+      end
+    end
     resources :deliveries
     
     delete 'peditor/deletePhoto/:id'        => 'peditor#destroyPhoto'

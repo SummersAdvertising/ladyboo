@@ -11,6 +11,8 @@ class Category < ActiveRecord::Base
   scope :for_admin, -> { where( "parent_id != 0" ) }
   scope :without_root_node, -> { where( "parent_id != 0 AND depth = 2" ) }
 
+  validates_presence_of :name
+
   def self.return_root_node
     return Category.find_by('parent_id=0')
   end

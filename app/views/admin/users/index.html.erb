@@ -1,0 +1,67 @@
+ 
+    <header>
+      <h2>會員管理</h2>
+    </header>
+    <article>
+      <div class="search">
+        <%= form_tag({controller: "users", action: "index"}, method: "get", remote: true) do %>
+          
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="15%" style="padding:0 5px">
+                <%= select_tag :type , options_for_select(@options) %>
+              </td>
+              <td width="78%">
+                <%= text_field_tag :value, params[:value]||= nil ,{class: 'text', placeholder: "搜尋"}  %>
+                
+              </td>
+              <td width="7%" align="center">
+                <%= submit_tag("",class: "submit" )  %>
+              </td>
+            </tr>
+          </table>
+        <% end %>
+      </div>
+      <div class="hgroup">
+        <div class="button right">
+          <%# link_to "Download CSV", export_admin_users_path(format: "csv") %> 
+          <%= link_to export_admin_users_path(format: "xls") , class: "right highlight" do %>
+            名單下載 <img src="/images/admin/offshelf.png">
+          <% end %>
+
+        </div>
+      </div>
+      <div class="list">
+        <% if @users.length > 0 %>
+          <table id="result" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <%# users.each do |user| %>
+            
+             <%= render @users %>
+            
+            <%# end %>
+          </table>
+        <% else %>
+          查無結果 請重新查詢
+        <% end %>
+        <!-- <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <%# @users.each do |user| %>
+            <tr>
+              <td><a href="#"><%# user.username %></a></td>
+              <td><%# user.email %></td>
+              <td>
+                <div class="tool">
+                   <a class="delete" title="刪除"></a>
+                </div>
+              </td>
+            </tr>
+          <%# end %>
+        </table> -->
+      </div>
+
+      <div class= "page" id="user_pager">
+        <%= paginate @users ,:window => 2, :remote => true %>
+      </div>
+
+    </article>
+  
+

@@ -7,7 +7,8 @@ class Announcement < ActiveRecord::Base
   scope :for_admin, -> { order('ranking ASC, created_at DESC') }  
 
   validates_presence_of :title
-  
+  #validates_presence_of :ck_context
+
   before_validation :check_attrs
   
   paginates_per 5

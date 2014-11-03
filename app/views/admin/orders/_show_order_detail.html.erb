@@ -23,25 +23,6 @@
         <tr class="total">
           <td colspan="3">
             
-            <% if !@order.order_memo.nil? && !@order.order_memo.empty?  %>
-            附註:<br>  
-              <% JSON.parse_if_json(@order.order_memo).each do | attr | %>
-          
-                  <% order.orderitems.each do |item| %>
-                   
-                    <% if attr[1]["stock_id"] ==  item.product_stock_id && attr[1]["needgrind"] == "true" %>
-                
-                        <%= attr[1]["amount"] %>包
-                        <%# item.item_name %>
-                        <%= "不" unless attr[1]["needgrind"] == "true" %>需要研磨
-                        <%= attr[1]["grindlevel"] if attr[1]["needgrind"] == "true" %>
-                      <br>  
-                    <% end %>
-                   
-                  <% end %>
-                
-              <% end %>
-            <% end %>
             
           </td>
           <td align="right">小計： </td>
@@ -62,6 +43,7 @@
       <%= link_to detail_admin_order_path(order) , target: "_blank", class: "enter" do %>
         <img src="/images/admin/right.png">
       <% end %>
+      
     </div>
   </td>
 </tr>

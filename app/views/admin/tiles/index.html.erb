@@ -83,7 +83,9 @@
             
             <!-- COVER UPLOAD -->
             <%= file_field_tag :attachment, class: 'file' %>
-            
+
+            <%= f.select :topic_id, options_for_select(@lookbook.topics.collect { |topic|
+            [topic.name, topic.id] }, ), {}, { id: 'topic_select' } %>
           </div>
         </td>
         <td align="right" width="18%">
