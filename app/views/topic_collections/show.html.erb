@@ -8,20 +8,18 @@
 <% end %>
 
 <% if @topic.galleries.select{ |v| v['type'] == 'TopicBannerGallery' }.first  %>
-  <% content_for :header do %>
-    
-  <% end %>
-<% end %>
-<div id="prodTop"><!-- Start #prodTop 上方橫福 --> 
-      <div class="container">
-        <div class="col-md-12">
-          <div class="row">
-            <img id="bannerImg" src=<%= "#{@topic.galleries.select{ |v| v['type'] == 'TopicBannerGallery' }.first.attachment.url}" %>>
-            <img id="bannerFrame" src="/images/frame_bannerPickup.png">
-          </div>
+  <div id="prodTop"><!-- Start #prodTop 上方橫福 --> 
+    <div class="container">
+      <div class="col-md-12">
+        <div class="row">
+          <img id="bannerImg" src=<%= "#{@topic.galleries.select{ |v| v['type'] == 'TopicBannerGallery' }.first.attachment.url}" %>>
+          <img id="bannerFrame" src="/images/frame_bannerPickup.png">
         </div>
       </div>
-    </div><!-- End #prodTop --> 
+    </div>
+  </div><!-- End #prodTop --> 
+<% end %>
+    
 
 <div class="xlg-margin hidden-xs"></div><!-- Space 間隔 -->
 <div class="container"><!-- Start .container -->

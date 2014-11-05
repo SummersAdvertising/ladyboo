@@ -24,7 +24,14 @@ class CategoriesController < ApplicationController
       redirect_to categories_path and return if @category.nil?
       
       @parent_cate = Category.find(@category.parent_id)
-      @products = Product.includes(:galleries, :category, :stocks).front_show_by_cate(params[:id].to_i).page(params[:page])
+      
+      if @category.depth <= 1
+        all_descendants_product_ids = Category.where(parent_id: @category.id).pluck(:id)
+        @products = Product.enabled.where(category_id: all_descendants_product_ids).includes(:galleries, :category, :stocks).page(params[:page])
+      else
+        @products = Product.includes(:galleries, :category, :stocks).front_show_by_cate(params[:id].to_i).page(params[:page])
+      end
+      
     rescue
       redirect_to categories_path
     end

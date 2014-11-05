@@ -164,7 +164,7 @@
                         <% lookbook = Lookbook.where(status: 'enable').first %>
                         <% if lookbook %>
                           <div class="col-5">
-                            <%= link_to lookbook.name, 'javascript:void(0);', class: "mega-menu-title" %><!-- End .mega-menu-title -->
+                            <div class='mega-menu-title'><%= lookbook.name %></div><!-- End .mega-menu-title -->
                             <ul class="mega-menu-list clearfix">
                               <% lookbook.topics.each do | topic | %>
                                 <li>
@@ -177,7 +177,7 @@
                         <% topic_collections = TopicCollection.where(status: 'enable').all.limit(4) %>
                         <% if topic_collections %>
                           <div class="col-5">
-                            <a href="javascript:void(0);" class="mega-menu-title">系列主題</a><!-- End .mega-menu-title -->
+                            <div class="mega-menu-title">系列主題</div><!-- End .mega-menu-title -->
                             <ul class="mega-menu-list clearfix">
                               <% topic_collections.each do | collection | %>
                                 <li>
@@ -202,6 +202,10 @@
                         品牌精神<br>
                         ABOUT US
                       <% end %>
+                      <ul>
+                        <li><%= link_to "最新消息 NEWS", announcements_path %></li>
+                        <li><%= link_to "社群迴響 COMMUNITY", communities_path %></li>
+                      </ul>
                     </li>
                     
                     <li>

@@ -17,6 +17,7 @@ class Product < ActiveRecord::Base
 
 
   scope :front_show_by_cate, ->(category_id) { where("category_id = ? AND status = ?", category_id, "enable") }
+  scope :enabled, -> { where(status: 'enable') }
 
   store :material, accessors: [ :material_1, :material_2]
   store :wash, accessors: [ :wash_1, :wash_2, :wash_3 ]
