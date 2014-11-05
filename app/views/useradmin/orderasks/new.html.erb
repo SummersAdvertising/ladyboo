@@ -2,7 +2,6 @@
   <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; <%= link_to 'ACCOUNT', 'javascript:void(0);' %>
 <% end %>
 
-<div id="lookbook">
   <div class="xlg-margin hidden-xs"></div>
   <!-- Space 間隔 -->
   <div class="container"><!-- Start .container -->
@@ -48,7 +47,7 @@
               <%= link_to "聯絡客服 CONTACT US", new_useradmin_orderask_path %>
             </p>
 
-            <div> <!-- <img id="tag" src="/images/bg_contact.png"> -->
+            <div id="contactForm"> <!-- <img id="tag" src="/images/bg_contact.png"> -->
               <%= form_for(@orderask, :url => useradmin_orderasks_path) do |f| %>
                 <%= f.text_area :description, :placeholder => "請輸入您的留言，我們會儘快為您服務。Please leave a message, we will contact within 24 hours.", :cols => "30", :rows => "10", class: "form-control" %>
                 <p class="text-right">
@@ -73,5 +72,3 @@
   <div class="lg-margin2x visible-sm visible-xs"></div>
   <!-- Space 間隔--> 
   
-</div>
-<!-- End .lookbook --> 

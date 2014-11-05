@@ -23,7 +23,8 @@
 <br><br><br>
   <%= link_to "看詳細商品資訊>>" , category_product_path(@product.category, @product), id: "prodDetail" %>
     <br>
-  <%= button_tag "加入購物車<span>ADD TO CART</span>".html_safe, class: "btn item-add-btn", data: {disable_with: "加入購物車..."} %>
+    <div id="btnAdd">
+  <%= button_tag "加入購物車<span>ADD TO CART</span>".html_safe, class: "btn item-add-btn", data: {disable_with: "加入購物車..."} %> 
 <% end %>
 
 <% if current_user %>
@@ -36,4 +37,4 @@
 <% else %>
   <%= link_to '', useradmin_tracking_lists_path, class: "icon-button icon-like" %>
 <% end %>
-
+    </div>

@@ -15,23 +15,21 @@
           <!-- <span id="slider-prev"></span>  Product slider  <span id="slider-next"></span> -->
         
           <div id="product-image-container">
-            <div id="pd_photo">
-            <% @product.galleries.where(type: 'ProductPhotoGallery').each do |attach| %>
-                <figure>
-                  <img src=<%= "#{attach.attachment.url}" %>  />
-                  <a id="zoom" href="javascript:;" title="放大"></a> 
-               </figure>
-            <% end %>   
-            </div>         
+            <figure>
+              <a href="/images/products/img_proBig1.jpg"  class = 'cloud-zoom' id='zoom1' rel="position:'inside',showTitle:true,adjustX:-4,adjustY:-4">
+              <img src="/images/products/img_proBig1.jpg" />
+              <a id="zoom" href="javascript:;" title="放大"></a> </a>
+           </figure>  
           </div>
           
           <!--photo-->
           <div id="product-image-carousel-container">
-            <ul id="pd_photo_thumb" class='celastislide-list'>
+            <ul id="product-carousel" class='celastislide-list'>
               <% @product.galleries.where(type: 'ProductPhotoGallery').each_with_index do |attach, index| %>
               <li class='markLi'>
-                <a data-slide-index="<%= "#{index}" %>" href="">
-                  <image src=<%= "#{attach.attachment.url}" %> width='100px' height='100px' />
+                <a href=<%= "#{attach.attachment.url}" %> class='cloud-zoom-gallery' title='' rel="useZoom: 'zoom1', smallImage: '<%= "#{attach.attachment.url}" %>'"> 
+                
+                  <img class="zoom-tiny-image active-slide" src=<%= "#{attach.attachment.url}" %>   />
                 </a>
               </li>
               <% end %>
@@ -203,7 +201,7 @@
   // $('.bxslider').css({'-webkit-transition': '0s', 'transition': '0s', '-webkit-transform': 'translate3d(0px, -380px, 0px)'}); 
 
   editor.output();
-
+/*
   $('#pd_photo').bxSlider({      
     pagerCustom: '#pd_photo_thumb',
     controls: false
@@ -218,5 +216,11 @@
     controls: false,
     slideMargin: 0
   });
-
+*/
 </script>
+<script src="/js/bootstrap.min.js"></script> 
+<script src="j/s/jquery.flexslider-min.js"></script>
+<script src="/js/owl.carousel.min.js"></script> 
+<script src="/js/main.js"></script> 
+<!--<script src="/js/jquery.js"></script>-->
+<script src="/js/cloud-zoom.1.0.2.min.js"></script>
