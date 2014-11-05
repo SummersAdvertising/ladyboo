@@ -2,39 +2,53 @@
 <link rel="stylesheet" href="/css/prodList.css">
 <script src="/js/side.js"></script> 
 
-<% content_for :breadcrumb do %>
-  <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; <%= link_to 'SHOP', 'javascript:void(0);'%>
-<% end %>
+<% if @category.depth == 1 %>
+    
+    <% content_for :breadcrumb do %>
+      <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; 
+      <%= link_to @category.name, 'javascript:void(0);' %>
+    <% end %>
 
-<% if @category.parent_id == 2 && @parent_cate.galleries.first  %>
-  
-    <div id="prodTop"><!-- Start #prodTop 上方橫福 --> 
-      <div class="container">
-        <div class="col-md-12">
-          <div class="row">
-            <img id="bannerImg" src=<%= "#{@parent_cate.galleries.first.attachment.url}" %>>
-            <img id="bannerFrame" src="/images/frame_bannerLookbook.png">
+    <% if @category.galleries.first %>
+      <div id="prodTop"><!-- Start #prodTop 上方橫福 --> 
+        <div class="container">
+          <div class="col-md-12">
+            <div class="row">
+              <img id="bannerImg" src=<%= "#{@category.galleries.first.attachment.url}" %>>
+              <img id="bannerFrame" src="/images/frame_bannerLookbook.png">
+            </div>
           </div>
         </div>
-      </div>
-    </div><!-- End #prodTop --> 
-  
+      </div><!-- End #prodTop --> 
+    <% end %>
+
 <% end %>
 
-<% if @category.depth == 1 && @category.galleries.first  %>
-  
-    <div id="prodTop"><!-- Start #prodTop 上方橫福 --> 
-      <div class="container">
-        <div class="col-md-12">
-          <div class="row">
-            <img id="bannerImg" src=<%= "#{@category.galleries.first.attachment.url}" %>>
-            <img id="bannerFrame" src="/images/frame_bannerLookbook.png">
+<% if @category.depth == 2 %>
+    
+    <% content_for :breadcrumb do %>
+      <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; 
+      
+      <%= link_to "#{@parent_cate.name }", category_path(@parent_cate) %> &nbsp; > &nbsp; 
+      
+      <%= link_to @category.name, 'javascript:void(0);' %>
+    <% end %>
+
+    <% if @parent_cate.galleries.first %>
+      <div id="prodTop"><!-- Start #prodTop 上方橫福 --> 
+        <div class="container">
+          <div class="col-md-12">
+            <div class="row">
+              <img id="bannerImg" src=<%= "#{@parent_cate.galleries.first.attachment.url}" %>>
+              <img id="bannerFrame" src="/images/frame_bannerLookbook.png">
+            </div>
           </div>
         </div>
-      </div>
-    </div><!-- End #prodTop --> 
-  
+      </div><!-- End #prodTop --> 
+    <% end %>
+
 <% end %>
+
 
 <div class="xlg-margin hidden-xs"></div><!-- Space 間隔 -->
 <div class="container"><!-- Start .container -->

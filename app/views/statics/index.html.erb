@@ -134,17 +134,14 @@
                   <ul class="menu clearfix"><!-- Start .menu 選單列 -->
                     
                     <li class="mega-menu-container">
-                      <%= link_to categories_path do %>
-                        品牌總覽<br>
-                        SHOP
-                      <% end %>
+                      <a href="javascript:void(0);">品牌總覽<br>SHOP</a>
                       <div class="mega-menu clearfix"><!-- Start .mega-menu -->
                         <% @root_node = Category.return_root_node unless @root_node %>
                         <% @hierarchy = Category.get_level_hierarchy() unless @hierarchy %>
                         <% levels = @hierarchy.select { |v| v[2] == @root_node.id } %>
                           <% levels.each do | level1 | %>
                             <div class="col-5">
-                              <a href="javascript:void(0);" class="mega-menu-title"><%= level1[3] %></a><!-- End .mega-menu-title -->
+                              <%= link_to level1[3], category_path(id: level1[0]), class: "mega-menu-title" %><!-- End .mega-menu-title -->
                               <ul class="mega-menu-list clearfix">
                                 <% levels = @hierarchy.select { |v| v[2] == level1[0] } %>
                                 <% levels.each do | level2 | %>

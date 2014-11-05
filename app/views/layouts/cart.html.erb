@@ -125,10 +125,7 @@
                   <ul class="menu clearfix"><!-- Start .menu 選單列 -->
                     
                     <li class="mega-menu-container">
-                      <%= link_to categories_path do %>
-                        品牌總覽<br>
-                        SHOP
-                      <% end %>
+                      <a href="javascript:void(0);">品牌總覽<br>SHOP</a>
                       <div class="mega-menu clearfix"><!-- Start .mega-menu -->
                         <% @root_node = Category.return_root_node unless @root_node %>
                         <% @hierarchy = Category.get_level_hierarchy() unless @hierarchy %>
