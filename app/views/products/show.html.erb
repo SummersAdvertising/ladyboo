@@ -26,12 +26,23 @@
           <div id="product-image-carousel-container">
             <ul id="product-carousel" class='celastislide-list'>
               <% @product.galleries.where(type: 'ProductPhotoGallery').each_with_index do |attach, index| %>
-              <li class='markLi'>
-                <a href=<%= "#{attach.attachment.url}" %> class='cloud-zoom-gallery' title='' rel="useZoom: 'zoom1', smallImage: '<%= "#{attach.attachment.url}" %>'"> 
-                
-                  <img class="zoom-tiny-image active-slide" src=<%= "#{attach.attachment.url}" %>   />
-                </a>
-              </li>
+
+                <% if index == 0 %>
+                  <li class='markLi'>
+                    <a href=<%= "#{attach.attachment.url}" %> class='cloud-zoom-gallery' title='' rel="useZoom: 'zoom1', smallImage: '<%= "#{attach.attachment.url}" %>'"> 
+                    
+                      <img class="zoom-tiny-image active-slide" src=<%= "#{attach.attachment.url}" %>   />
+                    </a>
+                  </li>
+                <% else %>
+                  <li>
+                    <a href=<%= "#{attach.attachment.url}" %> class='cloud-zoom-gallery' title='' rel="useZoom: 'zoom1', smallImage: '<%= "#{attach.attachment.url}" %>'"> 
+                    
+                      <img class="zoom-tiny-image active-slide" src=<%= "#{attach.attachment.url}" %>   />
+                    </a>
+                  </li>
+                <% end %>
+    
               <% end %>
             </ul>          
           </div>
