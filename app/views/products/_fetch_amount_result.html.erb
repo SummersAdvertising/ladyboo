@@ -1,5 +1,5 @@
 <% if stock %>
-數量<select name="cart[amount]" id="cart_amount" class="form-control" >
+數量 <select name="cart[amount]" id="cart_amount" class="form-control" >
     <option value=''>- Select Quantity -</option>
     <%= show_stock_amount_options(stock, amount_in_cart)%>
   </select>

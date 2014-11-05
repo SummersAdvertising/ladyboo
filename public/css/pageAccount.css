@@ -79,7 +79,7 @@
 .form-control.transferInput { background-color: #e8e8e8; display: inline-block; border: none; border-radius: 0px; margin-bottom: 10px; }
 #transfer-account { width: 250px; }
 #transfer-date { width: 150px; }
-#contactForm { position: relative; background-color: #434343; height: 400px; padding: 20px; position: absolute; left: 0; top: 45px; width: 100%; display: none; }
+#contactForm { position: relative; background-color: #434343; height: 400px; padding: 20px; width: 100%; }
 #tag { position: absolute; right: 100px; ; top: -18px; }
 #contactForm .form-control { width: 100%; border-redius: 0px; height: 300px; margin-bottom: 20px; }
 #contactForm .btn-custom-2.cancle { background-color: #646464; border: none; margin-right: 10px; }
@@ -89,7 +89,6 @@
 @media (max-width: 1099px) and (min-width: 768px) {
 #orderInfo .tagOrder span { display: block; }
 #orderInfo .tagOrder { width: 32%; }
-#contactForm { top: 62px; }
 }
 @media (max-width: 767px) {
 #orderInfo .table > tbody > tr > th { display: none; }
@@ -105,70 +104,74 @@
 #infoQuantity:before { content: '數量 Quantity：' }
 #infoSubtotal:before { content: '總額 Subtotal：'; }
 #infoSubtotal:after { content: '\a\a'; white-space: pre; }
-#contactForm { top: 160px; height: 440px; }
+#contactForm { height: 400px; }
 #tag { position: absolute; left: 60px; ; top: -36px; right: auto; }
 #contactForm .btn-custom-2.cancle { margin: 0px; }
 #contactForm .text-right { width: 100%; margin-bottom: 0; padding: 0; }
 #contactForm .md-margin { margin-bottom: 10px !important }
 }
 /*TAB2---------------------------------------------------------*/
-.tab-container .tab-content .tab-pane#personal { padding: 20px 80px; }
-#edit-form .input-group .input-group-addon { width: 125px; border-radius: 2px 0 0 2px; padding: 0px 10px; line-height: 44px; min-width: 125px; }
-#edit-form .input-group { width: 85%; }
+#personal { padding: 20px 80px; }
+#personal.input-group .input-group-addon { width: 125px; border-radius: 2px 0 0 2px; padding: 0px 10px; line-height: 44px; min-width: 125px; }
+#personal .input-group { width: 85%; }
 @media screen and (-webkit-min-device-pixel-ratio:0) {
-#edit-form .input-group select.form-control { background-image: url(../images/bg_selectBirthday.jpg); }
-#edit-form .input-group select.form-control:hover { background-image: url(../images/bg_selectBirthday2.jpg); }
+#personal .input-group select.form-control { background-image: url(../images/bg_selectBirthday.jpg); }
+#personal .input-group select.form-control:hover { background-image: url(../images/bg_selectBirthday2.jpg); }
 }
-#edit-form .input-group select.form-control { height: 47px; width: 25%; float: left; margin: 0;}
-#edit-form .register-birthday p { float: left; padding-bottom: 0; padding-right: 8px; padding-left: 8px; margin: 0; line-height: 45px; font-size: 1.0em; }
-#edit-form .edit-birthday p { float: left; padding-bottom: 0; padding-right: 8px; padding-left: 8px; margin: 0; line-height: 45px; font-size: 1.0em; }
+.input-group p{padding-left: 20px;height:40px;line-height:45px;}
+#personal .input-group select.form-control { height: 47px; width: 25%; float: left; margin: 0;}
+#personal .register-birthday p { float: left; padding-bottom: 0; padding-right: 8px; padding-left: 8px; margin: 0; line-height: 45px; font-size: 1.0em; }
+#personal .edit-birthday p { float: left; padding-bottom: 0; padding-right: 8px; padding-left: 8px; margin: 0; line-height: 45px; font-size: 1.0em; }
+#personal .edit-birthday select.year{height: 45px;display: inline-block;}
 @media (min-width: 992px) and (max-width: 1200px) {
-#edit-form .input-group select.form-control { width: 23%; }
-.tab-container .tab-content .tab-pane#personal { padding: 20px 60px; }
+#personal .input-group select.form-control { width: 23%; }
+#personal { padding: 20px 60px; }
 }
 @media (min-width: 768px) and (max-width: 991px) {
-#edit-form .input-group select.form-control { width: 23%; }
+#personal .input-group select.form-control { width: 23%; }
 .tab-container .tab-content .tab-pane#personal { padding: 20px 20px; }
 }
 @media (max-width: 767px) {
-#personal:before { content: '會員資料 Personal details'; background-color: #434343; color: #FFF; display: block; text-align: center; padding: 10px 0; margin-top: 10px; }
-.tab-container .tab-content .tab-pane#personal { padding: 0px; }
-#edit-form { padding: 20px 10px; }
-#edit-form .input-group { width: 100%; }
-#edit-form .input-group .input-group-addon { width: 115px; padding: 0px 4px; min-width: 115px; }
-#edit-form .edit-birthday .input-group-addon { display: block; float: left; }
-#edit-form .input-group select.form-control#edit-month { clear: both; width: 38%; }
-#edit-form .input-group select.form-control#edit-date { width: 38%; }
-#edit-form .input-group select.form-control#edit-year { margin-bottom: 20px; width: 47%; }
+#personal:before { content: '會員資料 Personal details'; background-color: #434343; color: #FFF; display: block; text-align: center; padding: 10px 0; margin-top: 10px; margin-left: -10px;margin-right: -10px;}
+#personal { padding: 20px 10px; }
+#personal .input-group { width: 99%; }
+#personal .input-group .input-group-addon { width: 115px; padding: 0px 4px; min-width: 115px; }
+#personal .edit-birthday .input-group-addon { display: block; float: left; }
+#personal .input-group select.form-control#edit-month { clear: both; width: 38%; }
+#personal .input-group select.form-control#edit-date { width: 38%; }
+#personal .input-group select.form-control#edit-year { margin-bottom: 20px; width: 47%; }
 }
 /*TAB3---------------------------------------------------------*/
-.tab-container .tab-content .tab-pane#address { padding: 20px 80px; }
+#address { padding: 20px 80px; width:100%;overflow: hidden;}
 #address .input-group .input-group-addon { width: 125px; border-radius: 2px 0 0 2px; padding: 0px 10px; line-height: 44px; min-width: 125px; }
-#address p { padding-bottom: 20px; }
-#address .input-group { float: left; width: 80%; }
+#address p { padding-bottom: 20px; padding-bottom: 0 20px;}
+#address .input-group { float: left; width: 100%;height:44px; }
+#address .input-group .form-control{width: 70%;}
+#address .input-group p { float: left; width:70%;height:44px;line-height: 16px; display: inline-block; padding:10px 20px; }
 #address .text-left { display: block; padding-top: 40px; }
-#address .btn-custom-1 { background-color: #f2f2f2; border-color: #e4e2e2; padding: 12px 10px; margin-left: 5px; margin-bottom: 32px; }
+#address .btn-custom-1 { width:50px;background-color: #f2f2f2; border-color: #e4e2e2; padding: 10px 0;text-align: center;; margin-left: 5px; }
 #address .btn-custom-3:hover { -webkit-box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.4); box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.4); background-color: #f858b7; }
+form#patchthisaddressbook_2 {float: left;}
 @media (min-width: 1041px) and (max-width: 1200px) {
-#address .input-group { width: 80%; }
-.tab-container .tab-content .tab-pane#address { padding: 20px 60px; }
+#address { padding: 20px 60px; }
 }
 @media (min-width: 991px) and (max-width: 1040px) {
-#address .input-group { width: 75%; }
-.tab-container .tab-content .tab-pane#address { padding: 20px 40px; }
+#address { padding: 20px 40px; }
 }
 @media (min-width: 768px) and (max-width: 990px) {
-#address .input-group { width: 75%; }
-.tab-container .tab-content .tab-pane#address { padding: 20px 30px; }
+#address { padding: 20px 30px; }
 .addEdit, .addDelete { width: 10%; }
 }
 @media (max-width: 767px) {
 #address:before { content: '常用地址 Primary address'; background-color: #434343; color: #FFF; display: block; text-align: center; padding: 10px 0; margin: 10px -10px 0 -10px; }
 #address p { padding-top: 20px; }
-#address .input-group { width: 100%; margin-bottom: 10px; }
-.tab-container .tab-content .tab-pane#address { padding: 10px 10px; overflow: hidden; }
-.addEdit, .addDelete { float: right; }
-#address .btn-custom-1 { padding: 6px 15px; margin-left: 5px; margin-bottom: 20px; }
+#address .input-group .input-group-addon { height: 30px;}
+#address .input-group {  margin-bottom: 10px; }
+#address .input-group p { width:100%;}
+#address { padding: 10px 10px; overflow: hidden; }
+.addEdit, .addDelete { float: left; }
+#address .btn-custom-1 { margin-left: 5px;  }
 #address .input-group .input-group-addon { width: 80px; min-width: 80px; padding: 0px 4px; }
-#address .btn-custom-3 { display: block; clear: both; }
+#address .btn-custom-3 { display: block; clear: both; width:120px;}
+form#patchthisaddressbook_2 {float: none;}
 }

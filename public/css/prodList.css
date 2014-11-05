@@ -13,6 +13,8 @@
 /*圖片*/
 .item-image-container figure img { /* [disabled]max-height:225px!important;
 */ }
+.item:hover > .item-image-container .item-image { visibility: visible; opacity: 1;
+}
 /*文字*/
 .item-name { font: 100 1.0em Helvetica, Microsoft JhengHei, "微軟正黑體"; margin: 0 0 5px 0; }
 .category-item-container .item:hover .item-name { color: #FFF; }

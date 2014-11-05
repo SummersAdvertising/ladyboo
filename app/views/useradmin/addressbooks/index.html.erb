@@ -2,7 +2,7 @@
   <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; <%= link_to 'ACCOUNT', 'javascript:void(0);' %>
 <% end %>
 
-<div id="lookbook">
+
   <div class="xlg-margin hidden-xs"></div>
   <!-- Space 間隔 -->
   <div class="container"><!-- Start .container -->
@@ -46,15 +46,15 @@
             <% unless current_user.addressbooks.count >= 5 %>
             <div class="text-right">
               <%= link_to 'javascript:void(0);', class: "btn btn-custom-3 toggle_new_addressbook" do %>
-                新增項目<img src="/images/admin/add.png">
+                新增項目
               <% end %>
-            </div>
+            </div><br>
             <% end %>
             
             <% @addressbooks.each_with_index do |addressbook, index| %>
               <%# show %>
               <div class="input-group show_addressbook_<%= addressbook.id %>"> <span class="input-group-addon"><span class="input-icon input-icon-address"></span><span class="input-text">地 址</span></span>
-                <%= addressbook.address %> 
+                <p><%= addressbook.address %> </p>
                 <%= link_to "編輯", "javascript:void(0);", :data => { :id => addressbook.id }, :class => "edit btn btn-custom-1 addEdit", title:"編輯" %>
                 <%= link_to "刪除", useradmin_addressbook_path(addressbook), :method => :delete, :data => {:confirm => "確定刪除？"}, :class => "delete btn btn-custom-1 addDelete", title: "刪除" %>
               </div>
@@ -97,8 +97,7 @@
   <div class="lg-margin2x visible-sm visible-xs"></div>
   <!-- Space 間隔--> 
   
-</div>
-<!-- End .lookbook --> 
+
 
 <script type="text/javascript">
 $(document).ready(function(){

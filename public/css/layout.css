@@ -28,7 +28,7 @@ body, html { overflow-x: hidden; color: #434343; }
 #header .dropdown-cart .dropdown-cart-menu { border-top: 3px solid #c9006e; }
 #header .dropdown-menu { box-shadow: none; }
 .quick-search-form .btn { padding-top: 8px; }
-#header .dropdown-cart-action .btn{font-size:1.2em; padding: 10px 10px;}
+#header .dropdown-cart-action .btn{font-size: 1.3em!important;font-weight: bold!important;padding: 8px 10px;-webkit-font-smoothing: antialiased!important;}
 .btn-custom-3 { background-color: #c9006e; }
 .btn-custom-3:hover { background-color: #f858b7; }
 .btn-custom-2:hover { background-color: #000; }
@@ -66,8 +66,8 @@ ropdown-cart-menu-container { padding: 0; }
 #main-nav-container.fixed .menu > li > a { font-size: 1.2em!important; line-height: 1.2em!important; }
 #main-nav-container.fixed #main-nav .menu >li { height: 60px; }
 #main-nav-container #main-nav .menu li a { font-size: 0.8em; line-height: 1.5em; }
+#main-nav-container #main-nav .menu li:first-child a {padding: 13px 25px;}
 .menu > li { text-align: center; }
-.menu .mega-menu-container a { padding-left: 25px!important }
 .menu > li:hover { background: url(../images/nav.gif) center bottom no-repeat }
 #main-nav-container #main-nav .menu > li { font-size: 0.8em; line-height: 1.5em; height: 69px; }
 h1.logo { margin-top: 10px; margin-bottom: 15px; }
@@ -177,11 +177,12 @@ h2.title { background: none; }
 .input-icon.input-icon-birthday { background-position: 0px -120px; }
 .input-icon.input-icon-address { background-position: 0px -150px; }
 .custom-checkbox .checbox-container { top: 6px; }
-.btn{ padding: 5px 25px;-webkit-font-smoothing: antialiased!important; font-weight:normal!important;font-size: 1em!important; box-shadow: none; -webkit-box-shadow!important: none;display: inline-block; }
+.custom-checkbox input[type="checkbox"]:checked + .checbox-container {background: #C9006E !important;border-color: #C9006E;}
+.btn{ padding: 5px 25px;-webkit-font-smoothing: antialiased!important; font-weight: bold!important;font-size: 1em!important; box-shadow: none; -webkit-box-shadow!important: none;display: inline-block; }
 .mainBtn { color: #fff !important; background-color: #C9006E; border-color: #C9006E; -webkit-box-shadow: none; box-shadow: none; border-radius: 0px; }
 .mainBtn span { font-size: 1.3em; }
 .mainBtn:hover, .mainBtn:focus, .mainBtn:active, .mainBtn.active, .open .dropdown-toggle.mainBtn { color: #fff !important; background-color: #d8569d; border-color: #C9006E; -webkit-box-shadow: none; box-shadow: none; }
-#content .btn-custom-2, #content .btn-custom-3 { padding: 5px 25px;-webkit-font-smoothing: antialiased!important; font-weight:normal!important;font-size: 1em!important; box-shadow: none; -webkit-box-shadow!important: none;display: inline-block; }
+#content .btn-custom-2, #content .btn-custom-3 { font-weight: bold!important;padding: 5px 25px;-webkit-font-smoothing: antialiased!important; font-size: 1em!important; box-shadow: none; -webkit-box-shadow!important: none;display: inline-block; }
 #content .btn-custom-2, #content .btn-custom-2:hover, #content .btn-custom-3, #content .btn-custom-3:hover { border-color: transparent;text-decoration: none; }
 #content .btn-custom-2:hover { background-color: #C9006E; }
 #content .btn-custom-3:hover { -webkit-box-shadow: inset 1px 1px 6px 2px rgba(0, 0,0, 0.2); box-shadow: inset 1px 1px 6px 2px rgba(0, 0, 0, 0.2); background-color: #C9006E; }
@@ -195,9 +196,9 @@ textarea.form-control { resize: none; }
 .input-group{clear:both;}
 }
 /*-------------------------------------------------------------------------------------------Bottom底圖---*/
-.bottom { position: absolute; bottom: 86px; right: 6%; z-index: 0; }
+.bottom { position: absolute; bottom: 89px; right: 6%; z-index: 0; }
 @media (min-width: 768px) and (max-width: 1200px) {
-.bottom { bottom: 105px; }
+.bottom { bottom: 106px; }
 }
 @media (max-width: 767px) {
 .bottom.container { display: none; }
@@ -210,7 +211,7 @@ textarea.form-control { resize: none; }
 #footer-bottom .container { background-image: url(../images/bg_footer.jpg); position: relative; background-position: center bottom; background-repeat: no-repeat; hieght: 100px!important; padding-bottom: 25px; margin-bottom: 0; }
 .footer-text-container p:after { content: "　© 2014 Copyright by LadyBoo."; }
 .footer-text-container { color: #b3b3b3; position: relative; }
-.footer-text-container a { font-size: 1em!important; margin: 0 0 0 4% }
+.footer-text-container a { font-size: 1em!important; margin: 0 0 0 20px }
 .footer-social-links-container a { color: #fff!important; display: block; width: 200px; position: relative; padding-left: 40px; background-image: url(../images/fb.gif); background-repeat: no-repeat; background-position: left top; position: absolute; top: -15px; left: 40px; margin: 0 8% 0 0; font-size: 1em!important; height: 50px; padding-top: 35px; }
 #footer a { color: #b3b3b3; }
 .fb-like { position: absolute; left: 240px; top: 16px; }
@@ -219,6 +220,10 @@ textarea.form-control { resize: none; }
 }
 @media (min-width: 768px) and (max-width: 1200px) {
 #scroll-top { bottom: 80px; }
+#footer .container {width: 100%;}
+}
+@media (min-width: 992px){
+#footer .col-md-6 {width: 100%;}
 }
 @media (max-width: 767px) {
 .footer-social-links-container a img { top: -26px }
@@ -248,6 +253,9 @@ textarea.form-control { resize: none; }
 .cb-info { width: 300px; margin-top: 0; }
 .cb-info span { text-align: center }
 .cb-info select { width: 100%; }
+#inline_content .product-add.clearfix {height: 80px;}
+#btnAdd{position: relative;}
+#btnAdd .icon-button.icon-like {position: absolute;bottom: 0px;left: 120px;}
 select.form-control { display: inline; width: 200px; border-radius: 0px; padding: 2px 2px 2px 6px; height: 30px; margin-bottom: 20px; margin-left: 10px;}
 @media screen and (-webkit-min-device-pixel-ratio:0) {
 select.form-control { display: inline; width: 200px; border-radius: 0px; background-image: url(../images/bg_select.jpg); background-repeat: no-repeat; background-position: right top; padding: 2px 2px 2px 6px; height: 30px; margin-bottom: 20px; margin-left: 10px; appearance:none;-moz-appearance:none; -webkit-appearance:none; }

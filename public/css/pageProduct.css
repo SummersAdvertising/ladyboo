@@ -18,7 +18,7 @@ h3.title span { font: 0.8em Helvetica, Microsoft JhengHei, "微軟正黑體"!imp
 .product hr { margin: 10px 0; }
 .product-list li { padding-bottom: 20px; color: #FFF; font-size: 0.9em; line-height: 1.4em; }
 label { color: #FFF; }
-.mainBtn { padding-top: 5px; padding-bottom: 6px; line-height: 1.1em; float: left; }
+.mainBtn { padding-top: 5px; padding-bottom: 6px; line-height: 1.1em; float: left;font-size: 0.9em!important; }
 .mainBtn span { font-size: 1.1em; }
 .price p { font-size: 1.1em; }
 .old-price { color: #626564; text-decoration: line-through; }
