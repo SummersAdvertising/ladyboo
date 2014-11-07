@@ -71,9 +71,8 @@
         </td>
       </tr>
       <tr>
-        <td width="7%">摘要：</td>
+        <td width="7%"></td>
         <td width="93%">
-          <%= f.text_area :subtitle, class: "text" ,placeholder: "輸入文章摘要" %>
 
           <%= fields_for @community.article do | a | %>
             <%= a.hidden_field :content, {:id => 'peditor_community_content'} %>

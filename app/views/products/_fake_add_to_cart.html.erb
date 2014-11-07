@@ -1,0 +1,30 @@
+<div class="md-margin"></div>
+
+  <div class="product-add clearfix">
+    
+    
+  </div><!-- End .product-add -->
+
+  <div class="price">
+    <p>售價 Price <span class="old-price">NT$ <%= number_with_delimiter(@product.price) %></span></p>
+    <% if @product.price_for_sale > 0 %>
+      <p class="item-price">優惠價 Favorable NT$ <%= number_with_delimiter(@product.price_for_sale) %></p>
+    <% else %>
+      <p class="item-price">優惠價 Favorable NT$ <%= number_with_delimiter(@product.price) %></p>
+    <% end %>
+  </div>
+  <hr>
+  <br>
+  <%= button_tag "<span>已售完</span><br>SOLD OUT".html_safe, class: "btn mainBtn" %>
+
+  <% if current_user %>
+    <% tracking_list = TrackingList.new %>
+    <%= form_for(tracking_list,:url => useradmin_tracking_lists_path(tracking_list), :html => {:id =>'NewTrackingListForm' } ) do | f |%>
+      <%= f.hidden_field :user_id, value: current_user.id , class: 'text' %>
+      <%= f.hidden_field :product_id, value: @product.id, class: 'text' %>
+      <%= f.submit "", class: "icon-button icon-like"  %>
+    <% end %>
+  <% else %>
+    <%= link_to '', useradmin_tracking_lists_path, class: "icon-button icon-like" %>
+    <!-- <a class='inline icon-button icon-fb' href="#inline_content">FB</a> -->
+  <% end %>

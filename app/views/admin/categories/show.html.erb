@@ -95,7 +95,7 @@
       </a>
     </div>
 
-  <% else %>
+  <% else %> <%# show depth >= 2  categories %>
 
     <div class="hgroup">
       <h3 class="left">
@@ -119,21 +119,23 @@
       </div>
     </div>
     <div class="list">      
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <table id='dragable_container' width="100%" border="0" cellspacing="0" cellpadding="0">
         <% @category.products.each do |product| %>
-
-        <tr <%= "class=off" if product.status == "disable" %> >
-          <td width="6%"><img src="/images/admin/file.png"></td>
-          <td width="76%">
-            <%= link_to(product.name, edit_admin_category_product_path(@category, product)) %>
-            <%# link_to(get_change_status_name(product), change_status_admin_category_product_path(@category, product), :method => :post) %>
-          </td>
-          <td width="18%">
-            <div class="tool">
-              <%= link_to("編輯", edit_admin_category_product_path(@category, product), class: 'edit') %><%= link_to("刪除", admin_category_product_path(@category, product), :method => :delete, :data => {:confirm => "確定刪除？"}, class: 'delete') %>
-            </div>
-          </td>
-        </tr>
+          
+          <tr <%= "id=Productcontainer_#{product.id.to_s}" %> class='dragable <%= "off" if product.status == "disable" %>' >
+            <td width="6%"><img src="/images/admin/file.png"></td>
+            <td width="76%">
+              <%= link_to(product.name, edit_admin_category_product_path(@category, product)) %>
+              <%= product.ranking%>
+              <%# link_to(get_change_status_name(product), change_status_admin_category_product_path(@category, product), :method => :post) %>
+            </td>
+            <td width="18%">
+              <div class="tool">
+                <%= link_to("編輯", edit_admin_category_product_path(@category, product), class: 'edit') %><%= link_to("刪除", admin_category_product_path(@category, product), :method => :delete, :data => {:confirm => "確定刪除？"}, class: 'delete') %>
+              </div>
+            </td>
+          </tr>
+          
         <% end %>
       </table>
 
@@ -143,6 +145,7 @@
         <img src="/images/admin/left.png">返回
       </a>
     </div>
+
   <% end %>
     
   </div>
@@ -188,3 +191,54 @@ $(document).ready(function(){
   }
 });
 </script>
+
+ <script>
+  $(function() {
+    var prevEvent = null;
+      $( "#dragable_container" ).sortable({
+        items: ".dragable" ,
+        placeholder: "ui-state-highlight",
+        update: function( event, ui ) {
+            
+          if(event.timeStamp == prevEvent){
+            return null;
+          }
+          
+          prevEvent = event.timeStamp;  
+          var newRankings_array = $('#dragable_container').sortable('toArray');
+          var orderSet = [];
+          $.each(newRankings_array, function( index, value){
+                orderSet.push(value.replace("Productcontainer_",""));
+            });
+            var order2Push = JSON.stringify(orderSet);
+            
+            $.ajaxSetup({
+              headers: {
+                  'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+
+          // reorder 
+          $.ajax({
+            type: "PATCH",
+            url: "/admin/products/"+orderSet[0]+"/reorder",
+            data: { products: {  reorderset: orderSet } },
+            success: function(data){
+
+              alertify['success'](data[0][1], 2000);
+              
+              return false   
+            },
+            error: function(data){
+            
+              return false  
+            }
+          });
+
+        }
+      });
+      
+        
+      $( "#dragable_container" ).disableSelection();
+    });  
+  </script>

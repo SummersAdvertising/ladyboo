@@ -80,7 +80,7 @@
           <% if check_with_stock(@product) %>
             <%= render partial: "add_to_cart", :locals => { stocks: @product.stocks, amount_in_cart: @amount_in_cart, product: @product } %>
           <% else %>
-            <h3>已售完</h3>
+            <%= render partial: "fake_add_to_cart", :locals => { stocks: @product.stocks, amount_in_cart: @amount_in_cart, product: @product } %>
           <% end %>
          </div><!-- End .product 右邊文字區 -->
 

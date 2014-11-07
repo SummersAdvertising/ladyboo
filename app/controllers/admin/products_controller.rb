@@ -164,6 +164,39 @@ class Admin::ProductsController < AdminController
     redirect_to :back
   end
 
+  def out_of_stock
+    # @products = Product.where
+  end
+
+  def disabled
+
+    # @products = Product.where(status: 'disable').order(category_id: :asc)
+    # @out_of_stock_category_ids = Category.where(id: @products.pluck(:category_id)).pluck(:parent_id)
+    # @out_of_stock_categories = Category.where(id: out_of_stock_category_ids).order(id: :asc) if @products
+  end
+
+  def reorder
+    errorFlag = false
+    params[:products][:reorderset].each_with_index do | productid , index |
+      the_product = Product.find(productid)
+      if !the_product.nil?
+        the_product.update_attribute(:ranking , index+1 )
+      else
+        errorFlag = true
+      end
+    end
+
+    respond_to do |format|
+      if errorFlag
+        format.json { head :no_content }
+      else
+        flash[:notice] = "重新排序成功"
+        format.json do render json: flash end
+      end
+    end
+
+  end
+
   private
 
   def set_product

@@ -15,7 +15,7 @@ class Product < ActiveRecord::Base
 
   has_many :tracking_lists
 
-
+  default_scope {order('ranking')}
   scope :front_show_by_cate, ->(category_id) { where("category_id = ? AND status = ?", category_id, "enable") }
   scope :enabled, -> { where(status: 'enable') }
 

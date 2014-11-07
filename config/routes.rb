@@ -129,6 +129,7 @@ Rails.application.routes.draw do
     
     resources :categories do 
       resources :products do
+
         post  'peditor/:id/createPhoto'       => 'peditor#createPhoto'
 
         get   '/free_paragraph'       => 'products#free_paragraph'
@@ -144,6 +145,16 @@ Rails.application.routes.draw do
         # resources :features
         # resources :colors
       end
+    end
+
+    resources :products do 
+      collection do 
+        get '/out_of_stock' => 'products#out_of_stock'
+        get '/disabled' => 'products#disabled'
+      end
+      member do
+        patch 'reorder' , :action => 'reorder'
+      end 
     end
 
     resources :banners

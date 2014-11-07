@@ -1,0 +1,21 @@
+<hr>
+[無庫存產品]<br>
+<br><br><br>
+<% Category.where(depth: 1).each do |category| %>
+  == <%= category.name %> ==<br>
+  <% sub_cates = category.children %>  
+  <% sub_cates.each do |cate| %>
+    
+    <% cate.products.each do |product| %>
+      <% unless check_with_stock(product) %>
+        CATEGORY:<%= product.category.name %><br>
+        PRODUCT NAME:<%=link_to product.name, edit_admin_category_product_path(product.category,product) %> = <%= product.en_name %><br>
+      <% end %>
+    <% end %>
+
+  <% end %>
+  <hr>
+<% end %>
+
+<%= link_to 'return' , admin_categories_path%>
+

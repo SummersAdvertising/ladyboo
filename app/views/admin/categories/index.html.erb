@@ -5,7 +5,9 @@
 </header>
 <article>
   <div class="hgroup">
-    <h3 class="left">分類列表</h3>
+    <h3 class="left">分類列表
+    <%= link_to '無庫存', out_of_stock_admin_products_path %> || <%= link_to '已下架', disabled_admin_products_path %>
+    </h3>
     <div class="button right">
       <a href="javascript:void(0);" class="right highlight toggle_new_category">新增分類<img src="/images/admin/add_folder.png"></a>
     </div>

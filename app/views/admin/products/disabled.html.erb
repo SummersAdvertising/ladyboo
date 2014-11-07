@@ -1,0 +1,22 @@
+<hr>
+[已下架產品]<br>
+<br><br><br>
+<% Category.where(depth: 1).each do |category| %>
+  == <%= category.name %> ==<br>
+  <% sub_cates = category.children %>  
+  <% sub_cates.each do |cate| %>
+    <% if cate.products.where(status: 'disable').count > 0 %>
+      <% out_of_stock_categories = Category.where(id: cate.products.where(status: 'disable').pluck(:category_id)) %>
+
+      <% cate.products.where(status: 'disable').each do |product| %>
+        CATEGORY:<%= product.category.name %><br>
+        PRODUCT NAME:<%=link_to product.name, edit_admin_category_product_path(product.category,product) %> = <%= product.en_name %><br>
+      <% end %>
+
+    <% end %>  
+  <% end %>
+  <hr>
+<% end %>
+
+<%= link_to 'return' , admin_categories_path%>
+
