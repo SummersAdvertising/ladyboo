@@ -161,6 +161,7 @@ h3.title span { font-size: 20px; padding: 0; margin-top: 5px; }
 #readMore:hover { color: #FFF; background-color: #c9006e; border: 1px solid #FFF; }
 .flex-active-slide{margin-right:20px;}
 .item-action {text-align: right;}
+#content .related-product img{height:100px;width:100px;}
 @media \0screen {
 .item > .item-image-container .item-price-container .item-price { padding-top: 15px;line-height:0px;  }
 }

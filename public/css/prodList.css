@@ -3,7 +3,7 @@
 .item { margin-bottom: 30px; padding-top: 15px; padding-left: 10px; padding-right: 10px; padding-bottom: 15px; }
 .item > .item-image-container { width: 230px; }
 .category-item-container .item:hover { background-image: url(../images/slider.gif); }
-#content .item > .item-image-container figure img { max-width: 230px; width: 100%; display: block; height: auto; max-height: 270px; }
+#content .item > .item-image-container figure img { max-width: 230px; width: 100%; display: block; height: auto; max-height: 230px; }
 .col-xs-12 { display: inline-block; padding-left: 10px; padding-right: 10px; }
 /*貼紙*/
 .new-rect { background: url(../images/idx-03.png); width: 69px; height: 38px; color: #333; padding-right: 5px; left: -3px; font-size: 1.2em; }
