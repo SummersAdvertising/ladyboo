@@ -2,7 +2,7 @@
 .title.about { width: 320px; }
 .title.news { width: 260px; }
 .title.community { width: 360px; }
-#aboutBanner { background-image: url(../images/page/img_aboutBanner.jpg); width: 972px; padding-top: 13%; background-size: contain; background-repeat: no-repeat; }
+#aboutBanner { background-image: url(../images/page/img_aboutBanner.jpg); width: 972px; padding-top: 21%; background-size: contain; background-repeat: no-repeat; }
 .articles-container.col-md-9 { margin-left: auto; margin-right: auto; float: none; }
 .readMore { font-weight: bold; display: inline-block; padding-left: 20px; }
 .article h2 { font: 1.8em Helvetica, Microsoft JhengHei, "微軟正黑體"!important }
@@ -33,7 +33,7 @@
 #lookbook .title span { padding: 0 0 0 2%!important; }
 #lookbook h2.title { background: none; }
 .title-bg:after { background: transparent; }
-#aboutBanner { background-image: url(../images/page/img_aboutBanner2.jpg); width: 100%; padding-top: 170px; background-size: auto; background-position: center top; }
+#aboutBanner { background-image: url(../images/page/img_aboutBanner2.jpg); width: 100%; padding-top: 356px;background-color: #1b1b1b; background-size: auto; background-position: center top; }
 .col-md-10 { padding: 0px; }
 .col-md-10 p { padding: 0 10px; }
 .article .article-meta-date { font-size: 0.8em; width: 50px; height: 45px; padding: 11px 0; line-height: 1em; font-weight: 300; margin-left: 10px; }

@@ -64,7 +64,7 @@ body, html { overflow-x: hidden; color: #434343; }
 #inner-header { padding-top: 20px; }
 #menu-right-side { margin-top: 20px; padding-bottom: 0; margin-bottom: 0; }
 #main-nav { height: 60px; padding-right: 180px; z-index: 1; }
-#main-nav-container #main-nav .menu li .mega-menu .mega-menu-title { padding: 0px 0; text-align: left; margin-left: -20px; }
+#main-nav-container #main-nav .menu li .mega-menu .mega-menu-title {  text-align: left; margin-left: 0px; }
 #main-nav-container.fixed #main-nav .menu li .mega-menu { top: 60px; }
 #main-nav-container.fixed { height: 60px; top: 36px; }
 #main-nav-container.fixed .menu > li > a { font-size: 1.2em!important; line-height: 1.2em!important; }
@@ -81,6 +81,8 @@ h1.logo { margin-top: 10px; margin-bottom: 15px; }
 #main-nav-container.fixed h1.logo { margin-top: 10px }
 #main-nav-container.fixed #quick-access { margin-top: 10px }
 #main-nav-container #main-nav .menu li .mega-menu .mega-menu-list li { text-transform: capitalize; background-image: url(../images/img_list.gif); background-repeat: no-repeat; background-position: left center; padding: 8px 0 8px 16px; width: 100%; border-bottom: none; border-top: none; }
+#main-nav-container #main-nav .menu li:nth-child(2) > .mega-menu { width: 360px; left:auto;}
+#main-nav-container #main-nav .menu li:nth-child(2) > .mega-menu .col-5{ width: 50%; }
 .menuTitle{font-size:1.3em;padding:20px 0;display:block;text-align:left;}
 .col-5{padding-bottom:20px;}
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -115,6 +117,13 @@ h1.logo { margin-top: 10px; margin-bottom: 15px; }
 #responsive-nav-button #responsive-nav-button-icon { display: inline-block; width: 35px; height: 36px; background-color: #C9006E; background-image: url(../images/sprites/responsive-menu-icon.png); background-repeat: no-repeat; background-position: center center; vertical-align: top; border-radius: 0px; margin-left: 15px; margin-top: 22px; transition: none; -webkit-transition: none; -moz-transition: none; box-shadow: none; -webkit-box-shadow: none; }
 #main-nav-container #main-nav #responsive-nav >ul { min-width: 300px; width: 100%; right: 0px!important; position: absolute; top: 60px; }
 #main-nav-container #main-nav #responsive-nav ul li .mega-menu .mega-menu-list li { text-transform: capitalize; background-image: url(../images/img_list.gif); background-repeat: no-repeat; background-position: left center; width: 100%; }
+#main-nav-container #main-nav #responsive-nav ul li .mega-menu .mega-menu-title {
+font: 0.9em Helvetica, Microsoft JhengHei, "微軟正黑體"!important;
+display: block;
+padding: 10px 30px;background: #f6f6f6;
+border-top:1px solid rgba(200, 200, 200, 0.2); 
+border-bottom: solid 1px #eee;border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
 }
 /*粉紅區塊指引區 Start---------------------------------------------------------------------------------------------------------------------*/
 #breadcrumb-container { background: #C9006E; margin-bottom: 0px; margin-top: 0; top: -10; }
