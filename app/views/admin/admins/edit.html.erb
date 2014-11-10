@@ -1,0 +1,33 @@
+  <header>
+      <h2>Edit profile</h2>      
+    </header>
+    <article>              
+        <div class="form">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <%= form_for(@admin,:url => admin_admin_path, :html => {:id =>'EditAdminForm' , :method => "PATCH"} ) do | f |%>
+            <tr>
+              <td width="6%">姓名：</td>
+              <td width="40%"><%= f.text_field :name, class: 'text' %></td>
+              <td width="4%">&nbsp;</td>
+              <td width="10%">Email：</td>
+              <td width="40%"><%= f.text_field :email, class: 'text' %></td>
+            </tr>
+            <tr>
+              <td>密碼：</td>
+              <td><%= f.password_field :password, class: 'text'  %></td>
+              <td>&nbsp;</td>
+              <td>確認密碼：</td>
+              <td><%= f.password_field :password_confirmation, class: 'text'  %></td>
+            </tr>
+            <% end %>
+          </table>
+        </div>
+		
+		
+      <div class="button">
+      	<%= link_to image_tag("/images/admin/left.png")+"返回", admin_admins_path(), class: "left" %>
+      	<a href='javascript:void(0);' class='right highlight'  onclick= "$('#EditAdminForm').submit()">變更
+          <img src="/images/admin/add.png">
+        </a>
+      </div>
+    <!--button--> 

@@ -21,9 +21,9 @@ en:
       confirmation_instructions:
         subject: "Confirmation instructions"
       reset_password_instructions:
-        subject: "cama咖啡 重新設定新密碼"
+        subject: "ladyboo 重新設定新密碼"
       unlock_instructions:
-        subject: "cama咖啡 解鎖帳號"
+        subject: "ladyboo 解鎖帳號"
     omniauth_callbacks:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."

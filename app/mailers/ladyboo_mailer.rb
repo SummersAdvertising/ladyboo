@@ -219,7 +219,7 @@ class LadybooMailer < ActionMailer::Base
   # MAILGUN
   def set_basic_data
     @data = Multimap.new
-    @data[:from] = "Ladyboo <no-reply@mg.ladybootw.com>"
+    @data[:from] = "Ladyboo <postmaster@mg.ladybootw.com>"
     @data[:inline] = File.new(File.join("public","images","email", "maillogo.jpg")) # inline img
   end
 

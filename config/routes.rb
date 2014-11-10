@@ -123,6 +123,7 @@ Rails.application.routes.draw do
       root "announcements#index"
       #root "orders#index"#, :as => :authenticated_root
     end
+    
     resources :admins
     
     mount Ckeditor::Engine => '/ckeditor'

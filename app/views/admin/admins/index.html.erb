@@ -1,0 +1,49 @@
+  <header>
+    <h2>管理者</h2>      
+  </header>
+  <article>           
+      <div class="form">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <%= form_for(@admin,:url => admin_admins_path, :html => {:id =>'NewAdminForm' , :method => "post"} ) do | f |%>
+            <tr>
+              <td width="6%">姓名：</td>
+              <td width="40%"><%= f.text_field :name, class: 'text' %></td>
+              <td width="4%">&nbsp;</td>
+              <td width="10%">Email：</td>
+              <td width="40%"><%= f.text_field :email, class: 'text' %></td>
+            </tr>
+            <tr>
+              <td>密碼：</td>
+              <td><%= f.password_field :password, class: 'text'  %></td>
+              <td>&nbsp;</td>
+              <td>確認密碼：</td>
+              <td><%= f.password_field :password_confirmation, class: 'text'  %></td>
+            </tr>
+          <% end %>
+        </table>
+        
+      </div>
+  
+    <div class="button"> 
+      <a href='javascript:void(0);' class='right highlight'  onclick= "$('#NewAdminForm').submit()">新增管理員<img src="/images/admin/add.png"></a>
+      </div>
+    </div>
+    <div class="list">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <% @admins.each do | admin | %>   
+       
+            <tr>
+              <td width="16%"></td>
+              <td width="18%"><%= admin.name %></td>
+              <td width="54"><%= admin.email %></td>
+              <td width="12%">
+                  <div class="tool">
+                      <a href="<%= edit_admin_admin_path(admin) %>" class="edit" title="編輯">編輯</a><%= link_to '刪除', admin_admin_path( admin ), :method => :delete, class: "delete", title: "刪除", data: { confirm: "是否確定刪除使用者#{admin.name}? 此動作無法復原。" } %>
+                  </div>
+               </td>
+            </tr>
+           
+        <% end %>
+      </table>
+    </div>      
+  </article>
