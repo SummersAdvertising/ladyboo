@@ -16,9 +16,13 @@
         
           <div id="product-image-container">
             <figure>
-              <a href="/images/products/img_proBig1.jpg"  class = 'cloud-zoom' id='zoom1' rel="position:'inside',showTitle:true,adjustX:-4,adjustY:-4">
-              <img src="/images/products/img_proBig1.jpg" />
-              <a id="zoom" href="javascript:;" title="放大"></a> </a>
+              <% if @product.galleries.where(type: 'ProductPhotoGallery').first %>
+                <a href="<%= @product.galleries.where(type: 'ProductPhotoGallery').first.attachment.url %>"  class = 'cloud-zoom' id='zoom1' rel="position:'inside',showTitle:true,adjustX:-4,adjustY:-4">
+                  <img src="<%= @product.galleries.where(type: 'ProductPhotoGallery').first.attachment.url %>" />
+                  <a id="zoom" href="javascript:;" title="放大"></a>
+                </a>  
+              <% end %>
+          
            </figure>  
           </div>
           
@@ -29,14 +33,14 @@
 
                 <% if index == 0 %>
                   <li class='markLi'>
-                    <a href=<%= "#{attach.attachment.url}" %> class='cloud-zoom-gallery' title='' rel="useZoom: 'zoom1', smallImage: '<%= "#{attach.attachment.url}" %>'"> 
+                    <a href='<%= "#{attach.attachment.url}" %>' class='cloud-zoom-gallery' title='' rel="useZoom: 'zoom1', smallImage: '<%= "#{attach.attachment.url}" %>'"> 
                     
                       <img class="zoom-tiny-image active-slide" src=<%= "#{attach.attachment.url}" %>   />
                     </a>
                   </li>
                 <% else %>
                   <li>
-                    <a href=<%= "#{attach.attachment.url}" %> class='cloud-zoom-gallery' title='' rel="useZoom: 'zoom1', smallImage: '<%= "#{attach.attachment.url}" %>'"> 
+                    <a href='<%= "#{attach.attachment.url}" %>' class='cloud-zoom-gallery' title='' rel="useZoom: 'zoom1', smallImage: '<%= "#{attach.attachment.url}" %>'"> 
                     
                       <img class="zoom-tiny-image active-slide" src=<%= "#{attach.attachment.url}" %>   />
                     </a>
@@ -182,9 +186,9 @@
               <div class="item">
                 <div class="item-image-container">
                   <figure>
-                    <% if current_product.galleries.select{ |v| v['type'] == 'ProductCoverGallery' }.count > 0 %>
+                    <% if current_product.galleries.where(type: 'ProductCoverGallery').count > 0 %>
                       <%= link_to category_product_path(current_category, current_product) do %>
-                        <%= image_tag(current_product.galleries.select{ |v| v['type'] == 'ProductCoverGallery' }.first.attachment.url, class: 'item-image', alt: "item#{index+1}") %>
+                        <%= image_tag(current_product.galleries.where(type: 'ProductCoverGallery').first.attachment.url, class: 'item-image', alt: "item#{index+1}") %>
                       <% end %>
                     <% end %>
                   </figure>
