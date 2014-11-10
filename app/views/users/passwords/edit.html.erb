@@ -1,43 +1,43 @@
+<link rel="stylesheet" href="/css/pageLogin.css">
 <% content_for :header do %>
-  <div id="banner">
-    <div class="container row">
-      <div class="col-md-3 col-md-offset-9 col-sm-12">會員登入</div>
-    </div>
-  </div>
+
 <% end %>
 
-<article class="container-fluid">
-  <section class="container row" id="member-info">
-    <div class="col-md-10 col-md-offset-1 col-sm-12 row">
-      <article>
-      <%= devise_error_messages! %>
-      <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
-          <h3>變更密碼</h3>
-          <%# devise_error_messages! %>
-          <%= f.hidden_field :reset_password_token %>
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <th><img src="/images/mbr-04.jpg"><%= f.label :password, "新密碼" %></th>
-              <td><%= f.password_field :password, :autofocus => true , class: 'form-control' %></td>
-            </tr>
-          </table>
-
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <th><img src="/images/mbr-04.jpg"><%= f.label :password_confirmation, "確認新密碼" %></th>
-              <td><%= f.password_field :password_confirmation, class: 'form-control' %></td>
-            </tr>
-          </table>
-
-         
-          <div class="text-center">
-            <%= f.submit "設定密碼", class: "btn", data: {disable_with: "..."} %>
-          </div>
-        <% end %>
-      </article>
+<div class="xlg-margin"></div>
+<div id="lookbook">
+<div class="container">
+  <header class="content-title">
+    <div class="title-bg">
+      <h2 class="title forgotten">RESET PASSWORD<span>變更密碼</span></h2>
     </div>
-  </section>
-</article>
+  </header>
+  <div class="layout member">
+    <%= devise_error_messages! %>
+    <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+        
+      <p>請輸入您的新密碼<br>Enter your new password.</p>
+      <%= f.hidden_field :reset_password_token %>
+      <div class="input-group input-container contact-email">
+        <span class="input-group-addon"><span class="input-icon input-icon-email"></span><span class="input-text">新密碼</span></span>
+        <td>
+        <%= f.password_field :password, :autofocus => true , class: 'form-control input-lg', placeholder: "password" %>
+        </td>
+      </div>
+      <div class="input-group input-container contact-email">
+        <span class="input-group-addon"><span class="input-icon input-icon-email"></span><span class="input-text">確認新密碼</span></span>
+        <td><%= f.password_field :password_confirmation, :autofocus => true , class: 'form-control input-lg', placeholder: "" %>
+        </td>
+      </div>
+      <br><br>
+      <p class="text-right">
+        <%= f.submit "密碼重設 RESET", class: "btn btn-custom-3", data: {disable_with: "..."} %>
+      </p>
+    <% end %>
+    <br><br><br><br>
+  </div>
+</div>
+
+<div class="xlg-margin"></div>
 
 <script src="/js_plugins/jq_validation/jquery.validate.min.js"></script>
 <script src="/js_plugins/jq_validation/additional-methods.min.js"></script>

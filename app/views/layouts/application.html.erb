@@ -54,13 +54,21 @@
 <body>
  <div id="fb-root"></div>
   <script>
-  // (function(d, s, id) {
-  //     var js, fjs = d.getElementsByTagName(s)[0];
-  //     if (d.getElementById(id)) return;
-  //     js = d.createElement(s); js.id = id;
-  //     js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&appId=477202859073516&version=v2.0";
-  //     fjs.parentNode.insertBefore(js, fjs);
-  //   }(document, 'script', 'facebook-jssdk'));
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '380171498811984',
+        xfbml      : true,
+        version    : 'v2.2'
+      });
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
   </script>
   <div id="wrapper">
     <!--Header Start**************************************************************************************************************--> 
@@ -240,7 +248,6 @@
         <a href="#" id="scroll-top" title="Scroll to Top"><i class="fa fa-angle-up"></i><br>Top</a><!-- #scroll-top 回上方按鈕 -->
           <div class="col-md-6 col-sm-2 col-xs-12 footer-social-links-container"><!-- Facebook Start --> 
             <a href="https://www.facebook.com/LadyBooTW" target="_blank">LadyBoo’s Facebook</a>
-            <div class="fb-like" data-href="https://www.facebook.com/LadyBooTW" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
           </div><!-- Facebook End --> 
           <div class="col-md-6 col-sm-10 col-xs-12 footer-text-container">
             <p>
