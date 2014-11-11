@@ -5,6 +5,7 @@
 .bottom { right:auto;left:16%; }
 .bgBottom.index { background-image: url(../images/bg_footer2.png); height: 169px; width: 284px; }
 .bgBottom { position: absolute; bottom: 3px; left: -100px; }
+#bannerFrame { position: absolute; left: 0; top: 0; z-index: 600;}
  @media (min-width: 768px) and (max-width: 1200px) {
 .title.lookbook { width: 20%; min-width: 320px; }
 .title.pickup { width: 20%; min-width: 280px; }
