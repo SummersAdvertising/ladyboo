@@ -1,4 +1,15 @@
-= measurement new =
+
+<header>
+  <h2 class="left">商品管理</h2>
+  <nav class="left">
+    <%= link_to "簡介", edit_admin_category_product_path(@product.category, @product) %>
+    <%= link_to "照片", admin_category_product_photo_path(@product.category, @product) %>
+    <%= link_to "尺寸", admin_category_product_measurements_path(@product.category, @product), class: "active" %>
+    <%= link_to "庫存", admin_category_product_stocks_path(@product.category, @product)%>
+    <%= link_to "內容", admin_category_product_free_paragraph_path(@product.category, @product) %>
+  </nav>
+</header>
+
 <%= simple_form_for(@measurement, :url => admin_category_product_measurements_path(params[:category_id] , params[:product_id], @measurement), html: { id: "postthismeasurement" } ) do |f| %>
 顯示：<%= f.check_box :status, { class: 'checkbox'  }, "enable", "disable" %> 是
 title：<%= f.input_field :title %><br>

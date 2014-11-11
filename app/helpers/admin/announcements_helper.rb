@@ -4,9 +4,9 @@ module Admin::AnnouncementsHelper
   def list_edit_btn(current_announcement)
     
     if current_announcement.type == "PeditorAnnouncement"
-      "#{link_to( '編輯' , edit_admin_announcement_path(current_announcement), class: "edit")  }".html_safe
+      "#{link_to( '' , edit_admin_announcement_path(current_announcement), class: "edit")  }".html_safe
     elsif current_announcement.type == "CustomizedAnnouncement"
-      "#{link_to( '編輯', custom_edit_admin_announcement_path(current_announcement), class: "edit")  }".html_safe
+      "#{link_to( '', custom_edit_admin_announcement_path(current_announcement), class: "edit")  }".html_safe
     end
         
   end

@@ -2,7 +2,7 @@
 class Admin::ProductsController < AdminController
   
   before_action :set_product_with_category, only: [:create, :show]
-  before_action :set_product, only: [:edit,:update,:destroy]
+  before_action :set_product, only: [:edit,:update,:destroy,:change_status]
   #before_action :get_category, only: [:create]
   
   def show
@@ -37,6 +37,14 @@ class Admin::ProductsController < AdminController
     @gallery_count = @product.galleries.select{ |v| v['type'] == "ProductCoverGallery" }.count
   end
 
+  def change_status
+    @product.status = (@product.status == "enable") ? "disable" : "enable"
+    @product.save
+
+    respond_to do |format|
+      format.html { redirect_to :back }
+    end
+  end
   # def slider
   #   @product = Product.find_by_id(params[:product_id])
   #   @gallery_count = @product.galleries.select{ |v| v['type'] == "ProductSlider" }.count

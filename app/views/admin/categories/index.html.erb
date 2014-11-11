@@ -1,15 +1,16 @@
 <header>
   <h2 class="left">商品管理</h2>
-  <nav class="left"></nav>
-  <div class="explain right"><p>圖片尺寸：</p></div>
+  <nav class="left">
+    <%= link_to '下架', disabled_admin_products_path %>
+    <%= link_to '售完', out_of_stock_admin_products_path %>
+  </nav>
+  <div class="explain right"><p>圖片尺寸：1024px * 768px</p></div>
 </header>
 <article>
   <div class="hgroup">
-    <h3 class="left">分類列表
-    <%= link_to '無庫存', out_of_stock_admin_products_path %> || <%= link_to '已下架', disabled_admin_products_path %>
-    </h3>
+    <h3 class="left">分類列表</h3>
     <div class="button right">
-      <a href="javascript:void(0);" class="right highlight toggle_new_category">新增分類<img src="/images/admin/add_folder.png"></a>
+      <a href="javascript:void(0);" class="right highlight toggle_new_category">建立分類<img src="/images/admin/add_folder.png"></a>
     </div>
   </div>
   <div class="list">
@@ -25,7 +26,7 @@
           </td>
           <td width="18%">
             <div class="tool">
-              <%= link_to "編輯", "javascript:void(0);", :data => { :id => category.id }, :class => "edit", title:"編輯" %><%= link_to "刪除", admin_category_path(category), :data => { :confirm => "將會刪除分類底下所有商品，確定繼續？" }, :method => :delete, :class => "delete", title: "刪除" %>
+              <%= link_to "", "javascript:void(0);", :data => { :id => category.id }, :class => "edit", title:"編輯" %><%= link_to "", admin_category_path(category), :data => { :confirm => "將會刪除分類底下所有商品，確定繼續？" }, :method => :delete, :class => "delete", title: "刪除" %>
             </div>
           </td>
         </tr>

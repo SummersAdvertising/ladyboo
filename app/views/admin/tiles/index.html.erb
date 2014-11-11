@@ -1,8 +1,9 @@
 <header>
-  <h2 class="left">穿搭管理</h2>
+  <h2 class="left"><span>首頁管理 / </span>穿搭主題</h2>
   <nav class="left">
-    <%= link_to 'Lookbook', edit_admin_lookbook_path(@lookbook)%>
-    <%= link_to 'Lookbook Tile', admin_lookbook_tiles_path(@lookbook)%>
+    <%= link_to '基本', edit_admin_lookbook_path(@lookbook)%>
+    <%= link_to '圖片', admin_lookbook_tiles_path(@lookbook), class: 'active' %>
+    <%= "此穿搭主題限制關聯主題數：#{@lookbook.limit}, 已關聯主題數：#{@lookbook.lookbook_topicships.count}" %>
   </nav>
   <div class="explain right"><p>圖片尺寸：</p></div>
 </header>
@@ -32,7 +33,7 @@
           </td>
           <td width="18%">
             <div class="tool">
-              <%= link_to "編輯", "javascript:void(0);", :data => { :id => tile.id }, :class => "edit", title:"編輯" %><%= link_to "刪除", admin_lookbook_tile_path(@lookbook,tile), :data => { :confirm => "將會刪除分類底下所有商品，確定繼續？" }, :method => :delete, :class => "delete", title: "刪除" %>
+              <%= link_to "", "javascript:void(0);", :data => { :id => tile.id }, :class => "edit", title:"編輯" %><%= link_to "", admin_lookbook_tile_path(@lookbook,tile), :data => { :confirm => "將會刪除分類底下所有商品，確定繼續？" }, :method => :delete, :class => "delete", title: "刪除" %>
             </div>
           </td>
         </tr>
@@ -43,15 +44,15 @@
           <td width="6%" style="background:url(/images/admin/folder.png) center center no-repeat"></td>
           <td width="76%">
             <div style="position:relative">
-              <%= f.text_field :context_1, class:"text", placeholder: "", style:"width:50%" %>
-              <%= f.text_field :context_2, class:"text", placeholder: "", style:"width:50%" %>
-              <%= f.text_field :context_3, class:"text", placeholder: "", style:"width:50%" %>
-              <%= f.text_field :context_4, class:"text", placeholder: "", style:"width:50%" %>
-              <%= f.text_field :context_5, class:"text", placeholder: "", style:"width:50%" %>
+              描述1：<%= f.text_field :context_1, class:"text", placeholder: "", style:"width:50%" %><br>
+              描述2：<%= f.text_field :context_2, class:"text", placeholder: "", style:"width:50%" %><br>
+              描述3：<%= f.text_field :context_3, class:"text", placeholder: "", style:"width:50%" %><br>
+              描述4：<%= f.text_field :context_4, class:"text", placeholder: "", style:"width:50%" %><br>
+              描述5：<%= f.text_field :context_5, class:"text", placeholder: "", style:"width:50%" %><br>
               <!-- COVER UPLOAD -->
               <%= file_field_tag :attachment, class: 'file' unless tile.galleries.count > 0 %>
 
-              <%= f.select :topic_id, options_for_select(@lookbook.topics.collect { |topic|
+              連結：<%= f.select :topic_id, options_for_select(@lookbook.topics.collect { |topic|
             [topic.name, topic.id] }, tile.topic_id), {}, { id: 'topic_select' } %>
             </div>
           </td>          
@@ -75,16 +76,16 @@
         <td width="6%" style="background:url(/images/admin/folder.png) center center no-repeat"></td>
         <td width="76%">
           <div style="position:relative">
-            <%= f.text_field :context_1, class:"text", placeholder: "", style:"width:50%" %>
-            <%= f.text_field :context_2, class:"text", placeholder: "", style:"width:50%" %>
-            <%= f.text_field :context_3, class:"text", placeholder: "", style:"width:50%" %>
-            <%= f.text_field :context_4, class:"text", placeholder: "", style:"width:50%" %>
-            <%= f.text_field :context_5, class:"text", placeholder: "", style:"width:50%" %>
+            描述1：<%= f.text_field :context_1, class:"text", placeholder: "", style:"width:50%" %>
+            描述2：<%= f.text_field :context_2, class:"text", placeholder: "", style:"width:50%" %>
+            描述3：<%= f.text_field :context_3, class:"text", placeholder: "", style:"width:50%" %>
+            描述4：<%= f.text_field :context_4, class:"text", placeholder: "", style:"width:50%" %>
+            描述5：<%= f.text_field :context_5, class:"text", placeholder: "", style:"width:50%" %>
             
             <!-- COVER UPLOAD -->
-            <%= file_field_tag :attachment, class: 'file' %>
+            圖片：<%= file_field_tag :attachment, class: 'file' %>
 
-            <%= f.select :topic_id, options_for_select(@lookbook.topics.collect { |topic|
+            連結：<%= f.select :topic_id, options_for_select(@lookbook.topics.collect { |topic|
             [topic.name, topic.id] }, ), {}, { id: 'topic_select' } %>
           </div>
         </td>

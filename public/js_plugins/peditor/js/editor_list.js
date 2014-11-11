@@ -3,7 +3,7 @@ editor.list = {
 		var li = $("<li>");
 		li.attr("data-type", "list").attr("id", "tab-list");
 		var a = $("<a>").append("列表");
-		var icon = $("<img>").attr("src", "/images/list.png");
+		var icon = $("<img>").attr("src", "/js_plugins/peditor/img/list.png");
 		a.prepend(icon);
 
 		li.append(a);

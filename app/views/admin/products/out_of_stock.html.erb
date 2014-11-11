@@ -1,21 +1,39 @@
-<hr>
-[無庫存產品]<br>
-<br><br><br>
-<% Category.where(depth: 1).each do |category| %>
-  == <%= category.name %> ==<br>
-  <% sub_cates = category.children %>  
-  <% sub_cates.each do |cate| %>
-    
-    <% cate.products.each do |product| %>
-      <% unless check_with_stock(product) %>
-        CATEGORY:<%= product.category.name %><br>
-        PRODUCT NAME:<%=link_to product.name, edit_admin_category_product_path(product.category,product) %> = <%= product.en_name %><br>
-      <% end %>
+<header>
+  <h2 class="left">商品管理</h2>
+  <nav class="left">
+    <%= link_to '下架', disabled_admin_products_path %>
+    <%= link_to '售完', out_of_stock_admin_products_path, class: 'active' %>
+  </nav>
+</header>
+
+<article>
+  
+  <% Category.where(depth: 1).each do |category| %>
+    == <%= category.name %> ==<br>
+    <% sub_cates = category.children %>  
+    <% sub_cates.each do |cate| %>
+      
+      <div class="list">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <% cate.products.each do |product| %>
+            <% unless check_with_stock(product) %>
+            <tr>
+              <td>
+              CATEGORY:<%= product.category.name %>
+              PRODUCT NAME:<%=link_to product.name, admin_category_product_stocks_path(product.category,product) %> = <%= product.en_name %>
+              </td>
+            </tr>
+            <% end %>
+          <% end %>
+        </table>
+      </div>
+
     <% end %>
-
+    <hr>
   <% end %>
-  <hr>
-<% end %>
-
-<%= link_to 'return' , admin_categories_path%>
-
+  <div class='button'>
+    <%= link_to admin_categories_path, class: 'left' do %>
+      <img src="/images/admin/left.png">返回
+    <% end %>
+  </div>
+</article>

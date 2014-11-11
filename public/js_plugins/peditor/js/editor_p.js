@@ -3,7 +3,7 @@ editor.p = {
 		var li = $("<li>");
 		li.attr("data-type", "p").attr("id", "tab-p");
 		var a = $("<a>").append("段落");
-		var icon = $("<img>").attr("src", "/images/paragraph.png");
+		var icon = $("<img>").attr("src", "/js_plugins/peditor/img/paragraph.png");
 		a.prepend(icon);
 
 		li.append(a);

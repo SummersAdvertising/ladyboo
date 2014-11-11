@@ -1,0 +1,46 @@
+
+/*-----------------------------------------------------------------------變數---*/
+
+@major: #FCDCD1;
+@major-deep: @major - #111;
+@major-light: @major + #111;
+
+@font-family: courier,微軟正黑體,Microsoft JhengHei;
+
+
+/*-----------------------------------------------------------------------全域---*/
+
+html,body{height:100%}
+body > table{}
+body{width:370px;margin:0 auto;font:300 14px @font-family}
+a{font:300 14px @font-family}
+
+/*-----------------------------------------------------------------------頁身---*/
+
+h1{height:155px;margin:0 0 0 54px}
+.login-input{
+	background:#fff;
+	text-align:left;
+	padding:10px;
+	border:1px solid #ddd;
+	border-radius:10px;
+	margin:0 0 20px 0;
+	position:relative;
+	.text{width:270px;border:none;color:#333;font:300 14px @font-family}
+	img{position:relative;top:3px;margin:0 5px 0 0}
+	.button{width:25px;height:25px;background:url(../../images/admin/login.png) center center no-repeat #eee;
+		border:none;margin:0 0 0 20px;position:absolute;top:9px;right:18px;border-radius:50%;
+		-webkit-transition:all ease .3s;-moz-transition:all ease .3s;cursor:pointer;
+		opacity:.5;filter:alpha(opacity=50)
+	}
+	.button:hover{right:13px;opacity:1;filter:alpha(opacity=100)}
+}
+
+/*-----------------------------------------------------------------------頁尾---*/
+
+#footer{height:50px;text-align:center}
+
+/*-----------------------------------------------------------------------特製---*/
+
+html{background:@major}
+#footer{text-shadow:0 1px 0 @major-light;color:#111}

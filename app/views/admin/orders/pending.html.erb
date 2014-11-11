@@ -49,7 +49,7 @@ div ,td, p .noTransition {
           <td class="icon">
             <% if order.payment_type == 'Vaccount' || order.payment_type == 'atm_transfer' %>
               <% unless 4.days.ago < order.created_at %>
-                <img src="/images/admin/warn.gif">
+                <img src="/images/admin/alert.png" title="此訂單已超過繳費期限">
               <% end %>
             <% end %>
           </td>

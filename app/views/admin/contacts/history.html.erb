@@ -1,0 +1,38 @@
+<header>
+  <h2 class="left">聯絡我們</h2>
+  <nav class="left">
+    <%= link_to "未處理", admin_contacts_path() %>
+    <%= link_to "已處理", history_admin_contacts_path , class: 'active' %>
+  </nav>
+</header>
+
+<article>
+  <div class="list">
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      
+      <% @contacts.each do |contact| %>
+        <tr>
+          <td width="6%" class="icon"></td>
+          <td width="21%"><span class="time"><%= contact.created_at.strftime("%Y-%m-%d %H:%M") %></span><br>
+            <%= contact.name %><a class="email"><img src="/images/admin/msg.png">
+            <p><%= contact.email %></p></a></td>
+          <td width="60%">
+          <h6><%= contact.subject %></h6>
+          <p><%= contact.content %></p></td>
+          <td width="13%">
+            <div class="tool">
+              <%= get_contact_status(contact) %><%# contacts_helper %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+
+    </table>
+  </div>
+
+  <div class="page">
+    <%= paginate @contacts ,:window => 2 %>
+  </div>
+
+</article>

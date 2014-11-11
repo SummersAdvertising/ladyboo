@@ -1,26 +1,33 @@
 <header>
-  <h2 class="left">TopicCollection<span> / 首頁管理</span></h2>
-  <nav class="left"></nav>
+  <h2 class="left"><span>首頁管理 / </span>系列主題</h2>
 </header>
+
 <article>
-  
   <div class="hgroup">
+    <h3 class="left">主題列表</h3>
     <div class="button right">
       <%= link_to new_admin_topic_collection_path(), class: "right highlight" do %>
-        新增<img src="/images/admin/add.png">
+        建立主題<img src="/images/admin/add.png">
       <% end %>
     </div>
   </div>
 
-  <div class="gallery">
-    <% @topic_collections.each do |topic_collection| %>
-
-    <div class="thumb left">
-      <%= link_to '刪除', admin_topic_collection_path(topic_collection), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete', title: '刪除' %>
-      <%= link_to "編輯 topic_collection", edit_admin_topic_collection_path(topic_collection) %>
-      <%= topic_collection.name %>
-    </div>
-
-    <% end %>    
+  <div class="list">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <% @topic_collections.each do |topic_collection| %>
+        <tr>  
+          <td width="6%" class="icon"><img src="/images/admin/folder.png"></td>
+          <td width="70%"><%=link_to topic_collection.name, edit_admin_topic_collection_path(topic_collection) %></td>
+          <td width="18%">
+            <div class="tool"> 
+              <%= link_to "", edit_admin_topic_collection_path(topic_collection), class: 'edit' %>
+              <%= link_to '', admin_topic_collection_path(topic_collection), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete', title: '刪除' %>
+            </div>
+          </td>  
+        </tr>
+      <% end %>      
+    </table>
   </div>
+
+  
 </article>

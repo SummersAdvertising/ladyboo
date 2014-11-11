@@ -1,26 +1,41 @@
-= measurement index =
+
 <header>
-  <h2 class="left">編輯產品</h2>
+  <h2 class="left">商品管理</h2>
   <nav class="left">
-    <%= link_to "Basic", edit_admin_category_product_path(@product.category, @product)%>
-    <%= link_to "Measurement", admin_category_product_measurements_path(@product.category, @product) %>
-    <%= link_to "ProductPhotoGallery", admin_category_product_photo_path(@product.category, @product)%>
-    <%= link_to "Stock", admin_category_product_stocks_path(@product.category, @product)%>
-    <%= link_to "peditor", admin_category_product_free_paragraph_path(@product.category, @product) %>
+    <%= link_to "簡介", edit_admin_category_product_path(@product.category, @product) %>
+    <%= link_to "照片", admin_category_product_photo_path(@product.category, @product) %>
+    <%= link_to "尺寸", admin_category_product_measurements_path(@product.category, @product), class: "active" %>
+    <%= link_to "庫存", admin_category_product_stocks_path(@product.category, @product)%>
+    <%= link_to "內容", admin_category_product_free_paragraph_path(@product.category, @product) %>
   </nav>
 </header>
-<br>
+
 <%# link_to 'NEW', new_admin_category_product_measurement_path(params[:category_id], params[:product_id]) %><br><br><br>
 
-<% @measurements.each do |measurement| %>
-  <%= '[顯示]' if measurement.status == 'enable' %>
-  <%= measurement.title %>
+<article>
+  <div class="list">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <% @measurements.each do |measurement| %>
+          <tr>
+            <td width="6%" valign="top"><%= '[顯示]' if measurement.status == 'enable' %></td>
+            <td width="70%">
+              <%= measurement.title %>
   == <%= measurement.context_1 %> == <%= measurement.context_2 %> == <%= measurement.context_3 %> 
-  == <%= measurement.context_4 %> == <%= measurement.context_5 %> == <%= measurement.context_6 %> 
-  [<%= link_to 'edit', edit_admin_category_product_measurement_path(params[:category_id], params[:product_id],measurement) %>| 
-  <%= link_to "delete", admin_category_product_measurement_path(@product.category,@product,measurement), :data => { :confirm => "確定繼續？" }, :method => :delete, :class => "delete", title: "刪除" %>
-   ]
-  <br>
-<% end %>
-<br>
-<%= link_to 'return' ,admin_category_path(params[:category_id]) %>
+  == <%= measurement.context_4 %> == <%= measurement.context_5 %> == <%= measurement.context_6 %>
+            </td>
+            <td width="18%" align="right">
+              <div class="tool">
+                <%= link_to '', edit_admin_category_product_measurement_path(params[:category_id], params[:product_id],measurement), class: 'edit' %>
+                <%= link_to "", admin_category_product_measurement_path(@product.category,@product,measurement), :data => { :confirm => "確定繼續？" }, :method => :delete, :class => "delete", title: "刪除" %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+  </div>
+  <div class="button"> 
+    <%= link_to admin_category_path(params[:category_id]) , class: 'left' do %>
+      <img src="/images/admin/left.png">返回
+    <% end %>
+  </div>
+</article>

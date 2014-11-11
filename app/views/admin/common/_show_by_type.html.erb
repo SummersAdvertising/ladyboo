@@ -3,20 +3,20 @@
 <%# target: object %>
 <%# type: gallery type %>
 <div class="hgroup">
-  <h3 class="left">圖片預覽 <% if allow_dragable %><span>(可拖拉排序)</span><% end %></h3>          
+  <h3 class="left">圖片預覽 <% if allow_dragable %><span>(可拖拉排序，第一張為封面)</span><% end %></h3>          
 </div>
 
 <div class="gallery" id="listAttachs">
 
   <% target.galleries.select{ |v| v['type'] == type }.each_with_index do |attach, i| %>
     <% if i == 0 %>
-      <div style='float:left;' class="thumb left cover Attachcontainer dragable" <%= "id=Attachcontainer_#{attach.id.to_s}" %>> 
+      <div class="thumb left cover Attachcontainer dragable" <%= "id=Attachcontainer_#{attach.id.to_s}" %>> 
     <% else %>
-      <div style='float:left;' class="thumb left Attachcontainer dragable" <%= "id=Attachcontainer_#{attach.id.to_s}" %>> 
+      <div class="thumb left Attachcontainer dragable" <%= "id=Attachcontainer_#{attach.id.to_s}" %>> 
     <% end %>
     <image src=<%= "#{attach.attachment.url}" %> />
 
-    <%= link_to '刪除', admin_gallery_path(attach.id), method: :delete, data: { confirm: '確認刪除?' }, class: 'delete', title: '刪除' %>
+    <%= link_to '', admin_gallery_path(attach.id), method: :delete, data: { confirm: '確認刪除?' }, class: 'delete', title: '刪除' %>
     </div>
   <% end %>
 

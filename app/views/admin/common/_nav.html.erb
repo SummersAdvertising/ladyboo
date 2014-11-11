@@ -1,0 +1,63 @@
+<nav class="left">
+  <ul>
+    <li>
+      <%= link_to admin_categories_path do %>
+        <img src="/images/admin/box.png">商品管理
+      <% end %>
+    </li>
+    <li>
+      <%= link_to admin_orders_path do %>
+        <img src="/images/admin/page.png">訂單管理
+      <% end %>
+    </li>
+    <li>
+      <%= link_to admin_deliveries_path do %>
+        <img src="/images/admin/truck.png">運送管理
+      <% end %>
+    </li>
+    <li>
+      <%= link_to admin_orderasks_path do %>
+        <img src="/images/admin/comments.png">客服管理
+      <% end %>
+    </li>
+    <li>
+      <%= link_to admin_users_path do %>
+        <img src="/images/admin/group.png">會員管理
+      <% end %>
+    </li>
+  </ul>
+  <ul>
+    <li class="menu-box">
+      <a href="javascript:void(0);"><img src="/images/admin/tv.png">首頁管理</a>
+      <div class="menu">
+        <%= link_to '主視覺輪播', admin_banners_path %>
+        <%= link_to '系列主題', admin_topic_collections_path %>
+        <%= link_to '穿搭主題', admin_lookbooks_path %>
+        <%= link_to '精選商品', admin_pickups_path %>     
+      </div>
+    </li>
+    <li class="menu-box"><a href="javascript:void(0);"><img src="/images/admin/news.png">關於我</a>
+      <div class="menu">
+        <%= link_to '最新消息', admin_announcements_path %>
+        <%= link_to '社群迴響', admin_communities_path %>
+      </div>
+    </li>       
+    <li>
+      <%= link_to admin_topics_path do %>
+        <img src="/images/admin/topic.png">基本主題
+      <% end %>
+    </li>
+    <li>
+      <%= link_to admin_contacts_path do %>
+        <img src="/images/admin/contact.png">聯絡我們
+      <% end %>
+    </li>
+  </ul>
+  <ul>
+    <li>
+      <%= link_to admin_admins_path do %>
+        <img src="/images/admin/manager.png">管理者
+      <% end %>
+    </li>
+  </ul>
+</nav>

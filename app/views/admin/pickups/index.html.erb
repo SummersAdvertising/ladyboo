@@ -13,14 +13,23 @@
       </div>
     </div>
   <% end %>
-  <div class="gallery">
-    <% @pickups.each do |pickup| %>
-    <%= pickup.product.name %> => ＄<%= pickup.product.price %> / <%= pickup.status %>
-    <div class="thumb left">
-      <%= link_to '刪除', admin_pickup_path(pickup), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete', title: '刪除' %>
-      <%= link_to "編輯", edit_admin_pickup_path(pickup) %>
-    </div>
 
-    <% end %>    
+  <div class="list">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <% @pickups.each do |pickup| %>
+        <tr>
+          <td width='88%'>
+            <%= pickup.product.name %> => ＄<%= pickup.product.price %> / <%= pickup.status %>  
+          </td>
+        
+          <td>
+            <div class="tool">
+              <%= link_to "", edit_admin_pickup_path(pickup), class: 'edit' %>
+              <%= link_to '', admin_pickup_path(pickup), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete', title: '刪除' %>
+            </div>
+          </td>
+        </tr>
+      <% end %>    
+    </table>
   </div>
 </article>

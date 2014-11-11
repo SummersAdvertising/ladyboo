@@ -1,22 +1,43 @@
-<hr>
-[已下架產品]<br>
-<br><br><br>
-<% Category.where(depth: 1).each do |category| %>
-  == <%= category.name %> ==<br>
-  <% sub_cates = category.children %>  
-  <% sub_cates.each do |cate| %>
-    <% if cate.products.where(status: 'disable').count > 0 %>
-      <% out_of_stock_categories = Category.where(id: cate.products.where(status: 'disable').pluck(:category_id)) %>
 
-      <% cate.products.where(status: 'disable').each do |product| %>
-        CATEGORY:<%= product.category.name %><br>
-        PRODUCT NAME:<%=link_to product.name, edit_admin_category_product_path(product.category,product) %> = <%= product.en_name %><br>
+<header>
+  <h2 class="left">商品管理</h2>
+  <nav class="left">
+    <%= link_to '下架', disabled_admin_products_path, class: 'active' %>
+    <%= link_to '售完', out_of_stock_admin_products_path %>
+  </nav>
+</header>
+
+<article>
+  
+  <% Category.where(depth: 1).each do |category| %>
+    == <%= category.name %> ==<br>
+    <% sub_cates = category.children %>  
+    <% sub_cates.each do |cate| %>
+      <% if cate.products.where(status: 'disable').count > 0 %>
+        <% disabled_categories = Category.where(id: cate.products.where(status: 'disable').pluck(:category_id)) %>
+
+        <div class="list">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <% cate.products.where(status: 'disable').each do |product| %>
+              
+              <tr>
+                <td>
+                CATEGORY:<%= product.category.name %><br>
+                PRODUCT NAME:<%=link_to product.name, edit_admin_category_product_path(product.category,product) %> = <%= product.en_name %><br>
+                </td>
+              </tr>
+              
+            <% end %>
+          </table>
+        </div>
       <% end %>
 
     <% end %>  
+    <hr>
   <% end %>
-  <hr>
-<% end %>
-
-<%= link_to 'return' , admin_categories_path%>
-
+  <div class='button'>
+    <%= link_to admin_categories_path, class: 'left' do %>
+      <img src="/images/admin/left.png">返回
+    <% end %>
+  </div>
+</article>

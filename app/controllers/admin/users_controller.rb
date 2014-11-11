@@ -1,5 +1,5 @@
 class Admin::UsersController < AdminController
-  authorize_resource
+  
   def index
     @options = ["Email" ,"Name", "Address"]
     

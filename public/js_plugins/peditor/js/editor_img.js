@@ -12,7 +12,7 @@ editor.img = {
 		var li = $("<li>");
 		li.attr("data-type", "img").attr("id", "tab-img");
 		var a = $("<a>").append("圖片");
-		var icon = $("<img>").attr("src", "/images/photo.png");
+		var icon = $("<img>").attr("src", "/js_plugins/peditor/img/photo.png");
 		a.prepend(icon);
 
 		li.append(a);

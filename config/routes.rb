@@ -142,6 +142,10 @@ Rails.application.routes.draw do
         patch  '/upload_photo'       => 'products#upload_photo'
 
         resources :measurements
+
+        member do 
+          match :change_status, :via => :post
+        end
         # resources :accessories
         # resources :features
         # resources :colors
@@ -286,6 +290,12 @@ Rails.application.routes.draw do
         
       end
 
+    end
+
+    resources :contacts, :only => [:index, :update] do
+      collection do 
+        get 'history', action: 'history'
+      end
     end
 
     resources :orderasks, :only => [:index, :update] do

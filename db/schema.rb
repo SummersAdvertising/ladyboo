@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141029140158) do
+ActiveRecord::Schema.define(version: 20141111075918) do
 
   create_table "addressbooks", force: true do |t|
     t.integer  "user_id"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 20141029140158) do
     t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status",     default: "new"
   end
 
   create_table "deliveries", force: true do |t|

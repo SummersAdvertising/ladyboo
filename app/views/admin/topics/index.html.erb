@@ -1,26 +1,32 @@
 <header>
-  <h2 class="left">topic<span> / 首頁管理</span></h2>
-  <nav class="left"></nav>
+  <h2 class="left">基本主題</h2>
 </header>
 <article>
-  
   <div class="hgroup">
+    <h3 class="left">主題列表</h3>
     <div class="button right">
       <%= link_to new_admin_topic_path(), class: "right highlight" do %>
-        新增<img src="/images/admin/add.png">
+        建立基本主題<img src="/images/admin/add_folder.png">
       <% end %>
     </div>
   </div>
-
-  <div class="gallery">
-    <% @topics.each do |topic| %>
-
-    <div class="thumb left">
-      <%= link_to '刪除', admin_topic_path(topic), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete', title: '刪除' %>
-      <%= link_to "編輯主題", edit_admin_topic_path(topic) %>
-      <%= topic.name %>
-    </div>
-
-    <% end %>    
+  <div class="list">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      
+      <% @topics.each do |topic| %>
+        <tr>
+          <td width="6%" class="icon"><img src="/images/admin/folder.png"></td>
+          <td width="70%">
+            <%= link_to topic.name, edit_admin_topic_path(topic) %>
+          </td>
+          <td width="18%">
+            <div class="tool">
+              <%= link_to "", edit_admin_topic_path(topic), class: 'edit', title: "編輯" %>
+              <%= link_to '', admin_topic_path(topic), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete', title: '刪除' %>
+            </div>
+          </td>
+        </tr>
+      <% end %>    
+    </table>
   </div>
 </article>

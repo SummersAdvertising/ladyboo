@@ -1,16 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-  <title>Ladyboo 後台管理系統</title>
-  <!--[if lt IE 9]>
-    <script src="/js/html5.js"></script>
-  <![endif]-->
-  <meta charset="utf-8">
-  <meta name="Robots" content="index,follow"/>
-  <meta http-equiv="content-language" content="zh-TW" />
+<meta charset="utf-8">
+<meta name="Robots" content="index,follow"/>
+<meta http-equiv="content-language" content="zh-TW" />
+<title>LadyBoo 後台管理系統</title>
+
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+
+<link rel="stylesheet" href="/css/admin/reset.css">
+<link rel="stylesheet/less" type="text/css" href="/css/admin/global.less" />
+<link rel="stylesheet/less" type="text/css" href="/css/admin/custom.less" />
+
+<script src="/js/admin/less.min.js"></script>
+<script src="/js/admin/global.js"></script>
 
   <script>
     window.onload= function() {
@@ -25,20 +30,20 @@
   </script>
 
 </head>
-<body>
-<section id="wrapper">
-  
-  <header _height="none">
-    <h1>Ladyboo 後台管理系統</h1>
-    <aside class="right"> <a href="<% root_url %>" id="aside-1">index</a><%= link_to current_admin.name, 'javascript:void(0)', id: "aside-2" %><%= link_to 'Log out', destroy_admin_session_path, :method => :delete, id: "aside-3" %> </aside>
-  </header>
-  <br><%= link_to '最新消息', admin_announcements_path %> == <%= link_to '社群迴響', admin_communities_path %> == <%= link_to '首頁輪播', admin_banners_path %> == <%= link_to '精選pickup', admin_pickups_path %> == <%= link_to '商品管理', admin_categories_path %> == <%= link_to '基本主題', admin_topics_path %> == <%= link_to '穿搭主題', admin_lookbooks_path %> == <%= link_to '系列主題', admin_topic_collections_path %> == <%= link_to 'Admin', admin_admins_path %> == 
-  
-  <%= link_to 'Order', admin_orders_path %> == <%= link_to 'Delivery', admin_deliveries_path %> == 
-
-  <section id="content" _height="auto" class="left">
-    <%= yield %>
-  </section>
-
-</body>
+  <body>
+    <section id="wrapper">
+      <header>
+        <h1>LadyBoo 後台管理系統</h1>
+        <aside class="right"> <a href="<% root_url %>" id="aside-1">index</a><%= link_to "Edit profile", admin_admins_path , id: "aside-2" %><%= link_to 'Log out', destroy_admin_session_path, :method => :delete, id: "aside-3" %></aside>
+      </header>
+      <article id="container">
+        <%= render 'admin/common/nav' %>
+        <section id="content" _height="auto" class="left">
+          
+          <%= yield %>
+        
+        </section>
+      </article>
+    </section>
+  </body>
 </html>
