@@ -122,7 +122,11 @@
         <% @category.products.each do |product| %>
           
           <tr <%= "id=Productcontainer_#{product.id.to_s}" %> class='dragable <%= "off" if product.status == "disable" %>' >
-            <td width="6%"><img src="/images/admin/file.png"></td>
+            <td width="6%">
+              <% if product.status == "disable" %>
+                <img src="/images/admin/alert.png">
+              <% end %>
+            </td>
             <td width="76%">
               <%= link_to(product.name, edit_admin_category_product_path(@category, product)) %>
               <%= product.ranking%>
