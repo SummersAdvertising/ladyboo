@@ -921,14 +921,15 @@ function checkSupport(elemname, pluginname) {
 
 $(function() {
   var widthMove = $(window).width();
-	photoBig = $('#product-image-container img').width();
-	$('#product-image-carousel-container li').css({width:'15%','margin-left':'2%'});
+	photoBig = $('#product-image-container').width();
+	$('#product-image-carousel-container li').css({width:'14%','margin-left':'3%'});
 	photoSmallLi = $('#product-image-carousel-container li').outerWidth(true);
 	photoMargin = (photoBig-(photoSmallLi*6))/5;
 
   if(widthMove<768){
-   
-		$('#product-image-container img').height(photoBig);
+    $('.mousetrap').width(photoBig);
+    $('#cloud-zoom-big').width(photoBig);
+		$('#product-image-container img').width(photoBig);
 		$('#product-image-carousel-container li').width(photoSmallLi-4);
 		$('#product-image-carousel-container li').height(photoSmallLi-4);
 		$('#product-image-carousel-container li').css({'margin-left':photoMargin});
@@ -936,8 +937,9 @@ $(function() {
 		$('#product-image-carousel-container li img').width(photoSmallLi-4);
 		$('#product-image-carousel-container li img').height(photoSmallLi-4);
   }else{
-
-    $('#product-image-container img').height(photoBig);
+    $('.mousetrap').width(photoBig);
+    $('#cloud-zoom-big').width(photoBig);
+    $('#product-image-container img').width(photoBig);
 		$('#product-image-carousel-container li').width(photoSmallLi-4);
 		$('#product-image-carousel-container li').height(photoSmallLi-4);
 		$('#product-image-carousel-container li').css({'margin-left':photoMargin});
@@ -950,14 +952,15 @@ $(function() {
 
   $(window).resize(function(){
     widthMove = $(window).width();
-		  photoBig = $('#product-image-container img').width();
-			$('#product-image-carousel-container li').css({width:'15%','margin-left':'2%'});
+		  photoBig = $('#product-image-container').width();
+			$('#product-image-carousel-container li').css({width:'14%','margin-left':'3%'});
 			photoSmallLi = $('#product-image-carousel-container li').outerWidth(true);
 			photoMargin = (photoBig-(photoSmallLi*6))/5;
 
 		  if(widthMove<768){
-		   
-				$('#product-image-container img').height(photoBig);
+		    $('.mousetrap').width(photoBig);
+    		$('#cloud-zoom-big').width(photoBig);
+				$('#product-image-container img').width(photoBig);
 				$('#product-image-carousel-container li').width(photoSmallLi-4);
 				$('#product-image-carousel-container li').height(photoSmallLi-4);
 				$('#product-image-carousel-container li').css({'margin-left':photoMargin});
@@ -965,8 +968,9 @@ $(function() {
 				$('#product-image-carousel-container li img').width(photoSmallLi-4);
 				$('#product-image-carousel-container li img').height(photoSmallLi-4);
 		  }else{
-
-		    $('#product-image-container img').height(photoBig);
+		  	$('.mousetrap').width(photoBig);
+    		$('#cloud-zoom-big').width(photoBig);
+		    $('#product-image-container img').width(photoBig);
 				$('#product-image-carousel-container li').width(photoSmallLi-4);
 				$('#product-image-carousel-container li').height(photoSmallLi-4);
 				$('#product-image-carousel-container li').css({'margin-left':photoMargin});

@@ -28,7 +28,7 @@ body, html { overflow-x: hidden; color: #434343; }
 #header .dropdown-cart .dropdown-cart-menu { border-top: 3px solid #c9006e; }
 #header .dropdown-menu { box-shadow: none; }
 .quick-search-form .btn { padding-top: 8px; }
-#header .dropdown-cart-action .btn{font-size: 1.3em!important;font-weight: bold!important;padding: 8px 10px;-webkit-font-smoothing: antialiased!important;}
+#header .dropdown-cart-action .btn{font-size: 1.3em!important;font-weight: normal!important;padding: 8px 10px;-webkit-font-smoothing: antialiased!important;}
 .btn-custom-3 { background-color: #c9006e; }
 .btn-custom-3:hover { background-color: #f858b7; }
 .btn-custom-2:hover { background-color: #000; }
@@ -202,11 +202,11 @@ width: 30%;}
 #user_birthday_1i{margin-right: 5%}
 #user_birthday_3i{margin-left: 5%}
 .custom-checkbox input[type="checkbox"]:checked + .checbox-container {background: #C9006E !important;border-color: #C9006E;}
-.btn{ padding: 5px 25px;-webkit-font-smoothing: antialiased!important; font-weight: bold!important;font-size: 1em!important; box-shadow: none; -webkit-box-shadow!important: none;display: inline-block; }
+.btn{ padding: 5px 25px;-webkit-font-smoothing: antialiased!important; font-weight: normal!important;font-size: 1em!important; box-shadow: none; -webkit-box-shadow!important: none;display: inline-block; }
 .mainBtn { color: #fff !important; background-color: #C9006E; border-color: #C9006E; -webkit-box-shadow: none; box-shadow: none; border-radius: 0px; }
 .mainBtn span { font-size: 1.3em; }
 .mainBtn:hover, .mainBtn:focus, .mainBtn:active, .mainBtn.active, .open .dropdown-toggle.mainBtn { color: #fff !important; background-color: #d8569d; border-color: #C9006E; -webkit-box-shadow: none; box-shadow: none; }
-#content .btn-custom-2, #content .btn-custom-3 { font-weight: bold!important;padding: 5px 25px;-webkit-font-smoothing: antialiased!important; font-size: 1em!important; box-shadow: none; -webkit-box-shadow!important: none;display: inline-block; }
+#content .btn-custom-2, #content .btn-custom-3 { font-weight: normal!important;padding: 5px 25px;-webkit-font-smoothing: antialiased!important; font-size: 1em!important; box-shadow: none; -webkit-box-shadow!important: none;display: inline-block; }
 #content .btn-custom-2, #content .btn-custom-2:hover, #content .btn-custom-3, #content .btn-custom-3:hover { border-color: transparent;text-decoration: none; }
 #content .btn-custom-2:hover { background-color: #C9006E; }
 #content .btn-custom-3:hover { -webkit-box-shadow: inset 1px 1px 6px 2px rgba(0, 0,0, 0.2); box-shadow: inset 1px 1px 6px 2px rgba(0, 0, 0, 0.2); background-color: #C9006E; }

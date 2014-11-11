@@ -11,7 +11,6 @@
   <meta name="description" content="Responsive modern ecommerce Html5 Template">
   <!--[if IE]> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <link href='//fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic%7CPT+Gudea:400,700,400italic%7CPT+Oswald:400,700,300' rel='stylesheet' id="googlefont">
   <link rel="stylesheet" href="/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/font-awesome.min.css">
   <link rel="stylesheet" href="/css/revslider.css">
@@ -232,7 +231,7 @@
             <div id="slider-rev-container">
               <div id="slider-rev">
                 <ul>
-                  <% @banners.each do |banner| %>
+                  <!--<% @banners.each do |banner| %>
                     <% if banner.galleries.first %>
                       <li data-transition="flip" data-slotamount="15" data-masterspeed="400">
                         <%= link_to banner.description, target: "_blank" do %>
@@ -240,8 +239,11 @@
                         <% end %>
                       </li>
                      <% end %>
-                  <% end %>
-                </ul>
+                  <% end %>-->
+                  <li data-transition="flip" data-slotamount="15" data-masterspeed="400"><img id="bannerFrame" src="/images/index/slide1.jpg"></li>
+                  <li data-transition="flip" data-slotamount="15" data-masterspeed="400"><img id="bannerFrame" src="/images/index/slide2.jpg"></li>
+                  <li data-transition="flip" data-slotamount="15" data-masterspeed="400"><img id="bannerFrame" src="/images/index/slide3.jpg"></li>
+                </ul><img id="bannerFrame" src="/images/frame_bannerIndex.png">
               </div><!-- End #slider-rev --> 
             </div><!-- End #slider-rev-container --> 
           </div><!--End .container--> 
@@ -420,7 +422,7 @@ $(function() {
   // Slider Revolution
   jQuery('#slider-rev').revolution({
     delay:8000,
-    startwidth:1170,
+    startwidth:1172,
     startheight:600,
     onHoverStop:"true",
     hideThumbs:250,
