@@ -72,164 +72,7 @@
   </script>
   <div id="wrapper">
     <!--Header Start**************************************************************************************************************--> 
-    <header id="header">
-      <div id="header-top"><!-- Start #header-top上方黑色區塊 -->
-        <div class="container">
-          <div class="header-top-left">
-            <div class="btn-group">
-              <% unless user_signed_in? %>
-                <%= link_to new_user_session_path, method: 'get', class: "btn btn-custom dropdown-toggle" do  %>
-                  <span class="hide-for-xs">會員登入 Login</span><span class="hide-for-lg"><span class="login-menu-icon"></span></span> 
-                <% end %>
-              <% end %>
-              <% if user_signed_in? %>
-                <%= link_to destroy_user_session_path, method: 'delete', class: "btn btn-custom dropdown-toggle" ,method: :delete do %>
-                  <span class="hide-for-xs">會員登出 Logout</span><span class="hide-for-lg"><span class="logout-menu-icon"></span></span> 
-                <% end %>
-                <%= link_to useradmin_root_path, class: "btn btn-custom dropdown-toggle" do %>
-                  <span class="hide-for-xs"><%= "#{current_user.username} 您好" %></span><span class="hide-for-lg"><span class="login-menu-icon"></span></span> 
-                <% end %>
-              <% end %>
-            </div>
-          </div><!-- End .header-top-left -->
-          
-          <div class="header-top-right"><!-- Start .header-top-right -->
-            <div class="dropdown-cart-menu-container pull-right">
-              <%= render 'cart/quickview' %>
-            </div><!-- End .dropdown-cart-menu-container -->
-            <div class="header-top-dropdowns pull-right">
-              <% if user_signed_in? %>
-                <div class="btn-group">
-                  <%= link_to useradmin_tracking_lists_path, class: "btn btn-custom" do %>
-                    <span class="hide-for-xs"><span class="love-menu-icon"></span> 我的最愛 Favorites</span><span class="hide-for-lg"><span class="love-menu-icon"></span></span>
-                  <% end %>
-                </div>
-              <% end %>
-            </div><!-- End .header-top-dropdowns -->
-          </div><!-- End .header-top-right --> 
-        </div><!-- End .container -->
-      </div><!-- End #header-top -->
-   
-      
-      <div id="inner-header"><!-- Start #inner-header 上方白色區塊 --> 
-        <div id="main-nav-container">
-          <div class="container">
-            <div id="menu-wrapper" class="clearfix">
-              <div class="logo-container"><!-- Start .logo-container -->
-                <h1 class="logo clearfix"> <span>LadyBoo</span> 
-                  <%= link_to root_path, title: "Venedor eCommerce Template" do %>
-                    <img src="/images/logo.png" alt="Venedor Commerce Template" width="184" height="60">
-                  <% end %>
-                </h1>
-              </div><!-- End .logo-container -->
-              <div id="menu-right-side" class="clerfix">
-                <div id="quick-access"><!-- Start #quick-access 搜尋鍵 -->
-                  
-                  <%= render 'common/search_form' %>
-
-                </div><!-- End #quick-access -->
-                <nav id="main-nav"><!-- Start #main-nav 選單區 -->
-                  <div id="responsive-nav"><!-- Start #responsive-nav 手機螢幕選單按鈕 -->
-                    <div id="responsive-nav-button"><span id="responsive-nav-button-icon"></span></div> 
-                  </div><!-- End #responsive-nav -->
-                  
-                  <ul class="menu clearfix"><!-- Start .menu 選單列 -->
-                    
-                    <li class="mega-menu-container">
-                      <a href="javascript:void(0);">品牌總覽<br>SHOP</a>
-                      <div class="mega-menu clearfix"><!-- Start .mega-menu -->
-                        <% @root_node = Category.return_root_node unless @root_node %>
-                        <% @hierarchy = Category.get_level_hierarchy() unless @hierarchy %>
-                        <% levels = @hierarchy.select { |v| v[2] == @root_node.id } %>
-                          <% levels.each do | level1 | %>
-                            <div class="col-5">
-                              <%= link_to level1[3], category_path(id: level1[0]), class: "mega-menu-title" %><!-- End .mega-menu-title -->
-                              <ul class="mega-menu-list clearfix">
-                                <% levels = @hierarchy.select { |v| v[2] == level1[0] } %>
-                                <% levels.each do | level2 | %>
-                                  <li>
-                                    <%= link_to level2[3], category_path(id: level2[0]) %>
-                                  </li>
-                                <% end %>
-                              </ul>
-                            </div>
-                          <% end %>
-                      </div><!-- End .mega-menu -->
-                    </li>
-                    
-                    <li  class="mega-menu-container"> 
-                      <a href="javascript:void(0);">主題專輯<br>LOOK BOOK</a>
-                      <div class="mega-menu clearfix"><!-- Start .mega-menu -->
-                        <% lookbook = Lookbook.where(status: 'enable').first %>
-                        <% if lookbook %>
-                          <div class="col-5">
-                            <div class='mega-menu-title'><%= lookbook.name %></div><!-- End .mega-menu-title -->
-                            <ul class="mega-menu-list clearfix">
-                              <% lookbook.topics.each do | topic | %>
-                                <li>
-                                  <%= link_to topic.name , lookbook_topic_path(lookbook,topic) %>
-                                </li>
-                              <% end %>
-                            </ul>
-                          </div>
-                        <% end %>
-                        <% topic_collections = TopicCollection.where(status: 'enable').all.limit(4) %>
-                        <% if topic_collections %>
-                          <div class="col-5">
-                            <div class="mega-menu-title">系列主題</div><!-- End .mega-menu-title -->
-                            <ul class="mega-menu-list clearfix">
-                              <% topic_collections.each do | collection | %>
-                                <li>
-                                  <%= link_to collection.name , topic_collection_path(collection) %>
-                                </li>
-                              <% end %>
-                            </ul>
-                          </div>
-                        <% end %>
-                      </div>
-                    </li>
-
-                    <li>
-                      <%= link_to page_pages_path('size') do %>
-                        尺寸說明<br>
-                        SIZE
-                      <% end %>
-                    </li>
-                    
-                    <li>
-                      <%= link_to about_pages_path do %>
-                        品牌精神<br>
-                        ABOUT US
-                      <% end %>
-                      <ul>
-                        <li><%= link_to "最新消息 NEWS", announcements_path %></li>
-                        <li><%= link_to "社群迴響 COMMUNITY", communities_path %></li>
-                      </ul>
-                    </li>
-                    
-                    <li>
-                      <%= link_to contacts_path do %>
-                        聯絡客服<br>
-                        CONTACT US
-                      <% end %>
-                    </li>
-
-                  </ul><!-- End .menu -->
-                </nav><!-- End #main-nav -->
-              </div><!-- End .menu-right-side -->
-            </div><!-- End .menu-wrapper -->
-          </div><!-- End .container --> 
-        </div><!-- End .main-nav-container --> 
-      </div><!-- End #inner-header --> 
-
-      
-    </header>
-    <nav id="navBottom"><!-- Start #navBottom 導覽列--> 
-      <div class="container">
-        <%= yield :breadcrumb %>
-      </div>
-    </nav><!-- End #navBottom --> 
-
+    <%= render 'layouts/front_shared_header' %>
     <!--Header End**************************************************************************************************************--> 
    <div class="bottom container"> <div class="bgBottom about"></div></div><!-- .bgBottom 下方背景圖 -->
      <!--Container Start**************************************************************************************************************-->
@@ -241,24 +84,7 @@
     <!--Container End**************************************************************************************************************--> 
   
   <!--Footer Start**************************************************************************************************************-->
-  <footer id="footer">
-    <div id="footer-bottom"><!-- Start #footer-bottom --> 
-      <div class="container">
-        <div class="row"><!-- Start .row --> 
-        <a href="#" id="scroll-top" title="Scroll to Top"><i class="fa fa-angle-up"></i><br>Top</a><!-- #scroll-top 回上方按鈕 -->
-          <div class="col-md-6 col-sm-2 col-xs-12 footer-social-links-container"><!-- Facebook Start --> 
-            <a href="https://www.facebook.com/LadyBooTW" target="_blank">LadyBoo’s Facebook</a>
-          </div><!-- Facebook End --> 
-          <div class="col-md-6 col-sm-10 col-xs-12 footer-text-container">
-            <p>
-              <%= link_to "隱私權聲明 PRIVACY", page_pages_path("privacy") %>
-              <%= link_to "服務條款 TERMS & CONDITIONS", page_pages_path("terms") %>
-            </p>
-          </div>
-        </div><!-- End .row --> 
-      </div><!-- End .container --> 
-    </div><!-- End #footer-bottom -->
-  </footer>
+  <%= render 'layouts/front_shared_footer' %>
   <!--Footer End**************************************************************************************************************--> 
   </div><!--wrapper End --> 
 
@@ -274,35 +100,7 @@
   </div>
 </div>
 <!--LightBox End**************************************************************************************************************-->
+<script src="/js_plugins/main.js"></script> 
 
-
-<script type="text/javascript">
-  $(".pdquickview").click(function(){
-      pd_id = $(this).data("pd").toString();
-      $.ajax({
-      type: "GET",
-      url: "/products/"+pd_id+"/quickview",
-      data: { },
-      success: function(data){
-        $('#thumb li a').removeClass('active'); 
-        $('#thumb li a:first').addClass('active');
-        $('.bxslider').css({'-webkit-transition': '0s', 'transition': '0s', '-webkit-transform': 'translate3d(0px, -380px, 0px)'}); 
-        
-        $(".inline").colorbox({
-          inline:true, 
-          width:"925",
-          height:"480",
-          href: "#inline_content",
-          open: true
-        });
-        return false   
-      },
-      error: function(data){
-        return false  
-      }
-    });
-  });
-
-</script>
 </body>
 </html>

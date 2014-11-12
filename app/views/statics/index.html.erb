@@ -372,25 +372,7 @@
     <!--Container End**************************************************************************************************************--> 
 
   <!--Footer Start**************************************************************************************************************-->
-  <footer id="footer">
-    <div id="footer-bottom"><!-- Start #footer-bottom --> 
-      <div class="container">
-        <div class="row"><!-- Start .row --> 
-        <a href="#" id="scroll-top" title="Scroll to Top"><i class="fa fa-angle-up"></i><br>Top</a><!-- #scroll-top 回上方按鈕 -->
-          <div class="col-md-6 col-sm-2 col-xs-12 footer-social-links-container"><!-- Facebook Start --> 
-            <a href="https://www.facebook.com/LadyBooTW" target="_blank">LadyBoo’s Facebook</a>
-            <div class="fb-like" data-href="https://www.facebook.com/LadyBooTW" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
-          </div><!-- Facebook End --> 
-          <div class="col-md-6 col-sm-10 col-xs-12 footer-text-container">
-            <p>
-              <%= link_to "隱私權聲明 PRIVACY", page_pages_path("privacy") %>
-              <%= link_to "服務條款 TERMS & CONDITIONS", page_pages_path("terms") %>
-            </p>
-          </div>
-        </div><!-- End .row --> 
-      </div><!-- End .container --> 
-    </div><!-- End #footer-bottom -->
-  </footer>
+  <%= render 'layouts/front_shared_footer' %>
   <!--Footer End**************************************************************************************************************--> 
   </div>
   
@@ -461,30 +443,7 @@ $(function() {
 
 </script>
 
-<script type="text/javascript">
-  $(".pdquickview").click(function(){
-      pd_id = $(this).data("pd").toString();
-      $.ajax({
-      type: "GET",
-      url: "/products/"+pd_id+"/quickview",
-      data: { },
-      success: function(data){
-        $(".inline").colorbox({
-          inline:true, 
-          width:"925",
-          height:"480",
-          href: "#inline_content",
-          open: true
-        });
-
-        return false   
-      },
-      error: function(data){
-        return false  
-      }
-    });
-  });
-</script>
+<script src="/js_plugins/main.js"></script> 
 
 </body>
 
