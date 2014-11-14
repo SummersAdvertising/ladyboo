@@ -16,7 +16,7 @@ class Stock < ActiveRecord::Base
   def check_attrs
     self.name = "#{self.description_1}-#{self.description_2}"
     self.amount = 0 if self.amount.blank?
-    self.assign_amount = false if self.assign_amount.nil?
+    self.assign_amount = true if self.assign_amount.nil?
     return true
   end
 end

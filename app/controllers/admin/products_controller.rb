@@ -3,7 +3,8 @@ class Admin::ProductsController < AdminController
   
   before_action :set_product_with_category, only: [:create, :show]
   before_action :set_product, only: [:edit,:update,:destroy,:change_status]
-  #before_action :get_category, only: [:create]
+  after_action :disable_product_when_edit, only: [:create, :update, :upload_photo, :update_parapraph]
+  
   
   def show
     # @com_accessories = @product.accessories.where(type: 'ComplimentaryAccessory').includes(:galleries)
@@ -222,6 +223,10 @@ class Admin::ProductsController < AdminController
       :highlight,
       :material_1, :material_2, :wash_1, :wash_2, :wash_3, :model_1, :model_2,
       :product_no)
+  end
+
+  def disable_product_when_edit
+    @product.update_attributes({:status => "disable"})
   end
 
 end

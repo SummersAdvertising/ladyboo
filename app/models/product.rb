@@ -65,7 +65,7 @@ class Product < ActiveRecord::Base
 
   private
   def create_default_stocks
-    Stock.create({product_id: self.id, description_1: '預設', description_2: '庫存', amount: 0, assign_amount: true})
+    Stock.create({product_id: self.id, description_1: '顏色', description_2: '尺寸', amount: 0, assign_amount: true})
   end
   
   def create_default_measurements

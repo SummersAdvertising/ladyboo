@@ -4,9 +4,8 @@
     <%= link_to "簡介", edit_admin_category_product_path(@product.category, @product), class: "active" %>
     <%= link_to "照片", admin_category_product_photo_path(@product.category, @product)%>
     <%= link_to "尺寸", admin_category_product_measurements_path(@product.category, @product) %>
-    
-    <%= link_to "庫存", admin_category_product_stocks_path(@product.category, @product)%>
     <%= link_to "內容", admin_category_product_free_paragraph_path(@product.category, @product) %>
+    <%= link_to "庫存", admin_category_product_stocks_path(@product.category, @product)%>
   </nav>
 </header>
 
