@@ -1,6 +1,7 @@
 <div id="wrapper">
   <div id="up">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <%= form_for(@order, :url => "/admin/orders/#{@order.id}/#{params[:event]}", html: { id: "patchthisorder" } ) do |f| %>
         <tr>
           <td width="24%">確認操作：</td>
           <td width="76%"><%= get_event_display_name(params[:event]) %></td>
@@ -11,10 +12,11 @@
             <% @shipping_fee = get_shipping_fee_from_order(@order)  %>
             <td width="76%">$<%= number_with_delimiter(@sum + @shipping_fee) %></td>
         </tr>
+      <% end %>
     </table>
   </div>
   <div id="down">
-      <%= link_to "取消" , "javascript: void(0);" , class: "cancel" , id: "cancel" %>
-      <%= link_to "確認", "/admin/orders/#{@order.id}/#{params[:event]}" , :method => :post , class: "action_confirmed" , id: "send" %>
+    <%= link_to "取消" , "javascript: void(0);" , class: "cancel" , id: "cancel" %>
+    <a href="javascript: document.getElementById('patchthisorder').submit();" id="send" class="action_confirmed" data-no-turbolink = true >確定</a>
   </div>
  </div> 

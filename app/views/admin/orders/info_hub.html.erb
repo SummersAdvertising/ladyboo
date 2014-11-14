@@ -21,21 +21,7 @@ div ,td, p .noTransition {
 <% elsif params[:event].in? ["post_collect_checked"]%>
 <%= render 'post_collect_checked' %>
 <% else %>
-
-<div id="wrapper">
-  <div id="up">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-          <td width="24%">確認操作：</td>
-          <td width="76%"><%= get_event_display_name(params[:event]) %></td>
-      </tr>
-    </table>
-  </div>
-  <div id="down">
-      <%= link_to "確認", "/admin/orders/#{@order.id}/#{params[:event]}" , :method => :post , class: "action_confirmed" , id: "send" %>
-      <%= link_to "取消" , "javascript: void(0);" , class: "cancel" , id: "cancel" %>
-  </div>
- </div> 
+<%= render 'normal' %>
 <% end %>
 
 <!-- This contains the hidden content for inline calls -->

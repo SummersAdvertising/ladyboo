@@ -39,7 +39,15 @@
                 <% @order.orderitems.each_with_index do |item, index| %>
                   <tr>
                     <td align="left"><%= index + 1%></td>
-                    <td align="left"><%= "#{ item.item_name }（#{ item.item_stockname }）" %></td>
+                    <td align="left">
+                    <% item_stock = Stock.find(item.stock_id) %>
+                    <% item_product = Product.find(item_stock.product_id) if item_stock %>
+                    <% if item_product %>
+                      <%= link_to "#{ item.item_name }（#{ item.item_stockname }）", edit_admin_category_product_path(item_product.category, item_product) %>
+                    <% else %>
+                      <%= "#{ item.item_name }（#{ item.item_stockname }）" %>
+                    <% end %>
+                    </td>
                     <td align="center"><%= item.amount %></td>
                     <td align="center"><%= number_with_delimiter(item.item_price) %></td>
                     <td align="center"><%= number_with_delimiter(item.item_price * item.amount) %></td>
@@ -48,26 +56,6 @@
 
                 <tr class="total">
                   <td colspan="3">
-                    
-                    <% if !@order.order_memo.nil? && !@order.order_memo.empty?  %>
-                    附註:<br>  
-                      <% JSON.parse_if_json(@order.order_memo).each do | attr | %>
-                  
-                          <% @order.orderitems.each do |item| %>
-                           
-                            <% if attr[1]["stock_id"] ==  item.product_stock_id && attr[1]["needgrind"] == "true" %>
-                        
-                                <%= attr[1]["amount"] %>包
-                                <%= item.item_name %>
-                                <%= "不" unless attr[1]["needgrind"] == "true" %>需要研磨
-                                <%= attr[1]["grindlevel"] if attr[1]["needgrind"] == "true" %>
-                              <br>  
-                            <% end %>
-                           
-                          <% end %>
-                        
-                      <% end %>
-                    <% end %>
                     
                   </td>
                   <td align="right">小計： </td>

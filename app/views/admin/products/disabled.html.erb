@@ -25,6 +25,11 @@
                 CATEGORY:<%= product.category.name %><br>
                 PRODUCT NAME:<%=link_to product.name, edit_admin_category_product_path(product.category,product) %> = <%= product.en_name %><br>
                 </td>
+                <td>
+                  <div class='tool'>
+                    <%= link_to(get_change_status_name(product),change_status_admin_category_product_path(product.category, product), :method => :post) %>
+                  </div>
+                </td>
               </tr>
               
             <% end %>

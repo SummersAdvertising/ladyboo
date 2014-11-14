@@ -146,6 +146,7 @@ class Cart
           :stock_id => stock.id, 
           :item_name => stock.product.name, 
           :item_stockname => stock.name, 
+          :product_no => stock.product.product_no.to_s,
           :item_price => 
           (stock.product.price_for_sale > 0) ? stock.product.price_for_sale.to_i : stock.product.price.to_i
         }

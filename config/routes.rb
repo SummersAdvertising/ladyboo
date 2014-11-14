@@ -225,10 +225,10 @@ Rails.application.routes.draw do
       member do 
         #AASM
         post :checkout_succeeded_ATM # should remove
-        post :cancel_before_paid_ATM
-        post :atm_transfered
-        post :money_placed_ATM
-        post :atm_comfirmed
+        patch :cancel_before_paid_ATM
+        patch :atm_transfered
+        patch :money_placed_ATM
+        patch :atm_comfirmed
         
         post :checkout_succeeded_Vaccount # should remove
         post :cancel_before_paid_Vaccount
@@ -266,8 +266,8 @@ Rails.application.routes.draw do
         post :human_involving_after_money_placed
         post :human_involving_after_money_checked
         post :human_involving_after_shipped
-        post :close_deal
-        post :to_abnormal
+        patch :close_deal
+        patch :to_abnormal
 
         get '/info_hub/:event' => 'orders#info_hub'
         post '/info_hub/:event' => 'orders#update_from_info_hub'

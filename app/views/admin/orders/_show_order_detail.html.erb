@@ -13,7 +13,15 @@
         <% order.orderitems.each_with_index do |item, index| %>
           <tr>
             <td align="left"><%= index + 1%></td>
-            <td align="left"><%= "#{ item.item_name }（#{ item.item_stockname }）" %></td>
+            <td align="left">
+            <% item_stock = Stock.find(item.stock_id) %>
+            <% item_product = Product.find(item_stock.product_id) if item_stock %>
+            <% if item_product %>
+              <%= link_to "#{ item.item_name }（#{ item.item_stockname }）", edit_admin_category_product_path(item_product.category, item_product) %>
+            <% else %>
+              <%= "#{ item.item_name }（#{ item.item_stockname }）" %>
+            <% end %>
+            </td>
             <td align="center"><%= item.amount %></td>
             <td align="center"><%= item.item_price %></td>
             <td align="center"><%= item.item_price * item.amount %></td>
