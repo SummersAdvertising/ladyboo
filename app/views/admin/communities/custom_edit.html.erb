@@ -60,7 +60,7 @@
         </td>
       </tr>
       <tr>
-        <td width="7%">CKEditor：</td>
+        <td width="7%">內容：</td>
         <td width="93%">
           <%= f.cktext_area :ck_context, :class => 'someclass', :ckeditor => {:language => 'zh-tw'} %>
         </td>
@@ -71,7 +71,7 @@
 
   <div class="button"> 
     <%= link_to image_tag("/images/admin/left.png")+"返回", admin_communities_path(), class: "left" %>
-    <a href="javascript: document.getElementById('patchthiscommunity').submit();" class="right highlight" data-no-turbolink = true >儲存<img src="<%= image_path("save.png") %>"></a>
+    <a href="javascript: document.getElementById('patchthiscommunity').submit();" class="right highlight" data-no-turbolink = true >儲存<img src="<%= image_path("/images/admin/save.png") %>"></a>
   </div>
   
 </article>
