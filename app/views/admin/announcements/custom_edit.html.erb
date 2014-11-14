@@ -4,7 +4,7 @@
 </header>
 <article>
   <div class="hgroup">
-    <h3 class="left">CKE 編輯</h3>
+    <h3 class="left">編輯最新消息</h3>
     <%= form_for(@announcement, :url => custom_edit_admin_announcement_path(@announcement), html: { id: "patchthisannouncement", :multipart => true } ) do |f| %>
     <div class="right">
       顯示 <%= f.check_box :status, { class: 'checkbox'  }, "enable", "disable" %>

@@ -1,5 +1,5 @@
     <header>
-      <h2 class="left">topic_collection<span> / 首頁管理</span></h2>
+      <h2 class="left"><span>首頁管理 / </span>系列主題</h2>
       <nav class="left"></nav>
       <div class="explain right"><p>圖片尺寸：</p></div>
     </header>
@@ -8,9 +8,9 @@
         <%= form_for(@topic_collection, :url => admin_topic_collections_path(), html: { id: "newthistopic_collection" } ) do |f| %>
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-              <td width="7%">topic_collection名稱：</td>
+              <td width="7%">名稱：</td>
               <td width="31%">
-               <%= f.text_field :name %>
+               <%= f.text_field :name , class: 'text' %>
               </td>
               <td width="2%">&nbsp;</td>
               <td width="7%">&nbsp;</td>

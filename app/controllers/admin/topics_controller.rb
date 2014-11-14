@@ -7,7 +7,7 @@ class Admin::TopicsController < AdminController
   # GET /admin/topics
   # GET /admin/topics.json
   def index 
-    @topics = Topic.all #.for_admin
+    @topics = Topic.all.page(params[:page]) #.for_admin
   end
 
   #new

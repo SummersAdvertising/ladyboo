@@ -8,7 +8,7 @@
       <!-- Peditor<img src="/images/admin/add.png"> -->
     <%# end %>
     <%= link_to admin_announcements_path(type: "CustomizedAnnouncement"), :method => :post , class:"right highlight" do %>
-      CKEditor<img src="/images/admin/add.png">
+      New<img src="/images/admin/add.png">
     <% end %>
   </div>
   <div class="list">
@@ -28,7 +28,7 @@
           <td width="15%" align="right"><%= announcement.created_at.strftime("%Y年%m月%d日")%></td>
           <td width="12%">
             <div class="tool">
-              <%= list_edit_btn(announcement) %><%= link_to("", admin_announcement_path(announcement), :method => :delete, :data => {:confirm => "確定刪除？"}, class: "delete") %>
+              <%# list_edit_btn(announcement) %><%= link_to("", admin_announcement_path(announcement), :method => :delete, :data => {:confirm => "確定刪除？"}, class: "delete") %>
             </div>
           </td>
         </tr>

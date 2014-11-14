@@ -12,4 +12,6 @@ class Topic < ActiveRecord::Base
 
   validates_presence_of :name
 
+  paginates_per 25
+
 end

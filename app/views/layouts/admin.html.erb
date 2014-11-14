@@ -34,7 +34,7 @@
     <section id="wrapper">
       <header>
         <h1>LadyBoo 後台管理系統</h1>
-        <aside class="right"> <a href="<% root_url %>" id="aside-1">index</a><%= link_to "Edit profile", admin_admins_path , id: "aside-2" %><%= link_to 'Log out', destroy_admin_session_path, :method => :delete, id: "aside-3" %></aside>
+        <aside class="right"> <a href="<%= admin_root_url %>" id="aside-1">index</a><%= link_to "Edit profile", admin_admins_path , id: "aside-2" %><%= link_to 'Log out', destroy_admin_session_path, :method => :delete, id: "aside-3" %></aside>
       </header>
       <article id="container">
         <%= render 'admin/common/nav' %>

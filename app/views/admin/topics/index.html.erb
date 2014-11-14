@@ -28,5 +28,10 @@
         </tr>
       <% end %>    
     </table>
+    
+    <div class="page">
+      <%= paginate @topics ,:window => 2 %>
+    </div>
+
   </div>
 </article>
