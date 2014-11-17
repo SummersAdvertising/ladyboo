@@ -4,27 +4,25 @@
     <%= link_to "簡介", edit_admin_category_product_path(@product.category, @product) %>
     <%= link_to "照片", admin_category_product_photo_path(@product.category, @product) %>
     <%= link_to "尺寸", admin_category_product_measurements_path(@product.category, @product), class: "active" %>
-    <%= link_to "庫存", admin_category_product_stocks_path(@product.category, @product)%>
     <%= link_to "內容", admin_category_product_free_paragraph_path(@product.category, @product) %>
+    <%= link_to "庫存", admin_category_product_stocks_path(@product.category, @product)%>
   </nav>
 </header>
 
 <article>
-
 
   <div class="hgroup">
     <%= simple_form_for(@measurement, :url => admin_category_product_measurement_path(params[:category_id] , params[:product_id], @measurement), html: { id: "patchthismeasurement" } ) do |f| %> 
     <div class="right">顯示：<%= f.check_box :status, { class: 'checkbox'  }, "enable", "disable" %>
     是</div>
     </div> 
-
-title：<%= f.input_field :title , class: 'text' %><br> 
-context_1：<%= f.input_field :context_1 , class: 'text'%><br>
-context_2：<%= f.input_field :context_2 , class: 'text'%><br>
-context_3：<%= f.input_field :context_3 , class: 'text'%><br>
-context_4：<%= f.input_field :context_4 , class: 'text'%><br>
-context_5：<%= f.input_field :context_5 , class: 'text'%><br>
-context_6：<%= f.input_field :context_6 , class: 'text'%><br>
+    title：<%= f.input_field :title , class: 'text' %><br> 
+    context_1：<%= f.input_field :context_1 , class: 'text'%><br>
+    context_2：<%= f.input_field :context_2 , class: 'text'%><br>
+    context_3：<%= f.input_field :context_3 , class: 'text'%><br>
+    context_4：<%= f.input_field :context_4 , class: 'text'%><br>
+    context_5：<%= f.input_field :context_5 , class: 'text'%><br>
+    context_6：<%= f.input_field :context_6 , class: 'text'%><br>
   <div class="button"> 
     <%= link_to admin_category_product_measurements_path(params[:category_id], params[:product_id]), class: 'left' do  %>
       <img src="/images/admin/left.png">返回
