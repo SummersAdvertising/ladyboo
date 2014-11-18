@@ -921,63 +921,41 @@ function checkSupport(elemname, pluginname) {
 
 $(function() {
   var widthMove = $(window).width();
-	photoBig = $('#product-image-container').width();
-	$('#product-image-carousel-container li').css({width:'14%','margin-left':'3%'});
-	photoSmallLi = $('#product-image-carousel-container li').outerWidth(true);
-	photoMargin = (photoBig-(photoSmallLi*6))/5;
-
-  if(widthMove<768){
-    $('.mousetrap').width(photoBig);
-    $('#cloud-zoom-big').width(photoBig);
-		$('#product-image-container img').width(photoBig);
-		$('#product-image-carousel-container li').width(photoSmallLi-4);
-		$('#product-image-carousel-container li').height(photoSmallLi-4);
-		$('#product-image-carousel-container li').css({'margin-left':photoMargin});
-		$('#product-image-carousel-container li.markLi').css({'margin-left':0});
-		$('#product-image-carousel-container li img').width(photoSmallLi-4);
-		$('#product-image-carousel-container li img').height(photoSmallLi-4);
-  }else{
-    $('.mousetrap').width(photoBig);
-    $('#cloud-zoom-big').width(photoBig);
-    $('#product-image-container img').width(photoBig);
-		$('#product-image-carousel-container li').width(photoSmallLi-4);
-		$('#product-image-carousel-container li').height(photoSmallLi-4);
-		$('#product-image-carousel-container li').css({'margin-left':photoMargin});
-		$('#product-image-carousel-container li.markLi').css({'margin-left':0});
-		$('#product-image-carousel-container li img').width(photoSmallLi-4);
-		$('#product-image-carousel-container li img').height(photoSmallLi-4);
-  }
-
-  
-
-  $(window).resize(function(){
-    widthMove = $(window).width();
 		  photoBig = $('#product-image-container').width();
 			$('#product-image-carousel-container li').css({width:'14%','margin-left':'3%'});
-			photoSmallLi = $('#product-image-carousel-container li').outerWidth(true);
-			photoMargin = (photoBig-(photoSmallLi*6))/5;
+			photoSmallLi = $('#product-image-carousel-container li').outerWidth(true)-4;
+			photoMargin = (photoBig-((photoSmallLi+4)*6))/5;
 
-		  if(widthMove<768){
-		    $('.mousetrap').width(photoBig);
-    		$('#cloud-zoom-big').width(photoBig);
-				$('#product-image-container img').width(photoBig);
-				$('#product-image-carousel-container li').width(photoSmallLi-4);
-				$('#product-image-carousel-container li').height(photoSmallLi-4);
+				$('#product-image-carousel-container li').width(photoSmallLi);
+				$('#product-image-carousel-container li').height(photoSmallLi);
 				$('#product-image-carousel-container li').css({'margin-left':photoMargin});
 				$('#product-image-carousel-container li.markLi').css({'margin-left':0});
-				$('#product-image-carousel-container li img').width(photoSmallLi-4);
-				$('#product-image-carousel-container li img').height(photoSmallLi-4);
-		  }else{
+				$('#product-image-carousel-container li img').width(photoSmallLi);
+		
 		  	$('.mousetrap').width(photoBig);
     		$('#cloud-zoom-big').width(photoBig);
-		    $('#product-image-container img').width(photoBig);
-				$('#product-image-carousel-container li').width(photoSmallLi-4);
-				$('#product-image-carousel-container li').height(photoSmallLi-4);
+    		$('#product-image-container').height(photoBig);
+	
+   
+ 
+
+  $(window).resize(function(){
+      widthMove = $(window).width();
+		  photoBig = $('#product-image-container').width();
+			$('#product-image-carousel-container li').css({width:'14%','margin-left':'3%'});
+			photoSmallLi = $('#product-image-carousel-container li').outerWidth(true)-4;
+			photoMargin = (photoBig-((photoSmallLi+4)*6))/5;
+
+				$('#product-image-carousel-container li').width(photoSmallLi);
+				$('#product-image-carousel-container li').height(photoSmallLi);
 				$('#product-image-carousel-container li').css({'margin-left':photoMargin});
 				$('#product-image-carousel-container li.markLi').css({'margin-left':0});
-				$('#product-image-carousel-container li img').width(photoSmallLi-4);
-				$('#product-image-carousel-container li img').height(photoSmallLi-4);
-		  }
+				$('#product-image-carousel-container li img').width(photoSmallLi);
+		
+		  	$('.mousetrap').width(photoBig);
+    		$('#cloud-zoom-big').width(photoBig);
+    		$('#product-image-container').height(photoBig);
+		 
 
   });
 });     

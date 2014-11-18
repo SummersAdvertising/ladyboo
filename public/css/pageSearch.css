@@ -1,6 +1,5 @@
 .main-content { width: 100%; padding: 0; }
 #content .col-md-4 { width: 25%; }
-#content .row { text-align: center; }
 .title.search { width: 240px; }
 #content p { font-size: 1.2em; line-height: 1.5em; }
 .title.favorites { width: 340px; }
@@ -19,6 +18,7 @@
 #content .col-sm-6,#content  .col-xs-12 { float: none; }
 }
 @media (max-width: 767px) {
+	#content .row { text-align: center; }
 .title.search { width: 280px; }
 #content .col-md-6.col-sm-12.col-xs-12.product { width: 100%; }
 #content .col-sm-6, #content .col-xs-12 { float: none; }

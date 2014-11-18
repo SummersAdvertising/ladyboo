@@ -9,11 +9,13 @@
 .input-group.register-phone { clear: both; }
 .custom-checkbox input[type="checkbox"]:checked + .checbox-container { background: #c9006e !important; border-color: #c9006e; }
 label { font-size: 1.0em; font-weight: normal; color: #646464; }
-#content .btn-custom-2, #content .btn-custom-3 { font-size: 0.8em; }
+#content .btn-custom-2, #content .btn-custom-3 { font-size: 0.8em!important; }
 .code { background-color: #FFF; border: solid 1px #eee; width: 50%; padding: 10px; margin-bottom: 20px; }
 #register-form .code .input-group .form-control { background-color: #F2F2F2; color: #B3B3B3; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; }
 fieldset.half-margin { margin-bottom: 0px; }
 #register-form .register-birthday p { float: left; padding-bottom: 0; padding-right: 8px; padding-left: 8px; margin: 0; line-height: 45px; font-size: 1.0em; }
+.input-container label{position:absolute;right: 10px;top: 10px;color:#c9006e;}
+#register-form .form-control {position: initial;}
 @media (min-width: 992px) and (max-width: 1200px) {
 .emailNote { width: 33%; }
 .input-group { width: 55%; }

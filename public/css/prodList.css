@@ -1,9 +1,10 @@
 /*-------------------------------------------------------------------------------------------ProdList---*/
 .col-md-4 { max-width: 330px; }
-.item { margin-bottom: 30px; padding-top: 15px; padding-left: 10px; padding-right: 10px; padding-bottom: 15px; }
+.item { overflow: hidden;margin-bottom: 30px; padding-top: 15px; padding-left: 10px; padding-right: 10px; padding-bottom: 15px; }
 .item > .item-image-container { width: 230px; }
 .category-item-container .item:hover { background-image: url(../images/slider.gif); }
-#content .item > .item-image-container figure img { max-width: 230px; width: 100%; display: block; height: auto; max-height: 230px; }
+.item-image-container figure {height: 230px;width: 230px;overflow: hidden;}
+#content .item > .item-image-container figure img { max-width: 230px; width: 100%; display: block; height: auto; }
 .col-xs-12 { display: inline-block; padding-left: 10px; padding-right: 10px; }
 /*貼紙*/
 .new-rect { background: url(../images/idx-03.png); width: 69px; height: 38px; color: #333; padding-right: 5px; left: -3px; font-size: 1.2em; }
@@ -36,7 +37,13 @@ item-action .item-add-btn:hover, .item-add-btn:focus, .item-add-btn:active, .ite
 .icon-compare:hover { background: url(../images/idx-07h.png) center center no-repeat #D01A7E!important; border: 1px solid #D01A7E; }
 .icon-like { background: url(../images/idx-06.png) center center no-repeat #fff!important; border: 1px solid #313131; }
 .icon-like:hover { background: url(../images/idx-06h.png) center center no-repeat #D01A7E!important; border: 1px solid #D01A7E; }
- @media (min-width: 992px) and (max-width: 1200px) {
+.icon-cancel {display:block;height:40px;width:40px;border-radius:4px;position: absolute;right: 55px;background: url(../images/idx-08.png) center center no-repeat #fff!important;border: 1px solid #313131;}
+.icon-cancel:hover { background: url(../images/idx-08h.png) center center no-repeat #D01A7E!important; border: 1px solid #D01A7E; }
+
+@media (max-width: 940px) {
+.icon-cancel { position: relative;float:right;right:0; }
+}
+@media (min-width: 992px) and (max-width: 1200px) {
 .col-md-4 { width: 55%; max-width: 280px; }
 .item .item-image-container { width: 230px; }
 }
