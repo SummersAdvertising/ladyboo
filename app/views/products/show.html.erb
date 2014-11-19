@@ -1,5 +1,9 @@
 <link rel="stylesheet" href="/css/pageProduct.css">
 
+<% content_for :meta_area do %>
+  <meta name="description" content="<%= "#{@product.name}#{@product.en_name}" %>">
+<% end %>
+
 <% content_for :breadcrumb do %>
   <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; <%= link_to 'SHOP', categories_path %>
   &nbsp; > &nbsp; <%= link_to "#{@product.category.daddy.name} #{@product.category.name}", category_path(@product.category) %>
