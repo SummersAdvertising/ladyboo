@@ -1,7 +1,14 @@
 <link rel="stylesheet" href="/css/pageProduct.css">
 
 <% content_for :meta_area do %>
-  <meta name="description" content="<%= "#{@product.name}#{@product.en_name}" %>">
+  <meta name="og:title" content="<%= "#{@product.name}#{@product.en_name}" %>">
+  <meta name="og:site_name" content="Ladyboo">
+  <% if @product.galleries.where(type: 'ProductPhotoGallery').first %>
+    <meta name="og:image" content="<%= @product.galleries.where(type: 'ProductPhotoGallery').first.attachment.url %>">
+  <% end %>
+  <meta name="og:url" content="<%= category_product_url(@product.category, @product) %>">
+  <meta name="fb:app_id" content="380171498811984">
+  
 <% end %>
 
 <% content_for :breadcrumb do %>
