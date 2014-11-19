@@ -1,8 +1,9 @@
 <link rel="stylesheet" href="/css/pageProduct.css">
 
 <% content_for :meta_area do %>
-  <meta name="og:title" content="<%= "#{@product.name}#{@product.en_name}" %>">
+  <meta name="og:title" content="<%= "#{@product.name}" %>">
   <meta name="og:site_name" content="Ladyboo">
+  <meta name="og:description" content="<%= "#{@product.name}#{@product.en_name}" %>">
   <% if @product.galleries.where(type: 'ProductPhotoGallery').first %>
     <meta name="og:image" content="<%= @product.galleries.where(type: 'ProductPhotoGallery').first.attachment.url %>">
   <% end %>
