@@ -25,9 +25,8 @@
         <tr class="show_tile_<%= tile.id %>" >
           <td width="6%" style="background:url(/images/admin/folder.png) center center no-repeat"></td>
           <td width="76%">
-            <%= tile.id %> - Ranking: [<%= tile.ranking %>]
             <% tile.galleries.select{ |v| v['type'] == "TileCoverGallery" }.each do |attach| %>
-              <%= link_to(image_tag("#{attach.attachment.url}"), admin_lookbook_tile_path(@lookbook,tile)) %>
+              <%= image_tag("#{attach.attachment.url}") %>
             <% end %>
             
           </td>
