@@ -44,9 +44,9 @@ fieldset.half-margin { margin-bottom: 0px; }
 .half-margin { font-size: 0.9em; }
 .code { width: 100%; }
 #content .btn-custom-2, #content .btn-custom-3 { font-size: 1em; }
-#user_birthday_1i{width: 200px;float:none;display:block;margin:0;}
-	#user_birthday_2i{width: 150px;margin:10px 15px 0 0;}
-	#user_birthday_3i{width: 150px;margin:10px 0 0 0;}
+#user_birthday_1i{width: 60%;float:none;display:block;margin:0;}
+	#user_birthday_2i{width: 135px;margin:10px 15px 0 0;}
+	#user_birthday_3i{width: 135px;margin:10px 0 0 0;}
 }
 
 
