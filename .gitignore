@@ -55,3 +55,4 @@ database.yml
 /public/assets/*
 
 /app/helpers/focas_helper.rb
+app/views/topics/show.html.erb
