@@ -205,10 +205,10 @@ function itemAnimationOut() {
            	
         if (windowTop >= navDist2 && windowTop > headerHeight&& windowWidth > 768) {
             navContainer.addClass('fixed');
-			navTop.addClass('fixed');
+						navTop.addClass('fixed');
         } else {
         	navContainer.removeClass('fixed');
-			navTop.removeClass('fixed');
+					navTop.removeClass('fixed');
         }
 	}
 
@@ -919,5 +919,45 @@ function checkSupport(elemname, pluginname) {
 }());
 
 
+$(function() {
+  var widthMove = $(window).width();
+		  photoBig = $('#product-image-container').width();
+			$('#product-image-carousel-container li').css({width:'14%','margin-left':'3%'});
+			photoSmallLi = $('#product-image-carousel-container li').outerWidth(true)-4;
+			photoMargin = (photoBig-((photoSmallLi+4)*6))/5;
+
+				$('#product-image-carousel-container li').width(photoSmallLi);
+				$('#product-image-carousel-container li').height(photoSmallLi);
+				$('#product-image-carousel-container li').css({'margin-left':photoMargin});
+				$('#product-image-carousel-container li.markLi').css({'margin-left':0});
+				$('#product-image-carousel-container li img').width(photoSmallLi);
+		
+		  	$('.mousetrap').width(photoBig);
+    		$('#cloud-zoom-big').width(photoBig);
+    		$('#product-image-container').height(photoBig);
+	
+   
+ 
+
+  $(window).resize(function(){
+      widthMove = $(window).width();
+		  photoBig = $('#product-image-container').width();
+			$('#product-image-carousel-container li').css({width:'14%','margin-left':'3%'});
+			photoSmallLi = $('#product-image-carousel-container li').outerWidth(true)-4;
+			photoMargin = (photoBig-((photoSmallLi+4)*6))/5;
+
+				$('#product-image-carousel-container li').width(photoSmallLi);
+				$('#product-image-carousel-container li').height(photoSmallLi);
+				$('#product-image-carousel-container li').css({'margin-left':photoMargin});
+				$('#product-image-carousel-container li.markLi').css({'margin-left':0});
+				$('#product-image-carousel-container li img').width(photoSmallLi);
+		
+		  	$('.mousetrap').width(photoBig);
+    		$('#cloud-zoom-big').width(photoBig);
+    		$('#product-image-container').height(photoBig);
+		 
+
+  });
+});     
 
 

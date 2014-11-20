@@ -88,7 +88,7 @@ h2.title { background: none; }
 .table > thead > tr > td.tableTitle, .table > tbody > tr > td.tableTitle, .table > tfoot > tr > td.tableTitle { white-space: normal;}
 .table > tbody > tr > td.tableNote { padding: 20px 10px 10px 0px; }
 }
-/*--------------------------------------*/
+/*--------------------------------------Plugin*/
 .cloud-zoom-lens {margin:0px;background-color:#fff;cursor:move;}
 .cloud-zoom-big { overflow: hidden; margin-top: 4px; margin-left: 4px; border: 1px solid #000;max-height: 560px; }
 .cloud-zoom-loading {color:white;background:#222;padding:0px;}
@@ -100,4 +100,9 @@ img.active-slide{border:2px solid #c9006e!important;}
 .cloud-zoom-lens {display:none!important;}
 .cloud-zoom-big { display:none!important; }
 .cloud-zoom-loading {display:none!important;}
+}
+/*----------------------------------------FB*/
+#prodTop .fb-like{position: absolute;left:15px;bottom:-30px; z-index: 900;}
+@media (max-width: 767px) {
+#prodTop .fb-like{display: none;}
 }
