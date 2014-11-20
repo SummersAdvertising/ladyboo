@@ -19,9 +19,7 @@
               <ul class="category-filter-list jscrollpane">
                 <% levels = @hierarchy.select { |v| v[2] == level1[0] } %>
                 <% levels.each do | level2 | %>
-                  <li>
-                    <%= link_to level2[3], category_path(id: level2[0]) %>
-                  </li>
+                  <%= aside_link(level2[3], category_path(id: level2[0]) ) %>
                 <% end %>    
               </ul>
             </div>
