@@ -2,7 +2,7 @@
 
 <% content_for :meta_area do %>
 
-  <meta property="og:title" content="<%= "#{@product.name}#{@product.en_name}" %>">
+  <meta property="og:title" content="<%= "#{@product.name}#{@product.en_name} - LadyBoo" %>">
   <% if @product.galleries.where(type: 'ProductPhotoGallery').first %>
     <meta property="og:image" content="<%= image_url(@product.galleries.where(type: 'ProductPhotoGallery').first.attachment.url) %>">
   <% end %>
