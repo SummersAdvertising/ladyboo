@@ -5,7 +5,7 @@
   <meta property="og:title" content="<%= "#{@product.name}#{@product.en_name} - LadyBoo" %>">
 
   <% if @product.galleries.where(type: 'ProductPhotoGallery').first %>
-    <meta property="og:image" content="<%= @product.galleries.where(type: 'ProductPhotoGallery').first.attachment.url %>">
+    <meta property="og:image" content="<%= image_url(@product.galleries.where(type: 'ProductPhotoGallery').first.attachment.url) %>">
   <% end %>
   <meta name="og:url" content="<%= category_product_url(@product.category, @product) %>">
   
