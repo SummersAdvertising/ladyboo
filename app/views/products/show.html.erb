@@ -44,16 +44,16 @@
 
                 <% if index == 0 %>
                   <li class='markLi'>
-                    <a href='<%= "#{attach.attachment.url}" %>' class='cloud-zoom-gallery' title='' rel="useZoom: 'zoom1', smallImage: '<%= "#{attach.attachment.url}" %>'"> 
+                    <a href='<%= "#{image_url(attach.attachment.url)}" %>' class='cloud-zoom-gallery' title='' rel="useZoom: 'zoom1', smallImage: '<%= "#{image_url(attach.attachment.url)}" %>'"> 
                     
-                      <img class="zoom-tiny-image active-slide" src=<%= "#{attach.attachment.url}" %>   />
+                      <img class="zoom-tiny-image active-slide" src=<%= "#{image_url(attach.attachment.url)}" %>   />
                     </a>
                   </li>
                 <% else %>
                   <li>
-                    <a href='<%= "#{attach.attachment.url}" %>' class='cloud-zoom-gallery' title='' rel="useZoom: 'zoom1', smallImage: '<%= "#{attach.attachment.url}" %>'"> 
+                    <a href='<%= "#{image_url(attach.attachment.url)}" %>' class='cloud-zoom-gallery' title='' rel="useZoom: 'zoom1', smallImage: '<%= "#{image_url(attach.attachment.url)}" %>'"> 
                     
-                      <img class="zoom-tiny-image" src=<%= "#{attach.attachment.url}" %>   />
+                      <img class="zoom-tiny-image" src=<%= "#{image_url(attach.attachment.url)}" %>   />
                     </a>
                   </li>
                 <% end %>
@@ -220,7 +220,6 @@
 <script src="/js_plugins/peditor/js/editor_img.js"></script>
 <script src="/js_plugins/peditor/js/editor_list.js"></script>
 <script src="/js_plugins/peditor/js/editor_video.js"></script>
-<script src="/js_plugins/peditor/js/jquery.imgareaselect.min.js"></script>
 <script src="/js_plugins/bxslider/jquery.bxslider.min.js"></script>
 
 <script type="text/javascript">
