@@ -12,20 +12,21 @@
 .article .article-meta-date { font: 1.0em Helvetica, Microsoft JhengHei; font-weight: 700; letter-spacing: 1px; }
 #wrapper { position: relative }
 .bgBottom.about { background-image: url(../images/bg_footer.png); height: 327px; width: 268px; }
-.bgBottom { position: absolute; bottom: 17px; right: 0px; }
+.bgBottom { position: absolute; bottom: -1px; right: 0px; }
  @media (min-width: 1200px) {
 .article .article-meta-date { width: 85px; }
-
 }
 @media (min-width: 992px) and (max-width: 1200px) {
 .col-md-9 { width: 80%; }
+}
+@media (max-width: 839px) {
+.bgBottom { bottom: 47px; }
 }
 @media (min-width: 768px) and (max-width: 991px) {
 .title.about { width: 20%; min-width: 300px; }
 .title.news { width: 20%; min-width: 240px; }
 .title.community { width: 20%; min-width: 340px; }
 .col-md-9 { width: 90%; margin-left: auto; margin-right: auto; }
-.bgBottom { bottom: 0px;}
 }
 @media (max-width: 767px) {
 .title.about { width: 240px; margin-left: 10px; }

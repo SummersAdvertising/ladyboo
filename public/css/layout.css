@@ -33,7 +33,7 @@ body, html { overflow-x: hidden; color: #434343; }
 .btn-custom-3:hover { background-color: #f858b7; }
 .btn-custom-2:hover { background-color: #000; }
 .related-product .item-name { padding-top: 10px; color: #434343; overflow: hidden; text-overflow: ellipsis; -o-text-overflow: ellipsis; white-space : nowrap; }
-.flexslider { height: 400px; }
+.flexslider { max-height: 400px; }
 #header-top.fixed { position: fixed; top: 0; left: 0; z-index: 1000; padding: 0; -webkit-backface-visibility: hidden; width: 100%; }
 @media (min-width: 768px) and (max-width: 1199px) {
 #header-top .container { width: 100%; }
@@ -162,7 +162,7 @@ h3.title span { font-size: 20px; padding: 0; margin-top: 5px; }
 .flex-active-slide{margin-right:20px;}
 .item-action {text-align: right;}
 #content .related-product img{height:100px;width:100px;}
-.accordion-header li.active {background-color: #fff799;}
+.panel-body li.active {background-color: #fff799;}
 @media \0screen {
 .item > .item-image-container .item-price-container .item-price { padding-top: 15px;line-height:0px;  }
 }
@@ -199,7 +199,7 @@ background-color: #FFF;
 border-radius: 0px;
 -moz-border-radius: 0px;
 -webkit-border-radius: 0px;border-color:#e0e0e0;
-width: 30%;}
+width: 28%;}
 #user_birthday_1i{margin-right: 5%}
 #user_birthday_3i{margin-left: 5%}
 .custom-checkbox input[type="checkbox"]:checked + .checbox-container {background: #C9006E !important;border-color: #C9006E;}
@@ -235,28 +235,34 @@ textarea.form-control { resize: none; }
 .footer-text-container { color: #b3b3b3; position: relative; }
 .footer-text-container a { font-size: 1em!important; margin: 0 0 0 20px }
 .footer-social-links-container a { color: #fff!important; display: block; width: 200px; position: relative; padding-left: 40px; background-image: url(../images/fb.gif); background-repeat: no-repeat; background-position: left top; position: absolute; top: -15px; left: 40px; margin: 0 8% 0 0; font-size: 1em!important; height: 50px; padding-top: 35px; }
+.footer-social-links-container {width:200px;}
+.footer-text-container{width:70%;float:right;}
 #footer a { color: #b3b3b3; }
 .fb-like { position: absolute; left: 240px; top: 16px; }
 @media (min-width: 768px) and (max-width: 1200px) {
 .footer-text-container p:after { display: block; }
-}
-@media (min-width: 768px) and (max-width: 1200px) {
+.footer-text-container{padding-right: 60px!important;}
 #scroll-top { bottom: 80px; }
 #footer .container {width: 100%;}
 }
-@media (min-width: 992px){
-#footer .col-md-6 {width: 100%;}
+@media (min-width: 840px) and (max-width: 991px) {
+.footer-text-container{padding-right: 60px;}
+}
+@media (max-width: 839px) {
+.col-xs-12{display:block;}
+.footer-text-container{padding-top:10px;width:96%;clear:both;text-align: left;}
+.footer-text-container a{margin:0;display:block;}
+.footer-text-container p:after { content: ""; display: none; }
+#footer-bottom p { margin: 20px 0 6px 0; text-align: left; }
+.footer-text-container p:before { content: "© 2014 Copyright by LadyBoo."; display: block; }
 }
 @media (max-width: 767px) {
 .footer-social-links-container a img { top: -26px }
 .fb-like { position: absolute; left: 0px; top: 10px; }
-#footer .footer-text-container a { margin: 0; display: block; }
-.footer-text-container p:after { content: ""; display: none; }
-.footer-text-container p:before { content: "© 2014 Copyright by LadyBoo."; display: block; }
-#footer-bottom p { margin: 20px 0 6px 0; text-align: left; }
-.footer-text-container { position: relative; }
+.footer-text-container { position: relative;float: none; }
 .footer-social-links-container a { left: 15px; top: -25px; text-align: left; padding-top: 15px; }
 #scroll-top { bottom: 15px;  }
+.fb_iframe_widget{float:right;}
 }
 /*-------------------------------------------------------------------------------------------lightbox預覽---*/
 #lightBox { z-index: -100; position: absolute; top: 0; left: 0;opacity:0;}
