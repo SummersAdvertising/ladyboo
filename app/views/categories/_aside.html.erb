@@ -11,7 +11,9 @@
       <% levels.each_with_index do | level1, index | %>
         <div class="panel"><!-- Start .panel 分類 --> 
           <div class="accordion-header">
-            <div class="accordion-title"><span><%= link_to level1[3], category_path(id: level1[0]) %></span></div>
+            <div class="accordion-title">
+              <span><%= link_to level1[3], category_path(id: level1[0]) %></span>
+            </div>
             <!-- <a class="accordion-btn opened"  data-toggle="collapse" data-target='#<%# "category-list-#{level1[0]}" %>'></a> -->
           </div>
           <div id='<%= "category-list-#{level1[0]}" %>' class="collapse in"><!-- Start .category-list 子面板 --> 
@@ -19,9 +21,7 @@
               <ul class="category-filter-list jscrollpane">
                 <% levels = @hierarchy.select { |v| v[2] == level1[0] } %>
                 <% levels.each do | level2 | %>
-                  <li>
-                    <%= link_to level2[3], category_path(id: level2[0]) %>
-                  </li>
+                  <%= aside_link(level2[3], category_path(id: level2[0]) ) %>
                 <% end %>    
               </ul>
             </div>
