@@ -23,13 +23,15 @@
       
         <tr class="show_stock_<%= stock.id %>">
           <td width="6%" valign="top">&nbsp;</td>
-          <td width="70%">
+          <td width="76%">
             <%= stock.name %><%= show_stock_amount(stock) %> /追蹤：<%= stock.assign_amount? %><%# stocks_helper %>
           </td>
           <td width="18%" align="right">
             <div class="tool">
               <%= link_to "", "javascript:void(0);", :data => { :id => stock.id }, :class => "edit" %>
+              <% if @stocks.count > 1 %>
               <%= link_to "", "stocks/#{stock.id}", :data => { :confirm => "將會刪除庫存，確定繼續？" }, :method => :delete, :class => "delete" %>
+              <% end %>
             </div>
           </td>
         </tr>
@@ -80,8 +82,8 @@
           </td>
           <td width="18%"  align="right">
             <div class="tool">
-              <%= f.submit "儲存" %>
-              <%= link_to "取消", "javascript:void(0);", class: "cancel_new_stock" %>
+              <%= f.submit "儲存", class: 'uvs' %>
+              <%= link_to "取消", "javascript:void(0);", class: "cancel_new_stock uvs" %>
             </div>
           </td>
           <% end %>
