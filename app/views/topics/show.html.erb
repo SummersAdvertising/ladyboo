@@ -4,7 +4,7 @@
 
 <% content_for :meta_area do %>
 
-  <meta property="og:title" content="<%= "#{@lookbook.name} #{@topic.name} - LadyBoo" %>">
+  <meta property="og:title" content="<%= "穿搭主題 #{@topic.name} - LadyBoo" %>">
   
   <% if @topic.galleries.where(type: 'TopicBannerGallery').first %>
     <meta property="og:image" content="<%= image_url(@topic.galleries.where(type: 'TopicBannerGallery').first.attachment.url) %>">
@@ -16,7 +16,7 @@
 
 <% content_for :breadcrumb do %>
   <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; <%= link_to 'Lookbook', 'javascript:void(0);' %>
-  &nbsp; > &nbsp; <%= link_to "#{@lookbook.name} #{@topic.name}", lookbook_topic_path(@lookbook, @topic) %>
+  &nbsp; > &nbsp; <%= link_to "穿搭主題 #{@topic.name}", lookbook_topic_path(@lookbook, @topic) %>
 <% end %>
 
 <% if @topic.galleries.select{ |v| v['type'] == 'TopicBannerGallery' }.first  %>

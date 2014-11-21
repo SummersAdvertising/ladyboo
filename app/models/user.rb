@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :email, :format => { :with => /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i, :message => 'E-Mail 格式不符'  }
+  validates_presence_of :birthday ,:message => "請輸入生日"
   #validates_uniqueness_of :email, :message => 'E-Mail 已有人使用。'
 
   #validates_presence_of :tel, :allow_nil => true ,:message => "請輸入電話或行動電話"

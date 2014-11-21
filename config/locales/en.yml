@@ -7,6 +7,7 @@ en:
         password: '密碼'
         password_confirmation: '確認密碼'
         username: '姓名'
+        birthday: '出生日期'
       selected_product:
         description: '描述'
       product:

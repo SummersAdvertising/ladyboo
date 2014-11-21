@@ -154,7 +154,7 @@ editor.img = {
 		paragraphBox.attr("data-type", "img");
 
 		var img = $("<img>");
-		img.attr("alt", paragraph.id);
+		// img.attr("alt", paragraph.id);
 		img.attr("src", paragraph.path);
 		img.attr("title", paragraph.id);
 		img.addClass('img-responsive');

@@ -6,5 +6,5 @@ class Admin < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :email, :format => { :with => /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i, :message => 'E-Mail 格式不符'  }
-  
+
 end
