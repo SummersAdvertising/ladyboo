@@ -54,7 +54,7 @@
             <% @addressbooks.each_with_index do |addressbook, index| %>
               <%# show %>
               <div class="input-group show_addressbook_<%= addressbook.id %>"> <span class="input-group-addon"><span class="input-icon input-icon-address"></span><span class="input-text">地 址</span></span>
-                <p><%= addressbook.address %> </p>
+                <p><span><%= addressbook.address %></span></p>
                 <%= link_to "編輯", "javascript:void(0);", :data => { :id => addressbook.id }, :class => "edit btn btn-custom-1 addEdit", title:"編輯" %>
                 <%= link_to "刪除", useradmin_addressbook_path(addressbook), :method => :delete, :data => {:confirm => "確定刪除？"}, :class => "delete btn btn-custom-1 addDelete", title: "刪除" %>
               </div>
