@@ -14,7 +14,7 @@ label { font-size: 1.0em; font-weight: normal; color: #646464; }
 #register-form .code .input-group .form-control { background-color: #F2F2F2; color: #B3B3B3; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; }
 fieldset.half-margin { margin-bottom: 0px; }
 #register-form .register-birthday p { float: left; padding-bottom: 0; padding-right: 8px; padding-left: 8px; margin: 0; line-height: 45px; font-size: 1.0em; }
-.input-container label{position:absolute;right: 10px;top: 10px;color:#c9006e;}
+.input-container label{position:absolute;right: 10px;top: 0px;color:#c9006e;font-size: 0.9em;}
 #register-form .form-control {position: initial;}
 @media (min-width: 992px) and (max-width: 1200px) {
 .emailNote { width: 33%; }
@@ -43,10 +43,11 @@ fieldset.half-margin { margin-bottom: 0px; }
 #content .container { padding: 0 10px; }
 .half-margin { font-size: 0.9em; }
 .code { width: 100%; }
-#content .btn-custom-2, #content .btn-custom-3 { font-size: 1em; }
+#content .btn-custom-2, #content .btn-custom-3 { font-size: 1em!important; }
 #user_birthday_1i{width: 60%;float:none;display:block;margin:0;}
-	#user_birthday_2i{width: 135px;margin:10px 15px 0 0;}
-	#user_birthday_3i{width: 135px;margin:10px 0 0 0;}
+#user_birthday_2i{width: 135px;margin:10px 15px 0 0;}
+#user_birthday_3i{width: 135px;margin:10px 0 0 0;}
+.input-container label{font-size: 0.9em;}
 }
 
 
