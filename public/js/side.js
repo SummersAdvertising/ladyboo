@@ -22,7 +22,7 @@ $(function() {
       topHeight3 = $('.panel-group').height();
       topHeight4 = $('#prodTop').height();
       $('.main-content').css({overflow:'hidden'});
-      $('#content').css({height:topHeight1+topHeight2+topHeight3+topHeight4,overflow:'hidden'});
+      $('#content').css({height:topHeight1+topHeight2+topHeight3+topHeight4+20,overflow:'hidden'});
       $('.sidebar').css({'margin-left':'-10px'})
       $('#category-filter').css({position:'absolute',top:topHeight1+topHeight2,width:'100%'});
       $('.related').css({position:'absolute',top:topHeight1,width:'96%','margin-left':'10px'});

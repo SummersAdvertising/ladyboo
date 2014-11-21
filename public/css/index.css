@@ -10,9 +10,6 @@
 .title.lookbook { width: 20%; min-width: 320px; }
 .title.pickup { width: 20%; min-width: 280px; }
 }
-@media (max-width: 839px) {
-.bgBottom { bottom: 47px; }
-}
 @media (max-width: 767px) {
 .title.lookbook { width: 260px; }
 .title.pickup { width: 200px; }

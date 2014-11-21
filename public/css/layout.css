@@ -35,6 +35,7 @@ body, html { overflow-x: hidden; color: #434343; }
 .related-product .item-name { padding-top: 10px; color: #434343; overflow: hidden; text-overflow: ellipsis; -o-text-overflow: ellipsis; white-space : nowrap; }
 .flexslider { max-height: 400px; }
 #header-top.fixed { position: fixed; top: 0; left: 0; z-index: 1000; padding: 0; -webkit-backface-visibility: hidden; width: 100%; }
+
 @media (min-width: 768px) and (max-width: 1199px) {
 #header-top .container { width: 100%; }
 }
@@ -62,6 +63,7 @@ body, html { overflow-x: hidden; color: #434343; }
 }
 /*白色區塊選單區 Start---------------------------------------------------------------------------------------------------------------*/
 #inner-header { padding-top: 20px; }
+#inner-header .container { position:relative; }
 #menu-right-side { margin-top: 20px; padding-bottom: 0; margin-bottom: 0; }
 #main-nav { height: 60px; padding-right: 180px; z-index: 1; }
 #main-nav-container #main-nav .menu li .mega-menu .mega-menu-title {  text-align: left; margin-left: 0px; }
@@ -114,8 +116,8 @@ h1.logo { margin-top: 10px; margin-bottom: 15px; }
 #menu-wrapper { position: static; }
 .menuTitle{ padding-left: 20px; padding-top: 12px; padding-bottom: 12px; font: 0.9em Helvetica, Microsoft JhengHei, "微軟正黑體"!important; border-top:solid 1px #EEE; }
 #responsive-nav { position: absolute; top: -60px; right: 0; }
-#responsive-nav-button #responsive-nav-button-icon { display: inline-block; width: 35px; height: 36px; background-color: #C9006E; background-image: url(../images/sprites/responsive-menu-icon.png); background-repeat: no-repeat; background-position: center center; vertical-align: top; border-radius: 0px; margin-left: 15px; margin-top: 22px; transition: none; -webkit-transition: none; -moz-transition: none; box-shadow: none; -webkit-box-shadow: none; }
-#main-nav-container #main-nav #responsive-nav >ul { min-width: 300px; width: 100%; right: 0px!important; position: absolute; top: 60px; }
+#responsive-nav-button #responsive-nav-button-icon { display: inline-block; width: 35px; height: 36px; background-color: #C9006E; background-image: url(../images/sprites/responsive-menu-icon.png); background-repeat: no-repeat; background-position: center center; vertical-align: top; border-radius: 0px; margin-left: 15px; margin-top: 16px; transition: none; -webkit-transition: none; -moz-transition: none; box-shadow: none; -webkit-box-shadow: none; }
+#main-nav-container #main-nav #responsive-nav >ul { min-width: 300px; width: 100%; right: 0px!important; position: absolute; top: 54px; }
 #main-nav-container #main-nav #responsive-nav ul li .mega-menu .mega-menu-list li { text-transform: capitalize; background-image: url(../images/img_list.gif); background-repeat: no-repeat; background-position: left center; width: 100%; }
 #main-nav-container #main-nav #responsive-nav ul li .mega-menu .mega-menu-title {
 font: 0.9em Helvetica, Microsoft JhengHei, "微軟正黑體"!important;
@@ -227,7 +229,6 @@ textarea.form-control { resize: none; }
 }
 /*-------------------------------------------------------------------------------------------Footer---*/
 #scroll-top { line-height: 1em!important; padding: 0; padding-top: 3px; color: #FFF!important; text-decoration: none!important; height: 37px; width: 40px; font-size: 1em!important; bottom: 70px; border-radius: 1px;z-index:1000;display:block;background-color: #C9006E; }
-
 #footer a:hover { color: #FFF!important; }
 #footer-bottom { background: #000!important; padding-bottom: 0; }
 #footer-bottom .container { background-image: url(../images/bg_footer.jpg); position: relative; background-position: center bottom; background-repeat: no-repeat; hieght: 100px!important; padding-bottom: 25px; margin-bottom: 0; }
@@ -238,29 +239,26 @@ textarea.form-control { resize: none; }
 .footer-social-links-container {width:200px;}
 .footer-text-container{width:70%;float:right;}
 #footer a { color: #b3b3b3; }
-.fb-like { position: absolute; left: 240px; top: 16px; }
+#footer .fb-share-button { position: absolute; right: -100px; bottom: -32px; }
 @media (min-width: 768px) and (max-width: 1200px) {
 .footer-text-container p:after { display: block; }
 .footer-text-container{padding-right: 60px!important;}
 #scroll-top { bottom: 80px; }
 #footer .container {width: 100%;}
 }
-@media (min-width: 840px) and (max-width: 991px) {
-.footer-text-container{padding-right: 60px;}
-}
-@media (max-width: 839px) {
-.col-xs-12{display:block;}
-.footer-text-container{padding-top:10px;width:96%;clear:both;text-align: left;}
-.footer-text-container a{margin:0;display:block;}
-.footer-text-container p:after { content: ""; display: none; }
-#footer-bottom p { margin: 20px 0 6px 0; text-align: left; }
-.footer-text-container p:before { content: "© 2014 Copyright by LadyBoo."; display: block; }
+@media (max-width: 830px) {
+#footer .fb-share-button { top:50px;left:40px;right:auto; }
 }
 @media (max-width: 767px) {
+#footer .fb-share-button { top:50px;left:15px;right:auto; }
+#footer .col-xs-12{display:block;}
+.footer-text-container{width:auto;padding-top: 80px;float:none;clear: both;;}
+.footer-text-container a{margin:0;width:auto;display:block;padding-bottom: 5px;}
+.footer-text-container p:after { content: "© 2014 Copyright by LadyBoo."; display:block;}
+#footer-bottom p { margin: 20px 0 6px 0; text-align: left; }
 .footer-social-links-container a img { top: -26px }
-.fb-like { position: absolute; left: 0px; top: 10px; }
 .footer-text-container { position: relative;float: none; }
-.footer-social-links-container a { left: 15px; top: -25px; text-align: left; padding-top: 15px; }
+.footer-social-links-container a { left: 15px; top: -25px; text-align: left;  }
 #scroll-top { bottom: 15px;  }
 .fb_iframe_widget{float:right;}
 }

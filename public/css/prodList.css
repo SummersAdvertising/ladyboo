@@ -61,3 +61,7 @@ item-action .item-add-btn:hover, .item-add-btn:focus, .item-add-btn:active, .ite
 }
 
 /*-------------------------------------------------------------------------------------------ProdList---*/
+#prodTop .fb-like{position: absolute;left:0;bottom:-20px; z-index: 900;}
+@media (max-width: 767px) {
+#prodTop .fb-like{display: none;}
+}

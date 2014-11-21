@@ -19,9 +19,6 @@
 @media (min-width: 992px) and (max-width: 1200px) {
 .col-md-9 { width: 80%; }
 }
-@media (max-width: 839px) {
-.bgBottom { bottom: 47px; }
-}
 @media (min-width: 768px) and (max-width: 991px) {
 .title.about { width: 20%; min-width: 300px; }
 .title.news { width: 20%; min-width: 240px; }

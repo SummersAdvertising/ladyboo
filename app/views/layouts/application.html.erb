@@ -11,8 +11,10 @@
   
   <%= yield :meta_area %>
 
-  <%= render 'layouts/fb_shared_meta' %>
-
+  <meta property="og:site_name" content="Ladyboo">
+  <meta property="fb:app_id" content="380171498811984">
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="現在就試試看吧，加一點蕾絲，特調妳的性感甜美比例，妳將發現自己不同以往的美，多了新鮮想像，開始讓人著迷。">
   <!--[if IE]> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -54,7 +56,15 @@
   }
   </script>
 
-</head>
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+  </head>
 <body>
  <div id="fb-root"></div>
   <script>
