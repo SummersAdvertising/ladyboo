@@ -1,4 +1,4 @@
-iframe{display: none;}
+body > iframe{display: none;}
 .layout.contact { background-color: #434343; padding: 30px 20px 10px 20px;margin-bottom:10px;}
 .layout.contact .input-group.input-container .form-control { border-radius: 0 2px 2px 0; }
 .contact-name { float: left; width: 44%; margin-bottom: 20px; }

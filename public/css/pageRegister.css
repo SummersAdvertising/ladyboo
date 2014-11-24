@@ -1,4 +1,4 @@
-iframe{display: none;}
+body > iframe{display: none;}
 .title.register { width: 330px; }
 .layout.member { width: 100%; }
 .layout.member p { font-size: 1.2em; padding-bottom: 20px; }
