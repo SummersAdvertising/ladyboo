@@ -119,13 +119,12 @@ h1.logo { margin-top: 10px; margin-bottom: 15px; }
 #responsive-nav-button #responsive-nav-button-icon { display: inline-block; width: 35px; height: 36px; background-color: #C9006E; background-image: url(../images/sprites/responsive-menu-icon.png); background-repeat: no-repeat; background-position: center center; vertical-align: top; border-radius: 0px; margin-left: 15px; margin-top: 16px; transition: none; -webkit-transition: none; -moz-transition: none; box-shadow: none; -webkit-box-shadow: none; }
 #main-nav-container #main-nav #responsive-nav >ul { min-width: 300px; width: 100%; right: 0px!important; position: absolute; top: 54px; }
 #main-nav-container #main-nav #responsive-nav ul li .mega-menu .mega-menu-list li { text-transform: capitalize; background-image: url(../images/img_list.gif); background-repeat: no-repeat; background-position: left center; width: 100%; }
-#main-nav-container #main-nav #responsive-nav ul li .mega-menu .mega-menu-title {
-font: 0.9em Helvetica, Microsoft JhengHei, "微軟正黑體"!important;
-display: block;
-padding: 10px 30px;background: #f6f6f6;
-border-top:1px solid rgba(200, 200, 200, 0.2); 
-border-bottom: solid 1px #eee;border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-}
+#main-nav-container #main-nav #responsive-nav ul li .mega-menu .mega-menu-title {font: 0.9em Helvetica, Microsoft JhengHei, "微軟正黑體"!important;display: block;padding: 10px 30px;background: #f6f6f6;border-top:1px solid rgba(200, 200, 200, 0.2); border-bottom: solid 1px #eee;border-bottom: 1px solid rgba(255, 255, 255, 0.5);}
+#main-nav-container #main-nav #responsive-nav ul li .menu-button {height: 70px;background-repeat:no-repeat;width: 100%;background-position: 260px -350px;}
+#main-nav-container #main-nav #responsive-nav ul li .menu-button.active{background-position: 260px -400px;}
+#main-nav-container #main-nav #responsive-nav ul li .mega-menu .menu-button{background-position: 260px -365px;background-repeat:no-repeat;}
+#main-nav-container #main-nav #responsive-nav ul li .mega-menu .menu-button.active{background-position: 260px -415px;}
+
 }
 /*粉紅區塊指引區 Start---------------------------------------------------------------------------------------------------------------------*/
 #breadcrumb-container { background: #C9006E; margin-bottom: 0px; margin-top: 0; top: -10; }
@@ -232,29 +231,30 @@ textarea.form-control { resize: none; }
 #footer a:hover { color: #FFF!important; }
 #footer-bottom { background: #000!important; padding-bottom: 0; }
 #footer-bottom .container { background-image: url(../images/bg_footer.jpg); position: relative; background-position: center bottom; background-repeat: no-repeat; hieght: 100px!important; padding-bottom: 25px; margin-bottom: 0; }
-.footer-text-container p:after { content: "　© 2014 Copyright by LadyBoo."; }
+.footer-text-container p:after { content: "　© 2014 Copyright by LadyBoo.";display:block\0;float:right\0; }
 .footer-text-container { color: #b3b3b3; position: relative; }
 .footer-text-container a { font-size: 1em!important; margin: 0 0 0 20px }
 .footer-social-links-container a { color: #fff!important; display: block; width: 200px; position: relative; padding-left: 40px; background-image: url(../images/fb.gif); background-repeat: no-repeat; background-position: left top; position: absolute; top: -15px; left: 40px; margin: 0 8% 0 0; font-size: 1em!important; height: 50px; padding-top: 35px; }
 .footer-social-links-container {width:200px;}
 .footer-text-container{width:70%;float:right;}
 #footer a { color: #b3b3b3; }
-#footer .fb-share-button { position: absolute; right: -100px; bottom: -32px; }
+#footer .fb-share-button { position: absolute; right: -100px;position: static\0;margin:50px 0 0 25px\0;  bottom: -32px; }
 @media (min-width: 768px) and (max-width: 1200px) {
-.footer-text-container p:after { display: block; }
+.footer-text-container p:after { display: block;display:block\0;float:right\0; }
 .footer-text-container{padding-right: 60px!important;}
 #scroll-top { bottom: 80px; }
 #footer .container {width: 100%;}
+#footer .fb-share-button { right: 100px\0; }
 }
 @media (max-width: 830px) {
-#footer .fb-share-button { top:50px;left:40px;right:auto; }
+#footer .fb-share-button { top:50px;left:40px;right:auto;}
 }
-@media (max-width: 767px) {
+@media (max-width: 767px) {.footer-text-container p:after { isplay:block\0;float:right\0; }
 #footer .fb-share-button { top:50px;left:15px;right:auto; }
 #footer .col-xs-12{display:block;}
 .footer-text-container{width:auto;padding-top: 80px;float:none;clear: both;;}
 .footer-text-container a{margin:0;width:auto;display:block;padding-bottom: 5px;}
-.footer-text-container p:after { content: "© 2014 Copyright by LadyBoo."; display:block;}
+.footer-text-container p:after { content: "© 2014 Copyright by LadyBoo."; display:block;float:none\0;}
 #footer-bottom p { margin: 20px 0 6px 0; text-align: left; }
 .footer-social-links-container a img { top: -26px }
 .footer-text-container { position: relative;float: none; }
@@ -262,6 +262,7 @@ textarea.form-control { resize: none; }
 #scroll-top { bottom: 15px;  }
 .fb_iframe_widget{float:right;}
 }
+
 /*-------------------------------------------------------------------------------------------lightbox預覽---*/
 #lightBox { z-index: -100; position: absolute; top: 0; left: 0;opacity:0;}
 #inline_content .item-price-sale { font-size: 1.3em; color: #D01A7E; line-height: 2em; }

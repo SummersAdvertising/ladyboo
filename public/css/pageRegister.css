@@ -1,9 +1,11 @@
+body > iframe{display: none;}
 .title.register { width: 330px; }
 .layout.member { width: 100%; }
 .layout.member p { font-size: 1.2em; padding-bottom: 20px; }
 .layout.member a { text-decoration: underline; }
 #register-form .input-group .input-group-addon { width: 125px; border-radius: 2px 0 0 2px; padding: 0px 10px; line-height: 44px; min-width: 125px; }
 .input-group { width: 50%; margin-bottom: 30px; }
+.code .input-group{width:100%;}
 .input-group.register-email { float: left; }
 .emailNote { float: left; padding-left: 10px; font-size: 0.9em; width: 50%; }
 .input-group.register-phone { clear: both; }
@@ -14,7 +16,7 @@ label { font-size: 1.0em; font-weight: normal; color: #646464; }
 #register-form .code .input-group .form-control { background-color: #F2F2F2; color: #B3B3B3; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; }
 fieldset.half-margin { margin-bottom: 0px; }
 #register-form .register-birthday p { float: left; padding-bottom: 0; padding-right: 8px; padding-left: 8px; margin: 0; line-height: 45px; font-size: 1.0em; }
-.input-container label{position:absolute;right: 10px;top: 10px;color:#c9006e;}
+.input-container label{z-index:900;position:absolute;right: 10px;top: 45px;color:#c9006e;font-size: 0.9em;}
 #register-form .form-control {position: initial;}
 @media (min-width: 992px) and (max-width: 1200px) {
 .emailNote { width: 33%; }
@@ -42,11 +44,20 @@ fieldset.half-margin { margin-bottom: 0px; }
 .input-group { width: 100%; }
 #content .container { padding: 0 10px; }
 .half-margin { font-size: 0.9em; }
-.code { width: 100%; }
-#content .btn-custom-2, #content .btn-custom-3 { font-size: 1em; }
+.code { min-width: 320px; padding:0;}
+#content .btn-custom-2, #content .btn-custom-3 { font-size: 1em!important; }
 #user_birthday_1i{width: 60%;float:none;display:block;margin:0;}
-	#user_birthday_2i{width: 135px;margin:10px 15px 0 0;}
-	#user_birthday_3i{width: 135px;margin:10px 0 0 0;}
+#user_birthday_2i{width: 135px;margin:10px 15px 0 0;}
+#user_birthday_3i{width: 135px;margin:10px 0 0 0;}
+.input-container label{font-size: 0.9em;}
+.code td{display:block;margin-top:20px;}
+.code a{display:inline-block;}
+.code td:last-child{display:none;}
+.code .input-group{margin-bottom: 0px;}
+.recaptchatable{border:none!important;}
+.recaptchatable #recaptcha_image{width:300px!important;overflow: hidden;}
+#recaptcha_image_cell{width:300px!important;}
+.recaptchatable #recaptcha_response_field {height: 30px;}
 }
 
 
