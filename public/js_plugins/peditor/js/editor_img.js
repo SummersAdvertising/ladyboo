@@ -156,7 +156,7 @@ editor.img = {
 		var img = $("<img>");
 		// img.attr("alt", paragraph.id);
 		img.attr("src", paragraph.path);
-		img.attr("title", paragraph.id);
+		// img.attr("title", paragraph.id);
 		img.addClass('img-responsive');
 
 		if(paragraph.link){
