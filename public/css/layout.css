@@ -119,13 +119,12 @@ h1.logo { margin-top: 10px; margin-bottom: 15px; }
 #responsive-nav-button #responsive-nav-button-icon { display: inline-block; width: 35px; height: 36px; background-color: #C9006E; background-image: url(../images/sprites/responsive-menu-icon.png); background-repeat: no-repeat; background-position: center center; vertical-align: top; border-radius: 0px; margin-left: 15px; margin-top: 16px; transition: none; -webkit-transition: none; -moz-transition: none; box-shadow: none; -webkit-box-shadow: none; }
 #main-nav-container #main-nav #responsive-nav >ul { min-width: 300px; width: 100%; right: 0px!important; position: absolute; top: 54px; }
 #main-nav-container #main-nav #responsive-nav ul li .mega-menu .mega-menu-list li { text-transform: capitalize; background-image: url(../images/img_list.gif); background-repeat: no-repeat; background-position: left center; width: 100%; }
-#main-nav-container #main-nav #responsive-nav ul li .mega-menu .mega-menu-title {
-font: 0.9em Helvetica, Microsoft JhengHei, "微軟正黑體"!important;
-display: block;
-padding: 10px 30px;background: #f6f6f6;
-border-top:1px solid rgba(200, 200, 200, 0.2); 
-border-bottom: solid 1px #eee;border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-}
+#main-nav-container #main-nav #responsive-nav ul li .mega-menu .mega-menu-title {font: 0.9em Helvetica, Microsoft JhengHei, "微軟正黑體"!important;display: block;padding: 10px 30px;background: #f6f6f6;border-top:1px solid rgba(200, 200, 200, 0.2); border-bottom: solid 1px #eee;border-bottom: 1px solid rgba(255, 255, 255, 0.5);}
+#main-nav-container #main-nav #responsive-nav ul li .menu-button {height: 70px;background-repeat:no-repeat;width: 100%;background-position: 260px -350px;}
+#main-nav-container #main-nav #responsive-nav ul li .menu-button.active{background-position: 260px -400px;}
+#main-nav-container #main-nav #responsive-nav ul li .mega-menu .menu-button{background-position: 260px -365px;background-repeat:no-repeat;}
+#main-nav-container #main-nav #responsive-nav ul li .mega-menu .menu-button.active{background-position: 260px -415px;}
+
 }
 /*粉紅區塊指引區 Start---------------------------------------------------------------------------------------------------------------------*/
 #breadcrumb-container { background: #C9006E; margin-bottom: 0px; margin-top: 0; top: -10; }
