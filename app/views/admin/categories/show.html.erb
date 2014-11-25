@@ -11,10 +11,9 @@
         <% @breadcrumb.each_with_index do | bread, index | %>
           <%= bread.name if index == 0 %>
             <% if index >= 1  %>
-              <span>/<%= bread.name %></span>
+              <span>/ <%= bread.name %></span>
               <!-- link_to  ancestor.name,  admin_hqlevel_path(ancestor.id, :locale => I18n.locale) -->
             <% end %>
-
             <% if index == (@breadcrumb.count - 1 ) %>
               <!-- <span>/分類列表</span> -->
             <% end %>
@@ -38,7 +37,8 @@
             </td>
             <td width="18%">
               <div class="tool">
-                <%= link_to "", "javascript:void(0);", :data => { :id => category.id }, :class => "edit", title:"編輯" %><%= link_to "", admin_category_path(category), :data => { :confirm => "將會刪除分類底下所有商品，確定繼續？" }, :method => :delete, :class => "delete", title: "刪除" %>
+                <%= link_to "", "javascript:void(0);", :data => { :id => category.id }, :class => "edit", title:"編輯" %>
+                <%= link_to "", admin_category_path(category), :data => { :confirm => "將會刪除分類底下所有商品，確定繼續？" }, :method => :delete, :class => "delete", title: "刪除" %>
               </div>
             </td>
           </tr>
@@ -102,7 +102,7 @@
           <%= bread.name if index == 0 %>
 
           <% if index >= 1  %>
-            <span>/<%= bread.name %></span>
+            <span>/ <%= bread.name %></span>
             <!-- link_to  ancestor.name,  admin_hqlevel_path(ancestor.id, :locale => I18n.locale) -->
           <% end %>
 
@@ -113,7 +113,7 @@
       </h3>
       <div class="button right">
         <%= link_to  admin_category_products_path(@category), :method => :post, class: "right highlight toggle_new_category" do %>
-          新增產品<img src="/images/admin/add_folder.png">
+          新增產品<img src="/images/admin/add_file.png">
         <% end %>
       </div>
     </div>
@@ -125,14 +125,21 @@
             <td width="6%">
               <% if product.status == "disable" %>
                 <img src="/images/admin/alert.png">
-              <% end %>
+              <% end %>              
             </td>
             <td width="76%">
               <%= link_to(product.name, edit_admin_category_product_path(@category, product)) %>
             </td>
             <td width="18%">
               <div class="tool">
-                <%= link_to(get_change_status_name(product),change_status_admin_category_product_path(@category, product), :method => :post) %><%= link_to("", edit_admin_category_product_path(@category, product), class: 'edit') %><%= link_to("", admin_category_product_path(@category, product), :method => :delete, :data => {:confirm => "確定刪除？"}, class: 'delete') %>
+                <%#toto= link_to(get_change_status_name(product),change_status_admin_category_product_path(@category, product), :method => :post) %>
+                <% if product.status == "disable" %>
+                  <%= link_to("",change_status_admin_category_product_path(@category, product), class: 'show', :method => :post) %>
+                <% else %>
+                <%= link_to("",change_status_admin_category_product_path(@category, product), class: 'hide', :method => :post) %>
+                <% end %>                
+                <%= link_to("", edit_admin_category_product_path(@category, product), class: 'edit') %>
+                <%= link_to("", admin_category_product_path(@category, product), :method => :delete, :data => {:confirm => "確定刪除？"}, class: 'delete') %>
               </div>
             </td>
           </tr>

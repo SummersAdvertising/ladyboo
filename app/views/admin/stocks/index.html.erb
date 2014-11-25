@@ -11,48 +11,59 @@
 
 <article>
   <div class="hgroup">
-    <h3 class="left">分類列表</h3>
     <div class="button right">
-      <a href="javascript:void(0);" class="right highlight toggle_new_stock">新增庫存<img src="/images/admin/add_folder.png"></a>
+      <a href="javascript:void(0);" class="right highlight toggle_new_stock">新增庫存<img src="/images/admin/add.png"></a>
     </div>
-  </div>       
+  </div>  
+
 
     <div class="list">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <% @stocks.each do |stock| %>
-      
-        <tr class="show_stock_<%= stock.id %>">
-          <td width="6%" valign="top">&nbsp;</td>
-          <td width="76%">
-            <%= stock.name %><%= show_stock_amount(stock) %> /追蹤：<%= stock.assign_amount? %><%# stocks_helper %>
-          </td>
-          <td width="18%" align="right">
-            <div class="tool">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">        
+          <tr>
+            <th width="7%">&nbsp;</th>
+            <th width="15%" align="left">尺寸</th>
+            <th width="15%" align="left">顏色</th>
+            <th width="45%" align="left">數量</th>
+            <th width="18%">&nbsp;</th>
+          </tr>
+          <% @stocks.each do |stock| %>
+            <% if stock.amount == 0 %>
+              <tr class="off">
+              <td class="icon"><img src="/images/admin/alert.png"></td>
+            <% else %>
+              <tr>
+              <td class="icon">&nbsp;</td>
+            <% end %>
+            <td><%#= stock.name %><%= stock.description_1 %></td>
+            <td><%= stock.description_2 %></td>
+            <td><%#= stock.assign_amount? %><%= show_stock_amount(stock) %></td>
+            <td align="right">
+              <div class="tool">
               <%= link_to "", "javascript:void(0);", :data => { :id => stock.id }, :class => "edit" %>
               <% if @stocks.count > 1 %>
               <%= link_to "", "stocks/#{stock.id}", :data => { :confirm => "將會刪除庫存，確定繼續？" }, :method => :delete, :class => "delete" %>
               <% end %>
-            </div>
-          </td>
-        </tr>
+              </div>
+            </td>
+          </tr>
+
+
         
-        <%# edit %>
+        <%# edit %>        
         <tr class="edit_stock_<%= stock.id %> list-edit" style="display:none;">
-          <%= form_for(stock, :url => "stocks/#{stock.id}" ) do |f| %>
-          <td width="6%" valign="top">&nbsp;</td>
-          <td width="20%">
+          <%= form_for(stock, :url => "stocks/#{stock.id}" ) do |f| %>     
+          <td class="icon"></td>     
+          <td>
             <%= f.text_field :description_1 ,class: 'text' %>
           </td>
-          <td width="20%">
+          <td>
             <%= f.text_field :description_2 ,class: 'text' %>
           </td>
-          <td width="10%">
-            <%= f.check_box :assign_amount, :id => "stock_assign_amount_#{stock.id}" %><%= f.label "assign_amount_#{stock.id}", "是否指定庫存量？" %>
+          <td>
+          <%= f.text_field :amount, :placeholder => "庫存量", class: 'text' , style:'width:30%' %>
+            <%= f.check_box :assign_amount, :id => "stock_assign_amount_#{stock.id}" %><%= f.label "assign_amount_#{stock.id}", "指定庫存量" %>
           </td>
-          <td width="10%">
-            <%= f.text_field :amount, :placeholder => "庫存量", class: 'text' %>
-          </td>
-          <td width="18%" align="right">
+          <td align="right">
             <div class="tool">
               <a href="javascript: document.getElementById('edit_stock_<%= stock.id%>').submit();" class="uvs" data-no-turbolink = true >儲存</a>
               <%= link_to("取消", "javascript:void(0);", :class => "uvs cancel_edit_stock" , :data => { :id => stock.id } )%>
@@ -64,23 +75,20 @@
         <% end %> <%# each loop end %>
         
         <%# new %>
-        <tr class="list-new edit_stock" style="display:none;">
-          <%= form_for(@stock, :url => "stocks") do |f| %>
-          
-          <td width="6%" valign="top">&nbsp;</td>
-          <td width="20%">
+        <tr class="list-new edit_stock list-edit" style="display:none;">
+          <%= form_for(@stock, :url => "stocks") do |f| %>   
+          <td class="icon"></td>       
+          <td>
             <%= f.text_field :description_1 ,class: 'text new_stock_description_1_input', placeholder: 'size' %>
           </td>
-          <td width="20%">
+          <td>
             <%= f.text_field :description_2 ,class: 'text new_stock_description_2_input', placeholder: 'color' %>
           </td>
-          <td width="10%">
+          <td>            
+            <%= f.text_field :amount, :placeholder => "庫存量" , class: 'text' , style:'width:30%' %>
+            <%= f.check_box :assign_amount %><%= f.label :assign_amount, "指定庫存量" %>
           </td>
-          <td width="10%">
-            <%= f.check_box :assign_amount %><%= f.label :assign_amount, "是否指定庫存量？" %>
-            <%= f.text_field :amount, :placeholder => "庫存量" %>
-          </td>
-          <td width="18%"  align="right">
+          <td align="right">
             <div class="tool">
               <%= f.submit "儲存", class: 'uvs' %>
               <%= link_to "取消", "javascript:void(0);", class: "cancel_new_stock uvs" %>

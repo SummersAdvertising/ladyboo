@@ -10,23 +10,33 @@
   </nav>
 </header>
 
-<%# link_to 'NEW', new_admin_category_product_measurement_path(params[:category_id], params[:product_id]) %><br><br><br>
-
+<%# link_to 'NEW', new_admin_category_product_measurement_path(params[:category_id], params[:product_id]) %>
 <article>
   <div class="list">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <% @measurements.each do |measurement| %>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">        
           <tr>
-            <td width="6%" valign="top"><%= '[顯示]' if measurement.status == 'enable' %></td>
-            <td width="70%">
-              <%= measurement.title %>
-  == <%= measurement.context_1 %> == <%= measurement.context_2 %> == <%= measurement.context_3 %> 
-  == <%= measurement.context_4 %> == <%= measurement.context_5 %> == <%= measurement.context_6 %>
-            </td>
-            <td width="18%" align="right">
+            <th width="28%" align="left">項目</th>
+            <th width="9%" >XS</th>
+            <th width="9%" >S</th>
+            <th width="9%" >M</th>
+            <th width="9%" >L</th>
+            <th width="9%" >XL</th>
+            <th width="9%" >F</th>
+            <th width="18%">&nbsp;</th>
+          </tr>
+          <% @measurements.each do |measurement| %>
+          <tr>
+            <td><%= measurement.title %></td>
+            <td align="center"><%= measurement.context_1 %></td>
+            <td align="center"><%= measurement.context_2 %></td>
+            <td align="center"><%= measurement.context_3 %></td>
+            <td align="center"><%= measurement.context_4 %></td>
+            <td align="center"><%= measurement.context_5 %></td>
+            <td align="center"><%= measurement.context_6 %></td>
+            <td align="right">
               <div class="tool">
                 <%= link_to '', edit_admin_category_product_measurement_path(params[:category_id], params[:product_id],measurement), class: 'edit' %>
-                <%= link_to "", admin_category_product_measurement_path(@product.category,@product,measurement), :data => { :confirm => "確定繼續？" }, :method => :delete, :class => "delete", title: "刪除" %>
+                <%#= link_to "", admin_category_product_measurement_path(@product.category,@product,measurement), :data => { :confirm => "確定繼續？" }, :method => :delete, :class => "delete", title: "刪除" %>
               </div>
             </td>
           </tr>

@@ -12,22 +12,23 @@
 </header>
 
 <article>
-
+<div class="form">
   <%= simple_form_for(@product, :url => admin_category_product_upload_photo_path(params[:category_id] , @product), html: { id: "patchthisproduct", :multipart => true } ) do |f| %>
 
-    <%= render 'admin/common/upload_by_type', target_title: '圖' %>
+    <%= render 'admin/common/upload_by_type', target_title: '圖片' %>
     
     <%= f.hidden_field :status, :value => 'enable' %>
-
-    <div class="button"> 
-      <%= content_tag :button, type: :submit, class: 'right highlight' do %>
-        上傳<img src="/images/admin/up.png">
-      <% end %>
-    </div>
-
+</div>
+<div class="button"> 
+  <%= content_tag :button, type: :submit, class: 'right highlight' do %>
+    上傳<img src="/images/admin/up.png">
   <% end %>
-
-<%= render 'admin/common/show_by_type', target: @product, target_title: '圖', type: 'ProductPhotoGallery', allow_dragable: true %>
+</div>
+  <% end %>
+<div class="hgroup">
+  <h3 class="left">圖片預覽<span>(可拖拉排序，第一張為封面)</span></h3>          
+</div>
+<%= render 'admin/common/show_by_type', target: @product, target_title: '圖片', type: 'ProductPhotoGallery', allow_dragable: true %>
 
 <div class="button"> 
   <%= link_to admin_category_path(@product.category), class: 'left' do  %>

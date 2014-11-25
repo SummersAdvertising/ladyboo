@@ -13,16 +13,34 @@
 
   <div class="hgroup">
     <%= simple_form_for(@measurement, :url => admin_category_product_measurement_path(params[:category_id] , params[:product_id], @measurement), html: { id: "patchthismeasurement" } ) do |f| %> 
-    <div class="right">顯示：<%= f.check_box :status, { class: 'checkbox'  }, "enable", "disable" %>
-    是</div>
-    </div> 
-    title：<%= f.input_field :title , class: 'text' %><br> 
-    context_1：<%= f.input_field :context_1 , class: 'text'%><br>
-    context_2：<%= f.input_field :context_2 , class: 'text'%><br>
-    context_3：<%= f.input_field :context_3 , class: 'text'%><br>
-    context_4：<%= f.input_field :context_4 , class: 'text'%><br>
-    context_5：<%= f.input_field :context_5 , class: 'text'%><br>
-    context_6：<%= f.input_field :context_6 , class: 'text'%><br>
+    <div class="right"><%= f.check_box :status, { class: 'checkbox'  }, "enable", "disable" %>
+    顯示</div>
+  </div> 
+
+<div class="list">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">        
+          <tr>
+            <th width="28%" align="left">項目</th>
+            <th width="9%" >XS</th>
+            <th width="9%" >S</th>
+            <th width="9%" >M</th>
+            <th width="9%" >L</th>
+            <th width="9%" >XL</th>
+            <th width="9%" >F</th>
+            <th width="18%">&nbsp;</th>
+          </tr>          
+          <tr class="list-edit">
+            <td><%= f.input_field :title , class: 'text' %></td>
+            <td><%= f.input_field :context_1 , class: 'text'%></td>
+            <td><%= f.input_field :context_2 , class: 'text'%></td>
+            <td><%= f.input_field :context_3 , class: 'text'%></td>
+            <td><%= f.input_field :context_4 , class: 'text'%></td>
+            <td><%= f.input_field :context_5 , class: 'text'%></td>
+            <td><%= f.input_field :context_6 , class: 'text'%></td>
+            <td>&nbsp;</td>
+          </tr>
+      </table>
+  </div>
   <div class="button"> 
     <%= link_to admin_category_product_measurements_path(params[:category_id], params[:product_id]), class: 'left' do  %>
       <img src="/images/admin/left.png">返回

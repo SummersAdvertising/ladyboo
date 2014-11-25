@@ -1,10 +1,9 @@
 <header>
   <h2 class="left">社群迴響</h2>
-  <nav class="left"></nav>
+  <div class="explain right"><p>圖片尺寸：770px * 300px</p></div>
 </header>
 <article>
   <div class="hgroup">
-    <h3 class="left">編輯社群迴響</h3>
     <%= form_for(@community, :url => custom_edit_admin_community_path(@community), html: { id: "patchthiscommunity", :multipart => true } ) do |f| %>
     <div class="right">
       顯示 <%= f.check_box :status, { class: 'checkbox'  }, "enable", "disable" %>
@@ -60,7 +59,7 @@
         </td>
       </tr>
       <tr>
-        <td width="7%">內容：</td>
+        <td width="7%" valign="top">內容：</td>
         <td width="93%">
           <%= f.cktext_area :ck_context, :class => 'someclass', :ckeditor => {:language => 'zh-tw'} %>
         </td>
