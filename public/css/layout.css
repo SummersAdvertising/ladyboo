@@ -83,6 +83,7 @@ h1.logo { margin-top: 10px; margin-bottom: 15px; }
 #quick-access .quick-search-form .btn-custom:focus,#quick-access .quick-search-form .btn-custom:active {background-position: 0 -96px;}
 @media only screen and (min-device-width:480px){
 #quick-access .quick-search-form .btn-custom {background-color: #646464; background-position: 0 -116px; }
+#quick-access .quick-search-form .btn-custom:focus,#quick-access .quick-search-form .btn-custom:active {background-position: 0 -116px;}
 }
 #quick-access { margin-top: 17px }
 #main-nav-container #quick-access .form-group { display: block; }
@@ -177,7 +178,6 @@ h3.title span { font-size: 20px; padding: 0; margin-top: 5px; }
 .related-slider .related-product figure{height:100px;overflow: hidden;}
 .related-slider .related-product img{width:100px;}
 .panel-body li.active {background-color: #fff799;}
-
 @media \0screen {
 .item > .item-image-container .item-price-container .item-price { padding-top: 15px;line-height:0px;  }
 }
