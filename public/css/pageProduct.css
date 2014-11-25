@@ -50,6 +50,7 @@ label { color: #FFF; }
 .favDelete:hover { background-position: -40px -20px; }
 .item:hover > .item-image-container .favDelete { visibility: visible; }
 .prodCon img{padding:10px 0;}
+#content .img-responsive{width:auto;}
 @media (min-width: 992px) and (max-width: 1300px) {
 #prodTop .container { width: 100%; }
 .bgFav { top: 65px; }

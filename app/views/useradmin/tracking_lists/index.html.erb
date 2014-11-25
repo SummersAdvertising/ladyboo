@@ -39,7 +39,7 @@
                 </div><!-- End .item-image-container --> 
                 <div class="item-meta-container"><!-- Start .item-meta-container 商品文字說明 --> 
                   <h3 class="item-name">
-                    <%= link_to category_product_path(current_product.category, current_product) do %>
+                    <%= link_to category_product_path(current_product.category, current_product), title: current_product.name+'    '+current_product.en_name do %>
                       <%= current_product.name %><br><%= current_product.en_name %>
                     <% end %>
                   </h3>

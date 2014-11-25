@@ -20,7 +20,7 @@
              </div>
              <div class="item-meta-container"><!-- Start .item-meta-container 商品文字說明 --> 
                 <h3 class="item-name">
-                  <%= link_to category_product_path(product.category, product) do %>
+                  <%= link_to category_product_path(product.category, product), title: product.name+'    '+product.en_name do %>
                     <%= product.name %><br><%= product.en_name %>
                   <% end %>
                 </h3>
