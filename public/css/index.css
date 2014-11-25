@@ -58,9 +58,9 @@
 .category-item-container .item:hover .item-price-original { color: #646464; }
 .category-item-container .item:hover .item-price-sale { color: #f858b7; }
 /*按鈕*/
-.item-add-btn { background-color: #313131; border-color: #313131; padding: 6px 10px 0px 10px; line-height: 0.9em!important; height: auto; color: #FFF; font-size: 0.9em!important; text-align: center; }
+.item-add-btn { background-color: #313131; border-color: #313131; padding: 4px 15px 2px 15px; text-align: center; line-height: 1.2em!important; height: auto; color: #FFF; font-size: 0.9em!important; }
 .item-action .item-add-btn:hover, .item-add-btn:focus, .item-add-btn:active, .item-add-btn.active { background-color: #C9006E; border-color: #C9006E; }
-.item-add-btn span { display: block; line-height: 1.4em; }
+.item-add-btn span { display: block; }
 .item .item-image-container { min-width: 230px; }
 .icon-button { width: 40px; height: 40px; border-radius: 3px; }
 .icon-compare { background: url(../images/idx-07.png) center center no-repeat #fff!important; border: 1px solid #313131; }

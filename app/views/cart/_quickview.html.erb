@@ -23,7 +23,7 @@
           </figure>
           <div class="dropdown-cart-details">
             <p class="item-name"> 
-              <%= link_to category_product_path(Stock.find(item[:id]).product.category.id,item[:product_id]), target: '_blank' do %>
+              <%= link_to category_product_path(Stock.find(item[:id]).product.category.id,item[:product_id]), target: '_blank', title: item[:name]+'    '+item[:en_name] do %>
                 <%= item[:name] %><br><%= item[:en_name] %>
               <% end %>
             </p>

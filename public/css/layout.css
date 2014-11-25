@@ -35,7 +35,9 @@ body, html { overflow-x: hidden; color: #434343; }
 .related-product .item-name { padding-top: 10px; color: #434343; overflow: hidden; text-overflow: ellipsis; -o-text-overflow: ellipsis; white-space : nowrap; }
 .flexslider { max-height: 400px; }
 #header-top.fixed { position: fixed; top: 0; left: 0; z-index: 1000; padding: 0; -webkit-backface-visibility: hidden; width: 100%; }
-
+.dropdown-cart .dropdown-cart-product-list figure{height:85px;overflow: hidden;}
+.dropdown-cart .dropdown-cart-product-list .delete-item{top:-6px;}
+.dropdown-cart .dropdown-cart-product-list li.item{margin-bottom: 0px;}
 @media (min-width: 768px) and (max-width: 1199px) {
 #header-top .container { width: 100%; }
 }
@@ -162,8 +164,10 @@ h3.title span { font-size: 20px; padding: 0; margin-top: 5px; }
 #readMore:hover { color: #FFF; background-color: #c9006e; border: 1px solid #FFF; }
 .flex-active-slide{margin-right:20px;}
 .item-action {text-align: right;}
-#content .related-product img{height:100px;width:100px;}
+.related-slider .related-product figure{height:100px;overflow: hidden;}
+.related-slider .related-product img{width:100px;}
 .panel-body li.active {background-color: #fff799;}
+
 @media \0screen {
 .item > .item-image-container .item-price-container .item-price { padding-top: 15px;line-height:0px;  }
 }
@@ -282,14 +286,14 @@ textarea.form-control { resize: none; }
 .cb-info select { width: 100%; }
 #inline_content .product-add.clearfix {height: 80px;}
 #btnAdd{position: relative;}
-#btnAdd .icon-button.icon-like {position: absolute;bottom: 0px;left: 120px;}
+#btnAdd .icon-button.icon-like {position: absolute;bottom: 0px;left: 130px;}
 select.form-control { display: inline; width: 200px; border-radius: 0px; padding: 2px 2px 2px 6px; height: 30px; margin-bottom: 20px; margin-left: 10px;}
+label { font-weight: normal; color: #434343; }
+
 @media screen and (-webkit-min-device-pixel-ratio:0) {
 select.form-control { display: inline; width: 200px; border-radius: 0px; background-image: url(../images/bg_select.jpg); background-repeat: no-repeat; background-position: right top; padding: 2px 2px 2px 6px; height: 30px; margin-bottom: 20px; margin-left: 10px; appearance:none;-moz-appearance:none; -webkit-appearance:none; }
 select.form-control:hover, select.form-control:focus { background-image: url(../images/bg_select2.jpg); }
 }
-label { font-weight: normal; color: #434343; }
-
 @media (max-width: 940px) {
 .icon-compare { display: none; }
 #lightBox { display:none;}

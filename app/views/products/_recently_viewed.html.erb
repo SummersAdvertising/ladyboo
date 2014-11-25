@@ -10,7 +10,7 @@
     </figure>
     <h5>
       <p class="item-name">
-        <%= link_to category_product_path(product.category, product) do %>
+        <%= link_to category_product_path(product.category, product), title: product.name+'    '+product.en_name do %>
           <%= product.name %><br><%= product.en_name %>
         <% end %>
       </p>
