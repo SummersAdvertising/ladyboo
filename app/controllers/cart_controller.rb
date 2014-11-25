@@ -19,8 +19,8 @@ class CartController < ApplicationController
 
     begin
       @result = Cart.check_stock_all(cookies[:cart_ladyboo])
-      cookies[:cart_ladyboo] = @result[:cart_items]
-      
+      cookies[:cart_ladyboo] = { value: @result[:cart_items], httponly: true }
+
       if @result[:cart_message].to_s.length > 0
         flash.now[:alert] = @result[:cart_message]
       else 
@@ -388,7 +388,7 @@ class CartController < ApplicationController
       
       if(@stock)
         @result = Cart.check_stock(cookies[:cart_ladyboo], @stock, params[:cart][:amount].to_i)
-        cookies[:cart_ladyboo] = @result[:cart_items]
+        cookies[:cart_ladyboo] = { value: @result[:cart_items], httponly: true }
 
         @cart_message = @result[:cart_message]
       else
@@ -406,7 +406,7 @@ class CartController < ApplicationController
 
   def plus
     @result = Cart.plus_stock(cookies[:cart_ladyboo], params[:id])
-    cookies[:cart_ladyboo] = @result[:cart_items]
+    cookies[:cart_ladyboo] = { value: @result[:cart_items], httponly: true }
 
     @cart_message = @result[:cart_message] unless @result[:cart_message].empty?
 
@@ -421,7 +421,7 @@ class CartController < ApplicationController
 
   def minus
     @result = Cart.minus_stock(cookies[:cart_ladyboo], params[:id])
-    cookies[:cart_ladyboo] = @result[:cart_items]
+    cookies[:cart_ladyboo] = { value: @result[:cart_items], httponly: true }
 
     @cart_message = @result[:cart_message] unless @result[:cart_message].empty?
 
@@ -436,7 +436,7 @@ class CartController < ApplicationController
 
   def delete_by_attribute
     @result = Cart.minus_partial_stock_to_zero(cookies[:cart_ladyboo], params[:id])
-    cookies[:cart_ladyboo] = @result[:cart_items]
+    cookies[:cart_ladyboo] = { value: @result[:cart_items], httponly: true }
 
     @cart_message = @result[:cart_message]
 
@@ -447,7 +447,7 @@ class CartController < ApplicationController
 
   def delete
     @result = Cart.delete_stock(cookies[:cart_ladyboo], params[:id])
-    cookies[:cart_ladyboo] = @result[:cart_items]
+    cookies[:cart_ladyboo] = { value: @result[:cart_items], httponly: true }
 
     @cart_message = @result[:cart_message]
 
