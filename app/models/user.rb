@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   rolify :role_cname => 'Role'
   after_create :assign_member_role
   
+  require 'sanitize'
+  before_validation :sanitize_content, :on => :create
+
   has_many :orders
   has_many :addressbooks
   has_many :tracking_lists
@@ -56,4 +59,9 @@ class User < ActiveRecord::Base
   def assign_member_role
     self.add_role :member
   end
+  
+  def sanitize_content
+    self.username = Sanitize.fragment(self.username, Sanitize::Config::DEFAULT)
+  end
+
 end

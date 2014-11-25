@@ -56,6 +56,7 @@ gem 'whenever', :require => false
 gem 'sucker_punch', '~> 1.0'
 
 gem 'activemerchant'
+gem 'sanitize'
 
 group :production, :staging do
   gem 'mysql2'
