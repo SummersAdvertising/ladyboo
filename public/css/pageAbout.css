@@ -12,9 +12,12 @@
 .article .article-meta-date { font: 1.0em Helvetica, Microsoft JhengHei; font-weight: 700; letter-spacing: 1px; }
 #wrapper { position: relative }
 .bgBottom.about { background-image: url(../images/bg_footer.png); height: 327px; width: 268px; }
-.bgBottom { position: absolute; bottom: -1px; right: 0px; }
+.bgBottom { position: absolute; bottom: -1px;bottom: 26px\0; right: 0px; }
  @media (min-width: 1200px) {
 .article .article-meta-date { width: 85px; }
+}
+ @media (min-width: 768px) and (max-width: 1200px) {
+.bgBottom { bottom: 8px\0; }
 }
 @media (min-width: 992px) and (max-width: 1200px) {
 .col-md-9 { width: 80%; }

@@ -4,11 +4,12 @@
 #wrapper { position: relative }
 .bottom { right:auto;left:16%; }
 .bgBottom.index { background-image: url(../images/bg_footer2.png); height: 169px; width: 284px; }
-.bgBottom { position: absolute; bottom: 0px; left: -100px; }
-#bannerFrame { position: absolute; left: 0; top: 0; z-index: 600;}
+.bgBottom { position: absolute; bottom: 0px; left: -100px; bottom: 27px\0; }
+#bannerFrame { position: absolute; left: 0; top: 0;z-index: 600;}
  @media (min-width: 768px) and (max-width: 1200px) {
 .title.lookbook { width: 20%; min-width: 320px; }
 .title.pickup { width: 20%; min-width: 280px; }
+.bgBottom { bottom: 10px\0; }
 }
 @media (max-width: 767px) {
 .title.lookbook { width: 260px; }
@@ -57,6 +58,7 @@
 .item-price-sale { color: #D01A7E; font-weight: 600; font-size: 1.1em; }
 .category-item-container .item:hover .item-price-original { color: #646464; }
 .category-item-container .item:hover .item-price-sale { color: #f858b7; }
+
 /*按鈕*/
 .item-add-btn { background-color: #313131; border-color: #313131; padding: 4px 15px 2px 15px; text-align: center; line-height: 1.2em!important; height: auto; color: #FFF; font-size: 0.9em!important; }
 .item-action .item-add-btn:hover, .item-add-btn:focus, .item-add-btn:active, .item-add-btn.active { background-color: #C9006E; border-color: #C9006E; }

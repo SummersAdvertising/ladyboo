@@ -79,7 +79,11 @@ body, html { overflow-x: hidden; color: #434343; }
 .menu > li:hover { background: url(../images/nav.gif) center bottom no-repeat }
 #main-nav-container #main-nav .menu > li { font-size: 0.8em; line-height: 1.5em; height: 69px; }
 h1.logo { margin-top: 10px; margin-bottom: 15px; }
-#quick-access .quick-search-form .btn-custom { background-image: url(../images/sprites/sprite.png); background-color: #646464; background-position: 0 -116px; }
+#quick-access .quick-search-form .btn-custom {background-color: #646464;background-position: 0 -96px;}
+#quick-access .quick-search-form .btn-custom:focus,#quick-access .quick-search-form .btn-custom:active {background-position: 0 -96px;}
+@media only screen and (min-device-width:480px){
+#quick-access .quick-search-form .btn-custom {background-color: #646464; background-position: 0 -116px; }
+}
 #quick-access { margin-top: 17px }
 #main-nav-container #quick-access .form-group { display: block; }
 #main-nav-container.fixed h1.logo { margin-top: 10px }
@@ -89,6 +93,7 @@ h1.logo { margin-top: 10px; margin-bottom: 15px; }
 #main-nav-container #main-nav .menu li:nth-child(2) > .mega-menu .col-5{ width: 50%; }
 .menuTitle{font-size:1.3em;padding:20px 0;display:block;text-align:left;}
 .col-5{padding-bottom:20px;}
+#main-nav-container #main-nav .menu li ul{top:65px\0;}
 @media (min-width: 992px) and (max-width: 1199px) {
 #main-nav { padding-right: 160px; }
 #main-nav-container .container { width: 100%; }
@@ -122,11 +127,16 @@ h1.logo { margin-top: 10px; margin-bottom: 15px; }
 #main-nav-container #main-nav #responsive-nav >ul { min-width: 300px; width: 100%; right: 0px!important; position: absolute; top: 54px; }
 #main-nav-container #main-nav #responsive-nav ul li .mega-menu .mega-menu-list li { text-transform: capitalize; background-image: url(../images/img_list.gif); background-repeat: no-repeat; background-position: left center; width: 100%; }
 #main-nav-container #main-nav #responsive-nav ul li .mega-menu .mega-menu-title {font: 0.9em Helvetica, Microsoft JhengHei, "微軟正黑體"!important;display: block;padding: 10px 30px;background: #f6f6f6;border-top:1px solid rgba(200, 200, 200, 0.2); border-bottom: solid 1px #eee;border-bottom: 1px solid rgba(255, 255, 255, 0.5);}
+#main-nav-container #main-nav #responsive-nav ul li .menu-button {height: 70px;background-repeat:no-repeat;width: 100%;background-position: 260px -295px;}
+#main-nav-container #main-nav #responsive-nav ul li .menu-button.active{background-position: 260px -335px;}
+#main-nav-container #main-nav #responsive-nav ul li .mega-menu .menu-button{background-position: 260px -310px;background-repeat:no-repeat;}
+#main-nav-container #main-nav #responsive-nav ul li .mega-menu .menu-button.active{background-position: 260px -348px;}
+}
+@media only screen and (min-device-width:480px){
 #main-nav-container #main-nav #responsive-nav ul li .menu-button {height: 70px;background-repeat:no-repeat;width: 100%;background-position: 260px -350px;}
 #main-nav-container #main-nav #responsive-nav ul li .menu-button.active{background-position: 260px -400px;}
 #main-nav-container #main-nav #responsive-nav ul li .mega-menu .menu-button{background-position: 260px -365px;background-repeat:no-repeat;}
 #main-nav-container #main-nav #responsive-nav ul li .mega-menu .menu-button.active{background-position: 260px -415px;}
-
 }
 /*粉紅區塊指引區 Start---------------------------------------------------------------------------------------------------------------------*/
 #breadcrumb-container { background: #C9006E; margin-bottom: 0px; margin-top: 0; top: -10; }
@@ -185,6 +195,7 @@ h2.title { background: none; }
 .pagination-container { width: 90%; margin-left: auto; margin-right: auto; }
 .pagination { display: block; text-align: center; }
 }
+
 /*-------------------------------------------------------------------------------------------表單按鈕---*/
 .icon-button { -webkit-box-shadow: outset 0 1px 0 rgba(0, 0, 0, 0.45); box-shadow: outset 0 1px 0 rgba(0, 0, 0, 0.45); }
 .icon-button:hover, .icon-button:focus, .icon-button:active, .icon-button.active { border-color: #000; }
@@ -197,14 +208,7 @@ h2.title { background: none; }
 .input-icon.input-icon-birthday { background-position: 0px -120px; }
 .input-icon.input-icon-address { background-position: 0px -150px; }
 .custom-checkbox .checbox-container { top: 6px; }
-#user_birthday_1i,#user_birthday_2i,#user_birthday_3i{outline: none;
-display: inline-block;height: 47px;
-padding:0;margin:0;
-background-color: #FFF;
-border-radius: 0px;
--moz-border-radius: 0px;
--webkit-border-radius: 0px;border-color:#e0e0e0;
-width: 28%;}
+#user_birthday_1i,#user_birthday_2i,#user_birthday_3i{outline: none;display: inline-block;height: 47px;padding:0;margin:0;background-color: #FFF;border-radius: 0px;-moz-border-radius: 0px;-webkit-border-radius: 0px;border-color:#e0e0e0;width: 28%;}
 #user_birthday_1i{margin-right: 5%}
 #user_birthday_3i{margin-left: 5%}
 .custom-checkbox input[type="checkbox"]:checked + .checbox-container {background: #C9006E !important;border-color: #C9006E;}
@@ -253,7 +257,7 @@ textarea.form-control { resize: none; }
 @media (max-width: 830px) {
 #footer .fb-share-button { top:50px;left:40px;right:auto;}
 }
-@media (max-width: 767px) {.footer-text-container p:after { isplay:block\0;float:right\0; }
+@media (max-width: 767px) {.footer-text-container p:after { display:block\0;float:right\0; }
 #footer .fb-share-button { top:50px;left:15px;right:auto; }
 #footer .col-xs-12{display:block;}
 .footer-text-container{width:auto;padding-top: 80px;float:none;clear: both;;}
@@ -268,11 +272,12 @@ textarea.form-control { resize: none; }
 }
 
 /*-------------------------------------------------------------------------------------------lightbox預覽---*/
-#lightBox { z-index: -100; position: absolute; top: 0; left: 0;opacity:0;}
+#lightBox { z-index: -100; position: absolute; top: 0; left: 0;opacity:0; }
 #inline_content .item-price-sale { font-size: 1.3em; color: #D01A7E; line-height: 2em; }
 #inline_content .item-price-original { font-size: 1.1em; color: #cccccc; }
 #cboxOverlay { background: #aaa; }
-#inline_content { padding: 3%; background: #fff!important; height: 446px; width: 923px }
+#cboxLoadedContent{overflow-x: hidden;}
+#inline_content { padding: 3%; background: #fff!important; height: auto;min-height: 100%; width: 923px;overflow-x: hidden; }
 #inline_content h4 { border-bottom: 1px solid #D2D2D2; padding: 0 0 10px 0; font: 1.3em Helvetica, Microsoft JhengHei, "微軟正黑體"; color: #434343; }
 #inline_content ul { width: 60px; }
 #inline_content ul a { cursor: pointer; margin: 4px 0; display: block; width: 60px; height: 60px; }
