@@ -23,11 +23,7 @@ module Ladyboo
     # config.i18n.default_locale = :de
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
 
-    # config.action_dispatch.default_headers = {
-    #   'X-Frame-Options' => 'SAMEORIGIN',
-    #   'X-XSS-Protection' => '1; mode=block',
-    #   'X-Content-Type-Options' => 'nosniff'
-    # }
+    
     
   end
 end

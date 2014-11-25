@@ -4,7 +4,7 @@ module CartHelper
 
   def products_in_cart_count
     @cart_items = JSON.parse_if_json(cookies[:cart_ladyboo]) || Hash.new
-    cookies[:cart_ladyboo] = Cart.check_cookies(@cart_items)
+    cookies[:cart_ladyboo] = { value: Cart.check_cookies(@cart_items), httponly: true }
 
     return @cart_items.inject(0) { | sum, i | sum += i[1] }
   end

@@ -57,7 +57,7 @@ Rails.application.routes.draw do
   end
 
 
-  resources :lookbooks, :only => [:show] do 
+  resources :lookbooks, :only => [] do 
     resources :topics, :only => [:show] do 
       resources :categories, :only => [ :index, :show] do
         resources :products, only: [:show] do 
@@ -316,6 +316,6 @@ Rails.application.routes.draw do
   end #admin scope end
   
   
-  #get '(*url)'   => 'errors#index'
+  get '(*url)'   => 'errors#index'
   
 end
