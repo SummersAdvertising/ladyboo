@@ -45,7 +45,7 @@
 .item-image-container figure img { /* [disabled]max-height:225px!important;
 */ }
 /*文字*/
-.item-name { padding-top: 20px; }
+.item-name { white-space: nowrap;overflow: hidden;text-overflow: ellipsis;padding-top: 20px; }
 .item-name a { font: 100 0.9em Helvetica, Microsoft JhengHei, "微軟正黑體"!important; margin: 0 0 5px 0; }
 .category-item-container .item:hover .item-name { color: #FFF; }
 .item-meta-container { margin: 20px 0 0 0 }

@@ -20,6 +20,7 @@
   
   <meta name="description" content="現在就試試看吧，加一點蕾絲，特調妳的性感甜美比例，妳將發現自己不同以往的美，多了新鮮想像，開始讓人著迷。 - LadyBoo">
 
+  
   <!--[if IE]> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -350,7 +351,7 @@
                     </div>
                     <div class="item-meta-container"><!-- Start .item-meta-container 商品文字說明 --> 
                       <h3 class="item-name">
-                        <%= link_to category_product_path(pickup.product.category, pickup.product) do %>
+                        <%= link_to category_product_path(pickup.product.category, pickup.product), title: pickup.product.name+"    "+pickup.product.en_name do %>
                           <%= pickup.product.name %><br><%= pickup.product.en_name %>
                         <% end %>
                       </h3>
