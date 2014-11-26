@@ -12,15 +12,15 @@
   <meta property="og:title" content="現在就試試看吧，加一點蕾絲，特調妳的性感甜美比例，妳將發現自己不同以往的美，多了新鮮想像，開始讓人著迷。 - LadyBoo">
   <meta property="og:site_name" content="Ladyboo">
   <meta property="og:description" content="時尚風格很多種，簡單不失個性的穿著，卻一向是 LadyBoo 最愛，比如說，只要簡單加一點點「蕾絲」，衣服的表情立刻繽紛起來，時尚品牌如專做蕾絲服飾的澳洲品牌Lover、義大利手工蕾絲 La Perla……等，都紛紛採用了新顏色、新設計、新花樣，顛覆過去「蕾絲＝老氣」，或「蕾絲只能性感」的印象，把女生的魅力和不同面貌鈎織出來，微微透露出性感、甜美、陽光、健康及更多可能性，LadyBoo 因為愛上這一半辛辣一半甜的美學，特地把蕾絲融入日常穿著，讓每個女生都能輕易穿搭我們精心設計或挑選的時尚單品。">
-
+  
   <meta property="og:image" content="<%= image_url('/images/fb-kv.jpg') %>">
   <meta property="og:type" content="website" />
   <meta property="og:url" content="<%= root_url %>">
   <meta property="fb:app_id" content="380171498811984">
   
   <meta name="description" content="現在就試試看吧，加一點蕾絲，特調妳的性感甜美比例，妳將發現自己不同以往的美，多了新鮮想像，開始讓人著迷。 - LadyBoo">
-
   
+
   <!--[if IE]> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -218,10 +218,6 @@
                         品牌精神<br>
                         ABOUT US
                       <% end %>
-                      <ul>
-                        <li><%= link_to "最新消息 NEWS", announcements_path %></li>
-                        <li><%= link_to "社群迴響 COMMUNITY", communities_path %></li>
-                      </ul>
                     </li>
                     
                     <li>
@@ -361,13 +357,13 @@
                           <%= form_for(@tracking_list,:url => useradmin_tracking_lists_path(@tracking_list), :html => {:id =>'NewTrackingListForm' } ) do | f |%>
                             <%= f.hidden_field :user_id, value: current_user.id , class: 'text' %>
                             <%= f.hidden_field :product_id, value: pickup.product.id, class: 'text' %>
-                            <%= f.submit "", class: "icon-button icon-like"  %>
-                            <a class='inline icon-button icon-compare pdquickview' data-pd='<%= pickup.product.id %>'></a> 
+                            <%= f.submit "Favorite", class: "icon-button icon-like",title: 'Favorite'  %>
+                            <a class='inline icon-button icon-compare pdquickview' data-pd='<%= pickup.product.id %>' title="Quick View" ></a> 
                           <% end %>
                           <%# <a href="javascript: document.getElementById('NewTrackingListForm').submit();" class="icon-button icon-like" data-no-turbolink = true ></a> %>
                         <% else %>
-                          <%= link_to '', useradmin_tracking_lists_path, class: "icon-button icon-like" %>
-                          <a class='inline icon-button icon-compare pdquickview' data-pd='<%= pickup.product.id %>'></a> 
+                          <%= link_to '', useradmin_tracking_lists_path, class: "icon-button icon-like",title: 'Favorite' %>
+                          <a class='inline icon-button icon-compare pdquickview' data-pd='<%= pickup.product.id %>' title="Quick View" ></a> 
                         <% end %>
                         
                       </div>

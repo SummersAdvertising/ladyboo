@@ -11,6 +11,7 @@ label { font-size: 1.0em; font-weight: normal; color: #646464; }
 #login-form .text-right { width: 50%; }
 #content .btn-custom-2, #content .btn-custom-3{font-size: 0.8em!important;}
 .text-right{padding-top: 40px;}
+#content a span{display:block;line-height: 1em!important;}
 @media (min-width: 992px) and (max-width: 1200px) {
 }
 @media (min-width: 768px) and (max-width: 991px) {

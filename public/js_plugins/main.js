@@ -12,7 +12,7 @@
         $(".inline").colorbox({
           inline:true, 
           width:"925",
-          height:"480",
+          height:"auto",
           href: "#inline_content",
           open: true
         });

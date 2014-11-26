@@ -2,9 +2,10 @@
 <link rel="stylesheet" href="/css/prodList.css">
 <script src="/js/side.js"></script> 
 
+
 <% content_for :meta_area do %>
 
-  <meta property="og:title" content="<%= "穿搭主題 #{@topic.name} - LadyBoo" %>">
+  <meta property="og:title" content="<%= "#{@lookbook.name} #{@topic.name}" %>">
   
   <% if @topic.galleries.where(type: 'TopicBannerGallery').first %>
     <meta property="og:image" content="<%= image_url(@topic.galleries.where(type: 'TopicBannerGallery').first.attachment.url) %>">
@@ -14,9 +15,10 @@
   
 <% end %>
 
+
 <% content_for :breadcrumb do %>
-  <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; <%= link_to 'Lookbook', 'javascript:void(0);' %>
-  &nbsp; > &nbsp; <%= link_to "穿搭主題 #{@topic.name}", lookbook_topic_path(@lookbook, @topic) %>
+  <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; Lookbook
+  &nbsp; > &nbsp; <%= "#{@lookbook.name} #{@topic.name}" %>
 <% end %>
 
 <% if @topic.galleries.select{ |v| v['type'] == 'TopicBannerGallery' }.first  %>

@@ -41,13 +41,12 @@
         <div class="tab-content clearfix">
           
           <div class="tab-pane active" id="orderInfo">
-            <p class="tagOrder">訂單編號 NO:<span id="orderNum"><%= @order.ordernum %></span></p>
+            <p class="tagOrder">訂單編號 NO:<span id="orderNum"> <%= link_to @order.ordernum, useradmin_order_path(@order) %></span></p>
             <p class="tagOrder">訂購時間 Order time: <span id="orderTime"><%= @order.created_at.strftime("%Y/%m/%d %H:%M") %></span></p>
-            <p class="tagOrder">
-              <%= link_to "聯絡客服 CONTACT US", new_useradmin_orderask_path %>
-            </p>
+            <p class="tagOrder">聯絡客服 CONTACT US</p>
 
-            <div id="contactForm"> <!-- <img id="tag" src="/images/bg_contact.png"> -->
+            <div id="contactForm"> 
+              <img id="tag" src="/images/bg_contact.png">
               <%= form_for(@orderask, :url => useradmin_orderasks_path) do |f| %>
                 <%= f.text_area :description, :placeholder => "請輸入您的留言，我們會儘快為您服務。Please leave a message, we will contact within 24 hours.", :cols => "30", :rows => "10", class: "form-control" %>
                 <p class="text-right">

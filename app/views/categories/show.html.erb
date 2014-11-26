@@ -6,7 +6,7 @@
     
     <% content_for :breadcrumb do %>
       <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; 
-      <%= link_to @category.name, 'javascript:void(0);' %>
+      <%= @category.name %>
     <% end %>
 
     <% if @category.galleries.first %>
@@ -29,9 +29,9 @@
     <% content_for :breadcrumb do %>
       <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; 
       
-      <%= link_to "#{@parent_cate.name }", category_path(@parent_cate) %> &nbsp; > &nbsp; 
+      <%= link_to "#{@parent_cate.name }", category_path(@parent_cate),title: "#{@parent_cate.name }" %> &nbsp; > &nbsp; 
       
-      <%= link_to @category.name, 'javascript:void(0);' %>
+      <%= @category.name %>
     <% end %>
 
     <% if @parent_cate.galleries.first %>

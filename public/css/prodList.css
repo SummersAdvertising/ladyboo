@@ -35,7 +35,7 @@ item-action .item-add-btn:hover, .item-add-btn:focus, .item-add-btn:active, .ite
 .item-add-btn span { display: block; }
 .icon-button { width: 40px; height: 40px; border-radius: 3px; }
 .icon-compare { background: url(../images/idx-07.png) center center no-repeat #fff!important; border: 1px solid #313131; }
-.icon-compare:hover { background: url(../images/idx-07h.png) center center no-repeat #D01A7E!important; border: 1px solid #D01A7E; }
+.icon-compare:hover { cursor: pointer; background: url(../images/idx-07h.png) center center no-repeat #D01A7E!important; border: 1px solid #D01A7E; }
 .icon-like { background: url(../images/idx-06.png) center center no-repeat #fff!important; border: 1px solid #313131; }
 .icon-like:hover { background: url(../images/idx-06h.png) center center no-repeat #D01A7E!important; border: 1px solid #D01A7E; }
 .icon-cancel {display:block;height:40px;width:40px;border-radius:4px;position: absolute;right: 55px;background: url(../images/idx-08.png) center center no-repeat #fff!important;border: 1px solid #313131;}
