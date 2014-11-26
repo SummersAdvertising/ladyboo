@@ -54,7 +54,7 @@ module StocksHelper
 
   def show_stock_amount(stock)
     if(stock.assign_amount)
-      return " / 庫存數量：#{stock.amount}"
+      return "#{stock.amount}"
     end    
   end
 

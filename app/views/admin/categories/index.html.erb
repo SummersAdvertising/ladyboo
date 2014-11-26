@@ -4,7 +4,7 @@
     <%= link_to '下架', disabled_admin_products_path %>
     <%= link_to '售完', out_of_stock_admin_products_path %>
   </nav>
-  <div class="explain right"><p>圖片尺寸：1024px * 768px</p></div>
+  <div class="explain right"><p>圖片尺寸：1030px * 280px</p></div>
 </header>
 <article>
   <div class="hgroup">
@@ -17,7 +17,6 @@
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       
       <% @categories.each do |category| %>
-
         
         <tr class="show_category_<%= category.id %>" >
           <td width="6%" style="background:url(/images/admin/folder.png) center center no-repeat"></td>
@@ -26,7 +25,8 @@
           </td>
           <td width="18%">
             <div class="tool">
-              <%= link_to "", "javascript:void(0);", :data => { :id => category.id }, :class => "edit", title:"編輯" %><%= link_to "", admin_category_path(category), :data => { :confirm => "將會刪除分類底下所有商品，確定繼續？" }, :method => :delete, :class => "delete", title: "刪除" %>
+              <%= link_to "", "javascript:void(0);", :data => { :id => category.id }, :class => "edit", title:"編輯" %>
+              <%= link_to "", admin_category_path(category), :data => { :confirm => "將會刪除分類底下所有商品，確定繼續？" }, :method => :delete, :class => "delete", title: "刪除" %>
             </div>
           </td>
         </tr>

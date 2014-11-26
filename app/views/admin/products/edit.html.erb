@@ -7,6 +7,7 @@
     <%= link_to "內容", admin_category_product_free_paragraph_path(@product.category, @product) %>
     <%= link_to "庫存", admin_category_product_stocks_path(@product.category, @product)%>
   </nav>
+  <div class="explain right"><p>圖片尺寸：230px * 230px</p></div>
 </header>
 
 <article>
@@ -17,82 +18,77 @@
     </div> 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+    <div class="form">
+    <% if @gallery_count > 0 %>
+      <%= render 'admin/common/show_by_type', target: @product, target_title: '封面', type: 'ProductCoverGallery', allow_dragable: false %>
+    <% else %>
+      <%= render 'admin/common/upload_by_type', target_title: '封面' %>
+    <% end %>
+    </div>
    <div class="form">
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td width="7%">中文：</td>
-          <td width="41%"><%= f.text_field :name, class: 'text', placeholder: "商品中文名"%></td>
-          <td width="2%"></td>
-          <td width="7%">英文：</td>
-          <td width="41%"><%= f.text_field :en_name, class: 'text', placeholder: "商品英文名" %></td>
+          <td width="15%">商品名稱(中)：</td>
+          <td width="34%"><%= f.text_field :name, class: 'text', placeholder: "商品中文名"%></td>
+          <td width="2%">&nbsp;</td>
+          <td width="15%">商品名稱(英)：</td>
+          <td width="34%"><%= f.text_field :en_name, class: 'text', placeholder: "商品英文名" %></td>
+        </tr>
+        <tr>
+          <td>價格：</td>
+          <td><%= f.text_field :price, class: 'text', placeholder: "價格"%></td>
+          <td>&nbsp;</td>
+          <td>優惠價：</td>
+          <td><%= f.text_field :price_for_sale, class: 'text', placeholder: "優惠價" %></td>
         </tr>           
       </table>
     </div><!--form--> 
+    
     <div class="form">
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td width="7%">價格：</td>
-          <td width="41%"><%= f.text_field :price, class: 'text', placeholder: "價格"%></td>
-          <td width="2%"></td>
-          <td width="7%">優惠價：</td>
-          <td width="41%"><%= f.text_field :price_for_sale, class: 'text', placeholder: "優惠價" %></td>
-        </tr>           
-      </table>
-    </div><!--form--> 
-    <div class="form">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td width="9%" valign="top">材質：</td>
-          <td width="91%"><%= f.text_field :material_1, class: 'text' %></td>
+          <td width="12%">材質：</td>
+          <td width="88%"><%= f.text_field :material_1, class: 'text' %></td>
         </tr> 
         <tr>
-          <td width="9%" valign="top">材質：</td>
-          <td width="91%"><%= f.text_field :material_2, class: 'text' %></td>
-        </tr>                     
-      </table>
-    </div>
-    <div class="form">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td width="9%" valign="top">洗滌說明：</td>
-          <td width="91%"><%= f.text_field :wash_1, class: 'text' %></td>
+          <td>&nbsp;</td>
+          <td><%= f.text_field :material_2, class: 'text' %></td>
         </tr> 
         <tr>
-          <td width="9%" valign="top">洗滌說明：</td>
-          <td width="91%"><%= f.text_field :wash_2, class: 'text' %></td>
-        </tr>         
+          <td colspan="2"><hr></td>
+        </tr>
         <tr>
-          <td width="9%" valign="top">洗滌說明：</td>
-          <td width="91%"><%= f.text_field :wash_3, class: 'text' %></td>
-        </tr>                     
-      </table>
-    </div>
-    <div class="form">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <td>洗滌說明：</td>
+          <td><%= f.text_field :wash_1, class: 'text' %></td>
+        </tr>  
         <tr>
-          <td width="9%" valign="top">模特兒資料：</td>
-          <td width="91%"><%= f.text_field :model_1, class: 'text' %></td>
+          <td>&nbsp;</td>
+          <td><%= f.text_field :wash_2, class: 'text' %></td>
         </tr> 
         <tr>
-          <td width="9%" valign="top">模特兒資料：</td>
-          <td width="91%"><%= f.text_field :model_2, class: 'text' %></td>
-        </tr>         
-      </table>
-    </div>
-    <div class="form">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <td>&nbsp;</td>
+          <td><%= f.text_field :wash_3, class: 'text' %></td>
+        </tr>
         <tr>
-          <td width="9%" valign="top">促銷文字：</td>
-          <td width="91%"><%= f.text_field :highlight, class: 'text', placeholder: '最多四字' %></td>
+          <td colspan="2"><hr></td>
+        </tr>   
+        <tr>
+          <td>模特兒資料：</td>
+          <td><%= f.text_field :model_1, class: 'text' %></td>
         </tr> 
+        <tr>
+          <td>&nbsp;</td>
+          <td><%= f.text_field :model_2, class: 'text' %></td>
+        </tr>
+        <tr>
+          <td colspan="2"><hr></td>
+        </tr>
+        <tr>
+          <td>促銷文字：</td>
+          <td><%= f.text_field :highlight, class: 'text', placeholder: '最多四字' %></td>
+        </tr>               
       </table>
-    </div>
-
-    <% if @gallery_count > 0 %>
-      <%= render 'admin/common/show_by_type', target: @product, target_title: '圖', type: 'ProductCoverGallery', allow_dragable: false %>
-    <% else %>
-      COVER <%= render 'admin/common/upload_by_type', target_title: '圖' %>
-    <% end %>
+    </div>   
     
     <div class="button"> 
       <%= link_to admin_category_path(@product.category) , class: 'left' do %>

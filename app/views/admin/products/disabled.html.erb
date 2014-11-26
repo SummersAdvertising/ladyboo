@@ -10,7 +10,6 @@
 <article>
   
   <% Category.where(depth: 1).each do |category| %>
-    == <%= category.name %> ==<br>
     <% sub_cates = category.children %>  
     <% sub_cates.each do |cate| %>
       <% if cate.products.where(status: 'disable').count > 0 %>
@@ -18,31 +17,41 @@
 
         <div class="list">
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <% cate.products.where(status: 'disable').each do |product| %>
-              
-              <tr>
-                <td>
-                CATEGORY:<%= product.category.name %><br>
-                PRODUCT NAME:<%=link_to product.name, edit_admin_category_product_path(product.category,product) %> = <%= product.en_name %><br>
-                </td>
-                <td>
+
+            <tr>
+             <td width="5%" class="icon"><img src="/images/admin/folder.png"></td>
+             <td width="15%"><%= category.name %></td>
+             <td width="62%"></td>
+             <td width="18%"></td>
+            </tr>
+           <% cate.products.where(status: 'disable').each do |product| %>     
+           <% unless check_with_stock(product) %>
+           <tr>
+             <td>├</td>
+             <td class="icon"><img src="/images/admin/folder.png"> <%= product.category.name %></td>
+              <td><%=link_to product.name, edit_admin_category_product_path(product.category,product) %></td>
+             <td>
                   <div class='tool'>
-                    <%= link_to(get_change_status_name(product),change_status_admin_category_product_path(product.category, product), :method => :post) %>
+                    <%= link_to("",change_status_admin_category_product_path(product.category, product), :method => :post, :class => "show", title: "重新上架") %>
                   </div>
-                </td>
-              </tr>
-              
-            <% end %>
+                </td> 
+            </tr>
+          <% end %>
+          <% end %>
           </table>
         </div>
-      <% end %>
 
+
+
+
+
+
+      <% end %>
     <% end %>  
-    <hr>
   <% end %>
-  <div class='button'>
+  <!--div class='button'>
     <%= link_to admin_categories_path, class: 'left' do %>
       <img src="/images/admin/left.png">返回
     <% end %>
-  </div>
+  </div-->
 </article>

@@ -30,63 +30,58 @@ div ,td, p .noTransition {
   </nav>
 </header>
 <article>
-      <div class='search'>
+      <div class='form'>
        <%# %>
        <%= search_form_for @q, url: history_admin_orders_path, method: :post  do |f| %>
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td width="15%" style="padding:0 5px">
-              訂單編號：
-            </td>
-            <td width="35%">
-              <%= f.search_field :ordernum_cont, class: 'text' %>
-            </td>
-            <td width="15%" style="padding:0 5px">
-              Email：
-            </td>
-            <td width="35%" align="center">
-              <%= f.search_field :user_email_start, class: 'text' %>
-            </td>
+            <td width="12%">訂單編號：</td>
+            <td width="37%"><%= f.search_field :ordernum_cont, class: 'text' %></td>
+            <td width="2%">&nbsp;</td>
+            <td width="12%">Email：</td>
+            <td width="37%"><%= f.search_field :user_email_start, class: 'text' %></td>
           </tr>
           <tr>
-            <td width="15%" style="padding:0 5px">
+            <td>
               付款方式：
             </td>
-            <td width="35%">
+            <td>
               <%= f.select :payment_type_eq, options_for_select([['-- 請選擇 --',nil],['ATM','atm_transfer'], ['信用卡', 'credit_card'], ['Paypal','paypal']], nil), class: 'form-control' %>
             </td>
-            <td width="15%" style="padding:0 5px">
+            <td>&nbsp;</td>
+            <td>
               狀態：
             </td>
-            <td width="35%" align="center">
+            <td>
               <%= f.select :payment_status_eq, options_for_select([['-- 請選擇 --',nil],['交易完成','finished'],['交易結束','abnormal_end'], ['取消訂單', 'cancel'], ['交易失敗','failed']], nil ) , class: 'form-control' %>
             </td>
           </tr>
           <tr>
-            <td width="15%" style="padding:0 5px">
+            <td>
               收款狀態：
             </td>
-            <td width="35%">
+            <td>
               <%= f.select :paid_eq, options_for_select([['-- 請選擇 --',nil],['已付款','yes'],['未付款','no']], nil ) , class: 'form-control' %>
             </td>
-            <td width="15%" style="padding:0 5px">
+            <td>&nbsp;</td>
+            <td>
               出貨狀態：
             </td>
-            <td width="35%" align="center">
+            <td>
               <%= f.select :shipped_eq, options_for_select([['-- 請選擇 --',nil],['已出貨','yes'],['未出貨','no']], nil ) , class: 'form-control' %>
             </td>
           </tr>
           <tr>
-            <td width="15%" style="padding:0 5px">
+            <td>
               期間：
             </td>
-            <td width="35%">
+            <td>
               <%= f.select :created_at_gteq, options_for_select([['-- 請選擇 --',nil],['1週',1.week.ago], ['1個月', 1.month.ago], ['1年',1.year.ago]], nil) %>
             </td>
-            <td width="15%" style="padding:0 5px">
-              
+            <td>
+            <td>&nbsp;</td>
             </td>
-            <td width="35%" align="center">
+            <td align="right">
               <%= f.submit('搜尋') %>
             </td>
           </tr>

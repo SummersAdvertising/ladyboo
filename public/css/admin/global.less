@@ -3,7 +3,8 @@
 
 @font-family:courier,微軟正黑體,Microsoft JhengHei;
 @major: #FFFBF9;
-@major-deep: @major - #111;
+@major-deep: @major - #090909;
+@major-dark: @major - #1a1a1a;
 
 /*-----------------------------------------------------------------------全域---*/
 
@@ -47,7 +48,7 @@ border-top:1px solid #42454C;border-bottom:1px solid #1E2023;color:#ccc;text-sha
 
 /*-----------------------------------------------------------------------大標---*/
 
-#content header{border-bottom:1px solid @major-deep;padding:15px 0 0 30px;height:64px}
+#content header{border-bottom:1px solid @major-dark;padding:15px 0 0 30px;height:64px}
 #content header h2{font:900 26px @font-family;padding:0 30px 0 0}
 #content header h2 span{font:300 15px @font-family;margin:0 0 0 5px}
 
@@ -62,7 +63,7 @@ border-top:1px solid #42454C;border-bottom:1px solid #1E2023;color:#ccc;text-sha
 #content .explain{position:relative;width:16px;height:16px;margin:9px 30px 0 0;
 background:url(../../images/admin/explain.png) 0 0 no-repeat;text-align:right}
 #content .explain p{display:none;position:absolute;right:30px;top:-11px;background:#333;color:#ccc;
-padding:10px 15px;font:italic 300 .9em @font-family;border-radius:5px;min-width:215px;z-index:5;}
+padding:10px 15px;font:italic 300 .9em @font-family;border-radius:5px;min-width:225px;z-index:5;}
 #content .explain:hover p{display:inline-block}
 #content .explain p:after{content:"";display:block;width:0px;height:0px;
 border-top:7px solid @major;border-bottom:7px solid @major;
@@ -80,15 +81,15 @@ position:absolute;top:12px;right:-14px}
 #content article > div{margin:0 0 30px 0;min-width:779px;position:relative;overflow:hidden}
 
 /*欄位*/
-article .text{width:100%;border:1px solid @major-deep;font:300 14px @font-family;color:#777;padding:7px}
-article textarea{width:100%;border:1px solid @major-deep;max-width:100%;min-width:100%;min-height:100px;
+article .text{width:100%;border:1px solid @major-dark;font:300 14px @font-family;color:#777;padding:7px}
+article textarea{width:100%;border:1px solid @major-dark;max-width:100%;min-width:100%;min-height:100px;
 font:300 14px @font-family;color:#777;padding:7px}
-article .file{width:100%;border:1px dashed @major-deep;padding:7px;text-indent:-7777px;font-size:0%;min-height:33px;
+article .file{width:100%;border:1px dashed @major-dark;padding:7px;text-indent:-7777px;font-size:0%;min-height:33px;
 background:url(../../images/admin/upload-1.png) 15px center no-repeat;position:relative;top:-3px}
 _:-moz-tree-row(hover), article .file {top:-1px}
 article .file:hover{background-color:@major}
 article .file.success{background:url(../../images/admin/upload-2.png) 15px center no-repeat @major}
-article select{border:1px solid @major-deep;padding:5px;width:100%;margin:5px 0;color:#777}
+article select{border:1px solid @major-dark;padding:5px;width:100%;margin:5px 0;color:#777}
 
 /*工具列*/
 .tool{text-align:right;opacity:0;filter:alpha(opacity=0);
@@ -145,12 +146,19 @@ text-indent:-7777px}
 position:absolute;top:-40px;left:-55px;border-radius: 5px}
 .list .email:hover p{display:block;}
 
+/*拖拉*/
+.list .ui-state-highlight{height:40px;border:1px dashed #aaa;
+	background-color:#eee!important;}
+.list .ui-state-highlight td:first-child{background:url(../../images/admin/right.png) 15px center no-repeat #eee!important;}
+.list .ui-sortable-helper .tool{display:none;}
+
 /*-----------------------------------------------------------------------按鈕---*/
 
 .button{overflow:hidden;}
-.button a{display:block;color:#555;width:125px;text-align:center;padding:7px 0;background:#F1F1F1}
-.button a img{position:relative;top:2px}
-.button a:hover{background:@major-deep}
+.button a,.button button{display:block;color:#555;width:125px;text-align:center;
+padding:7px 0;background:#F1F1F1;font-size:13px;cursor: pointer;}
+.button a img,.button button img{position:relative;top:2px}
+.button a:hover,.button button:hover{background:@major-dark}
 
 .button .left img{margin:0 15px 0 0}
 .button .right{margin:0 0 0 15px}
@@ -158,17 +166,18 @@ position:absolute;top:-40px;left:-55px;border-radius: 5px}
 
 /*-----------------------------------------------------------------------表單---*/
 
-.form{background:#fff;padding:10px 15px;border:1px solid @major-deep}
+.form{background:#fff;padding:10px 15px;border:1px solid @major-dark}
 .form h4{height:45px}
 .form td{padding:5px 0}
+.form hr{border:0;margin:15px 0;}
 
 /*-----------------------------------------------------------------------搜尋---*/
 
-.search{border:1px solid @major-deep;width:100%}
+.search{border:1px solid @major-dark;width:100%}
 .search .text{border:none}
 .search .submit{width:20px;height:20px;background:url(../../images/admin/search.png) 0 0 no-repeat;border:none;cursor:pointer;opacity:.5;filter:alpha(opacity=50);text-indent:-9999px;margin:7px 0 0 0}
 .search .submit:hover{opacity:1;filter:alpha(opacity=100)}
-.search select{background:@major-deep;border:none;padding:5px 10px;width:100%;margin:5px 0;color:#aaa}
+.search select{background:@major-dark;border:none;padding:5px 10px;width:100%;margin:5px 0;color:#aaa}
 
 /*-----------------------------------------------------------------------發文---*/
 
@@ -180,7 +189,7 @@ position:absolute;top:-40px;left:-55px;border-radius: 5px}
 #tab-li li{margin:5px 0 10px 0}
 #tab-li li .text{background:url(../../images/admin/li.png) 10px center no-repeat;padding-left:25px}
 #tab-li .add{display:inline-block;padding:5px 10px;text-align:center;color:#777;
-border-radius:3px;border:1px solid @major-deep}
+border-radius:3px;border:1px solid @major-dark}
 #tab-li .add:hover{background:@major}
 
 /*-----------------------------------------------------------------------預覽---*/
@@ -190,13 +199,13 @@ border-image:url(../../images/admin/p.png);
 border-image-slice: 13; 
 border-image-width: 13px; 
 border-image-repeat: repeat;
-border-left:13px solid @major-deep;
+border-left:13px solid @major-dark;
 margin:0 0 15px 0;padding:0 65px 0 15px;position:relative;cursor:pointer;background:@major}
 .preview .part .tool{position:absolute;top:0;right:0}
 .preview .part:hover .tool{opacity:1;filter:alpha(opacity=100)}
 .preview .part:active{background:#fff}
 
-.part img{max-width:100%;height:auto;border:1px solid @major-deep}
+.part img{max-width:100%;height:auto;border:1px solid @major-dark}
 .part .space{height:16px;background:url(../../images/admin/right.png) 0 center no-repeat;margin:0 0 15px 0;}
 
 .part-edit{position:relative;cursor:pointer;
@@ -204,32 +213,33 @@ border-image:url(../../images/admin/p.png);
 border-image-slice: 13; 
 border-image-width: 13px; 
 border-image-repeat: repeat;
-border-left:13px solid @major-deep;
+border-left:13px solid @major-dark;
 margin:0 0 15px 0;padding:0 0 0 15px}
 .part-edit .tool{opacity:1;filter:alpha(opacity=100)}
 .part-edit .tool a{opacity:1;filter:alpha(opacity=100);
 padding:7px 10px 5px 10px;text-align:center;color:#777;width:100px;height:32px;
-border-radius:3px;border:1px solid @major-deep;margin:5px 0 0 0;text-indent:0}
+border-radius:3px;border:1px solid @major-dark;margin:5px 0 0 0;text-indent:0}
 .part-edit .tool a:hover{background:#eee}
 
 /*-----------------------------------------------------------------------頁碼---*/
 
-.page{text-align:center;}
-.page a{display:inline-block;padding:5px 10px;background:#fff;margin:0 7.5px;color:#999}
-.page .active{color:#999}
+.page{text-align:center;overflow:hidden;}
+.page li{list-style: none;float:left;margin:0 7.5px 0 0;border:1px solid @major-dark;width:30px;height:30px;
+background:@major-deep;}
+.page a{display:block;width:100%;height:100%;padding:6px 0 0 0;color:#999;text-align:center}
 
 /*-----------------------------------------------------------------------進度---*/
 
 .user{width:50%;height:55px}
-.user img{width:55px;height:100%;padding:2px;background:#fff;border:1px solid @major-deep;border-radius:50%;margin:0 10px 0 0}
+.user img{width:55px;height:100%;padding:2px;background:#fff;border:1px solid @major-dark;border-radius:50%;margin:0 10px 0 0}
 .user a{color:#555;position:relative;top:-20px}
 .user a:hover{text-decoration:underline}
 
 .status{width:50%;height:55px;position:relative;color:#6A7180;font-size:11px;padding:0 4%;background:#f1f1f1;}
-.status #notch{width:100%;height:4px;background:@major-deep;border-radius:15px;margin:20px 0 0 0}
+.status #notch{width:100%;height:4px;background:@major-dark;border-radius:15px;margin:20px 0 0 0}
 .status #bar{height:100%;background:#777;border-radius:15px;}
 .status .point{position:absolute;top:16px;width:50px;text-align:center;line-height:.9em}
-.status .point b{display:inline-block;background:@major-deep;width:13px;height:13px;border-radius:50%;border:2px solid #fff}
+.status .point b{display:inline-block;background:@major-dark;width:13px;height:13px;border-radius:50%;border:2px solid #fff}
 
 #point-1{left:5%;text-align:left}
 #point-2{left:45%;text-align:center}
@@ -249,7 +259,7 @@ border-radius:3px;border:1px solid @major-deep;margin:5px 0 0 0;text-indent:0}
 
 /*-----------------------------------------------------------------------紀錄---*/
 
-.log{background:@major-deep;position:absolute!important;top:0;right:-185px;width:185px;min-width:185px!important;
+.log{background:@major-dark;position:absolute!important;top:0;right:-185px;width:185px;min-width:185px!important;
 z-index:9;padding:20px 10px;font:300 13px @font-family}
 .log span{color:#aaa;font:italic 300 12px Arial}
 .log li{border-bottom:1px dotted #999;padding:15px 0;color:#333;width:100%}
@@ -258,10 +268,11 @@ z-index:9;padding:20px 10px;font:300 13px @font-family}
 
 /*-----------------------------------------------------------------------相簿---*/
 
-.thumb{position:relative;text-align:left;max-width:310px;background:#fff;}
+.thumb{position:relative;text-align:left;max-width:310px;background:#fff;
+-webkit-transition:none;-moz-transition:none}
 .thumb .delete{background:url(../../images/admin/cancel2.png) 0 0 no-repeat;display:block;width:12px;height:12px;
 position:absolute;top:5px;right:5px}
-.thumb img{max-width:100%;width:auto;height:auto;border:1px solid @major-deep}
+.thumb img{max-width:100%;width:auto;height:auto;border:1px solid @major-dark}
 .thumb:first-child:before{content:"封面";background:#555;color:#fff;padding:2px 8px;position:absolute;top:5px;left:5px;}
 
 .form .thumb{display:inline-block}
@@ -269,17 +280,18 @@ position:absolute;top:5px;right:5px}
 .gallery .thumb{max-width:23%;margin:0 2% 2% 0;text-align:center}
 .gallery .thumb:last-child{margin-right:0px}
 .gallery .cover img,.thumb img:hover{border:1px solid #aaa!important}
-.ui-state-highlight{width:140px;height:140px;border:1px dashed #aaa;float:left;margin-right:15px;margin-bottom:15px;
+
+.gallery .ui-state-highlight{width:140px;height:140px;border:1px dashed #aaa;float:left;margin-right:15px;margin-bottom:15px;
 background:#eee;}
 
 /*-----------------------------------------------------------------------標籤---*/
 
 #tag-box{overflow:hidden}
-#tag-box .tag{background:#fff;border:1px solid @major-deep;padding:7px 14px;margin:0 10px 10px 0;
+#tag-box .tag{background:#fff;border:1px solid @major-dark;padding:7px 14px;margin:0 10px 10px 0;
 border-radius:0 15px 0 15px}
 #tag-box .tag img{position:relative;top:3px;margin:0 10px 0 0;width:22px;}
 #tag-box .tag .tool{display:inline;position:relative;top:3px}
 #tag-box .tag:hover .tool{opacity:1;filter:alpha(opacity=100)}
 
 .tag-text{width:100%;box-shadow:none!important;}
-.tag-text ul{border:1px solid @major-deep!important;box-shadow:none!important;background:none!important}
+.tag-text ul{border:1px solid @major-dark!important;box-shadow:none!important;background:none!important}
