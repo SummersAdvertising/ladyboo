@@ -58,7 +58,7 @@ gem 'sucker_punch', '~> 1.0'
 gem 'activemerchant'
 gem 'sanitize'
 
-gem 'dalli'
+# gem 'dalli'
 
 group :production, :staging do
   gem 'mysql2'

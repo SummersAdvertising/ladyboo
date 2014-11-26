@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :fetch_categories
+  before_action :fetch_for_nav
+  before_action :check_cart
 
   layout :layout_by_resource
 
@@ -34,9 +35,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def fetch_categories
+  def fetch_for_nav
     @root_node = Category.return_root_node
     @hierarchy = Category.get_level_hierarchy()
+    @lookbook = Lookbook.where(status: 'enable').first
+    @topic_collections = TopicCollection.where(status: 'enable').all.limit(4)
+    @q = Product.where(status: 'enable').search()
   end
   
+  def check_cart
+    @items_in_cart = Cart.check_items_in_cart(cookies[:cart_ladyboo], "for_cart")
+  end
+
 end

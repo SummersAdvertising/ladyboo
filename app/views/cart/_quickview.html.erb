@@ -1,5 +1,5 @@
 <div class="btn-group dropdown-cart">
-  <% @items_in_cart = Cart.check_items_in_cart(cookies[:cart_ladyboo], "for_cart") %>
+  
   <button type="button" class="btn btn-custom dropdown-toggle" data-toggle="dropdown"> <span class="cart-menu-icon"></span><span class="hide-for-xs"><%= "#{products_in_cart_count}" %> item(s) </span><span class="drop-price hide-for-xs">- NT$ <%= number_with_delimiter(sum_cart_items(@items_in_cart)) %></span> </button>
 
   <div class="dropdown-menu dropdown-cart-menu pull-right clearfix" role="menu"><!-- Start .dropdown-cart-menu -->
