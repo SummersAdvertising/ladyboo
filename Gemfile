@@ -60,6 +60,7 @@ gem 'sanitize'
 
 group :production, :staging do
   gem 'mysql2'
+  gem 'dalli'
 end
 
 gem 'capistrano'#, "3.0.1"
