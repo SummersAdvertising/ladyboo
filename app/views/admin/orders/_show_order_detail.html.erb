@@ -14,7 +14,7 @@
           <tr>
             <td align="left"><%= index + 1%></td>
             <td align="left">
-            <% item_stock = Stock.find(item.stock_id) %>
+            <% item_stock = Stock.find_by_id(item.stock_id) %>
             <% item_product = Product.find(item_stock.product_id) if item_stock %>
             <% if item_product %>
               <%= link_to "#{ item.item_name }（#{ item.item_stockname }）", edit_admin_category_product_path(item_product.category, item_product) %>
