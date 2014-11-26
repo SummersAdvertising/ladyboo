@@ -4,7 +4,7 @@
 
 <% content_for :meta_area do %>
 
-  <meta property="og:title" content="<%= "#{@topic_collection.name} #{@topic.name} - LadyBoo" %>">
+  <meta property="og:title" content="<%= "#{@topic_collection.name} #{@topic.name}" %>">
   <% if @topic.galleries.where(type: 'TopicBannerGallery').first %>
     <meta property="og:image" content="<%= image_url(@topic.galleries.where(type: 'TopicBannerGallery').first.attachment.url) %>">
   <% end %>
@@ -14,8 +14,8 @@
 <% end %>
 
 <% content_for :breadcrumb do %>
-  <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; <%= link_to 'Collection', 'javascript:void(0);' %>
-  &nbsp; > &nbsp; <%= link_to "#{@topic_collection.name} #{@topic.name}", 'javascript:void(0);' %>
+  <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; Collection
+  &nbsp; > &nbsp; <%= "#{@topic_collection.name} #{@topic.name}" %>
 <% end %>
 
 <% if @topic.galleries.select{ |v| v['type'] == 'TopicBannerGallery' }.first  %>

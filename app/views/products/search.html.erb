@@ -1,6 +1,10 @@
 <link rel="stylesheet" href="/css/prodList.css">
 <link rel="stylesheet" href="/css/pageSearch.css">
 
+<% content_for :breadcrumb do %>
+  <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; SEARCH
+<% end %>
+
 <div class="xlg-margin"></div><!-- Space 間隔 -->
 
 <div class="container"><!-- Start .container -->

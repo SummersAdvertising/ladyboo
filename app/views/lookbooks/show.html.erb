@@ -3,8 +3,8 @@
 
 
 <% content_for :breadcrumb do %>
-  <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; <%= link_to 'Lookbook', 'javascript:void(0);' %>
-  &nbsp; > &nbsp; <%= link_to "穿搭主題", 'javascript:void(0);' %>
+  <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; Lookbook
+  &nbsp; > &nbsp; <%= @lookbook.name %>
 <% end %>
 
 <% if @topic.galleries.select{ |v| v['type'] == 'TopicBannerGallery' }.first  %>

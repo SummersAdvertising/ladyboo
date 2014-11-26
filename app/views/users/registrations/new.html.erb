@@ -1,5 +1,9 @@
   <link rel="stylesheet" href="/css/pageRegister.css">
-    
+  
+  <% content_for :breadcrumb do %>
+  <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; REGISTER
+  <% end %>
+
   <div class="xlg-margin"></div>
   <div id="lookbook">
   <div class="container">
@@ -93,17 +97,11 @@ $("#register-form").submit(function(){
     $("#register-form").validate({
     //debug: true,
     rules: {
-      "user[user_name]": {
-        required:true,
-        maxlength: 30
-      },
+      "user[user_name]": {required:true},
       "user[email]": {
         required:true,
         email: true
       },
-      "user[birthday(1i)]": {required:true},
-      "user[birthday(2i)]": {required:true},
-      "user[birthday(3i)]": {required:true},
       "user[password]": {
         required:true,
         minlength: 8

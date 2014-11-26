@@ -10,6 +10,10 @@ div ,td, p .noTransition {
 }
 </style>
 
+<% content_for :breadcrumb do %>
+<%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; YOUR CART
+<% end %>
+
 <div class="xlg-margin"></div><!-- Space 間隔-->
 <div class="container">
   <header class="content-title"><!-- Start .content-title 標題 -->
