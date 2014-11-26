@@ -42,7 +42,7 @@
         <div class="tab-content clearfix">
           
           <div class="tab-pane active" id="orderInfo">
-            <p class="tagOrder">訂單編號 NO:<span id="orderNum"><%= @order.ordernum %></span></p>
+            <p class="tagOrder">訂單編號 NO: <span id="orderNum"><%= @order.ordernum %></span></p>
             <p class="tagOrder">訂購時間 Order time: <span id="orderTime"><%= @order.created_at.strftime("%Y/%m/%d %H:%M") %></span></p>
             <p class="tagOrder">
               <%= link_to "聯絡客服 CONTACT US", new_useradmin_orderask_path %>
@@ -66,10 +66,11 @@
                       <p>NO. <%= get_product_of(item).product_no %><br>
                     <% end %>
                     
-                    <a><%= "#{ item.item_name }" %></a><br>
+                    <a href="#" target="_blank"><%= "#{ item.item_name }" %><br>
                     <% unless get_product_of(item).nil? %>
                       <%= get_product_of(item).en_name %>
                     <% end %>
+                    </a>
                     <br> 
                     <%= item.item_stockname %></p>
                   </td>

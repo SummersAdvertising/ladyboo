@@ -46,8 +46,8 @@
                   <span class="item-price-original">NT$  <%= number_with_delimiter(current_product.price) %></span> 
                   <span class="item-price-sale">NT$ <%= number_with_delimiter(current_product.price_for_sale) %></span>
                   <div class="item-action"> 
-                    <%= link_to '', useradmin_tracking_list_path(tracking_item), :method => :delete, :data => {:confirm => "確認取消追蹤？"}, class: "favDelete icon-cancel" %>
-                    <a class='inline icon-button icon-compare pdquickview' data-pd='<%= current_product.id %>' ></a> 
+                    <%= link_to '', useradmin_tracking_list_path(tracking_item), :method => :delete, :data => {:confirm => "確認取消追蹤？"}, class: "favDelete icon-cancel",title: 'Untracking' %>
+                    <a class='inline icon-button icon-compare pdquickview' data-pd='<%= current_product.id %>' title="Quick View" ></a> 
                   </div>
                 </div><!-- End .item-meta-container -->   
             </div><!-- End .item 商品 -->

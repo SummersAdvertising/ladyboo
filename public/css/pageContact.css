@@ -44,6 +44,7 @@ body > iframe{display: none;}
 .title.contact { width: 280px; margin-left: 10px; }
 .title.policy { width: 280px; margin-left: 10px; }
 .title.policy span { display: block; margin-top: 10px; }
+.layout.contact .input-group .input-group-addon { min-width: 110px; }
 .layout.contact .input-group.input-container { display: block; }
 .layout.contact .input-group.input-container { width: 100%; display: table; padding: 0; }
 .btn-custom-2,.btn-custom-3 { display: block; margin: 10px auto; }

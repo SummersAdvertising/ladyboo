@@ -58,6 +58,7 @@ fieldset.half-margin { margin-bottom: 0px; }
 .recaptchatable #recaptcha_image{width:300px!important;overflow: hidden;}
 #recaptcha_image_cell{width:300px!important;}
 .recaptchatable #recaptcha_response_field {height: 30px;}
+.register-birthday.input-container label{top:105px;} 
 }
 
 

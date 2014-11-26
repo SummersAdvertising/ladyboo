@@ -20,9 +20,9 @@
 }
 /*-------------------------------------------------------------------------------------------穿搭---*/
 .layout { position: relative; overflow: hidden; margin-bottom: 5% }
-.link { position: absolute; bottom: -250px; left: 0; width: 100%; display: block; -webkit-transition: all ease .3s; -moz-transition: all ease .3s; color: #646464; padding: 0 15px }
-.link:hover { color: #C9006E }
-.link li { background: #e7e7e7; padding: 1% 5% }
+.link { position: absolute; bottom: -250px; left: 0; width: 100%; display: block; -webkit-transition: all ease .3s; -moz-transition: all ease .3s; color: #C9006E; padding: 0 15px }
+.link:hover{ color: #C9006E;}
+.link li { background-image: url(../images/bg_lookbook.png);padding: 1% 5% }
 @media(min-width: 1023px) {
 .layout:hover .link { bottom: 0px }
 }
@@ -66,7 +66,7 @@
 .item .item-image-container { min-width: 230px; }
 .icon-button { width: 40px; height: 40px; border-radius: 3px; }
 .icon-compare { background: url(../images/idx-07.png) center center no-repeat #fff!important; border: 1px solid #313131; }
-.icon-compare:hover { background: url(../images/idx-07h.png) center center no-repeat #D01A7E!important; border: 1px solid #D01A7E; }
+.icon-compare:hover { cursor: pointer;background: url(../images/idx-07h.png) center center no-repeat #D01A7E!important; border: 1px solid #D01A7E; }
 .icon-like { background: url(../images/idx-06.png) center center no-repeat #fff!important; border: 1px solid #313131; }
 .icon-like:hover { background: url(../images/idx-06h.png) center center no-repeat #D01A7E!important; border: 1px solid #D01A7E; }
 .owl-item { min-width: 234px; }

@@ -104,7 +104,7 @@
 #infoQuantity:before { content: '數量 Quantity：' }
 #infoSubtotal:before { content: '總額 Subtotal：'; }
 #infoSubtotal:after { content: '\a\a'; white-space: pre; }
-#contactForm { height: 400px; }
+#contactForm { height: auto; }
 #tag { position: absolute; left: 60px; ; top: -36px; right: auto; }
 #contactForm .btn-custom-2.cancle { margin: 0px; }
 #contactForm .text-right { width: 100%; margin-bottom: 0; padding: 0; }
@@ -114,7 +114,6 @@
 #personal { padding: 20px 80px; }
 #personal.input-group .input-group-addon { width: 125px; border-radius: 2px 0 0 2px; padding: 0px 10px; line-height: 44px; min-width: 125px; }
 #personal .input-group { width: 85%; }
-
 .input-group > p{line-height:47px;padding: 0 0 0 20px; margin: 0;background-color: #dcdcdc;}
 
 @media (min-width: 992px) and (max-width: 1200px) {
@@ -131,9 +130,9 @@
 #personal .input-group { width: 99%; }
 #personal .input-group .input-group-addon { width: 115px; padding: 0px 4px; min-width: 115px; }
 #personal .edit-birthday .input-group-addon { display: block; float: left;height: 47px;line-height: 47px; }
-#user_birthday_1i{width: 200px;float:none;display:block;margin:0;}
-	#user_birthday_2i{width: 150px;margin:10px 15px 0 0;}
-	#user_birthday_3i{width: 150px;margin:10px 0 0 0;}
+#user_birthday_1i{width: 180px;float:none;display:block;margin:0;}
+#user_birthday_2i{width: 140px;margin:10px 15px 0 0;}
+#user_birthday_3i{width: 140px;margin:10px 0 0 0;}
 }
 /*TAB3---------------------------------------------------------*/
 #address { padding: 20px 80px; width:100%;overflow: hidden;}

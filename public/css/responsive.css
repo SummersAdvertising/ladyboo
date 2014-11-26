@@ -1105,12 +1105,12 @@ only screen and (min-device-pixel-ratio: 1.5) {
 	.close-button,
 	.accordion-btn,
 	.contact-icon,
-	.input-icon,
+/*	.input-icon,*/
 	.social-icon,
 	.flex-direction-nav a {
-		background-image:url('../images/sprites/sprite@2x.png');
-		background-size: 400px 409px;
-		-webkit-background-size: 400px 409px;
+		background-image:url(../images/sprites/sprite@2x.png);
+		background-size: 400px 460px;
+		-webkit-background-size: 400px 460px;
 	}
 
 	#responsive-nav-button #responsive-nav-button-icon {

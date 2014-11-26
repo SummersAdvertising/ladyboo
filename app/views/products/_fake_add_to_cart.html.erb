@@ -15,7 +15,7 @@
   </div>
   <hr>
   <br>
-  <%= button_tag "<span>已售完</span><br>SOLD OUT".html_safe, class: "btn mainBtn" %>
+  <%= button_tag "<span>已售完</span><br>SOLD OUT".html_safe, class: "btn mainBtn soldOut" %>
 
   <% if current_user %>
     <% tracking_list = TrackingList.new %>
