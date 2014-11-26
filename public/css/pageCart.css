@@ -153,3 +153,6 @@ select.form-control { width: 100px; }
 .thankPanel { width: 94%; padding: 0 5px; }
 .thanks p { font-size: 1.1em; }
 }
+/*交易進行中-------------*/
+#inline_content{background-color: #FFF;font-size: 1.2em;padding:40px 0;width:100%;text-align: center;}
+#inline_content img{margin: 0 auto;}

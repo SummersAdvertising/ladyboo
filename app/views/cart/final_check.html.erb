@@ -101,10 +101,10 @@ div ,td, p .noTransition {
 </div><!-- End .container -->
 
 <!-- This contains the hidden content for inline calls -->
-<div class="waiting" style='display:none'>
-  <div id='inline_content' style='padding:10px; background:#fff;'>
-    <p><strong>交易進行中 請稍後...</strong></p>
-    <p><%= image_tag("/images/loading.gif") %></p>
+<div class="waiting" style="display:none;">
+  <div id='inline_content'>
+    交易進行中 請稍後...<br><br>
+    <%= image_tag("/images/loading.gif") %>
   </div>
 </div>
 
@@ -114,16 +114,16 @@ div ,td, p .noTransition {
       
       $(".confirm").toggle();
       
-      $.colorbox({
+      $("#inline_content").colorbox({
         inline:true, 
         width:"80%",
-        height:"30%",
+        height:"auto",
+        href: "#inline_content",
+        open: true,
         escKey: false, 
         closeButton: false,
         overlayClose: false,
-        transition: "none",
-        open: true,
-        href: "#inline_content"
+        transition: "none"
       });
       
     });
