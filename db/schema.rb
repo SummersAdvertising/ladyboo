@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141111075918) do
+ActiveRecord::Schema.define(version: 20141126080725) do
 
   create_table "addressbooks", force: true do |t|
     t.integer  "user_id"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20141111075918) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "addressbooks", ["user_id"], name: "index_addressbooks_on_user_id"
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -56,6 +58,9 @@ ActiveRecord::Schema.define(version: 20141111075918) do
     t.text     "ck_context"
   end
 
+  add_index "announcements", ["article_id"], name: "index_announcements_on_article_id"
+  add_index "announcements", ["id", "type"], name: "index_announcements_on_id_and_type"
+
   create_table "articles", force: true do |t|
     t.string   "name"
     t.text     "content"
@@ -79,6 +84,8 @@ ActiveRecord::Schema.define(version: 20141111075918) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "categories", ["parent_id"], name: "index_categories_on_parent_id"
 
   create_table "ckeditor_assets", force: true do |t|
     t.string   "data_file_name",               null: false
@@ -107,6 +114,9 @@ ActiveRecord::Schema.define(version: 20141111075918) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "communities", ["article_id"], name: "index_communities_on_article_id"
+  add_index "communities", ["id", "type"], name: "index_communities_on_id_and_type"
 
   create_table "contacts", force: true do |t|
     t.string   "name"
@@ -143,12 +153,18 @@ ActiveRecord::Schema.define(version: 20141111075918) do
     t.datetime "updated_at"
   end
 
+  add_index "galleries", ["attachable_id", "attachable_type"], name: "index_galleries_on_attachable_id_and_attachable_type"
+  add_index "galleries", ["id", "type"], name: "index_galleries_on_id_and_type"
+
   create_table "lookbook_topicships", force: true do |t|
     t.integer  "lookbook_id"
     t.integer  "topic_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "lookbook_topicships", ["lookbook_id"], name: "index_lookbook_topicships_on_lookbook_id"
+  add_index "lookbook_topicships", ["topic_id"], name: "index_lookbook_topicships_on_topic_id"
 
   create_table "lookbooks", force: true do |t|
     t.string   "name"
@@ -172,6 +188,8 @@ ActiveRecord::Schema.define(version: 20141111075918) do
     t.string   "status"
   end
 
+  add_index "measurements", ["product_id"], name: "index_measurements_on_product_id"
+
   create_table "orderasks", force: true do |t|
     t.integer  "order_id"
     t.text     "description"
@@ -179,6 +197,8 @@ ActiveRecord::Schema.define(version: 20141111075918) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "orderasks", ["order_id"], name: "index_orderasks_on_order_id"
 
   create_table "orderitems", force: true do |t|
     t.integer  "order_id"
@@ -191,6 +211,8 @@ ActiveRecord::Schema.define(version: 20141111075918) do
     t.integer  "stock_id"
   end
 
+  add_index "orderitems", ["order_id"], name: "index_orderitems_on_order_id"
+
   create_table "orderlogs", force: true do |t|
     t.integer  "order_id"
     t.string   "content"
@@ -198,6 +220,8 @@ ActiveRecord::Schema.define(version: 20141111075918) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "orderlogs", ["order_id"], name: "index_orderlogs_on_order_id"
 
   create_table "orders", force: true do |t|
     t.integer  "user_id"
@@ -231,6 +255,8 @@ ActiveRecord::Schema.define(version: 20141111075918) do
     t.string   "invoice_address"
   end
 
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id"
+
   create_table "photos", force: true do |t|
     t.string   "image"
     t.string   "name"
@@ -238,6 +264,8 @@ ActiveRecord::Schema.define(version: 20141111075918) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "photos", ["article_id"], name: "index_photos_on_article_id"
 
   create_table "pickups", force: true do |t|
     t.string   "title"
@@ -248,6 +276,8 @@ ActiveRecord::Schema.define(version: 20141111075918) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "pickups", ["product_id"], name: "index_pickups_on_product_id"
 
   create_table "products", force: true do |t|
     t.integer  "category_id"
@@ -268,6 +298,9 @@ ActiveRecord::Schema.define(version: 20141111075918) do
     t.string   "is_new"
     t.string   "product_no"
   end
+
+  add_index "products", ["article_id"], name: "index_products_on_article_id"
+  add_index "products", ["category_id"], name: "index_products_on_category_id"
 
   create_table "roles", force: true do |t|
     t.string   "name"
@@ -291,6 +324,8 @@ ActiveRecord::Schema.define(version: 20141111075918) do
     t.datetime "updated_at"
   end
 
+  add_index "stocks", ["product_id"], name: "index_stocks_on_product_id"
+
   create_table "tiles", force: true do |t|
     t.integer  "lookbook_id"
     t.string   "context_1"
@@ -304,12 +339,18 @@ ActiveRecord::Schema.define(version: 20141111075918) do
     t.integer  "topic_id"
   end
 
+  add_index "tiles", ["lookbook_id"], name: "index_tiles_on_lookbook_id"
+  add_index "tiles", ["topic_id"], name: "index_tiles_on_topic_id"
+
   create_table "topic_collection_topicships", force: true do |t|
     t.integer  "topic_collection_id"
     t.integer  "topic_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "topic_collection_topicships", ["topic_collection_id"], name: "index_topic_collection_topicships_on_topic_collection_id"
+  add_index "topic_collection_topicships", ["topic_id"], name: "index_topic_collection_topicships_on_topic_id"
 
   create_table "topic_collections", force: true do |t|
     t.string   "name"
@@ -325,6 +366,10 @@ ActiveRecord::Schema.define(version: 20141111075918) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "topic_productships", ["product_id", "topic_id"], name: "index_topic_productships_on_product_id_and_topic_id"
+  add_index "topic_productships", ["product_id"], name: "index_topic_productships_on_product_id"
+  add_index "topic_productships", ["topic_id"], name: "index_topic_productships_on_topic_id"
 
   create_table "topics", force: true do |t|
     t.string   "name"

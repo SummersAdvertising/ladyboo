@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     redirect_to :back, alert: exception.message
     # exception.action, exception.subject
   end
-  
+
   private
   
   def configure_permitted_parameters

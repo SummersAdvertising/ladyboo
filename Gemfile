@@ -58,9 +58,10 @@ gem 'sucker_punch', '~> 1.0'
 gem 'activemerchant'
 gem 'sanitize'
 
+gem 'dalli'
+
 group :production, :staging do
   gem 'mysql2'
-  gem 'dalli'
 end
 
 gem 'capistrano'#, "3.0.1"
@@ -79,5 +80,6 @@ group :development do
   
   gem 'rvm-capistrano'
   gem 'capistrano-ext'
-
+  # gem 'lol_dba'
+  # lol_dba db:find_indexes
 end

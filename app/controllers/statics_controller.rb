@@ -3,7 +3,6 @@ class StaticsController < ApplicationController
   layout false , only: [:index]
 
   def index
-    expires_in 5.minutes
 
     @current_root = Category.return_root_node
     @categories = Category.get_level_hierarchy()
@@ -23,14 +22,13 @@ class StaticsController < ApplicationController
   end
 
   def about
-    expires_in 5.minutes
 
     @announcements = Announcement.for_index.limit(3)
     @communities = Community.for_index.limit(3)
+    
   end
 
   def show
-    expires_in 5.minutes
     
     if params[ :page ].nil?
       redirect_to :index
@@ -39,7 +37,7 @@ class StaticsController < ApplicationController
     respond_to do | format |
       format.html { render :template => 'statics/' + params[ :page ]  rescue redirect_to '/errors' }
     end
-    
+      
   end
 
 end
