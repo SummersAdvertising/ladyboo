@@ -42,11 +42,12 @@ label { color: #FFF; }
 .tableNote ol li { list-style-type: decimal; line-height: 1.5em; margin-bottom: 10px; font-size: 1em; text-align:left;}
 #favoritesBg .container { position: relative; margin: 0; padding: 0; width: 100%; z-index: 0; }
 .bgFav { background-color: #c9006e; position: absolute; height: 190px; width: 100%; left: 0px; top: 70px; }
-.item .item-image-container .item-image { min-width: 160px; }
+.brand-slider a{padding:0;}
+.item .item-image-container figure{ min-width: 160px; height:160px;overflow:hidden;}
 .item:hover > .item-image-container .item-image { visibility: visible; opacity: 1; }
 .owl-carousel .item { padding: 0px; }
-.item > .item-image-container { width: 170px; margin: 0 10px 0 0; }
-.favDelete { width: 32px; height: 32px; background-image: url(../images/icon_close.png); display: block; position: absolute; right: -5px; top: 0; visibility: hidden; background-position: 0px -20px; }
+.item > .item-image-container { width: 160px; margin: 0 10px 0 0; }
+.favDelete { width: 32px; height: 32px; background-image: url(../images/icon_close.png); display: block; position: absolute; right: 0px; top: 0; visibility: hidden; background-position: 0px -20px; }
 .favDelete:hover { background-position: -40px -20px; }
 .item:hover > .item-image-container .favDelete { visibility: visible; }
 .prodCon img{padding:10px 0;}

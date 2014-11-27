@@ -1,5 +1,5 @@
 /*-------------------------------------------------------------------------------------------ProdList---*/
-.col-md-4 { max-width: 330px; }
+.col-md-4 { width: 275px;}
 .item { overflow: hidden;margin-bottom: 30px; padding-top: 15px; padding-left: 10px; padding-right: 10px; padding-bottom: 15px; }
 .item > .item-image-container { width: 230px; }
 .category-item-container .item:hover { background-image: url(../images/slider.gif); }
@@ -11,12 +11,9 @@
 .item-price-container { background: url(../images/idx-04.gif); }
 .item-image-container .item-price-container { font: 100 1.3em Helvetica, Microsoft JhengHei, "微軟正黑體"; width: 85px; height: 85px; }
 .item-image-container .item-price-container .item-price { margin-top: 0px; font-size: 1.1em; line-height: 85px; }
-@media \0screen {
-.item-image-container .item-price-container .item-price{ margin-top: 30px;  }
-}
+
 /*圖片*/
-.item:hover > .item-image-container .item-image { visibility: visible; opacity: 1;
-}
+.item:hover > .item-image-container .item-image { visibility: visible; opacity: 1;}
 /*文字*/
 .item-name { white-space: nowrap;overflow: hidden;text-overflow: ellipsis;font: 100 1.0em Helvetica, Microsoft JhengHei, "微軟正黑體"; margin: 0 0 5px 0; }
 .category-item-container .item:hover .item-name { color: #FFF; }
@@ -31,7 +28,7 @@
 .category-item-container .item:hover .item-price-sale { color: #f858b7; }
 /*按鈕*/
 .item-add-btn { background-color: #313131; border-color: #313131; padding: 4px 15px 2px 15px; text-align: center; line-height: 1.2em!important; height: auto; color: #FFF; font-size: 0.9em!important; }
-item-action .item-add-btn:hover, .item-add-btn:focus, .item-add-btn:active, .item-add-btn.active { background-color: #C9006E; border-color: #C9006E; }
+.item-action .item-add-btn:hover, .item-add-btn:focus, .item-add-btn:active, .item-add-btn.active { background-color: #C9006E; border-color: #C9006E; }
 .item-add-btn span { display: block; }
 .icon-button { width: 40px; height: 40px; border-radius: 3px; }
 .icon-compare { background: url(../images/idx-07.png) center center no-repeat #fff!important; border: 1px solid #313131; }
@@ -45,12 +42,12 @@ item-action .item-add-btn:hover, .item-add-btn:focus, .item-add-btn:active, .ite
 .icon-cancel { position: relative;float:right;right:0; }
 }
 @media (min-width: 992px) and (max-width: 1200px) {
-.col-md-4 { width: 55%; max-width: 280px; }
+.col-md-4 { width: 275px;  }
 .item .item-image-container { width: 230px; }
 }
 @media (min-width: 768px) and (max-width: 991px) {
 .col-md-6.col-sm-12.col-xs-12.product { width: 100%; }
-.col-md-4 { width: 100%; max-width: 280px; }
+.col-md-4 { width: 275px; }
 .item .item-image-container { width: 230px; }
 }
 @media (max-width: 767px) {

@@ -39,7 +39,7 @@
         </div>
       </header><!-- End .content-title -->
 
-      <div class="col-md-9 col-sm-8 col-xs-12 articles-container"><!-- Start 內文 -->         
+      <div class="col-md-9 articles-container"><!-- Start 內文 -->         
         
         <% @announcements.each do |announcement| %>
           <article class="article"><!-- Start .article -->
@@ -73,7 +73,7 @@
         </div>
       </header><!-- End .content-title -->
 
-      <div class="col-md-9 col-sm-8 col-xs-12 articles-container"><!-- Start 內文 -->         
+      <div class="col-md-9 articles-container"><!-- Start 內文 -->         
        <% @communities.each do |community| %>
           <article class="article"><!-- Start .article -->
             <div class="article-meta-date"> <span><%= community.created_at.strftime("%d")%></span> <%= community.created_at.strftime("%b")%> </div>
