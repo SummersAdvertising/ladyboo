@@ -47,10 +47,10 @@ del {
 }
 
 /* tables still need 'cellspacing="0"' in the markup */
-table {
+/*table {
     border-collapse: collapse;
     border-spacing: 0;
-}
+}*/
 
 /*-----------------------------------------------------------------------適應性設計---*/
 
