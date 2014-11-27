@@ -1,134 +1,79 @@
-    <header>
-      <h2 class="left"><span>首頁管理 / </span>穿搭主題</h2>
-      <nav class="left">
-        <%= link_to '基本', edit_admin_lookbook_path(@lookbook), class: 'active' %>
-        <%= link_to '圖片', admin_lookbook_tiles_path(@lookbook)%>
-        <%= "此穿搭主題限制關聯主題數：#{@lookbook.limit}, 已關聯主題數：#{@lookbook.lookbook_topicships.count}" %>
-      </nav>
-      <div class="explain right"><p>圖片尺寸：</p></div>
-    </header>
-    <article>
-      <div class="hgroup">
-        <%= form_for(@lookbook, :url => admin_lookbook_path(@lookbook), html: { id: "patchthislookbook", multipart: true } ) do |f| %>
 
-        <div class="right">選擇此版型 <%= f.check_box :status, { id: 'grind-ctrl'  }, "enable", "disable" %>
-        </div>
-      </div>
-
-      <div class="form">
-    
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <td width="7%">名稱：</td>
-              <td width="93%">
-                <%= f.text_field :name , class: 'text' %>
-              </td>
-            </tr>
-            
-          </table>
-        <% end %>
-      </div>
-
-      <div class="button">
-        <%= link_to image_tag("/images/admin/left.png")+"返回", admin_lookbooks_path(), class: "left" %>
-        <a href="javascript: document.getElementById('patchthislookbook').submit();" id="sendtheform" class="right highlight" data-no-turbolink = true >變更
-          <img src="<%= image_path("/images/admin/save.png") %>">
-        </a>
-      </div>
-
-    </article>  
-    
-    
-
-  <article>
-    <br>== tile(順序) ==<br>
-    <div id='dragable_container' class='gallery' style='width:100%;'>
-      <% @lookbook.tiles.each do |tile| %>
-        <div class='dragable Tilecontainer thumb left' <%= "id=Tilecontainer_#{tile.id.to_s}" %> >
-          <%= link_to "#{tile.id}", admin_lookbook_tiles_path(@lookbook) %>
-          
-          <% if tile.galleries.select{ |v| v['type'] == 'TileCoverGallery' }.first %>
-            <%= link_to( image_tag(tile.galleries.select{ |v| v['type'] == 'TileCoverGallery' }.first.attachment.url, class: 'img-responsive', width: 100, height: 100 ) , 'javascript:void(0);') %>
-          <% end %>
-        </div>
-      <% end %>  
-    </div>
-  </article>
-
-  <% if @lookbook.lookbook_topicships.count < @lookbook.limit %>
-    <article>
-      <%= form_for(@lookbook_topicship, :url => admin_lookbook_topicships_path(), html: { id: "newthislookbook_topicship" } ) do |f| %>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td width="7%">新增關聯主題：</td>
-            <td width="31%">
-            <% unless @topics.count == 0 %>
-              <%= f.select :topic_id, options_for_select(@topics.collect { |topic|
-        [topic.name, topic.id] }, @lookbook_topicship.topic_id), {}, { id: 'topic_select' } %>
-            <% else %>
-              無主題可供選擇
-            <% end %>
-            </td>
-            <td width="2%">&nbsp;</td>
-            <td width="7%">&nbsp;</td>
-            <td width="53%"><%= f.hidden_field :lookbook_id, value: @lookbook.id %></td>
-          </tr>
-          <tr>
-            <td valign="top">&nbsp;</td>
-            <td colspan="4">&nbsp;</td>
-          </tr>
-        </table>
+<header>
+  <h2 class="left"><span>首頁管理 / </span>穿搭主題</h2>
+  <nav class="left"> <%= link_to '基本', edit_admin_lookbook_path(@lookbook), class: 'active' %> <%= link_to '圖片', admin_lookbook_tiles_path(@lookbook)%> <%#= "此穿搭主題限制關聯主題數：#{@lookbook.limit}, 已關聯主題數：#{@lookbook.lookbook_topicships.count}" %> </nav>
+</header>
+<article>
+  <div class="hgroup"> <%= form_for(@lookbook, :url => admin_lookbook_path(@lookbook), html: { id: "patchthislookbook", multipart: true } ) do |f| %>
+    <div class="right">選擇此版型 <%= f.check_box :status, { id: 'grind-ctrl'  }, "enable", "disable" %> </div>
+  </div>
+  <div class="form">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="7%">名稱：</td>
+        <td width="93%"><%= f.text_field :name , class: 'text' %></td>
+      </tr>
+    </table>
+    <% end %>
+  </div>  
+  <!--div id='dragable_container' class='gallery' style='width:100%;'>
+    <% @lookbook.tiles.each do |tile| %>
+    <div class='dragable Tilecontainer thumb left' <%= "id=Tilecontainer_#{tile.id.to_s}" %> > <%= link_to "#{tile.id}", admin_lookbook_tiles_path(@lookbook) %>
+      <% if tile.galleries.select{ |v| v['type'] == 'TileCoverGallery' }.first %>
+      <%= link_to( image_tag(tile.galleries.select{ |v| v['type'] == 'TileCoverGallery' }.first.attachment.url, class: 'img-responsive', width: 100, height: 100 ) , 'javascript:void(0);') %>
       <% end %>
-
-      <div class="button">
-        <%= link_to image_tag("/images/admin/left.png")+"返回", admin_lookbooks_path(), class: "left" %>
-        <a href="javascript: document.getElementById('newthislookbook_topicship').submit();" id='new_lookbook_topicship' class="right highlight" data-no-turbolink = true >新增主題
-          <img src="<%= image_path("/images/admin/down.png") %>">
-        </a>
-      </div>
-
-    </article>
+    </div>
+    <% end %>
+  </div-->
+  <% if @lookbook.lookbook_topicships.count < @lookbook.limit %>
+  <div class="form"> <%= form_for(@lookbook_topicship, :url => admin_lookbook_topicships_path(), html: { id: "newthislookbook_topicship" } ) do |f| %>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="12%">選擇主題：</td>
+        <td width="87%"><% unless @topics.count == 0 %>
+          <%= f.select :topic_id, options_for_select(@topics.collect { |topic|
+        [topic.name, topic.id] }, @lookbook_topicship.topic_id), {}, { id: 'topic_select' } %>
+          <% else %>
+          無主題可供選擇
+          <% end %></td>
+        <td width="1%"><%= f.hidden_field :lookbook_id, value: @lookbook.id %></td>
+      </tr>
+    </table>
+    <% end %>
+  </div>
+  <div class="button"> <a href="javascript: document.getElementById('newthislookbook_topicship').submit();" id='new_lookbook_topicship' class="right highlight" data-no-turbolink = true >加入 <img src="<%= image_path("/images/admin/down.png") %>"> </a> </div>
   <% end %>
-  
-  <article>
-  刪除關聯主題：
-    <div class="list">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <% @lookbook.lookbook_topicships.each do |ship| %>
-          <tr>
-            <td width='88%'>
-              <%= Topic.find(ship.topic_id).name %>
-            </td>
-            <td>
-              <div class='tool'>
-              <%= link_to '', admin_lookbook_topicship_path(ship.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete', title: '刪除' %>  
-              </div>
-            </td>
-          </tr>
-        <% end %>    
-      </table>
-    </div>
-  </article>
+  <div class="hgroup">
+    <h3>關聯主題</h3>
+  </div>
 
-  
-  <article>
-  已關聯商品列表：
-    <div class="list">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <% @lookbook.topics.each do |topic| %>
-          <% topic.products.each do |product| %>
-          <tr>
-            <td>
-              <%=topic.name%><%= product.name %> = <%= product.price %> / <%= product.price_for_sale %>
-            </td>
-          </tr>
-          <% end %>
-        <% end %>    
-      </table>
-    </div>
-  </article>
 
-  <script>
+  <div class="list">  
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">  
+      <% @lookbook.lookbook_topicships.each do |ship| %>   
+      <tr>
+        <td colspan="2" class="icon"><img src="/images/admin/folder.png"> <%= Topic.find(ship.topic_id).name %></td>
+        <td width="18%"><div class='tool'> <%= link_to '', admin_lookbook_topicship_path(ship.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete', title: '刪除' %> </div></td>
+      </tr>
+      <% @lookbook.topics.each do |topic| %>
+      <% topic.products.each do |product| %>
+      <tr>
+        <td width="5%" class="icon">├</td>
+        <td width="75%"><%= product.name %><%#= product.price %><%#= product.price_for_sale %></td>
+        <td></td>
+      </tr>
+      <% end %>
+      <% end %>
+      <% end %>
+      
+    </table>
+  </div>
+  <% if @lookbook.lookbook_topicships.count >= @lookbook.limit %>
+    <div class="button"> <%= link_to image_tag("/images/admin/left.png")+"返回", admin_lookbooks_path(), class: "left" %> <a href="javascript: document.getElementById('patchthislookbook').submit();" id="sendtheform" class="right highlight" data-no-turbolink = true >儲存 <img src="<%= image_path("/images/admin/save.png") %>"> </a> </div>
+  <% end %>
+</article>
+<script>
   $(function() {
     var prevEvent = null;
       $( "#dragable_container" ).sortable({
@@ -178,4 +123,4 @@
         
       $( "#dragable_container" ).disableSelection();
     });  
-  </script>
+  </script> 

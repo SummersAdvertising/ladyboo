@@ -8,14 +8,9 @@
         <%= form_for(@topic, :url => admin_topics_path(), html: { id: "NewTopicForm" } ) do |f| %>
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-              <td width="7%">主題名稱：</td>
-              <td width="31%">
+              <td width="7%">名稱：</td>
+              <td width="93%">
                <%= f.text_field :name, class: 'text' %>
-              </td>
-              <td width="2%">&nbsp;</td>
-              <td width="7%">&nbsp;</td>
-              <td width="53%">
-               &nbsp; 
               </td>
             </tr>
           </table>
@@ -25,7 +20,7 @@
       <div class="button">
         <%= link_to image_tag("/images/admin/left.png")+"返回", admin_topics_path(), class: "left" %>
         <a href="javascript: void(0);" id="sendtheform" class="right highlight" data-no-turbolink = true >儲存
-          <img src="<%= image_path("/images/admin/up.png") %>">
+          <img src="<%= image_path("/images/admin/save.png") %>">
         </a>
       </div>
 

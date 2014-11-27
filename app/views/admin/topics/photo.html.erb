@@ -13,27 +13,20 @@
       <div class="form">
         <%= form_for(@topic, :url => admin_topic_upload_photo_path(@topic), html: { id: "patchthistopic" , :multipart => true } ) do |f| %>
           
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">  
-            <tr>
-              <td width="7%" valign="top">封面：</td>
-              <td width="93%">
-                <% if @gallery_count > 0 %>
-                  <%= render 'admin/common/show_by_type', target: @topic, target_title: '圖', type: 'TopicBannerGallery', allow_dragable: false %>
+          <% if @gallery_count > 0 %>
+                  <%= render 'admin/common/show_by_type', target: @topic, target_title: '封面', type: 'TopicBannerGallery', allow_dragable: false %>
                 <% else %>
-                  <%= render 'admin/common/upload_by_type', target_title: '圖' %>
+                  <%= render 'admin/common/upload_by_type', target_title: '封面' %>
                 <% end %>
-              <%= f.hidden_field :name %>
-              </td>
-            </tr>          
-          </table>
-          
+              <%= f.hidden_field :name %>          
         <% end %>
       </div>
-
+      <% if @gallery_count < 1 %>
       <div class="button">
-        <a href="javascript: document.getElementById('patchthistopic').submit();" id="sendtheform" class="right highlight" data-no-turbolink = true >變更
+        <a href="javascript: document.getElementById('patchthistopic').submit();" id="sendtheform" class="right highlight" data-no-turbolink = true >上傳
           <img src="<%= image_path("/images/admin/up.png") %>">
         </a>
-      </div>
+        </div>
+        <% end %>
 
     </article> 
