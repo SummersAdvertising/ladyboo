@@ -6,7 +6,7 @@
       </div>
     
       <% @topic_collections.each do | collection | %>
-        <div class="panel"><!-- Start .panel 分類 --> 
+        <%= aside_panel(topic_collection_path(collection) ) %><!-- Start .panel 分類 --> 
           <div class="accordion-header">
             <div class="accordion-title"><span><%= link_to collection.name, topic_collection_path(collection) %></span></div>
             <a class="accordion-btn"></a>

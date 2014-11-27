@@ -7,7 +7,7 @@
       </div>
       
       <% @topics.each do | topic | %>     
-        <div class="panel"><!-- Start .panel 分類 --> 
+        <%= aside_panel(lookbook_topic_path(@lookbook, topic) ) %><!-- Start .panel 分類 --> 
           <div class="accordion-header">
             <div class="accordion-title"><span><%= link_to topic.name, lookbook_topic_path(@lookbook, topic) %></span></div>
             <a class="accordion-btn"></a>

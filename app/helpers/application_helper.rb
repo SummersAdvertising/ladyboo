@@ -14,6 +14,12 @@ module ApplicationHelper
     end
   end
 
+  def aside_panel(link_path)
+    class_name = current_page?(link_path) ? 'panel active' : 'panel'
+
+    "<div class='#{class_name}''>".html_safe
+  end
+
   # def controller?(*controller)
   #   controller.include?(params[:controller])
   # end
