@@ -175,6 +175,7 @@ GEM
       json (~> 1.4)
     recaptcha (0.3.6)
     remotipart (1.2.1)
+    request-log-analyzer (1.13.4)
     responders (1.1.1)
       railties (>= 3.2, < 4.2)
     rest-client (1.7.2)
@@ -269,6 +270,7 @@ DEPENDENCIES
   ransack!
   recaptcha
   remotipart
+  request-log-analyzer
   rolify
   rvm-capistrano
   sanitize

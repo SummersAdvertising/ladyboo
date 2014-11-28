@@ -22,7 +22,7 @@ class StaticsController < ApplicationController
     if current_user
       @tracking_lists = current_user.tracking_lists.includes(:product, :galleries, :categories).latest
     end
-
+    
   end
 
   def about
