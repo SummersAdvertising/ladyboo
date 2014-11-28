@@ -82,6 +82,6 @@ group :development do
   gem 'capistrano-ext'
   # gem 'lol_dba'
   # lol_dba db:find_indexes
-  gem 'newrelic_rpm'
+  # gem 'newrelic_rpm'
   
 end
