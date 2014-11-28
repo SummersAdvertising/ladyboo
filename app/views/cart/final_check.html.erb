@@ -47,10 +47,10 @@ div ,td, p .noTransition {
     <h1>2. 訂單明細<br>　ORDER INFO</h1>
     <table class="table orderItem">
       <tr>
-          <th>商品名稱 Name</th>
-          <th>售價 Price</th>
-          <th>數量 Quantity</th>
-          <th>總額 Subtotal</th>
+          <th id="ntd">商品名稱 Name</th>
+          <th id="ptd">售價 Price</th>
+          <th id="qtd">數量 Quantity</th>
+          <th id="std">總額 Subtotal</th>
       </tr>
       <%= render partial: "show_order_items_nop", :locals => { order_items: @order_items } %>
       <tr>
@@ -60,7 +60,7 @@ div ,td, p .noTransition {
           <% if is_delivery_discounted?(@order, @sum) %>
           滿額免運費 Shipping fee discount <span class="subtotal">NT$ -<%= fetch_discount_price_when_checkout(@order.delivery_type) %></span><br>
           <% end %>
-          <hr>
+          <hr><br>
           訂單總計 Total  <span class="subtotal">NT$ <%= @sum + @order.shipping_fee %><%# cart_helper  %></span></td>
       </tr>
     </table>

@@ -58,10 +58,10 @@
   <h1>2. 確認訂單<br>　CONFIRM</h1>
   <table class="table orderItem">
     <tr>
-        <th>商品名稱 Name</th>
-        <th>售價 Price</th>
-        <th>數量 Quantity</th>
-        <th>總額 Subtotal</th>
+        <th id="ntd">商品名稱 Name</th>
+        <th id="ptd">售價 Price</th>
+        <th id="qtd">數量 Quantity</th>
+        <th id="std">總額 Subtotal</th>
     </tr>
 
     <%= render partial: "show_order_items_nop", :locals => { order_items: @order_items } %>

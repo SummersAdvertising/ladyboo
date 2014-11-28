@@ -1,12 +1,13 @@
 #content,#content a { font-size: 1.1em!important; }
 /*步驟標籤------------------------------------------------------------------------------------------*/
-.stepTag { background-image: url(../images/bg_cartStep.png); background-repeat: no-repeat; width: 100%; overflow: hidden; background-size: contain; padding-bottom: 40px; }
+.stepTag { background-image: url(../images/bg_cartStep.png); background-repeat: no-repeat; width: 100%; overflow: hidden; padding-bottom: 20px;margin-bottom:20px;background-size: contain;}
 .stepTag ul { padding: 0; margin: 0; }
 .stepTag ul li { float: left; color: #646464; line-height: 1.2em; width: 10%; padding-top: 10px; margin-left: 7%; margin-right: 8%; font-size: 0.9em; }
 .stepTag ul li.active span { border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #c9006e; color: #f858b7; display: inline-block; }
 #content h1 { color: #EEE; background-color: #313131; height: 72px; margin: 0; padding-top: 20px; padding-bottom: 20px; padding-left: 20px; font-family: Helvetica, "Microsoft JhengHei", "微軟正黑體"; font-style: italic; font-size: 1em; line-height: 1.2em; }
 .note { color: #c9006e; font-weight: bold; font-size: 0.9em; }
 .title.cart { width: 320px; }
+.table > tbody > tr > td{padding:30px 0;}
 @media (max-width:1200px) {
 #content .container { width: 100%; padding: 0 5px; }
 }
@@ -37,9 +38,7 @@
 .choosePlace { border: 2px double #AAA; padding-bottom: 10px;}
 .choosePlace form{ display: inline-block;}
 .choose .text-center { padding-top: 105px; }
-/*@media screen and (-webkit-min-device-pixel-ratio:0) {
-.choosePlace { -webkit-border-image: url(../images/frame.png) 30 30 round; -o-border-image: url(../images/frame.png) 30 30 round; border-image: url(../images/frame.png) 30 30 round; }
-}*/
+.close-button{float:right;margin-right: 10px;margin-left: 0px;}
 
 @media (max-width:1200px) {
 .choose .text-center { padding-top: 20px; text-align: right;}
@@ -54,6 +53,7 @@
 #content .col-xs-6 { width: 100%; float: none; margin: 0 auto; padding: 0; }
 .choose .text-center { padding-top: 20px; }
 #content .row { margin-left: 10px; margin-right: 10px; }
+.close-button{float:none;margin-right: 0px;margin-left: 0px;}
 }
 /*步驟二*/
 /*1.選擇付款方式------------------------------------------------------------------------------------------*/
@@ -72,11 +72,19 @@ input[type=radio] {position: absolute;left: -5px;}
 .orderItem { border-color: #EEE!important; margin-bottom: 40px; }
 .orderItem > tbody > tr > th { padding: 10px 5px; color: #646464; background-color: #eeeeee; border: solid 1px #e0e0e0; font-weight: normal; }
 .orderItem > tbody > tr > td { vertical-align: middle; background-color: #FFF; border-color: #e0e0e0!important; }
-.orderItem img { float: left; margin-left: 10px; }
-.orderItem td p { float: left; margin-left: 30px; text-align: left; }
+.orderItem figure { float: left; margin-left: 20px;overflow: hidden;width:100px;height:100px; }
+.orderItem td p { float: left; margin-left: 30px; margin-bottom: 0px; text-align: left;width:75%; }
 .orderItem .tableBottom { color: #EEE; background-color: #313131; height: 72px; margin: 0; padding-top: 20px; padding-bottom: 20px; padding-right: 20px;  text-align: right; }
-.subtotal { color: #f858b7; }
+.subtotal { color: #f858b7;}
 .mTitle { background-color: #313131; text-align: center; color: #FFF; line-height: 1.4em; padding: 10px 0; display: none; }
+.table .custom-quantity-input input{background-color: #FFF;line-height: 40px;}
+#ntd{}
+#ptd{min-width:100px;}
+#qtd{min-width:120px;}
+#std{min-width:140px;}
+@media (min-width:767px) and (max-width:1000px ) {
+.orderItem td p { width:50%; }
+}
 @media(max-width:767px) {
 .mTitle { display: block; }
 .orderItem > tbody > tr > th { display: none; }
@@ -84,7 +92,7 @@ input[type=radio] {position: absolute;left: -5px;}
 .orderItem > tbody > tr > td { display: block; padding: 5px 10px; text-align: center; border: none!important; }
 .orderItem > tbody > tr:nth-child(even) { background-color: #EEE; }
 .orderItem > tbody > tr:nth-child(odd) { background-color: #FFF; }
-.orderItem img { float: none; margin: 20px auto 10px auto; }
+.orderItem figure { float: none; margin: 20px auto 10px auto; }
 .orderItem td p { float: none; margin: 0 auto 0 auto; text-align: center; }
 .itemPrice:before { content: '售價 Price：' }
 .itemQuantity:before { content: '數量 Quantity：'; }
@@ -128,10 +136,10 @@ select.form-control { width: 100px; }
 }
 /*共用確認訂單------------------------------------------------------------------------------------------*/
 /*2.訂單明細------------------------------------------------------------------------------------------*/
-.orderItem .tableBottom2 { color: #EEE; background-color: #313131; height: 72px; margin: 0; padding-top: 20px; padding-bottom: 20px; padding-right: 20px;  text-align: right; }
-.orderItem .tableBottom2 hr { border-color: #a0a0a0; width: 200px; margin-right: 0; margin-top: 10px; margin-bottom: 10px; }
+.orderItem .tableBottom2 { color: #EEE; background-color: #313131; height: auto; margin: 0; padding-top: 20px; padding-bottom: 20px; padding-right: 20px;  text-align: right; }
+.orderItem .tableBottom2 hr { border-color: #a0a0a0; width: 200px; margin-right: 0; margin-top: 10px; margin-bottom: 10px;float:right; }
 @media(max-width:767px) {
-.orderItem .tableBottom2 { height: 140px;  line-height: 2em; text-align: center; padding: 20px 0; }
+.orderItem .tableBottom2 {   line-height: 2em; text-align: center; padding: 20px 0; }
 .orderItem .tableBottom2 hr { margin: 0 auto; }
 }
 /*3.訂單資訊------------------------------------------------------------------------------------------*/
@@ -148,7 +156,7 @@ select.form-control { width: 100px; }
 .thanks { border: none!important; }
 .thanks > tbody > tr > td { border: none!important; text-align: left; padding: 10px 10px;  }
 .thanks p { text-align: center; padding-top: 10px; font-size: 1.3em; line-height: 1.8em; }
- @media(max-width:767px) {
+@media(max-width:767px) {
 #content h1.h1_2 { width: 94%; margin-top: 0px; }
 .thankPanel { width: 94%; padding: 0 5px; }
 .thanks p { font-size: 1.1em; }

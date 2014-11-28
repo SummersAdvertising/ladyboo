@@ -66,11 +66,11 @@
                       <p>NO. <%= get_product_of(item).product_no %><br>
                     <% end %>
                     
-                    <a href="#" target="_blank"><%= "#{ item.item_name }" %><br>
+                    <span><%= "#{ item.item_name }" %><br>
                     <% unless get_product_of(item).nil? %>
                       <%= get_product_of(item).en_name %>
                     <% end %>
-                    </a>
+                    </span>
                     <br> 
                     <%= item.item_stockname %></p>
                   </td>

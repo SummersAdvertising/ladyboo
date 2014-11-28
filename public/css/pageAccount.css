@@ -38,8 +38,8 @@
 .title.account { width: 20%; min-width: 310px; }
 }
 @media (max-width: 900px) {
-.sidebar { display: block; width: 100%; padding-top: 20px; margin-left: auto; margin-right: auto; height: 300px; }
-.tab-container .tab-content { padding-left: 0px; }
+.sidebar { z-index:900;display: block; width: 100%; padding-top: 20px; overflow:hidden;margin-left: auto; margin-right: auto; height: 300px; }
+.tab-container .tab-content { background-color:transparent;padding-left: 0px;margin-top: 300px;}
 }
 @media (max-width: 767px) {
 #content { padding-top: 40px; }
@@ -73,7 +73,8 @@
 .orderItem > tbody > tr:nth-child(even) { background-color: #FFF; }
 .orderItem > tbody > tr:nth-child(odd) { background-color: #EEE; }
 #orderInfo img { float: left; margin-left: 10px; }
-#orderInfo td p { float: left; margin-left: 10px; text-align: left; }
+#orderInfo td p { float: left; margin-left: 10px; text-align: left; width:65%;}
+#orderInfo td p span{color: #c9006e;}
 #orderInfo hr { width: 96%; margin: 0 auto; }
 #orderInfo .text-right { width: 100%; margin-bottom: 0; }
 .form-control.transferInput { background-color: #e8e8e8; display: inline-block; border: none; border-radius: 0px; margin-bottom: 10px; }
