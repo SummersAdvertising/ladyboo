@@ -1,0 +1,67 @@
+<header>
+  <h2 class="left"><span>首頁管理 / </span>穿搭主題</h2>
+  <nav class="left"> 
+    <%= link_to '基本', edit_admin_lookbook_path(@lookbook) %> 
+    <%= link_to '圖片', admin_lookbook_tiles_path(@lookbook)%> 
+    <%= link_to '排序', sort_admin_lookbook_tiles_path(@lookbook) , class: 'active' %> 
+  </nav>
+</header>
+<article>
+  <div class="hgroup">
+    <h3 class="left">位置排序<span>（拖拉圖片對應位置）</span></h3>
+  </div>
+  
+  <%= render 'drag_tiles' %>
+  
+</article>
+
+
+<script>
+  $(function() {
+    var prevEvent = null;
+      $( "#dragable_container" ).sortable({
+        items: "> .dragable" ,
+        placeholder: "ui-state-highlight",
+        update: function( event, ui ) {
+            
+          if(event.timeStamp == prevEvent){
+            return null;
+          }
+          
+          prevEvent = event.timeStamp;  
+          var newRankings_array = $('#dragable_container').sortable('toArray');
+          var orderSet = [];
+          $.each(newRankings_array, function( index, value){
+                orderSet.push(value.replace("Tilecontainer_",""));
+            });
+            var order2Push = JSON.stringify(orderSet);
+            
+            $.ajaxSetup({
+              headers: {
+                  'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+
+          // reorder 
+          $.ajax({
+            type: "PATCH",
+            url: "/admin/tiles/"+orderSet[0]+"/reorder",
+            data: { tiles: {  reorderset: orderSet } },
+            success: function(data){
+              alertify['success'](data[0][1], 2000);
+              
+              return false   
+            },
+            error: function(data){
+            
+              return false  
+            }
+          });
+
+        }
+      });
+      
+        
+      $( "#dragable_container" ).disableSelection();
+    });  
+  </script>

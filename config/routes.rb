@@ -173,7 +173,11 @@ Rails.application.routes.draw do
     resources :topic_productships
 
     resources :lookbooks do 
-      resources :tiles
+      resources :tiles do
+        collection do
+          get '/sort' => 'tiles#sort', as: 'sort'
+        end
+      end
 
       get   '/photos'       => 'lookbooks#photo', as: 'photo'
       patch  '/upload_photo'       => 'lookbooks#upload_photo'

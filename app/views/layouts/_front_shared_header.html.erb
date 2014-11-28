@@ -50,9 +50,7 @@
           </div><!-- End .logo-container -->
           <div id="menu-right-side" class="clerfix">
             <div id="quick-access"><!-- Start #quick-access 搜尋鍵 -->
-              
-              <%= render 'common/search_form' %>
-              
+                <%= render 'common/search_form' %>
             </div><!-- End #quick-access -->
             <nav id="main-nav"><!-- Start #main-nav 選單區 -->
               <div id="responsive-nav"><!-- Start #responsive-nav 手機螢幕選單按鈕 -->
@@ -66,9 +64,8 @@
                   <div class="mega-menu clearfix"><!-- Start .mega-menu -->
                     <%# @root_node = Category.return_root_node unless @root_node %>
                     <%# @hierarchy = Category.get_level_hierarchy() unless @hierarchy %>
-
-                    <% levels = @hierarchy.select { |v| v[2] == @root_node.id } %>
-                      <% levels.each do | level1 | %>
+                    <%# levels = @hierarchy.select { |v| v[2] == @root_node.id } %>
+                      <% @levels.each do | level1 | %>
                         <div class="col-5">
                           <%= link_to level1[3], category_path(id: level1[0]), class: "mega-menu-title" %><!-- End .mega-menu-title -->
                           <ul class="mega-menu-list clearfix">
@@ -88,30 +85,30 @@
                   <a href="javascript:void(0);">主題專輯<br>LOOK BOOK</a>
                   <div class="mega-menu clearfix"><!-- Start .mega-menu -->
                     <%# @lookbook = Lookbook.where(status: 'enable').first %>
-                    <% if @lookbook %>
-                      <div class="col-5">
-                        <div class='mega-menu-title'><%= @lookbook.name %></div><!-- End .mega-menu-title -->
-                        <ul class="mega-menu-list clearfix">
-                          <% @lookbook.topics.each do | topic | %>
-                            <li>
-                              <%= link_to topic.name , lookbook_topic_path(@lookbook,topic) %>
-                            </li>
-                          <% end %>
-                        </ul>
-                      </div>
+                    <% if @lookbook && @topics %>
+                        <div class="col-5">
+                          <div class='mega-menu-title'>穿搭主題</div><!-- End .mega-menu-title -->
+                          <ul class="mega-menu-list clearfix">
+                            <% @topics.each do | topic | %>
+                              <li>
+                                <%= link_to topic.name , lookbook_topic_path(@lookbook,topic) %>
+                              </li>
+                            <% end %>
+                          </ul>
+                        </div>
                     <% end %>
                     <%# topic_collections = TopicCollection.where(status: 'enable').all.limit(4) %>
                     <% if @topic_collections %>
-                      <div class="col-5">
-                        <div class="mega-menu-title">系列主題</div><!-- End .mega-menu-title -->
-                        <ul class="mega-menu-list clearfix">
-                          <% @topic_collections.each do | collection | %>
-                            <li>
-                              <%= link_to collection.name , topic_collection_path(collection) %>
-                            </li>
-                          <% end %>
-                        </ul>
-                      </div>
+                        <div class="col-5">
+                          <div class="mega-menu-title">系列主題</div><!-- End .mega-menu-title -->
+                          <ul class="mega-menu-list clearfix">
+                            <% @topic_collections.each do | collection | %>
+                              <li>
+                                <%= link_to collection.name , topic_collection_path(collection) %>
+                              </li>
+                            <% end %>
+                          </ul>
+                        </div>
                     <% end %>
                   </div>
                 </li>

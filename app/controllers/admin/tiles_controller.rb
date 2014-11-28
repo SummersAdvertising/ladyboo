@@ -74,6 +74,10 @@ class Admin::TilesController < AdminController
 
   end
 
+  def sort
+    @lookbook = Lookbook.find_by_id(params[:lookbook_id])
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tile

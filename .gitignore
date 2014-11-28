@@ -36,6 +36,7 @@ pickle-email-*.html
 
 /config/deploy.rb
 /config/deploy/*
+/config/newrelic.yml
 
 /config/environments/*
 database.yml

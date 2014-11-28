@@ -3,13 +3,17 @@ class StaticsController < ApplicationController
   layout false , only: [:index]
 
   def index
-
-    @current_root = Category.return_root_node
-    @categories = Category.get_level_hierarchy()
+    # shared in application_controller
+    # @root_node = Category.return_root_node
+    # @hierarchy = Category.get_level_hierarchy()
+    # @lookbook = Lookbook.where(status: 'enable').first
+    # @topics = @lookbook.topics if @lookbook # lookbook topics
+    # @levels = @hierarchy.select { |v| v[2] == @root_node.id }
 
     @banners = Banner.includes(:galleries).where(status: 'enable').limit(5)
-    @lookbook = Lookbook.where(status: 'enable').first
+    
     @tiles = @lookbook.tiles.includes(:galleries) if @lookbook
+    
 
     @topic_collections = TopicCollection.includes(:galleries).where(status: 'enable').order(created_at: :desc).limit(4)
     

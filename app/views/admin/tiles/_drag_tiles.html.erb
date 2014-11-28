@@ -1,0 +1,67 @@
+<% if @lookbook.limit == 1 %>
+  <style>
+  #dragable_container { list-style-type: none; margin: 0; padding: 0; width: 1200px; }
+  #dragable_container li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 570px; height: 240px; font-size: 4em; text-align: center; }
+  </style>
+
+  <ul id='dragable_container'>
+    <% @lookbook.tiles.each_with_index do |tile, index| %>
+      <li class='ui-state-default dragable Tilecontainer' <%= "id=Tilecontainer_#{tile.id.to_s}" %> >
+        <% if tile.galleries.select{ |v| v['type'] == 'TileCoverGallery' }.first %>
+          <%= link_to( image_tag(tile.galleries.select{ |v| v['type'] == 'TileCoverGallery' }.first.attachment.url ) , 'javascript:void(0);') %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+<% elsif @lookbook.limit == 2 %>
+  
+  <style>
+  #dragable_container { list-style-type: none; margin: 0; padding: 0; width: 1200px; }
+  #dragable_container li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 570px; height: 240px; font-size: 4em; text-align: center; }
+  </style>
+
+  <ul id='dragable_container'>
+    <% @lookbook.tiles.each_with_index do |tile, index| %>
+      <li class='ui-state-default dragable Tilecontainer' <%= "id=Tilecontainer_#{tile.id.to_s}" %> >
+        <% if tile.galleries.select{ |v| v['type'] == 'TileCoverGallery' }.first %>
+          <%= link_to( image_tag(tile.galleries.select{ |v| v['type'] == 'TileCoverGallery' }.first.attachment.url ) , 'javascript:void(0);') %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+
+<% elsif @lookbook.limit == 3 %>
+  <style>
+  #dragable_container { list-style-type: none; margin: 0; padding: 0; width: 1200px; }
+  #dragable_container li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 570px; height: 240px; font-size: 4em; text-align: center; }
+  #dragable_container li:first-of-type { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 570px; height: 500px; font-size: 4em; text-align: center; }
+  </style>
+  <ul id='dragable_container'>
+    <% @lookbook.tiles.each_with_index do |tile, index| %>
+      <li class='ui-state-default dragable Tilecontainer' <%= "id=Tilecontainer_#{tile.id.to_s}" %> >
+        <% if tile.galleries.select{ |v| v['type'] == 'TileCoverGallery' }.first %>
+          <%= link_to( image_tag(tile.galleries.select{ |v| v['type'] == 'TileCoverGallery' }.first.attachment.url ) , 'javascript:void(0);') %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+<% elsif @lookbook.limit == 4 %>
+   <style>
+  #dragable_container { list-style-type: none; margin: 0; padding: 0; width: 1200px; }
+  #dragable_container li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 570px; height: 240px; font-size: 4em; text-align: center; }
+  </style>
+
+  <ul id='dragable_container'>
+    <% @lookbook.tiles.each_with_index do |tile, index| %>
+      <li class='ui-state-default dragable Tilecontainer' <%= "id=Tilecontainer_#{tile.id.to_s}" %> >
+        <% if tile.galleries.select{ |v| v['type'] == 'TileCoverGallery' }.first %>
+          <%= link_to( image_tag(tile.galleries.select{ |v| v['type'] == 'TileCoverGallery' }.first.attachment.url ) , 'javascript:void(0);') %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+<% end %>

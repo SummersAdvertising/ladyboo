@@ -23,7 +23,7 @@ class CategoriesController < ApplicationController
       
       redirect_to categories_path and return if @category.nil?
       
-      @parent_cate = Category.find(@category.parent_id)
+      @parent_cate = Category.find_by_id(@category.parent_id)
       
       if @category.depth <= 1
         all_descendants_product_ids = Category.where(parent_id: @category.id).pluck(:id)

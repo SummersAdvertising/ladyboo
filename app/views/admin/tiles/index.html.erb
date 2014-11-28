@@ -1,103 +1,142 @@
+<style>
+.gallery, .thumb {max-width:270px!important}
+.form li {padding:0 0 0 15px;background:url(/images/admin/li.png) 0 center no-repeat}
+.form:hover .tool{opacity:1}
+.form .file{height:200px;background-position:center center;background-color:#eee}
+</style>
 <header>
   <h2 class="left"><span>首頁管理 / </span>穿搭主題</h2>
   <nav class="left">
     <%= link_to '基本', edit_admin_lookbook_path(@lookbook)%>
     <%= link_to '圖片', admin_lookbook_tiles_path(@lookbook), class: 'active' %>
-    <%= "此穿搭主題限制關聯主題數：#{@lookbook.limit}, 已關聯主題數：#{@lookbook.lookbook_topicships.count}" %>
+    <%= link_to '排序', sort_admin_lookbook_tiles_path(@lookbook)%> 
   </nav>
   <div class="explain right"><p>圖片尺寸：</p></div>
 </header>
 <article>
   <div class="hgroup">
-    <h3 class="left">列表</h3>
     <div class="button right">
       <% if @lookbook.tiles.count < @lookbook.limit %>
-        <a href="javascript:void(0);" class="right highlight toggle_new_tile">新增<img src="/images/admin/add_folder.png"></a>
+        <a href="javascript:void(0);" class="right highlight toggle_new_tile">新增圖片<img src="/images/admin/add.png"></a>
       <% end %>
     </div>
   </div>
-  <div class="list">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      
-      <% @tiles.each do |tile| %>
+  <% @tiles.each do |tile| %>
+    <%# SHOW %>
+    <div class="form show_tile_<%= tile.id %>" >
+      <table width="100%" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="38%" rowspan="2"><div class="gallery">
+              <div class="thumb">
+                <% tile.galleries.select{ |v| v['type'] == "TileCoverGallery" }.each do |attach| %>
+                  <%= image_tag("#{attach.attachment.url}") %>
+                <% end %>
+              </div>
+            </div></td>
+          <td width="44%">
+            <%= tile.topic.name if tile.topic %>
+          </td>
+          <td width="18%" rowspan="2" align="right" valign="top">
+            <div class="tool"> 
+              <%= link_to "", "javascript:void(0);", :data => { :id => tile.id }, :class => "edit", title:"編輯" %>
+              <%= link_to "", admin_lookbook_tile_path(@lookbook,tile), :data => { :confirm => "將會刪除分類底下所有商品，確定繼續？" }, :method => :delete, :class => "delete", title: "刪除" %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ul>
+              <li><%= tile.context_1 %></li>
+              <li><%= tile.context_2 %></li>
+              <li><%= tile.context_3 %></li>
+              <li><%= tile.context_4 %></li>
+              <li><%= tile.context_5 %></li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </div>
 
-        
-        <tr class="show_tile_<%= tile.id %>" >
-          <td width="6%" style="background:url(/images/admin/folder.png) center center no-repeat"></td>
-          <td width="76%">
-            <% tile.galleries.select{ |v| v['type'] == "TileCoverGallery" }.each do |attach| %>
-              <%= image_tag("#{attach.attachment.url}") %>
-            <% end %>
-            
-          </td>
-          <td width="18%">
-            <div class="tool">
-              <%= link_to "", "javascript:void(0);", :data => { :id => tile.id }, :class => "edit", title:"編輯" %><%= link_to "", admin_lookbook_tile_path(@lookbook,tile), :data => { :confirm => "將會刪除分類底下所有商品，確定繼續？" }, :method => :delete, :class => "delete", title: "刪除" %>
-            </div>
-          </td>
-        </tr>
-        
-        <tr class="list-edit edit_tile_<%= tile.id %>" style="display:none">
-          <%= form_for(tile, :url => admin_lookbook_tile_path(@lookbook,tile) , html: { id: "patchthistile_#{tile.id}", :multipart => true }) do |f| %>
-          
-          <td width="6%" style="background:url(/images/admin/folder.png) center center no-repeat"></td>
-          <td width="76%">
-            <div style="position:relative">
-              描述1：<%= f.text_field :context_1, class:"text", placeholder: "", style:"width:50%" %><br>
-              描述2：<%= f.text_field :context_2, class:"text", placeholder: "", style:"width:50%" %><br>
-              描述3：<%= f.text_field :context_3, class:"text", placeholder: "", style:"width:50%" %><br>
-              描述4：<%= f.text_field :context_4, class:"text", placeholder: "", style:"width:50%" %><br>
-              描述5：<%= f.text_field :context_5, class:"text", placeholder: "", style:"width:50%" %><br>
-              <!-- COVER UPLOAD -->
-              <%= file_field_tag :attachment, class: 'file' unless tile.galleries.count > 0 %>
-
-              連結：<%= f.select :topic_id, options_for_select(@lookbook.topics.collect { |topic|
-            [topic.name, topic.id] }, tile.topic_id), {}, { id: 'topic_select' } %>
-            </div>
-          </td>          
-          <td align="right" valign="top" width="18%">
-            <div class="tool">
-              <a href="javascript: document.getElementById('patchthistile_<%= tile.id %>').submit();" class="uvs" data-no-turbolink = true >儲存</a><%= link_to "取消", "javascript:void(0);" ,:data => { :id => tile.id }, :class => "uvs" %>
-            </div>
-          </td>
-          <% end %>
-        </tr>
-        <tr class="list-edit edit_tile_<%= tile.id %>" style="display:none;" >
-          <!-- DISPLAY COVER -->
-          <%= render 'display_tile_cover', :tile => tile unless tile.galleries.count <= 0 %>
-        </tr>
+    <%# EDIT %>
+    <div class="form list-edit edit_tile_<%= tile.id %>" style="display:none">
+      <%= form_for(tile, :url => admin_lookbook_tile_path(@lookbook,tile) , html: { id: "patchthistile_#{tile.id}", :multipart => true }) do |f| %>
+        <table width="100%" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="38%" rowspan="2">
+              <div class="gallery">
+                <div class="thumb"> 
+                  <% unless tile.galleries.count > 0 %>
+                    <%= file_field_tag :attachment, class: 'file'  %>
+                  <% end %>
+                  <% unless tile.galleries.count <= 0 %>     
+                    <% tile.galleries.select{ |v| v['type'] == "TileCoverGallery" }.each do |attach| %>
+                    <%= link_to '', admin_gallery_path(attach.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete act', title: '刪除' %> 
+                      <image src=<%= "#{attach.attachment.url}" %> alt=<%= "#{attach.file_name}" %> />  
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </td>
+            <td width="44%">
+              <%= f.select :topic_id, options_for_select(@lookbook.topics.collect { |topic|
+              [topic.name, topic.id] }, tile.topic_id), {}, { id: 'topic_select' } %>
+            </td>
+            <td width="18%" rowspan="2" align="right" valign="top">
+              <div class="tool"> 
+                <%= link_to "", "javascript:void(0);" ,:data => { :id => tile.id }, :class => "cancel act" %>
+                <a href="javascript: document.getElementById('patchthistile_<%= tile.id %>').submit();" class="save act" data-no-turbolink = true ></a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <ul>
+                <li><%= f.text_field :context_1, class:"text" %></li>
+                <li><%= f.text_field :context_2, class:"text" %></li>
+                <li><%= f.text_field :context_3, class:"text" %></li>
+                <li><%= f.text_field :context_4, class:"text" %></li>
+                <li><%= f.text_field :context_5, class:"text" %></li>
+              </ul>
+            </td>
+          </tr>
+        </table>
       <% end %>
-
-    <!-- new -->
-
-    <tr class="list-new list-edit edit_tile" style="display:none;">
+    </div>
+    <%# NEW %>
+    <div class="form list-new list-edit edit_tile" style="display:none;" >
       <%= form_for(@tile, :url => admin_lookbook_tiles_path(@lookbook) , html: {id: "create_new_tile", :multipart => true }) do |f| %>
-        <td width="6%" style="background:url(/images/admin/folder.png) center center no-repeat"></td>
-        <td width="76%">
-          <div style="position:relative">
-            描述1：<%= f.text_field :context_1, class:"text", placeholder: "", style:"width:50%" %>
-            描述2：<%= f.text_field :context_2, class:"text", placeholder: "", style:"width:50%" %>
-            描述3：<%= f.text_field :context_3, class:"text", placeholder: "", style:"width:50%" %>
-            描述4：<%= f.text_field :context_4, class:"text", placeholder: "", style:"width:50%" %>
-            描述5：<%= f.text_field :context_5, class:"text", placeholder: "", style:"width:50%" %>
-            
-            <!-- COVER UPLOAD -->
-            圖片：<%= file_field_tag :attachment, class: 'file' %>
-
-            連結：<%= f.select :topic_id, options_for_select(@lookbook.topics.collect { |topic|
-            [topic.name, topic.id] }, ), {}, { id: 'topic_select' } %>
-          </div>
-        </td>
-        <td align="right" width="18%">
-          <div class="tool">
-            <a href="javascript: document.getElementById('create_new_tile').submit();" class="uvs" data-no-turbolink = true >儲存</a><%= link_to("取消", "javascript:void(0);", :class => "uvs cancel_new_tile") %>
-          </div>
-        </td>
+        <table width="100%" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="38%" rowspan="2"><div class="gallery">
+                <%= file_field_tag :attachment, class: 'file' %>
+               </td>
+            <td width="44%">
+              <%= f.select :topic_id, options_for_select(@lookbook.topics.collect { |topic|
+              [topic.name, topic.id] }, ), {}, { id: 'topic_select' } %>
+            </td>
+            <td width="18%" rowspan="2" align="right" valign="top">
+              <div class="tool"> 
+                <%= link_to("取消", "javascript:void(0);", :class => "cancel cancel_new_tile act") %>
+                <a href="javascript: document.getElementById('create_new_tile').submit();" class="save act" data-no-turbolink = true >儲存</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <ul>
+                <li><%= f.text_field :context_1, class:"text" %></li>
+                <li><%= f.text_field :context_2, class:"text" %></li>
+                <li><%= f.text_field :context_3, class:"text" %></li>
+                <li><%= f.text_field :context_4, class:"text" %></li>
+                <li><%= f.text_field :context_5, class:"text" %></li>
+              </ul>
+            </td>
+          </tr>
+        </table>  
       <% end %>
-    </tr>
+    </div>
 
-    </table>
-  </div>
+  <% end %>
 </article>
 
 
@@ -106,7 +145,7 @@
 $(document).ready(function(){
   $(".toggle_new_tile").click(function(){
 
-    if($("tr[class*=edit_tile]:visible").length > 0){
+    if($("div[class*=edit_tile]:visible").length > 0){
       alert("請先完成編輯中的產品分類");
     }
     else{
@@ -122,7 +161,7 @@ $(document).ready(function(){
 
   $(".edit").click(function(){
     $active_id = $(this).data("id");
-    if($("tr[class*=edit_tile]:visible").length > 0){
+    if($("div[class*=edit_tile]:visible").length > 0){
       alert("請先完成編輯中的產品分類");
     }
     else{
@@ -130,14 +169,14 @@ $(document).ready(function(){
     }
   });
 
-  $(".uvs").click(function(){
+  $(".act").click(function(){
     $active_id = $(this).data("id");
     toggle_edit_area($active_id);
   });
 
   function toggle_edit_area(active_id){
-    $("tr.edit_tile_" + active_id).toggle();
-    $("tr.show_tile_" + active_id).toggle();
+    $("div.edit_tile_" + active_id).toggle();
+    $("div.show_tile_" + active_id).toggle();
   }
 });
 </script>

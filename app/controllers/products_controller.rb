@@ -39,9 +39,9 @@ class ProductsController < ApplicationController
   def fetch_stock_amount
     begin
       if params[:stock_id] && params[:stock_id].to_i > 0
-        @stock = Stock.find(params[:stock_id])
+        @stock = Stock.find_by_id(params[:stock_id])
 
-        @product = @stock.product
+        # @product = @stock.product
         cart_items = JSON.parse_if_json(cookies[:cart_ladyboo]) || Hash.new
 
         @amount_in_cart = cart_items[params[:stock_id]] ||= 0
@@ -58,7 +58,7 @@ class ProductsController < ApplicationController
 
   def quickview
 
-    # begin
+    begin
       @product = Product.where(status: 'enable').includes(:galleries).find_by_id(params[:id])
 
       if @product #params[:category_id]
@@ -81,9 +81,9 @@ class ProductsController < ApplicationController
           format.html { redirect_to category_path(params[:category_id]), alert: "找不到商品" }
         end
       end
-    # rescue
-    #   redirect_to categories_path
-    # end
+    rescue
+      redirect_to categories_path
+    end
 
   end
 

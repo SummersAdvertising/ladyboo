@@ -38,8 +38,12 @@ class ApplicationController < ActionController::Base
   def fetch_for_nav
     @root_node = Category.return_root_node
     @hierarchy = Category.get_level_hierarchy()
+    @levels = @hierarchy.select { |v| v[2] == @root_node.id }
+    
     @lookbook = Lookbook.where(status: 'enable').first
+    @topics = @lookbook.topics if @lookbook
     @topic_collections = TopicCollection.where(status: 'enable').all.limit(4)
+
     @q = Product.where(status: 'enable').search()
   end
   

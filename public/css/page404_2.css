@@ -1,0 +1,26 @@
+body{background: url(../images/content.jpg);}
+#content { padding-top: 10px;background: url(../images/content.jpg); }
+#content h4 { font: 3.0em Helvetica, Microsoft JhengHei, "微軟正黑體"!important; color: #646464; position: absolute; top: 52%; left: 50%; }
+#content h5 { font: 1.5em Helvetica, Microsoft JhengHei, "微軟正黑體"!important; color: #646464; position: absolute; top: 65%; left: 50%; }
+#content a { font: 1em Helvetica, Microsoft JhengHei, "微軟正黑體"!important; }
+@media (min-width: 1120px) and (max-width: 1199px) {
+#content h4 { font: 2.5em Helvetica, Microsoft JhengHei, "微軟正黑體"!important; left: 60%; }
+#content h4 span { display: block; }
+#content h5 { font: 1.2em Helvetica, Microsoft JhengHei, "微軟正黑體"!important; left: 60%; top: 72%; }
+}
+@media (min-width: 991px) and (max-width: 1120px) {
+#content img { width: 70%; }
+#content h4 { font: 2.3em Helvetica, Microsoft JhengHei, "微軟正黑體"!important; left: 60%; }
+#content h5 { font: 1.2em Helvetica, Microsoft JhengHei, "微軟正黑體"!important; left: 60%; top: 75%; }
+#content h4 span { display: block; }
+}
+@media (min-width: 768px) and (max-width: 990px) {
+#content img { width: 65%; }
+#content h4 { font: 2.0em Helvetica, Microsoft JhengHei, "微軟正黑體"!important; left: 57%; }
+#content h5 { font: 1.2em Helvetica, Microsoft JhengHei, "微軟正黑體"!important; left: 57%; top: 80%; }
+#content h4 span { display: block; }
+}
+@media (max-width: 767px) {
+#content h4 { position: static; font: 1.4em Helvetica, Microsoft JhengHei, "微軟正黑體"!important; text-align: left; }
+#content h5 { position: static; font: 1em Helvetica, Microsoft JhengHei, "微軟正黑體"!important; text-align: left; }
+}
