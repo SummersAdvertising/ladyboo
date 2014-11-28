@@ -7,7 +7,7 @@
       success: function(data){
         // $('#thumb li a').removeClass('active'); 
         // $('#thumb li a:first').addClass('active');
-        $('.bxslider').css({'-webkit-transition': '0s', 'transition': '0s', '-webkit-transform': 'translate3d(0px, -380px, 0px)'}); 
+        //$('.bxslider').css({'-webkit-transition': '0s', 'transition': '0s', '-webkit-transform': 'translate3d(0px, -380px, 0px)'}); 
         
         $(".inline").colorbox({
           inline:true, 

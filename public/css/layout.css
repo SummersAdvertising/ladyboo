@@ -167,8 +167,8 @@ h3.title span { font-size: 20px; padding: 0; margin-top: 5px; }
 .item-action {text-align: right;}
 .related-slider .related-product figure{height:100px;overflow: hidden;}
 .related-slider .related-product img{width:100px;}
-.panel-body li.active, .sidebar .widget .panel.active .accordion-header{background-color: #fff799;}
-
+.panel-body li.active, .sidebar .widget .panel.active .accordion-header{background-color: #fff799;color:#c9006e;}
+.panel-body li.active a, .sidebar .widget .panel.active .accordion-header a{color:#c9006e;}
 @media (min-width: 768px) and (max-width: 1200px) {
 #content .container { width: 90%; }
 }

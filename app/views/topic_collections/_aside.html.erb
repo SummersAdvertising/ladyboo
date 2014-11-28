@@ -9,7 +9,6 @@
         <%= aside_panel(topic_collection_path(collection) ) %><!-- Start .panel 分類 --> 
           <div class="accordion-header">
             <div class="accordion-title"><span><%= link_to collection.name, topic_collection_path(collection) %></span></div>
-            <a class="accordion-btn"></a>
           </div>
           <div id='<%= "category-list-#{collection.id}" %>' class="collapse in"><!-- Start .category-list 子面板 --> 
             <div class="panel-body">
