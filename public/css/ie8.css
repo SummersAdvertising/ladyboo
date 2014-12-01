@@ -1,5 +1,7 @@
-.bgBottom { bottom: 27px; }
-.item-image-container .item-price-container .item-price { line-height:85px;margin-top:0px!important;behavior: url(border-radius.htc);}
+.bgBottom { bottom: 10px;z-index: 0; }
+.bottom{bottom:118px;}
+.item-image-container .item-price-container { line-height:85px;margin-top:0px!important;behavior: url(../css/border-radius.htc);}
+.footer-text-container p { display:block;float:right;}
 .footer-text-container p:after { display:block;float:right;}
 #footer .fb-share-button { position: static;margin:50px 0 0 25px; }
 #main-nav-container #main-nav .menu li ul{top:65px;}
