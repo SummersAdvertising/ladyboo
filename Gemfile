@@ -83,6 +83,6 @@ group :development do
   # gem 'lol_dba'
   # lol_dba db:find_indexes
   # gem 'newrelic_rpm'
-  gem 'request-log-analyzer'
+  # gem 'request-log-analyzer'
 
 end
