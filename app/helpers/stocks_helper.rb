@@ -16,6 +16,22 @@ module StocksHelper
 
   end 
 
+  def check_with_stocks(products)
+    any_out_of_stock = false
+
+    products.each do | product |
+      product.stocks.each do | stock |
+        if stock.assign_amount
+          any_out_of_stock = true if stock.amount <= 0
+          break
+        end
+      end
+    end
+
+    return any_out_of_stock
+
+  end 
+
   def show_stocks(stocks,in_cart, category, product)
     if(stocks.length > 0)
       select_tag( "cart[stock]", generate_stock_options(stocks,in_cart), data: {category: category, product: product} , class: 'form-control')

@@ -15,7 +15,7 @@
 
 <% content_for :breadcrumb do %>
   <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; Collection
-  &nbsp; > &nbsp; <%= "#{@topic_collection.name} #{@topic.name}" %>
+  &nbsp; > &nbsp; <%= "#{@topic_collection.name}" %>
 <% end %>
 
 <% if @topic.galleries.select{ |v| v['type'] == 'TopicBannerGallery' }.first  %>

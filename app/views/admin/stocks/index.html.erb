@@ -28,15 +28,15 @@
           </tr>
           <% @stocks.each do |stock| %>
             <% if stock.amount == 0 %>
-              <tr class="off">
+              <tr class="off show_stock_<%= stock.id %>" >
               <td class="icon"><img src="/images/admin/alert.png"></td>
             <% else %>
-              <tr>
+              <tr class="show_stock_<%= stock.id %>" >
               <td class="icon">&nbsp;</td>
             <% end %>
-            <td><%#= stock.name %><%= stock.description_1 %></td>
+            <td><%= stock.description_1 %></td>
             <td><%= stock.description_2 %></td>
-            <td><%#= stock.assign_amount? %><%= show_stock_amount(stock) %></td>
+            <td><%= show_stock_amount(stock) %></td>
             <td align="right">
               <div class="tool">
               <%= link_to "", "javascript:void(0);", :data => { :id => stock.id }, :class => "edit" %>

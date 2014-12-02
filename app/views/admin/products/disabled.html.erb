@@ -8,12 +8,12 @@
 </header>
 
 <article>
-  
+
   <% Category.where(depth: 1).each do |category| %>
     <% sub_cates = category.children %>  
     <% sub_cates.each do |cate| %>
       <% if cate.products.where(status: 'disable').count > 0 %>
-        <% disabled_categories = Category.where(id: cate.products.where(status: 'disable').pluck(:category_id)) %>
+        <%# disabled_categories = Category.where(id: cate.products.where(status: 'disable').pluck(:category_id)) %>
 
         <div class="list">
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -25,7 +25,7 @@
              <td width="18%"></td>
             </tr>
            <% cate.products.where(status: 'disable').each do |product| %>     
-           <% unless check_with_stock(product) %>
+          
            <tr>
              <td>├</td>
              <td class="icon"><img src="/images/admin/folder.png"> <%= product.category.name %></td>
@@ -36,22 +36,17 @@
                   </div>
                 </td> 
             </tr>
-          <% end %>
+          
           <% end %>
           </table>
         </div>
-
-
-
-
-
 
       <% end %>
     <% end %>  
   <% end %>
   <!--div class='button'>
-    <%= link_to admin_categories_path, class: 'left' do %>
+    <%# link_to admin_categories_path, class: 'left' do %>
       <img src="/images/admin/left.png">返回
-    <% end %>
+    <%# end %>
   </div-->
 </article>
