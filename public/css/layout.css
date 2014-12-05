@@ -269,9 +269,9 @@ textarea.form-control { resize: none; }
 #inline_content { padding: 3%; background: #fff!important; height: auto;min-height: 100%; width: 923px;overflow-x: hidden; }
 #inline_content h4 { border-bottom: 1px solid #D2D2D2; padding: 0 0 10px 0; font: 1.3em Helvetica, Microsoft JhengHei, "微軟正黑體"; color: #434343; }
 #inline_content ul { width: 60px; }
-#inline_content ul a { cursor: pointer; margin: 4px 0; display: block; width: 60px; height: 60px; }
+#inline_content ul a { cursor: pointer; margin: 4px 0; display: block; width: 60px; height: 60px; overflow:hidden;}
 #inline_content ul .active { border: 1px solid #D01A7E; }
-#inline_content ul img { width: 58px; height: 58px }
+#inline_content ul img { width: 58px; }
 #prodDetail { line-height: 2em!important; }
 .bxslider { width: 380px!important; height: 380px!important; }
 .bxslider img { width: 380px!important; height: 380px!important; z-index: 1000; }

@@ -1,5 +1,6 @@
 .bottom{display:none;}
-.item-price-container{ background-image: url(../images/ie8_discount.png); filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../images/ie8_discount.png', sizingMethod='cover');-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../images/ie8_discount.png', sizingMethod='cover')";}
+#main-nav{height:auto;}
+.item-image-container .item-price-container{ background-image: url(../images/ie8_discount.png); filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../images/ie8_discount.png', sizingMethod='cover');-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../images/ie8_discount.png', sizingMethod='cover')";}
 .item-image-container .item-price-container .item-price{ font-size:24px;line-height:85px;margin-top:0px!important;}
 .footer-text-container p { display:block;float:right;}
 .footer-text-container p:after { display:block;float:right;}
@@ -9,3 +10,4 @@
 #quick-access{margin-top:20px!important;}
 .custom-checkbox .checbox-container{display: none;}
 .bgFav{width:150%;}
+.title-bg:after{content:'';background:transparent;}
