@@ -358,12 +358,12 @@
                           <%= form_for(@tracking_list,:url => useradmin_tracking_lists_path(@tracking_list), :html => {:id =>'NewTrackingListForm' } ) do | f |%>
                             <%= f.hidden_field :user_id, value: current_user.id , class: 'text' %>
                             <%= f.hidden_field :product_id, value: pickup.product.id, class: 'text' %>
-                            <%= f.submit "Favorite", class: "icon-button icon-like",title: 'Favorite'  %>
+                            <%= f.submit "Favorite", class: "icon-button icon-like",title: 'Add to Favorites'  %>
                             <a class='inline icon-button icon-compare pdquickview' data-pd='<%= pickup.product.id %>' title="Quick View" ></a> 
                           <% end %>
                           <%# <a href="javascript: document.getElementById('NewTrackingListForm').submit();" class="icon-button icon-like" data-no-turbolink = true ></a> %>
                         <% else %>
-                          <%= link_to '', useradmin_tracking_lists_path, class: "icon-button icon-like",title: 'Favorite' %>
+                          <%= link_to '', useradmin_tracking_lists_path, class: "icon-button icon-like",title: 'Add to Favorites' %>
                           <a class='inline icon-button icon-compare pdquickview' data-pd='<%= pickup.product.id %>' title="Quick View" ></a> 
                         <% end %>
                         
@@ -399,11 +399,6 @@
 <script src="/js/jquery.colorbox.js"></script> 
 <script src="/js/jquery.bxslider.min.js"></script> 
 <script src="/js/main.js"></script> 
-
-
-
-
-
 
   <!--LightBox Start**************************************************************************************************************-->
 <div id="lightBox">

@@ -25,7 +25,12 @@
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
-  
+  <script src="/js/jquery.placeholder.js"></script>
+  <script>
+    $(function() {
+      $('input, textarea').placeholder();
+    });
+  </script>
   <!-- Favicon and Apple Icons -->
   <link href='/images/favicon.ico' rel='shortcut icon' />
   <link href="/images/favicon.ico" rel="icon" type="image/x-icon" />
@@ -95,6 +100,7 @@
   <script src="/js/jquery.colorbox.js"></script> 
   <script src="/js/jquery.bxslider.min.js"></script> 
   <script src="/js/main.js"></script> 
+  
 
 </body>
 </html>

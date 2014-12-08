@@ -38,7 +38,7 @@
 .title.account { width: 20%; min-width: 310px; }
 }
 @media (max-width: 900px) {
-.sidebar { z-index:900;display: block; width: 100%; padding-top: 20px; overflow:hidden;margin-left: auto; margin-right: auto; height: 300px; }
+.sidebar { z-index:900;display: block; width: 100%; padding-top: 20px; overflow:hidden;margin-left: auto; margin-right: auto; height: 310px; }
 .tab-container .tab-content { background-color:transparent;padding-left: 0px;margin-top: 300px;}
 }
 @media (max-width: 767px) {
@@ -116,7 +116,7 @@
 #personal.input-group .input-group-addon { width: 125px; border-radius: 2px 0 0 2px; padding: 0px 10px; line-height: 44px; min-width: 125px; }
 #personal .input-group { width: 85%; }
 .input-group > p{line-height:47px;padding: 0 0 0 20px; margin: 0;background-color: #dcdcdc;}
-
+#personal form > p { padding: 20px 0;}
 @media (min-width: 992px) and (max-width: 1200px) {
 #personal .input-group select.form-control { width: 23%; }
 #personal { padding: 20px 60px; }
@@ -126,6 +126,7 @@
 .tab-container .tab-content .tab-pane#personal { padding: 20px 20px; }
 }
 @media (max-width: 767px) {
+#personal form >  p { padding-top: 20px; }
 #personal:before { content: '會員資料 Personal details'; background-color: #434343; color: #FFF; display: block; text-align: center; padding: 10px 0; margin-top: 10px; margin-left: -10px;margin-right: -10px;}
 #personal { padding: 20px 10px; }
 #personal .input-group { width: 99%; }
@@ -138,7 +139,7 @@
 /*TAB3---------------------------------------------------------*/
 #address { padding: 20px 80px; width:100%;overflow: hidden;}
 #address .input-group .input-group-addon { width: 125px; border-radius: 2px 0 0 2px; padding: 0px 10px; line-height: 44px; min-width: 125px; }
-#address p { padding-bottom: 20px; padding-bottom: 0 20px;}
+#address p { padding: 20px 0;}
 #address p:before { content:'';display: inline-block;vertical-align: middle;width: 0;height:100%;}
 #address p span{ display: inline-block;vertical-align: middle;}
 #address .input-group { float: left; width: 100%;height:44px; }

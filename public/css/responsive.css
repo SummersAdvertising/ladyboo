@@ -1103,7 +1103,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
 	.sidebarslider .flex-direction-nav a,
 	.sidebar .widget .testimonials-list li .testimonial-details:before,
 	.close-button,
-	.accordion-btn,
+/*	.accordion-btn, */
 	.contact-icon,
 /*	.input-icon,*/
 	.social-icon,
@@ -1120,6 +1120,12 @@ only screen and (min-device-pixel-ratio: 1.5) {
 		background-position:center center;
 		background-size: 21px 21px;
 		-webkit-background-size: 21px 21px;
+	}
+
+	#content {
+		background-image:url(../images/content.jpg);
+		background-size: 124px 80px;
+		-webkit-background-size: 124px 80px;
 	}
 
 	.ratings {

@@ -58,6 +58,7 @@ gem 'sucker_punch', '~> 1.0'
 gem 'activemerchant'
 gem 'sanitize'
 
+# gem 'rack-cache'
 # gem 'dalli'
 
 group :production, :staging do
@@ -83,5 +84,6 @@ group :development do
   # gem 'lol_dba'
   # lol_dba db:find_indexes
   # gem 'newrelic_rpm'
-  
+  # gem 'request-log-analyzer'
+
 end

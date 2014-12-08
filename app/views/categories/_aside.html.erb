@@ -11,10 +11,12 @@
       <% levels.each_with_index do | level1, index | %>
         <%= aside_panel(category_path(id: level1[0]) ) %><!-- Start .panel 分類 --> 
           <div class="accordion-header">
+            <span class="accordion-btn"></span>
             <div class="accordion-title">
               <span><%= link_to level1[3], category_path(id: level1[0]) %></span>
             </div>
             <!-- <a class="accordion-btn opened"  data-toggle="collapse" data-target='#<%# "category-list-#{level1[0]}" %>'></a> -->
+
           </div>
           <div id='<%= "category-list-#{level1[0]}" %>' class="collapse in"><!-- Start .category-list 子面板 --> 
             <div class="panel-body">
