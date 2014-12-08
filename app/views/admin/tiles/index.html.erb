@@ -2,7 +2,15 @@
 .gallery, .thumb {max-width:270px!important}
 .form li {padding:0 0 0 15px;background:url(/images/admin/li.png) 0 center no-repeat}
 .form:hover .tool{opacity:1}
-.form .file{height:200px;background-position:center center;background-color:#eee}
+.form .file{width:270px;height:200px;background-position:center center;background-color:#eee}
+
+#dragable_container { list-style-type: none; margin: 0; padding: 0; width:100%!important;}
+#dragable_container li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 50%; font-size: 4em; text-align: center; }
+#dragable_container li a {display:block;width: 50%; }
+#dragable_container li a img{width:100%;}
+  #dragable_container li:first-of-type { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 570px; height: 500px; font-size: 4em; text-align: center; }
+}
+
 </style>
 <header>
   <h2 class="left"><span>首頁管理 / </span>穿搭主題</h2>
@@ -11,7 +19,21 @@
     <%= link_to '圖片', admin_lookbook_tiles_path(@lookbook), class: 'active' %>
     <%= link_to '排序', sort_admin_lookbook_tiles_path(@lookbook)%> 
   </nav>
-  <div class="explain right"><p>圖片尺寸：</p></div>
+  <div class="explain right">
+    <% if @lookbook.tiles.count == 1 %>
+      <p>圖片尺寸：945px * 500px</p>
+    <% end %>
+    <% if @lookbook.tiles.count == 2 %>
+      <p>圖片尺寸：570px * 500px</p>
+    <% end %>
+    <% if @lookbook.tiles.count == 3 %>
+      <p>右側圖片尺寸：570px * 240px<br>
+      左側圖片尺寸：570px * 500px</p>
+    <% end %>
+    <% if @lookbook.tiles.count == 4 %>
+      <p>圖片尺寸：570px * 240px</p>
+    <% end %>
+    </div>
 </header>
 <article>
   <div class="hgroup">
@@ -44,7 +66,7 @@
           </td>
         </tr>
         <tr>
-          <td>
+          <td valign="top">
             <ul>
               <li><%= tile.context_1 %></li>
               <li><%= tile.context_2 %></li>
@@ -58,7 +80,7 @@
     </div>
 
     <%# EDIT %>
-    <div class="form list-edit edit_tile_<%= tile.id %>" style="display:none">
+    <div class="form edit_tile_<%= tile.id %>" style="display:none">
       <%= form_for(tile, :url => admin_lookbook_tile_path(@lookbook,tile) , html: { id: "patchthistile_#{tile.id}", :multipart => true }) do |f| %>
         <table width="100%" cellspacing="0" cellpadding="0">
           <tr>
@@ -89,7 +111,7 @@
             </td>
           </tr>
           <tr>
-            <td>
+            <td valign="top">
               <ul>
                 <li><%= f.text_field :context_1, class:"text" %></li>
                 <li><%= f.text_field :context_2, class:"text" %></li>
@@ -103,7 +125,7 @@
       <% end %>
     </div>
     <%# NEW %>
-    <div class="form list-new list-edit edit_tile" style="display:none;" >
+    <div class="form list-new edit_tile" style="display:none;" >
       <%= form_for(@tile, :url => admin_lookbook_tiles_path(@lookbook) , html: {id: "create_new_tile", :multipart => true }) do |f| %>
         <table width="100%" cellspacing="0" cellpadding="0">
           <tr>
@@ -116,13 +138,13 @@
             </td>
             <td width="18%" rowspan="2" align="right" valign="top">
               <div class="tool"> 
-                <%= link_to("取消", "javascript:void(0);", :class => "cancel cancel_new_tile act") %>
-                <a href="javascript: document.getElementById('create_new_tile').submit();" class="save act" data-no-turbolink = true >儲存</a>
+                <%= link_to("", "javascript:void(0);", :class => "cancel cancel_new_tile act") %>
+                <a href="javascript: document.getElementById('create_new_tile').submit();" class="save act" data-no-turbolink = true ></a>
               </div>
             </td>
           </tr>
           <tr>
-            <td>
+            <td valign="top">
               <ul>
                 <li><%= f.text_field :context_1, class:"text" %></li>
                 <li><%= f.text_field :context_2, class:"text" %></li>
