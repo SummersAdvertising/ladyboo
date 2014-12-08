@@ -9,7 +9,7 @@
 /*貼紙*/
 .new-rect { background: url(../images/idx-03.png); width: 69px; height: 38px; color: #333; padding-right: 5px; left: -3px; font-size: 1.2em; }
 .item-price-container { background: url(../images/idx-04.gif); }
-.item-image-container .item-price-container { font: 100 1.3em Helvetica, Microsoft JhengHei, "微軟正黑體"; width: 85px; height: 85px; }
+.item-image-container .item-price-container { font: 100 1.3em Helvetica, Microsoft JhengHei, "微軟正黑體"; width: 85px; height: 85px;width: 90px\9; height: 90px\9; }
 .item-image-container .item-price-container .item-price { margin-top: 0px; font-size: 1.1em; line-height: 85px; }
 
 /*圖片*/
