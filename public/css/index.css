@@ -5,7 +5,23 @@
 .bottom { right:auto;left:16%; }
 .bgBottom.index { background-image: url(../images/bg_footer2.png); height: 169px; width: 284px; }
 .bgBottom { position: absolute; bottom: 0px; left: -100px; }
-#bannerFrame { position: absolute; left: 0; top: 0;z-index: 600;}
+#slider .bx-wrapper {margin:0;}
+#slider:hover .bx-controls-direction a {display: block;}
+#slider .bx-wrapper .bx-viewport {box-shadow: none;border: none!important;padding: 0px!important;margin: 0px!important;top: 0px!important;bottom: 0px!important;left: 0px!important;right: 0px!important;}
+#slider ul#indexBanner {z-index:0!important;border: none!important;padding: 0px!important;margin: 0px!important;top: 0px!important;bottom: 0px!important;left: 0px!important;right: 0px!important;}
+#slider ul#indexBanner li{width:100%!important;}
+#slider {position: relative;}
+#slider .bx-wrapper .bx-pager{z-index: 900;bottom:10px;}
+#slider .bx-wrapper .bx-pager.bx-default-pager a:hover{background-color: #C9006E!important;-webkit-transition: background-color ease .5s; -moz-transition: background-color ease .5s;transition: background-color ease .5s;}
+#slider .bx-wrapper .bx-pager.bx-default-pager a.active{background-color: #c9006e;}
+.bx-wrapper .bx-controls-direction a {z-index: 900;display:none;width: 70px;height: 45px;background-color: #fafafa!important;background-image: url(../images/sprites/homeslidernav.png)!important;}
+.bx-wrapper .bx-controls-direction a:hover {background-color: #C9006E!important;-webkit-transition: background-color ease .5s; -moz-transition: background-color ease .5s;transition: background-color ease .5s;}
+.bx-wrapper .bx-prev{left: 0px;background-position: 0 0;border-radius: 0 3px 3px 0;}
+.bx-wrapper .bx-prev:hover{background-position: 0 -43px;}
+.bx-wrapper .bx-next {right: 0px;background-position: -68px 0;border-radius: 3px 0 0 3px;}
+.bx-wrapper .bx-next:hover{background-position: -68px -43px;}
+#bannerFrame1 { position: absolute; left: 0; top: 0;z-index: 600;}
+#bannerFrame2 { position: absolute; left: 0; bottom: 0;z-index: 600;}
 @media (min-width: 768px) and (max-width: 1200px) {
 .title.lookbook { width: 20%; min-width: 320px; }
 .title.pickup { width: 20%; min-width: 280px; }
@@ -15,7 +31,12 @@
 .title.pickup { width: 200px; }
 .title-bg { padding-left: 0px; }
 #content .container { padding-left: 10px; padding-right: 10px; }
-
+#slider .bx-wrapper .bx-pager{display:none;}
+.bx-wrapper .bx-controls-direction a {width:50px;height:36px;}
+.bx-wrapper .bx-prev{background-position: -136px 0;}
+.bx-wrapper .bx-prev:hover{background-position: -136px -34px;}
+.bx-wrapper .bx-next {background-position: -184px 0;}
+.bx-wrapper .bx-next:hover{background-position: -184px -34px;}
 }
 /*-------------------------------------------------------------------------------------------穿搭---*/
 .layout { position: relative; overflow: hidden; margin-bottom: 5% }

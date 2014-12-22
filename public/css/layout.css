@@ -275,6 +275,8 @@ textarea.form-control { resize: none; }
 #prodDetail { line-height: 2em!important; }
 .bxslider { width: 380px!important; height: 380px!important; }
 .bxslider img { width: 380px!important; height: 380px!important; z-index: 1000; }
+.bx-wrapper{margin:0;}
+.bx-wrapper .bx-viewport {-moz-box-shadow: none;-webkit-box-shadow: none;box-shadow: none;border: none;left: 0;}
 .cb-info { width: 300px; margin-top: 0; }
 .cb-info span { text-align: center }
 .cb-info select { width: 100%; }

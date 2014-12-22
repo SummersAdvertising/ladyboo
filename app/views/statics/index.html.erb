@@ -28,6 +28,7 @@
   <link rel="stylesheet" href="/css/revslider.css">
   <link rel="stylesheet" href="/css/owl.carousel.css">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/jquery.bxslider.css">
   <link rel="stylesheet" href="/css/responsive.css">
   <link rel="stylesheet" href="/css/colorbox.css" />
   
@@ -242,28 +243,31 @@
     <div class="container bottom"> <div class="bgBottom index"></div></div><!-- .bgBottom 下方背景圖 -->
      <!--Container Start**************************************************************************************************************-->
     <section id="content">
-      <% if @banners.count > 0 %>
-        <div id="slider-bg"><!-- Start #slider-bg 上方橫福 -->
-          <div class="container">
-            <div id="slider-rev-container">
-              <div id="slider-rev">
-                <ul>
-                  <% @banners.each do |banner| %>
-                    <% if banner.galleries.first %>
-                      <li data-transition="flip" data-slotamount="15" data-masterspeed="400">
-                        <%# link_to banner.description, target: "_blank" do %>
-                        <img id='bannerFrame' src=<%= "#{banner.galleries.first.attachment.url}" %> />
-                        <%# end %>
-                      </li>
-                     <% end %>
+
+    <% if @banners.count > 0 %>
+      <div id="slider-bg"><!-- Start #slider-bg 上方橫福 -->
+        <div class="container">
+          <div id="slider">
+          <ul id="indexBanner">
+            <% @banners.each do |banner| %>
+              <% if banner.galleries.first %>
+                <li>
+                  <%= link_to banner.description do %>
+                    <img src=<%= "#{banner.galleries.first.attachment.url}" %>  />
                   <% end %>
-                </ul><img id="bannerFrame" src="/images/frame_bannerIndex.png">
-              </div><!-- End #slider-rev --> 
-            </div><!-- End #slider-rev-container --> 
-          </div><!--End .container--> 
-        </div><!-- End #slider-bg 上方橫福 -->
-      <% end %>
-      
+                </li>
+               <% end %>
+            <% end %>
+          </ul>
+          <img id="bannerFrame1" src="/images/frame_bannerIndex1.png">
+          <img id="bannerFrame2" src="/images/frame_bannerIndex2.png">
+          </div>
+        </div><!--End .container--> 
+      </div><!-- End #slider-bg 上方橫福 -->
+    <% end %>
+
+
+
       <div class="xlg-margin"></div><!-- Space 間隔-->
       
       <% if @topic_collections.count > 0 %>
@@ -411,7 +415,7 @@
 <script type="text/javascript">
 $(function() {
   // Slider Revolution
-  jQuery('#slider-rev').revolution({
+  /*jQuery('#slider-rev').revolution({
     delay:8000,
     startwidth:1172,
     startheight:600,
@@ -435,12 +439,20 @@ $(function() {
     dottedOverlay:"none",
     fullWidth:"on",
     shadow:0         
+    });*/
+
+  $('#indexBanner').bxSlider({
+
+      auto:true,
+      mode:'fade',
+      width: '100%',
+      height: 600,
     });
 
   //lightBox
   $(".layout img").click(function(){
     $(this).siblings(".link").animate({bottom:0},250)
-  })
+  });
 
   
 });          
