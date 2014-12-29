@@ -30,15 +30,13 @@
     </div>
     <div class="list">
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <% @admins.each do | admin | %>   
-       
+        <% @admins.each do | admin | %>          
             <tr>
-              <td width="16%"></td>
               <td width="18%"><%= admin.name %></td>
-              <td width="54"><%= admin.email %></td>
+              <td width="70"><%= admin.email %></td>
               <td width="12%">
                   <div class="tool">
-                      <a href="<%= edit_admin_admin_path(admin) %>" class="edit" title="編輯">編輯</a><%= link_to '刪除', admin_admin_path( admin ), :method => :delete, class: "delete", title: "刪除", data: { confirm: "是否確定刪除使用者#{admin.name}? 此動作無法復原。" } %>
+                      <a href="<%= edit_admin_admin_path(admin) %>" class="edit" title="編輯"></a><%= link_to '', admin_admin_path( admin ), :method => :delete, class: "delete", title: "刪除", data: { confirm: "是否確定刪除使用者#{admin.name}? 此動作無法復原。" } %>
                   </div>
                </td>
             </tr>
