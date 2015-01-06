@@ -19,7 +19,7 @@ class Order < ActiveRecord::Base
   scope :pending, -> { where(aasm_state: ["order_placed_ATM", "order_placed_Vaccount"]) }  
   scope :human_involved, -> { where(aasm_state: ["human_involved"]) }  
   scope :shipped, -> { where(aasm_state: ["shipped", "shipped_COD"]) }  
-  scope :history, -> { where(aasm_state: ["close","abnormal","cancel"]) }  
+  scope :history, -> { where(aasm_state: ["close","abnormal","cancel"]).order(created_at: :desc) }  
   
   scope :latest, -> { where("aasm_state != 'hold'").order(created_at: :desc) }
 

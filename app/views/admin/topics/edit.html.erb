@@ -20,14 +20,15 @@
                <%= f.text_field :name, class: 'text' %>
             </tr>
           </table>
-        <% end %>
+
         </div>
         <div class="form">
           <% if @gallery_count > 0 %>
-                  <%= render 'admin/common/show_by_type', target: @topic, target_title: '縮圖', type: 'TopicCoverGallery', allow_dragable: false %>
-               <% else %>
-                 <%= render 'admin/common/upload_by_type', target_title: '縮圖' %>
-               <% end %>
+            <%= render 'admin/common/show_by_type', target: @topic, target_title: '縮圖', type: 'TopicCoverGallery', allow_dragable: false %>
+          <% else %>
+            <%= render 'admin/common/upload_by_type', target_title: '縮圖' %>
+          <% end %>
+        <% end %>
         </div>
     <div class="form">
       <%= form_for(@topic_productship, :url => admin_topic_productships_path(), html: { id: "newthistopic_productship" } ) do |f| %>
