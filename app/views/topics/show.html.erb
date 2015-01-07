@@ -5,7 +5,7 @@
 
 <% content_for :meta_area do %>
 
-  <meta property="og:title" content="<%= "#{@lookbook.name} #{@topic.name}" %>">
+  <meta property="og:title" content="<%= "#{@topic.name}" %>">
   
   <% if @topic.galleries.where(type: 'TopicBannerGallery').first %>
     <meta property="og:image" content="<%= image_url(@topic.galleries.where(type: 'TopicBannerGallery').first.attachment.url) %>">

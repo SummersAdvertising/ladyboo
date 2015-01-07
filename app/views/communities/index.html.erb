@@ -1,5 +1,10 @@
 <link rel="stylesheet" href="/css/pageAbout.css">
 
+<% content_for :meta_area do %>
+  <meta property="og:title" content="LadyBoo -女性時尚">
+  <meta property="og:image" content="<%= image_url('/images/fb-kv.jpg') %>">
+<% end %>
+
 <% content_for :breadcrumb do %>
   <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; <%= link_to 'ABOUT US', page_pages_path('about'), title: '品牌精神' %>
   &nbsp; > &nbsp; COMMUNITY
