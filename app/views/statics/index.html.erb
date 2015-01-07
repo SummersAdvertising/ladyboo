@@ -117,11 +117,7 @@
             </div><!-- End .dropdown-cart-menu-container -->
             <div class="header-top-dropdowns pull-right">
               <% if user_signed_in? %>
-                <div class="btn-group">
-                  <%= link_to useradmin_root_path, class: "btn btn-custom" do %>
-                    <span class="hide-for-xs"> <%= "#{current_user.username} 您好"%></span><span class="hide-for-lg"><span class="love-menu-icon"></span></span>
-                  <% end %>
-                </div>
+                <span class="hide-for-xs" id="greeting"> <%= "#{current_user.username} 您好"%></span>
                 <div class="btn-group">
                   <%= link_to useradmin_tracking_lists_path, class: "btn btn-custom" do %>
                     <span class="hide-for-xs"><span class="love-menu-icon"></span> 我的最愛 Favorites</span><span class="hide-for-lg"><span class="love-menu-icon"></span></span>
