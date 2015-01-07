@@ -13,7 +13,7 @@
               <span class="hide-for-xs">會員登出 Logout</span><span class="hide-for-lg"><span class="logout-menu-icon"></span></span> 
             <% end %>
             <%= link_to useradmin_root_path, class: "btn btn-custom dropdown-toggle" do %>
-              <span class="hide-for-xs"><%= "#{current_user.username} 我的帳號 My account" %></span><span class="hide-for-lg"><span class="login-menu-icon"></span></span> 
+              <span class="hide-for-xs"><%= "我的帳號 My account" %></span><span class="hide-for-lg"><span class="login-menu-icon"></span></span> 
             <% end %>
           <% end %>
         </div>
@@ -25,6 +25,11 @@
         </div><!-- End .dropdown-cart-menu-container -->
         <div class="header-top-dropdowns pull-right">
           <% if user_signed_in? %>
+            <div class="btn-group">
+              <%= link_to useradmin_root_path, class: "btn btn-custom" do %>
+                <span class="hide-for-xs"> <%= "#{current_user.username} 您好"%></span><span class="hide-for-lg"><span class="love-menu-icon"></span></span>
+              <% end %>
+            </div>
             <div class="btn-group">
               <%= link_to useradmin_tracking_lists_path, class: "btn btn-custom" do %>
                 <span class="hide-for-xs"><span class="love-menu-icon"></span> 我的最愛 Favorites</span><span class="hide-for-lg"><span class="love-menu-icon"></span></span>
