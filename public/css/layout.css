@@ -38,6 +38,7 @@ body, html { overflow-x: hidden; color: #434343; }
 .dropdown-cart .dropdown-cart-product-list figure{height:85px;overflow: hidden;}
 .dropdown-cart .dropdown-cart-product-list .delete-item{top:-6px;}
 .dropdown-cart .dropdown-cart-product-list li.item{margin-bottom: 0px;}
+#greeting{color:#FFF;margin-right: 20px;}
 @media (min-width: 768px) and (max-width: 1199px) {
 #header-top .container { width: 100%; }
 }
