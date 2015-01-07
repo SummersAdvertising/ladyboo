@@ -1,5 +1,9 @@
 <link rel="stylesheet" href="/css/pagePrivacy.css">
 
+<% content_for :meta_area do %>
+  <meta property="og:image" content="<%= image_url('/images/fb-kv.jpg') %>">
+<% end %>
+
 <% content_for :breadcrumb do %>
   <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; TERMS &amp; CONDITIONS
 <% end %>

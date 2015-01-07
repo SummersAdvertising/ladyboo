@@ -2,6 +2,10 @@
 <link rel="stylesheet" href="/css/prodList.css">
 <script src="/js/side.js"></script> 
 
+<% content_for :meta_area do %>
+  <meta property="og:image" content="<%= image_url('/images/fb-kv.jpg') %>">
+<% end %>
+
 <% if @category.depth == 1 %>
     
     <% content_for :breadcrumb do %>
