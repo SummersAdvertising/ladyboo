@@ -35,8 +35,7 @@ class Admin::MeasurementsController < AdminController
     
     respond_to do |format|
       if @measurement.save
-        format.html { redirect_to :back, notice: '更新成功' }
-        #format.html { redirect_to admin_product_cate_product_path(@product.product_cate_id, @product) }
+        format.html { redirect_to admin_category_product_measurements_path(@product.category_id, @product), notice: '更新成功' }
       else
         format.html { render :back, notice: @measurement.errors.full_messages }
       end      
