@@ -85,5 +85,5 @@ group :development do
   # lol_dba db:find_indexes
   # gem 'newrelic_rpm'
   # gem 'request-log-analyzer'
-
+  gem 'pry-rails'
 end
