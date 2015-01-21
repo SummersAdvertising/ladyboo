@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  total_order_count: 1
+  onhold_order_count: 1
+  valid_order_count: 1
+  completed_order_count: 1
+  new_member_count: 1
+  total_shipping_revenue: 1
+  total_product_revenue: 1
+  sumup_by_category: MyText
+  sumup_by_product: MyText
+  sumup_by_stock: MyText
+
+two:
+  total_order_count: 1
+  onhold_order_count: 1
+  valid_order_count: 1
+  completed_order_count: 1
+  new_member_count: 1
+  total_shipping_revenue: 1
+  total_product_revenue: 1
+  sumup_by_category: MyText
+  sumup_by_product: MyText
+  sumup_by_stock: MyText

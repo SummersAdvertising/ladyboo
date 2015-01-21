@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141126080725) do
+ActiveRecord::Schema.define(version: 20150120071108) do
 
   create_table "addressbooks", force: true do |t|
     t.integer  "user_id"
@@ -126,6 +126,23 @@ ActiveRecord::Schema.define(version: 20141126080725) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "status",     default: "new"
+  end
+
+  create_table "daily_reports", force: true do |t|
+    t.string   "name"
+    t.integer  "total_order_count"
+    t.integer  "onhold_order_count"
+    t.integer  "valid_order_count"
+    t.integer  "completed_order_count"
+    t.integer  "cancel_order_count"
+    t.integer  "abnormal_end_order_count"
+    t.integer  "new_member_count"
+    t.integer  "total_shipping_revenue"
+    t.integer  "total_product_revenue"
+    t.datetime "run_at"
+    t.datetime "target_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "deliveries", force: true do |t|
@@ -301,6 +318,18 @@ ActiveRecord::Schema.define(version: 20141126080725) do
 
   add_index "products", ["article_id"], name: "index_products_on_article_id"
   add_index "products", ["category_id"], name: "index_products_on_category_id"
+
+  create_table "revenue_details", force: true do |t|
+    t.integer  "context_id"
+    t.string   "context_displayname"
+    t.integer  "figure"
+    t.string   "type"
+    t.integer  "daily_report_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "revenue_details", ["daily_report_id"], name: "index_revenue_details_on_daily_report_id"
 
   create_table "roles", force: true do |t|
     t.string   "name"

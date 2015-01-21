@@ -5,6 +5,12 @@ namespace :whenever do
   task :delete_hold_orders => :environment do
     Order.delete_hold_orders
   end
+
+  desc "Calculate daily report"
+  task :calculate_daily_report => :environment do
+    DailyReport.calculate_yesterday
+  end
+
   desc "Add member the basic role to user"
   task :add_member_role => :environment do
     User.all.each do |usr|
