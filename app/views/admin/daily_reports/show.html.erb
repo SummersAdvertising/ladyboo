@@ -1,0 +1,63 @@
+DailyReport - show<br>
+
+<% unless @daily_report.blank? %>
+= latest report<br>
+日期:<%= @daily_report.name %><br>
+訂單總數:<%= @daily_report.total_order_count %><br>
+成功下單:<%= @daily_report.valid_order_count %><br>
+最後確認前離開:<%= @daily_report.onhold_order_count %><br>
+完成訂單數:<%= @daily_report.completed_order_count %><br>
+取消訂單數:<%= @daily_report.cancel_order_count %><br>
+人為處理完成:<%= @daily_report.abnormal_end_order_count %><br>
+新會員:<%= @daily_report.new_member_count %><br>
+運費營業額:<%= @daily_report.total_shipping_revenue %><br>
+產品營業額:<%= @daily_report.total_product_revenue %><br>
+總營業額:<%= @daily_report.total_shipping_revenue + @daily_report.total_product_revenue %><br>
+
+  <% unless @daily_report.total_order_count == 0 %>
+    <br>= other calculation<br>
+    成功下單率:<%= (@daily_report.valid_order_count.to_f / @daily_report.total_order_count).round(2)*100 %>％<br>
+    跳出:<%= (@daily_report.onhold_order_count.to_f / @daily_report.total_order_count).round(2)*100 %>％<br>
+  <% end %>
+<% end %>
+<hr>
+
+<% unless @sumup_by_category.blank? %>
+= Sales by category<br>
+Total amount: <%= @daily_report.sum_it_up('ByCategory') %><br>
+List_by_type:<br>
+<% @daily_report.list_by_type('ByCategory').each do |record| %>
+  <%= "#{record.category_name} >> " if record.category_name %>
+  <%= "#{record.product_name} >> " if record.product_name %>
+  <%= "#{record.stock_name}" if record.stock_name %><br>
+  [<%= record.context_displayname %> => <%= record.figure %>]<br><br>
+<% end %>
+<hr>
+<% end %>
+
+<% unless @sumup_by_product.blank? %>
+= Sales by product<br>
+Total amount: <%= @daily_report.sum_it_up('ByProduct') %><br>
+List_by_type:<br>
+<% @daily_report.list_by_type('ByProduct').each do |record| %>
+  <%= "#{record.category_name} >> " if record.category_name %>
+  <%= "#{record.product_name} >> " if record.product_name %>
+  <%= "#{record.stock_name}" if record.stock_name %><br>
+  [<%= record.context_displayname %> => <%= record.figure %>]<br><br>
+<% end %>
+<hr>
+<% end %>
+
+<% unless @sumup_by_stock.blank? %>
+= Sales by stock<br>
+Total amount: <%= @daily_report.sum_it_up('ByStock') %><br>
+List_by_type:<br>
+<% @daily_report.list_by_type('ByStock').each do |record| %>
+  <%= "#{record.category_name} >> " if record.category_name %>
+  <%= "#{record.product_name} >> " if record.product_name %>
+  <%= "#{record.stock_name}" if record.stock_name %><br>
+  [<%= record.context_displayname %> => <%= record.figure %>]<br><br>
+<% end %>
+
+<hr>
+<% end %>

@@ -1,0 +1,69 @@
+DailyReport - index<br>
+
+<br>= top 10 in category<br>
+<% RevenueDetail.top_ten_by_type('ByCategory').each do |record| %>
+  <%= record[0] %> => <%= record[1] %><br>
+<% end %>
+<br>= top 10 in product<br>
+<% RevenueDetail.top_ten_by_type('ByProduct').each do |record| %>
+  <%= record[0][1] %> => <%= record[1] %><br>
+<% end %>
+<br>= top 10 in stock<br>
+<% RevenueDetail.top_ten_by_type('ByStock').each do |record| %>
+  <%= record[0][2] %> => <%= record[1] %><br>
+<% end %>
+<hr>
+<% unless @yesterday_report.blank? %>
+= latest report<br>
+日期:<%= @yesterday_report.name %><br>
+訂單總數:<%= @yesterday_report.total_order_count %><br>
+成功下單:<%= @yesterday_report.valid_order_count %><br>
+最後確認前離開:<%= @yesterday_report.onhold_order_count %><br>
+完成訂單數:<%= @yesterday_report.completed_order_count %><br>
+取消訂單數:<%= @yesterday_report.cancel_order_count %><br>
+人為處理完成:<%= @yesterday_report.abnormal_end_order_count %><br>
+新會員:<%= @yesterday_report.new_member_count %><br>
+運費營業額:<%= @yesterday_report.total_shipping_revenue %><br>
+產品營業額:<%= @yesterday_report.total_product_revenue %><br>
+
+  <% unless @yesterday_report.total_order_count == 0 %>
+    <br>= other calculation<br>
+    成功下單率:<%= (@yesterday_report.valid_order_count / @yesterday_report.total_order_count)*100 %>％<br>
+    跳出:<%= (@yesterday_report.onhold_order_count / @yesterday_report.total_order_count)*100 %>％<br>
+  <% end %>
+
+<% end %>
+<hr>
+
+<% unless @daily_reports.blank? %>
+= list all available reports<br>
+  <table width="100%">
+    <tr>
+      <td>日期</td>
+      <td>訂單總數</td> 
+      <td>成功下單</td>
+      <td>最後確認前離開</td>
+      <td>完成訂單數</td> 
+      <td>取消訂單數</td>
+      <td>人為處理完成</td>
+      <td>新會員</td> 
+      <td>運費營業額</td>
+      <td>產品營業額</td>
+    </tr>
+    <% @daily_reports.each do |report| %>
+      <tr>
+        <td><%= link_to report.name, admin_daily_report_path(report) %></td>
+        <td><%= report.total_order_count %></td>
+        <td><%= report.valid_order_count %></td>
+        <td><%= report.onhold_order_count %></td>
+        <td><%= report.completed_order_count %></td>
+        <td><%= report.cancel_order_count %></td>
+        <td><%= report.abnormal_end_order_count %></td>
+        <td><%= report.new_member_count %></td>
+        <td><%= report.total_shipping_revenue %></td>
+        <td><%= report.total_product_revenue %></td>
+      </tr>
+    <% end %>
+  </table>
+  <%= paginate @daily_reports ,:window => 2 %>
+<% end %>

@@ -128,6 +128,8 @@ Rails.application.routes.draw do
     
     mount Ckeditor::Engine => '/ckeditor'
     
+    resources :daily_reports, only: [:index, :show]
+
     resources :categories do 
       resources :products do
 

@@ -322,6 +322,9 @@ ActiveRecord::Schema.define(version: 20150120071108) do
   create_table "revenue_details", force: true do |t|
     t.integer  "context_id"
     t.string   "context_displayname"
+    t.string   "category_name"
+    t.string   "product_name"
+    t.string   "stock_name"
     t.integer  "figure"
     t.string   "type"
     t.integer  "daily_report_id"

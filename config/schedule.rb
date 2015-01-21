@@ -19,7 +19,7 @@ every 3.days do
   #rake "whenever:check_deals_waitpay"
 end
 
-every :day, :at => '15:02am'  do
+every :day, :at => '3am'  do
   rake "whenever:calculate_daily_report"
 end
 

@@ -7,40 +7,22 @@ class Admin::DailyReportsController < AdminController
   # GET /admin/daily_reports
   # GET /admin/daily_reports.json
   def index 
-    @daily_reports = DailyReport.all
+    @yesterday_report = DailyReport.latest_report
+    @daily_reports = DailyReport.list_by_created.page(params[:page])
   end
 
-  #new
-  def new
-    @daily_report = DailyReport.new
-  end
 
-  def create
-
-    @daily_report = DailyReport.new(admin_daily_report_params)
-
-    #deal with attachment
-    if params[:filename].present?
-      display_name = params[:filename]
-    else
-      display_name = "#{@daily_report.title}-BANNER-#{@daily_report.galleries.count + 1}"
-    end
-
-    respond_to do |format|
-      if @daily_report.save
-        @latestAttach = DailyReportGallery.create(:attachment => params[:attachment], :attachable => @daily_report, :file_name => display_name) if params[:attachment]
-        flash[:notice] = "更新成功"
-        format.html { redirect_to admin_daily_reports_path() }
-        #format.js {render :js => "window.location.href=window.location.href;"}
-      else
-        format.html { redirect_to :back , notice: @daily_report.errors.full_messages }
-      end
-    end  
-  end
 
   # GET /admin/daily_reports/1
   # GET /admin/daily_reports/1.json
   def show
+    unless @daily_report.blank?
+      
+      @sumup_by_category = @daily_report.sum_by_category
+      @sumup_by_product = @daily_report.sum_by_product
+      @sumup_by_stock = @daily_report.sum_by_stock
+
+    end
   end
 
   # GET /admin/daily_reports/1/edit
@@ -71,12 +53,12 @@ class Admin::DailyReportsController < AdminController
   # DELETE /admin/daily_reports/1
   # DELETE /admin/daily_reports/1.json
   def destroy
-    @daily_report.destroy
-    respond_to do |format|
-      flash[:notice] = "刪除成功"
-      format.html { redirect_to :back }
-      format.json { head :no_content }
-    end
+    # @daily_report.destroy
+    # respond_to do |format|
+    #   flash[:notice] = "刪除成功"
+    #   format.html { redirect_to :back }
+    #   format.json { head :no_content }
+    # end
   end
 
   private
