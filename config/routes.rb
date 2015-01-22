@@ -128,7 +128,12 @@ Rails.application.routes.draw do
     
     mount Ckeditor::Engine => '/ckeditor'
     
-    resources :daily_reports, only: [:index, :show]
+    resources :daily_reports do
+      collection do 
+        match 'view_by_range' => 'daily_reports#view_by_range', via: [:get, :post], as: :view_by_range
+        # get '/view_by_range' => 'daily_reports#view_by_range'
+      end
+    end
 
     resources :categories do 
       resources :products do

@@ -1,3 +1,12 @@
+<style type="text/css">
+  table {
+    width: 100%;
+    text-align: center;
+  }
+  table, th, td {
+   border: 1px solid black;
+  }
+</style>
 DailyReport - show<br>
 
 <% unless @daily_report.blank? %>
@@ -12,7 +21,7 @@ DailyReport - show<br>
 新會員:<%= @daily_report.new_member_count %><br>
 運費營業額:<%= @daily_report.total_shipping_revenue %><br>
 產品營業額:<%= @daily_report.total_product_revenue %><br>
-總營業額:<%= @daily_report.total_shipping_revenue + @daily_report.total_product_revenue %><br>
+總營業額:<%= @daily_report.total_revenue %><br>
 
   <% unless @daily_report.total_order_count == 0 %>
     <br>= other calculation<br>

@@ -9,9 +9,12 @@ class Admin::DailyReportsController < AdminController
   def index 
     @yesterday_report = DailyReport.latest_report
     @daily_reports = DailyReport.list_by_created.page(params[:page])
+    @realtime_todolist_order_count = Order.todolist.count #待處理訂單數
+    @realtime_pending_order_count = Order.pending.count #待付款訂單數
+    @realtime_human_involved_order_count = Order.human_involved.count #人為處理訂單數
+    @realtime_shipped_order_count = Order.shipped.count # 已出貨訂單數
+    @realtime_total_active_order_count = @realtime_todolist_order_count + @realtime_pending_order_count + @realtime_human_involved_order_count + @realtime_shipped_order_count
   end
-
-
 
   # GET /admin/daily_reports/1
   # GET /admin/daily_reports/1.json
@@ -25,30 +28,48 @@ class Admin::DailyReportsController < AdminController
     end
   end
 
-  # GET /admin/daily_reports/1/edit
-  # def edit
-  #   # selected product
-  #   @products = Announcement.all
-  # end
+  def view_by_range
+    # default
+    begin_date = Date.today - 70.days
+    end_date = Date.today
 
-  # PATCH/PUT /admin/daily_reports/1
-  # PATCH/PUT /admin/daily_reports/1.json
-  # def update
-  #   #@daily_report = DailyReport.find(params[:id])
-  #   # thought-1: depends on type
-  #   @daily_report.update ( admin_daily_report_params )
+    unless params[:q].blank?
+      unless params[:q][:target_date_gteq].blank?
+        begin_date = Date.parse(params[:q][:target_date_gteq])
+
+        unless params[:q][:target_date_lteq].blank?
+          end_date = Date.parse(params[:q][:target_date_lteq])
+
+          if begin_date > end_date
+            tmp = end_date
+            end_date = begin_date
+            begin_date = tmp
+          end
+
+        else
+          end_date = Date.today  
+        end
+
+      else
+        begin_date = Date.today - 70.days
+      end 
+
+      params[:q][:target_date_gteq] = begin_date
+      params[:q][:target_date_lteq] = end_date
+
+      @q = DailyReport.search(params[:q])
+      @daily_reports = @q.result(distinct: true)
+
+      @begin_date = begin_date
+      @end_date = end_date
+
+      @sumup_report = DailyReport.slice_by_date_range(@begin_date, @end_date)
+    else
+      @q = DailyReport.empty_start.search(params[:q])
+      @daily_reports = @q.result(distinct: true)
+    end
     
-  #   respond_to do |format|
-  #     if @daily_report.save
-  #       format.html { redirect_to admin_daily_reports_path, notice: 'Successfully updated.' }
-  #       format.json { head :no_content }
-  #     else
-  #       format.html { render action: :back }
-  #       format.json { render json: @daily_report.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-
-  # end
+  end
 
   # DELETE /admin/daily_reports/1
   # DELETE /admin/daily_reports/1.json
@@ -62,6 +83,23 @@ class Admin::DailyReportsController < AdminController
   end
 
   private
+  
+  # def set_type
+  #   @type = type
+  # end
+
+  # def type
+  #   RevenueDetail.types.include?(params[:type]) ? params[:type] : "RevenueDetail"
+  # end
+
+  # def type_class
+  #   type.constantize
+  # end
+
+  # def set_revenue_detail
+  #   @revenue_detail = type_class.find(params[:id])
+  # end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_admin_daily_report
     @daily_report = DailyReport.find(params[:id])

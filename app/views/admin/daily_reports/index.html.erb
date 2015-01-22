@@ -1,3 +1,12 @@
+<style type="text/css">
+  table {
+    width: 100%;
+    text-align: center;
+  }
+  table, th, td {
+   border: 1px solid black;
+  }
+</style>
 DailyReport - index<br>
 
 <br>= top 10 in category<br>
@@ -13,31 +22,95 @@ DailyReport - index<br>
   <%= record[0][2] %> => <%= record[1] %><br>
 <% end %>
 <hr>
+<table class='table'>
+  <caption>目前訂單狀態</caption>
+  <tr>
+    <td>待處理訂單數 A</td>
+    <td>待付款訂單數 B</td> 
+    <td>人為處理訂單數 C</td>
+    <td>已出貨訂單數 D</td>
+    <td>處理中訂單(ACTIVE=A+B+C+D)</td> 
+  </tr>
+  <tr>
+    <td><%= @realtime_todolist_order_count %></td>
+    <td><%= @realtime_pending_order_count %></td>
+    <td><%= @realtime_human_involved_order_count %></td>
+    <td><%= @realtime_shipped_order_count %></td>
+    <td><%= @realtime_total_active_order_count %></td>
+  </tr>
+</table>
+<hr>
+<table class='table'>
+<caption>歷史訂單狀態</caption>
+  <tr>
+    <td>處理中訂單(ACTIVE=A+B+C+D)</td> 
+    <td>總完成訂單 E</td> 
+    <td>總最後確認跳出訂單 F</td>
+    <td>總經人為處理結束訂單 G</td>
+    <td>總取消訂單 H</td> 
+    <td>總訂單(ACTIVE+E+F+G+H)</td>
+  </tr>
+  <tr>
+    <td><%= @realtime_total_active_order_count %></td>
+    <td><%= Order.where(aasm_state: 'close').count %></td>
+    <td><%= Order.where(aasm_state: 'hold').count %></td>
+    <td><%= Order.where(aasm_state: 'abnormal').count %></td>
+    <td><%= Order.where(aasm_state: 'cancel').count %></td>
+    <td><%= Order.count %></td>
+  </tr>
+</table>
+<hr>
+ 
 <% unless @yesterday_report.blank? %>
-= latest report<br>
-日期:<%= @yesterday_report.name %><br>
-訂單總數:<%= @yesterday_report.total_order_count %><br>
-成功下單:<%= @yesterday_report.valid_order_count %><br>
-最後確認前離開:<%= @yesterday_report.onhold_order_count %><br>
-完成訂單數:<%= @yesterday_report.completed_order_count %><br>
-取消訂單數:<%= @yesterday_report.cancel_order_count %><br>
-人為處理完成:<%= @yesterday_report.abnormal_end_order_count %><br>
-新會員:<%= @yesterday_report.new_member_count %><br>
-運費營業額:<%= @yesterday_report.total_shipping_revenue %><br>
-產品營業額:<%= @yesterday_report.total_product_revenue %><br>
+<table class='table'>
+  <caption>最新日報表</caption>
+  <tr>
+    <td>日期</td>
+    <td>訂單總數</td> 
+    <td>成功下單</td>
+    <td>最後確認前離開</td>
 
-  <% unless @yesterday_report.total_order_count == 0 %>
-    <br>= other calculation<br>
-    成功下單率:<%= (@yesterday_report.valid_order_count / @yesterday_report.total_order_count)*100 %>％<br>
-    跳出:<%= (@yesterday_report.onhold_order_count / @yesterday_report.total_order_count)*100 %>％<br>
-  <% end %>
+    <td>完成訂單數</td> 
+    <td>取消訂單數</td>
+    <td>人為處理完成</td>
+    <td>新會員</td> 
+    <td>運費營業額 S</td>
+    <td>產品營業額 T</td>
+    <td>營業額 S+T </td>
+    <% unless @yesterday_report.total_order_count == 0 %>
+    <td>成功下單%</td>
+    <td>跳出%</td>
+    <% end %>
+  </tr>
+  <tr>
+    <td><%= link_to @yesterday_report.name, admin_daily_report_path(@yesterday_report) %></td>
+    <td><%= @yesterday_report.total_order_count %></td>
+    <td><%= @yesterday_report.valid_order_count %></td>
+    <td><%= @yesterday_report.onhold_order_count %></td>
 
+    <td><%= @yesterday_report.completed_order_count %></td>
+    <td><%= @yesterday_report.cancel_order_count %></td>
+    <td><%= @yesterday_report.abnormal_end_order_count %></td>
+    <td><%= @yesterday_report.new_member_count %></td>
+    <td><%= @yesterday_report.total_shipping_revenue %></td>
+    <td><%= @yesterday_report.total_product_revenue %></td>
+    <td><%= @yesterday_report.total_product_revenue + @yesterday_report.total_shipping_revenue %></td>
+    <% unless @yesterday_report.total_order_count == 0 %>
+    <td>
+      <%= (@yesterday_report.valid_order_count / @yesterday_report.total_order_count)*100 %>％
+    </td>
+    <td>
+      <%= (@yesterday_report.onhold_order_count / @yesterday_report.total_order_count)*100 %>％
+    </td>
+    <% end %>
+  </tr>
+</table>
 <% end %>
 <hr>
 
 <% unless @daily_reports.blank? %>
-= list all available reports<br>
-  <table width="100%">
+  <table class='table' >
+    <caption>所有日報表</caption>
     <tr>
       <td>日期</td>
       <td>訂單總數</td> 
@@ -47,8 +120,9 @@ DailyReport - index<br>
       <td>取消訂單數</td>
       <td>人為處理完成</td>
       <td>新會員</td> 
-      <td>運費營業額</td>
-      <td>產品營業額</td>
+      <td>運費營業額 S</td>
+      <td>產品營業額 T</td>
+      <td>營業額 S+T </td>
     </tr>
     <% @daily_reports.each do |report| %>
       <tr>
@@ -62,6 +136,7 @@ DailyReport - index<br>
         <td><%= report.new_member_count %></td>
         <td><%= report.total_shipping_revenue %></td>
         <td><%= report.total_product_revenue %></td>
+        <td><%= report.total_revenue %></td>
       </tr>
     <% end %>
   </table>

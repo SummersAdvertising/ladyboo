@@ -18,11 +18,6 @@ class RevenueDetail < ActiveRecord::Base
       when "ByStock"
         RevenueDetail.sum_by_stock.group(:category_name,:product_name, :stock_name).sum(:figure).sort_by{|k,v| v}.reverse
     end    
-    # @websites = current_user.records.sum(:minutes,
-    # :group => 'website',
-    # :conditions => 'website IS NOT NULL',
-    # :order => 'SUM(minutes) DESC',
-    # :limit => 10)
   end
 
   def self.combine_display_name(category_name = "其他", product_name = "其他", stock_name = "其他")

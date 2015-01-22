@@ -11,6 +11,7 @@ class CreateDailyReports < ActiveRecord::Migration
       t.integer :new_member_count
       t.integer :total_shipping_revenue
       t.integer :total_product_revenue
+      t.integer :total_revenue
       t.datetime :run_at
       t.datetime :target_date
       

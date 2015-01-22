@@ -1,0 +1,21 @@
+<h1>TEST STI</h1>
+<table>
+  <thead>
+    <tr>
+      <th>context_displayname</th>
+      <th>category_name</th>
+      <th>product_name</th>
+      <th>stock_name</th>
+    </tr>
+</thead>
+  <tbody>
+    <% @revenue_details.each do |record| %>
+      <tr>
+        <td><%= record.context_displayname %></td>
+        <td><%= record.category_name %></td>
+        <td><%= record.product_name %></td>
+        <td><%= record.stock_name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

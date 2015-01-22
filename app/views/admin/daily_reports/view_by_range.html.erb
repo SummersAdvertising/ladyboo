@@ -1,0 +1,116 @@
+<style type="text/css">
+  table {
+    width: 100%;
+    text-align: center;
+  }
+  table, th, td {
+   border: 1px solid black;
+  }
+</style>
+DailyReports - view by range
+
+<%= search_form_for @q, url: view_by_range_admin_daily_reports_path, method: :post  do |f| %>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>
+        期間：
+      </td>
+      <td>
+        <%= f.search_field :target_date_gteq, id: 'begin_picker'%><br>
+        <%= f.search_field :target_date_lteq, id: 'end_picker' %>
+        <%# f.select :target_date_gteq, options_for_select([['-- 請選擇 --',nil],['1週',1.week.ago], ['1個月', 1.month.ago], ['3個月',3.month.ago], ['6個月',6.month.ago], ['1年',1.year.ago]], nil) %>
+      </td>
+      <td align="right">
+        <%= f.submit('搜尋') %>
+      </td>
+    </tr>
+  </table>
+  
+<% end %>
+<hr>
+<% unless @sumup_report.blank? %>
+<table class='table'>
+  <caption>期間</caption>
+  <tr>
+    <td>日期區間</td>
+    <td>訂單總數</td> 
+    <td>成功下單</td>
+    <td>最後確認前離開</td>
+
+    <td>完成訂單數</td> 
+    <td>取消訂單數</td>
+    <td>人為處理完成</td>
+    <td>新會員</td> 
+    <td>運費營業額 S</td>
+    <td>產品營業額 T</td>
+    <td>營業額 S+T </td>
+    <% unless @sumup_report[0]['total_order_count'] == 0 %>
+    <td>成功下單%</td>
+    <td>跳出%</td>
+    <% end %>
+  </tr>
+  <tr>
+    <td><%= @begin_date %><br>~<br><%= @end_date %> </td>
+    <td><%= @sumup_report[0]['total_order_count'] %></td>
+    <td><%= @sumup_report[0]['valid_order_count'] %></td>
+    <td><%= @sumup_report[0]['onhold_order_count'] %></td>
+
+    <td><%= @sumup_report[0]['completed_order_count'] %></td>
+    <td><%= @sumup_report[0]['cancel_order_count'] %></td>
+    <td><%= @sumup_report[0]['abnormal_end_order_count'] %></td>
+    <td><%= @sumup_report[0]['new_member_count'] %></td>
+    <td><%= @sumup_report[0]['total_shipping_revenue'] %></td>
+    <td><%= @sumup_report[0]['total_product_revenue'] %></td>
+    <td><%= @sumup_report[0]['total_revenue'] %></td>
+    <% unless @sumup_report[0]['total_order_count'] == 0 %>
+    <td>
+      <%= (@sumup_report[0]['valid_order_count'].to_f / @sumup_report[0]['total_order_count']).round(2)*100 %>％
+    </td>
+    <td>
+      <%= (@sumup_report[0]['onhold_order_count'].to_f / @sumup_report[0]['total_order_count']).round(2)*100 %>％
+    </td>
+    <% end %>
+  </tr>
+</table>
+<hr>
+<% end %>
+
+<% unless @daily_reports.blank? %>
+=search result<br>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><%= sort_link @q , :name, "日期" %></td>
+    <td><%= sort_link @q , :total_order_count, "訂單總數" %></td> 
+    <td><%= sort_link @q , :valid_order_count, "成功下單" %></td>
+    <td><%= sort_link @q , :onhold_order_count, "最後確認前離開" %></td>
+    <td><%= sort_link @q , :completed_order_count, "完成訂單數" %></td> 
+    <td><%= sort_link @q , :cancel_order_count, "取消訂單數" %></td>
+    <td><%= sort_link @q , :abnormal_end_order_count, "人為處理完成" %></td>
+    <td><%= sort_link @q , :new_member_count, "新會員" %></td> 
+    <td><%= sort_link @q , :total_shipping_revenue, "運費營業額 S" %></td>
+    <td><%= sort_link @q , :total_product_revenue, "產品營業額 T" %></td>
+    <td><%= sort_link @q , :total_revenue, "營業額 S+T " %></td>
+  </tr>
+  <% @daily_reports.each do |report| %>
+    <tr>
+      <td><%= link_to report.name, admin_daily_report_path(report) %></td>
+      <td><%= report.total_order_count %></td>
+      <td><%= report.valid_order_count %></td>
+      <td><%= report.onhold_order_count %></td>
+      <td><%= report.completed_order_count %></td>
+      <td><%= report.cancel_order_count %></td>
+      <td><%= report.abnormal_end_order_count %></td>
+      <td><%= report.new_member_count %></td>
+      <td><%= report.total_shipping_revenue %></td>
+      <td><%= report.total_product_revenue %></td>
+      <td><%= report.total_revenue %></td>
+    </tr>
+  <% end %>
+</table>
+<% end %>
+<link rel="stylesheet" type="text/css" href="/css/jquery.datetimepicker.css"/ >
+<script src="/js/jquery.datetimepicker.js"></script>
+<script>
+jQuery('#begin_picker').datetimepicker();
+jQuery('#end_picker').datetimepicker();
+</script>

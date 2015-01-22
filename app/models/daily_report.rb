@@ -5,10 +5,11 @@ class DailyReport < ActiveRecord::Base
   
   scope :latest_report , -> { order(created_at: :desc).first }
   scope :list_by_created , -> { order(created_at: :desc) }
+  scope :empty_start , -> { where(id: -1) }
 
   delegate :sum_by_category, :sum_by_product, :sum_by_stock, to: :revenue_details
 
-  paginates_per 25
+  paginates_per 225
 
   def sum_it_up(type)
     
@@ -34,15 +35,15 @@ class DailyReport < ActiveRecord::Base
     end    
   end
 
-  def self.slice_by_date_range(begin_date = Date.today - 7.days, end_date = Date.today)
-    DailyReport.where(target_date: begin_date.beginning_of_day..end_date.end_of_day).order(created_at: :desc)
+  def self.slice_by_date_range(begin_date = Date.today - 100.days, end_date = Date.today)
+    DailyReport.where(target_date: begin_date.beginning_of_day..end_date.end_of_day).order(created_at: :desc).select('SUM(total_order_count) AS total_order_count, SUM(onhold_order_count) AS onhold_order_count, SUM(valid_order_count) AS valid_order_count, SUM(completed_order_count) AS completed_order_count, SUM(cancel_order_count) AS cancel_order_count, SUM(cancel_order_count) AS cancel_order_count, SUM(abnormal_end_order_count) AS abnormal_end_order_count, SUM(new_member_count) AS new_member_count, SUM(new_member_count) AS new_member_count, SUM(total_shipping_revenue) AS total_shipping_revenue, SUM(total_product_revenue) AS total_product_revenue , SUM(total_revenue) AS total_revenue ')
   end
 
   def self.calculate_yesterday
     DailyReport.calculate_report_of(Date.today - 1.day)
   end
 
-  def self.calculate_by_range(begin_date = Date.today - 100.days , end_date = Date.today)
+  def self.calculate_by_range(begin_date = Date.today - 150.days , end_date = Date.today)
     cal_range = (end_date - begin_date).to_i
 
     for i in 0..cal_range-1
@@ -72,11 +73,11 @@ class DailyReport < ActiveRecord::Base
     total_shipping_revenue = Order.where(id: completed_order_ids_today).sum(:shipping_fee)
     # 當日完成之訂單, 商品營業額總計
     total_product_revenue = Orderitem.where(order_id: completed_order_ids_today).sum('item_price * amount')
-
+    total_revenue = total_shipping_revenue + total_product_revenue
     # 當日新會員數量
-    new_member_count = User.where(created_at: target_date).count 
+    new_member_count = User.where(created_at: target_date.beginning_of_day..target_date.end_of_day).count 
 
-    @report_today = DailyReport.create({name: target_date.strftime("%Y-%m-%d"),total_order_count: total_order_count, valid_order_count: valid_order_count, onhold_order_count: onhold_order_count,completed_order_count: completed_order_count,cancel_order_count: cancel_order_count, abnormal_end_order_count: abnormal_end_order_count,total_shipping_revenue: total_shipping_revenue, total_product_revenue: total_product_revenue,new_member_count: new_member_count, run_at: Time.now.in_time_zone('Taipei'), target_date: target_date})
+    @report_today = DailyReport.create({name: target_date.strftime("%Y-%m-%d"),total_order_count: total_order_count, valid_order_count: valid_order_count, onhold_order_count: onhold_order_count,completed_order_count: completed_order_count,cancel_order_count: cancel_order_count, abnormal_end_order_count: abnormal_end_order_count,total_shipping_revenue: total_shipping_revenue, total_product_revenue: total_product_revenue, total_revenue: total_revenue,new_member_count: new_member_count, run_at: Time.now.in_time_zone('Taipei'), target_date: target_date})
 
     if @report_today.save      
       #營業額分項 by_category

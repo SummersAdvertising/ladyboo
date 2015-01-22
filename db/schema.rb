@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(version: 20150120071108) do
     t.integer  "new_member_count"
     t.integer  "total_shipping_revenue"
     t.integer  "total_product_revenue"
+    t.integer  "total_revenue"
     t.datetime "run_at"
     t.datetime "target_date"
     t.datetime "created_at"
