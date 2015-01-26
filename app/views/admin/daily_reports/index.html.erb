@@ -95,7 +95,7 @@ DailyReport - index<br>
     <td><%= @yesterday_report.total_shipping_revenue %></td>
     <td><%= @yesterday_report.total_product_revenue %></td>
     <td><%= @yesterday_report.total_product_revenue + @yesterday_report.total_shipping_revenue %></td>
-    <% unless @yesterday_report.total_order_count == 0 %>
+    <% unless @yesterday_report.total_order_count == 0 || @daily_report.total_order_count.blank? %>
     <td>
       <%= (@yesterday_report.valid_order_count / @yesterday_report.total_order_count)*100 %>％
     </td>

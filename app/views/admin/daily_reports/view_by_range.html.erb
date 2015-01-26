@@ -7,28 +7,39 @@
    border: 1px solid black;
   }
 </style>
-DailyReports - view by range
+DailyReports - view by range and export by selecting scope
 
 <%= search_form_for @q, url: view_by_range_admin_daily_reports_path, method: :post  do |f| %>
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
       <td>
-        期間：
+        自訂區間：
       </td>
       <td>
-        <%= f.search_field :target_date_gteq, id: 'begin_picker'%><br>
-        <%= f.search_field :target_date_lteq, id: 'end_picker' %>
-        <%# f.select :target_date_gteq, options_for_select([['-- 請選擇 --',nil],['1週',1.week.ago], ['1個月', 1.month.ago], ['3個月',3.month.ago], ['6個月',6.month.ago], ['1年',1.year.ago]], nil) %>
+        <%= f.search_field :target_date_gteq, id: 'begin_picker', class: 'text' %>
       </td>
-      <td align="right">
-        <%= f.submit('搜尋') %>
+      <td>
+        <%= f.search_field :target_date_lteq, id: 'end_picker', class: 'text' %>
       </td>
     </tr>
-  </table>
-  
+    <tr>
+      <td>
+        預設區間：
+      </td>
+      <td colspan='2'>
+        <%= f.select :target_date_gteq, options_for_select([['-- 請選擇 --',nil],['1週',1.week.ago], ['1個月', 1.month.ago], ['3個月',3.month.ago], ['6個月',6.month.ago], ['1年',1.year.ago]], nil) %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan='3'>
+        <%= button_tag "搜尋", data: { disable_with: "Please wait..." }, style: 'width=100%;' %>
+      </td>
+    </tr>
+  </table>  
 <% end %>
 <hr>
-<% unless @sumup_report.blank? %>
+
+<% unless @sumup_report.blank? || @sumup_report[0]['total_order_count'].blank? %>
 <table class='table'>
   <caption>期間</caption>
   <tr>
@@ -44,7 +55,7 @@ DailyReports - view by range
     <td>運費營業額 S</td>
     <td>產品營業額 T</td>
     <td>營業額 S+T </td>
-    <% unless @sumup_report[0]['total_order_count'] == 0 %>
+    <% unless @sumup_report[0]['total_order_count'] == 0 || @sumup_report[0]['total_order_count'].blank? %>
     <td>成功下單%</td>
     <td>跳出%</td>
     <% end %>
@@ -62,7 +73,7 @@ DailyReports - view by range
     <td><%= @sumup_report[0]['total_shipping_revenue'] %></td>
     <td><%= @sumup_report[0]['total_product_revenue'] %></td>
     <td><%= @sumup_report[0]['total_revenue'] %></td>
-    <% unless @sumup_report[0]['total_order_count'] == 0 %>
+    <% unless @sumup_report[0]['total_order_count'] == 0 || @sumup_report[0]['total_order_count'].blank? %>
     <td>
       <%= (@sumup_report[0]['valid_order_count'].to_f / @sumup_report[0]['total_order_count']).round(2)*100 %>％
     </td>
@@ -77,6 +88,11 @@ DailyReports - view by range
 
 <% unless @daily_reports.blank? %>
 =search result<br>
+<p>
+  Download:<% p @query_condition %>
+  <%# link_to "CSV", export_csv_admin_daily_reports_path(format: "csv", q: @query_condition) %>
+  <%= link_to "Excel", export_xls_admin_daily_reports_path(format: "xls", q: @query_condition) %>
+</p>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td><%= sort_link @q , :name, "日期" %></td>
@@ -107,6 +123,8 @@ DailyReports - view by range
     </tr>
   <% end %>
 </table>
+<% else %>
+= 查無結果 =
 <% end %>
 <link rel="stylesheet" type="text/css" href="/css/jquery.datetimepicker.css"/ >
 <script src="/js/jquery.datetimepicker.js"></script>

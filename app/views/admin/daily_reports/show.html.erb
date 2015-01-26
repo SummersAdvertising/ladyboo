@@ -23,7 +23,7 @@ DailyReport - show<br>
 產品營業額:<%= @daily_report.total_product_revenue %><br>
 總營業額:<%= @daily_report.total_revenue %><br>
 
-  <% unless @daily_report.total_order_count == 0 %>
+  <% unless @daily_report.total_order_count == 0 || @daily_report.total_order_count.blank? %>
     <br>= other calculation<br>
     成功下單率:<%= (@daily_report.valid_order_count.to_f / @daily_report.total_order_count).round(2)*100 %>％<br>
     跳出:<%= (@daily_report.onhold_order_count.to_f / @daily_report.total_order_count).round(2)*100 %>％<br>

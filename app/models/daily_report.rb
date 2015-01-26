@@ -4,7 +4,7 @@ class DailyReport < ActiveRecord::Base
   has_many :revenue_details
   
   scope :latest_report , -> { order(created_at: :desc).first }
-  scope :list_by_created , -> { order(created_at: :desc) }
+  scope :list_by_target_date , -> { order(target_date: :desc) }
   scope :empty_start , -> { where(id: -1) }
 
   delegate :sum_by_category, :sum_by_product, :sum_by_stock, to: :revenue_details
@@ -34,8 +34,36 @@ class DailyReport < ActiveRecord::Base
         self.sum_by_stock
     end    
   end
+  
+  def self.to_csv
+    CSV.generate do |csv|
+      csv << column_names
+      all.each do |report|
+        csv << report.attributes.values_at(*column_names)
+      end
+    end
+  end
 
-  def self.slice_by_date_range(begin_date = Date.today - 100.days, end_date = Date.today)
+  def self.to_xls(report_set)
+
+    require 'spreadsheet'
+    clients = Spreadsheet::Workbook.new
+    list = clients.create_worksheet :name => 'reports'
+    list.row(0).concat %w{ID 日期 訂單總數 成功下單 最後確認前離開 完成訂單數 取消訂單數 人為處理完成 新會員 運費營業額S 產品營業額T 營業額S+T }
+    report_set.each_with_index { |report, i|
+       list.row(i+1).push report.id ,report.name, report.total_order_count,report.onhold_order_count,report.valid_order_count,report.completed_order_count,report.cancel_order_count,report.abnormal_end_order_count,report.new_member_count,report.total_shipping_revenue,report.total_product_revenue,report.total_revenue
+    }
+
+    header_format = Spreadsheet::Format.new :color => :green, :weight => :bold
+    list.row(0).default_format = header_format
+    #output to blob object
+    blob = StringIO.new("")
+    clients.write blob
+    
+    return blob.string
+  end
+
+  def self.slice_by_date_range(begin_date = Date.today - 70.days, end_date = Date.today)
     DailyReport.where(target_date: begin_date.beginning_of_day..end_date.end_of_day).order(created_at: :desc).select('SUM(total_order_count) AS total_order_count, SUM(onhold_order_count) AS onhold_order_count, SUM(valid_order_count) AS valid_order_count, SUM(completed_order_count) AS completed_order_count, SUM(cancel_order_count) AS cancel_order_count, SUM(cancel_order_count) AS cancel_order_count, SUM(abnormal_end_order_count) AS abnormal_end_order_count, SUM(new_member_count) AS new_member_count, SUM(new_member_count) AS new_member_count, SUM(total_shipping_revenue) AS total_shipping_revenue, SUM(total_product_revenue) AS total_product_revenue , SUM(total_revenue) AS total_revenue ')
   end
 

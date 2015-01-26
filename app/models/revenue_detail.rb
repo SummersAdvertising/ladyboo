@@ -1,3 +1,4 @@
+# encoding: utf-8
 class RevenueDetail < ActiveRecord::Base
   belongs_to :daily_report
 

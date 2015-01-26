@@ -13,11 +13,11 @@ set :output, 'log/whenever.log'
 #   rake "whenever:disable_expired_gives"
 # end
 
-every 3.days do
-  #runner "Order.delete_hold_orders"
-  rake "whenever:delete_hold_orders"
-  #rake "whenever:check_deals_waitpay"
-end
+# every 3.days do
+#   #runner "Order.delete_hold_orders"
+#   rake "whenever:delete_hold_orders"
+#   #rake "whenever:check_deals_waitpay"
+# end
 
 every :day, :at => '3am'  do
   rake "whenever:calculate_daily_report"

@@ -131,6 +131,8 @@ Rails.application.routes.draw do
     resources :daily_reports do
       collection do 
         match 'view_by_range' => 'daily_reports#view_by_range', via: [:get, :post], as: :view_by_range
+        match 'view_by_range/export_csv' => 'daily_reports#export_csv', via: [:get, :post], as: :export_csv
+        match 'view_by_range/export_xls' => 'daily_reports#export_xls', via: [:get, :post], as: :export_xls
         # get '/view_by_range' => 'daily_reports#view_by_range'
       end
     end

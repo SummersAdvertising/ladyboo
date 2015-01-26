@@ -2,13 +2,12 @@
 class Admin::DailyReportsController < AdminController
 
   before_action :set_admin_daily_report, only: [:show, :update, :destroy]
-  #, :create_daily_report_attachment, :create_selected_product_attachment
   
   # GET /admin/daily_reports
   # GET /admin/daily_reports.json
   def index 
     @yesterday_report = DailyReport.latest_report
-    @daily_reports = DailyReport.list_by_created.page(params[:page])
+    @daily_reports = DailyReport.list_by_target_date.page(params[:page])
     @realtime_todolist_order_count = Order.todolist.count #待處理訂單數
     @realtime_pending_order_count = Order.pending.count #待付款訂單數
     @realtime_human_involved_order_count = Order.human_involved.count #人為處理訂單數
@@ -29,10 +28,47 @@ class Admin::DailyReportsController < AdminController
   end
 
   def view_by_range
+    
+    compose_query_condition(true) 
+    @daily_reports = @q.result(distinct: true)
+
+    @query_condition = params[:q]
+
+  end
+
+  def export_csv
+    
+    compose_query_condition(false) 
+    @daily_reports = @q.result(distinct: true)
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data text: @daily_reports.to_csv }
+    end
+
+  end
+
+  def export_xls
+    
+    compose_query_condition(false) 
+    @daily_reports = @q.result(distinct: true)
+
+    respond_to do |format|
+      format.html
+      format.xls {
+        send_data DailyReport.to_xls(@daily_reports), :type => :xls, :filename => "#{@begin_date}-#{@end_date}-report.xls";
+      }
+    end
+
+  end
+
+  private
+  
+  def compose_query_condition(first_response_empty = true)
     # default
     begin_date = Date.today - 70.days
     end_date = Date.today
-
+    
     unless params[:q].blank?
       unless params[:q][:target_date_gteq].blank?
         begin_date = Date.parse(params[:q][:target_date_gteq])
@@ -58,47 +94,22 @@ class Admin::DailyReportsController < AdminController
       params[:q][:target_date_lteq] = end_date
 
       @q = DailyReport.search(params[:q])
-      @daily_reports = @q.result(distinct: true)
-
-      @begin_date = begin_date
-      @end_date = end_date
-
-      @sumup_report = DailyReport.slice_by_date_range(@begin_date, @end_date)
+      @sumup_report = DailyReport.slice_by_date_range(begin_date, end_date)
     else
-      @q = DailyReport.empty_start.search(params[:q])
-      @daily_reports = @q.result(distinct: true)
+      if first_response_empty
+        @q = DailyReport.empty_start.search(params[:q])
+      else
+        params[:q][:target_date_gteq] = begin_date
+        params[:q][:target_date_lteq] = end_date
+        @q = DailyReport.search(params[:q])
+        @sumup_report = DailyReport.slice_by_date_range(begin_date, end_date)
+      end
     end
     
-  end
+    @begin_date = begin_date
+    @end_date = end_date
 
-  # DELETE /admin/daily_reports/1
-  # DELETE /admin/daily_reports/1.json
-  def destroy
-    # @daily_report.destroy
-    # respond_to do |format|
-    #   flash[:notice] = "刪除成功"
-    #   format.html { redirect_to :back }
-    #   format.json { head :no_content }
-    # end
-  end
-
-  private
-  
-  # def set_type
-  #   @type = type
-  # end
-
-  # def type
-  #   RevenueDetail.types.include?(params[:type]) ? params[:type] : "RevenueDetail"
-  # end
-
-  # def type_class
-  #   type.constantize
-  # end
-
-  # def set_revenue_detail
-  #   @revenue_detail = type_class.find(params[:id])
-  # end
+  end  
 
   # Use callbacks to share common setup or constraints between actions.
   def set_admin_daily_report
