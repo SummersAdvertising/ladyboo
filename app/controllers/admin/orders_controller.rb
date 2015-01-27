@@ -37,6 +37,12 @@ class Admin::OrdersController < AdminController
   def history
     @q = Order.history.search(params[:q])
     @orders = @q.result(distinct: true).includes(:user).page(params[:page])
+    # query options
+    @payment_type_eq = {'-- 請選擇 --' => nil, 'ATM' => 'atm_transfer', '信用卡' => 'credit_card', 'Paypal' => 'paypal' }
+    @payment_status_eq = {'-- 請選擇 --' => nil, '交易完成' => 'finished', '交易結束' => 'abnormal_end', '取消訂單' => 'cancel', '交易失敗' => 'failed' }
+    @paid_eq = {'-- 請選擇 --' => nil, '已付款' => 'yes', '未付款' => 'no' }
+    @shipped_eq = {'-- 請選擇 --' => nil, '已出貨' => 'yes', '未出貨' => 'no' }
+    @created_at_gteq = {'-- 請選擇 --' => nil, '1週' => 1.week.ago, '1個月' => 1.month.ago, '1年'=> 1.year.ago }
     #@orders = Order.history.order(sort_column + " " + sort_direction).page(params[:page])
   end
 

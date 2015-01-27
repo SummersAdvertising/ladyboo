@@ -9,7 +9,7 @@
 </style>
 DailyReport - index<br>
 
-<br>= top 10 in category<br>
+<!-- <br>= top 10 in category<br>
 <% RevenueDetail.top_ten_by_type('ByCategory').each do |record| %>
   <%= record[0] %> => <%= record[1] %><br>
 <% end %>
@@ -21,7 +21,7 @@ DailyReport - index<br>
 <% RevenueDetail.top_ten_by_type('ByStock').each do |record| %>
   <%= record[0][2] %> => <%= record[1] %><br>
 <% end %>
-<hr>
+<hr> -->
 <table class='table'>
   <caption>目前訂單狀態</caption>
   <tr>
@@ -40,7 +40,7 @@ DailyReport - index<br>
   </tr>
 </table>
 <hr>
-<table class='table'>
+<!-- <table class='table'>
 <caption>歷史訂單狀態</caption>
   <tr>
     <td>處理中訂單(ACTIVE=A+B+C+D)</td> 
@@ -59,7 +59,7 @@ DailyReport - index<br>
     <td><%= Order.count %></td>
   </tr>
 </table>
-<hr>
+<hr> -->
  
 <% unless @yesterday_report.blank? %>
 <table class='table'>

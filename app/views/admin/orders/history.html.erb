@@ -46,14 +46,14 @@ div ,td, p .noTransition {
               付款方式：
             </td>
             <td>
-              <%= f.select :payment_type_eq, options_for_select([['-- 請選擇 --',nil],['ATM','atm_transfer'], ['信用卡', 'credit_card'], ['Paypal','paypal']], nil), class: 'form-control' %>
+              <%= f.collection_select(:payment_type_eq, @payment_type_eq, :last, :first, {}, { class: 'form-control'} ) %>
             </td>
             <td>&nbsp;</td>
             <td>
               狀態：
             </td>
             <td>
-              <%= f.select :payment_status_eq, options_for_select([['-- 請選擇 --',nil],['交易完成','finished'],['交易結束','abnormal_end'], ['取消訂單', 'cancel'], ['交易失敗','failed']], nil ) , class: 'form-control' %>
+              <%= f.collection_select(:payment_status_eq, @payment_status_eq, :last, :first, {}, { class: 'form-control'} ) %>
             </td>
           </tr>
           <tr>
@@ -61,14 +61,14 @@ div ,td, p .noTransition {
               收款狀態：
             </td>
             <td>
-              <%= f.select :paid_eq, options_for_select([['-- 請選擇 --',nil],['已付款','yes'],['未付款','no']], nil ) , class: 'form-control' %>
+              <%= f.collection_select(:paid_eq, @paid_eq, :last, :first, {}, { class: 'form-control'} ) %>
             </td>
             <td>&nbsp;</td>
             <td>
               出貨狀態：
             </td>
             <td>
-              <%= f.select :shipped_eq, options_for_select([['-- 請選擇 --',nil],['已出貨','yes'],['未出貨','no']], nil ) , class: 'form-control' %>
+              <%= f.collection_select(:shipped_eq, @shipped_eq, :last, :first, {}, { class: 'form-control'} ) %>
             </td>
           </tr>
           <tr>
@@ -76,7 +76,7 @@ div ,td, p .noTransition {
               期間：
             </td>
             <td>
-              <%= f.select :created_at_gteq, options_for_select([['-- 請選擇 --',nil],['1週',1.week.ago], ['1個月', 1.month.ago], ['1年',1.year.ago]], nil) %>
+              <%= f.collection_select(:created_at_gteq, @created_at_gteq, :last, :first, {}, { class: 'form-control'} ) %>
             </td>
             <td>
             <td>&nbsp;</td>
