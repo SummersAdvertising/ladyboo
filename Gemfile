@@ -58,6 +58,7 @@ gem 'sucker_punch', '~> 1.0'
 gem 'activemerchant'
 gem 'sanitize'
 gem 'spreadsheet'
+gem 'meta-tags'
 # gem 'rack-cache'
 # gem 'dalli'
 
