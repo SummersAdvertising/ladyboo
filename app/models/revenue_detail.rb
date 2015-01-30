@@ -17,7 +17,7 @@ class RevenueDetail < ActiveRecord::Base
       when "ByProduct"
         RevenueDetail.sum_by_product.group(:category_name,:product_name).sum(:figure).sort_by{|k,v| v}.reverse
       when "ByStock"
-        RevenueDetail.sum_by_stock.group(:category_name,:product_name, :stock_name).sum(:figure).sort_by{|k,v| v}.reverse
+        RevenueDetail.sum_by_stock.group(:category_name,:product_name, :stock_name, :context_displayname).sum(:figure).sort_by{|k,v| v}.reverse
     end    
   end
 

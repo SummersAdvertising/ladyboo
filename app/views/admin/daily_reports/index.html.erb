@@ -9,19 +9,20 @@
 </style>
 DailyReport - index<br>
 
-<!-- <br>= top 10 in category<br>
-<% RevenueDetail.top_ten_by_type('ByCategory').each do |record| %>
+<br>= top 10 in category<br>
+<% @by_category_revenue_details.each do |record| %>
   <%= record[0] %> => <%= record[1] %><br>
 <% end %>
 <br>= top 10 in product<br>
-<% RevenueDetail.top_ten_by_type('ByProduct').each do |record| %>
-  <%= record[0][1] %> => <%= record[1] %><br>
+<% @by_product_revenue_details.each do |record| %>
+  <%= record[0][0] %> - <%= record[0][1] %> => <%= record[1] %><br>
 <% end %>
 <br>= top 10 in stock<br>
-<% RevenueDetail.top_ten_by_type('ByStock').each do |record| %>
-  <%= record[0][2] %> => <%= record[1] %><br>
+<% @by_stock_revenue_details.each do |record| %>
+  <%= record[0][3] %> => <%= record[1] %><br>
 <% end %>
-<hr> -->
+<hr>
+
 <table class='table'>
   <caption>目前訂單狀態</caption>
   <tr>
@@ -52,11 +53,11 @@ DailyReport - index<br>
   </tr>
   <tr>
     <td><%= @realtime_total_active_order_count %></td>
-    <td><%= Order.where(aasm_state: 'close').count %></td>
-    <td><%= Order.where(aasm_state: 'hold').count %></td>
-    <td><%= Order.where(aasm_state: 'abnormal').count %></td>
-    <td><%= Order.where(aasm_state: 'cancel').count %></td>
-    <td><%= Order.count %></td>
+    <td><%= @all_close_orders_count %></td>
+    <td><%= @all_hold_orders_count %></td>
+    <td><%= @all_abnormal_orders_count %></td>
+    <td><%= @all_cancel_orders_count %></td>
+    <td><%= @all_orders_count %></td>
   </tr>
 </table>
 <hr> -->
@@ -77,33 +78,12 @@ DailyReport - index<br>
     <td>運費營業額 S</td>
     <td>產品營業額 T</td>
     <td>營業額 S+T </td>
-    <% unless @yesterday_report.total_order_count == 0 %>
+    <%# unless @yesterday_report.total_order_count == 0 %>
     <td>成功下單%</td>
     <td>跳出%</td>
-    <% end %>
+    <%# end %>
   </tr>
-  <tr>
-    <td><%= link_to @yesterday_report.name, admin_daily_report_path(@yesterday_report) %></td>
-    <td><%= @yesterday_report.total_order_count %></td>
-    <td><%= @yesterday_report.valid_order_count %></td>
-    <td><%= @yesterday_report.onhold_order_count %></td>
-
-    <td><%= @yesterday_report.completed_order_count %></td>
-    <td><%= @yesterday_report.cancel_order_count %></td>
-    <td><%= @yesterday_report.abnormal_end_order_count %></td>
-    <td><%= @yesterday_report.new_member_count %></td>
-    <td><%= @yesterday_report.total_shipping_revenue %></td>
-    <td><%= @yesterday_report.total_product_revenue %></td>
-    <td><%= @yesterday_report.total_product_revenue + @yesterday_report.total_shipping_revenue %></td>
-    <% unless @yesterday_report.total_order_count == 0 || @daily_report.total_order_count.blank? %>
-    <td>
-      <%= (@yesterday_report.valid_order_count / @yesterday_report.total_order_count)*100 %>％
-    </td>
-    <td>
-      <%= (@yesterday_report.onhold_order_count / @yesterday_report.total_order_count)*100 %>％
-    </td>
-    <% end %>
-  </tr>
+  <%= render partial: 'tr_of_each_report', locals: { report: @yesterday_report } %>
 </table>
 <% end %>
 <hr>
@@ -123,22 +103,12 @@ DailyReport - index<br>
       <td>運費營業額 S</td>
       <td>產品營業額 T</td>
       <td>營業額 S+T </td>
+      <%# unless @yesterday_report.total_order_count == 0 %>
+        <td>成功下單%</td>
+        <td>跳出%</td>
+      <%# end %>
     </tr>
-    <% @daily_reports.each do |report| %>
-      <tr>
-        <td><%= link_to report.name, admin_daily_report_path(report) %></td>
-        <td><%= report.total_order_count %></td>
-        <td><%= report.valid_order_count %></td>
-        <td><%= report.onhold_order_count %></td>
-        <td><%= report.completed_order_count %></td>
-        <td><%= report.cancel_order_count %></td>
-        <td><%= report.abnormal_end_order_count %></td>
-        <td><%= report.new_member_count %></td>
-        <td><%= report.total_shipping_revenue %></td>
-        <td><%= report.total_product_revenue %></td>
-        <td><%= report.total_revenue %></td>
-      </tr>
-    <% end %>
+    <%= render partial: 'tr_of_each_report', collection: @daily_reports, as: :report %>
   </table>
   <%= paginate @daily_reports ,:window => 2 %>
 <% end %>

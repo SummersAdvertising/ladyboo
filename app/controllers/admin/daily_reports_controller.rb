@@ -8,11 +8,23 @@ class Admin::DailyReportsController < AdminController
   def index 
     @yesterday_report = DailyReport.latest_report
     @daily_reports = DailyReport.list_by_target_date.page(params[:page])
+
     @realtime_todolist_order_count = Order.todolist.count #待處理訂單數
     @realtime_pending_order_count = Order.pending.count #待付款訂單數
     @realtime_human_involved_order_count = Order.human_involved.count #人為處理訂單數
     @realtime_shipped_order_count = Order.shipped.count # 已出貨訂單數
     @realtime_total_active_order_count = @realtime_todolist_order_count + @realtime_pending_order_count + @realtime_human_involved_order_count + @realtime_shipped_order_count
+
+    @all_close_orders_count = Order.where(aasm_state: 'close').count #總完成訂單
+    @all_hold_orders_count = Order.where(aasm_state: 'hold').count #總最後確認跳出訂單
+    @all_abnormal_orders_count = Order.where(aasm_state: 'abnormal').count #總經人為處理結束訂單
+    @all_cancel_orders_count = Order.where(aasm_state: 'cancel').count #總取消訂單
+    @all_orders_count = Order.count #總訂單
+
+    @by_category_revenue_details = RevenueDetail.top_ten_by_type('ByCategory')
+    @by_product_revenue_details = RevenueDetail.top_ten_by_type('ByProduct')
+    @by_stock_revenue_details = RevenueDetail.top_ten_by_type('ByStock')
+
   end
 
   # GET /admin/daily_reports/1
