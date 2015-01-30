@@ -76,7 +76,6 @@ group :development do
   #gem 'brakeman', :require => false
   gem 'sqlite3'
   #gem 'sextant'
-  gem 'xray-rails'
   
   gem 'capistrano-bundler', '~> 1.1.2'
   
