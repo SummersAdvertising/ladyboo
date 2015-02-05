@@ -13,7 +13,7 @@
 
 <article>
 <div class="form">
-  <%= simple_form_for(@product, :url => admin_category_product_upload_photo_path(params[:category_id] , @product), html: { id: "patchthisproduct", :multipart => true } ) do |f| %>
+  <%= form_for(@product, :url => admin_category_product_upload_photo_path(params[:category_id] , @product), html: { id: "patchthisproduct", :multipart => true } ) do |f| %>
 
     <%= render 'admin/common/upload_by_type', target_title: '圖片' %>
     

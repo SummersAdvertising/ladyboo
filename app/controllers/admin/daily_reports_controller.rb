@@ -10,7 +10,7 @@ class Admin::DailyReportsController < AdminController
     @daily_reports = DailyReport.list_by_target_date.page(params[:page])
 
     @realtime_todolist_order_count = Order.todolist.count #待處理訂單數
-    @realtime_pending_order_count = Order.pending.count #待付款訂單數
+    @realtime_pending_order_count = Order.pending_without_vaccount.count #待付款訂單數
     @realtime_human_involved_order_count = Order.human_involved.count #人為處理訂單數
     @realtime_shipped_order_count = Order.shipped.count # 已出貨訂單數
     @realtime_total_active_order_count = @realtime_todolist_order_count + @realtime_pending_order_count + @realtime_human_involved_order_count + @realtime_shipped_order_count

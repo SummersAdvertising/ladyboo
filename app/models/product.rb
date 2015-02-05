@@ -1,5 +1,7 @@
 #encoding: utf-8
 class Product < ActiveRecord::Base
+  
+  include GalleryAttribute
 
   belongs_to :category
   
@@ -8,7 +10,7 @@ class Product < ActiveRecord::Base
 
   has_many :pickups, dependent: :destroy
   has_many :measurements, dependent: :destroy
-  has_many :galleries, -> { order('ranking, created_at') } , as: :attachable , dependent: :destroy
+  # has_many :galleries, -> { order('ranking, created_at') } , as: :attachable , dependent: :destroy
 
   has_many :topic_productships, dependent: :destroy
   has_many :topics , through: :topic_productships

@@ -7,7 +7,7 @@ class AnnouncementsController < ApplicationController
   def index
 
     @announcements = Announcement.for_index.page(params[:page])
-    
+
   end
   
 

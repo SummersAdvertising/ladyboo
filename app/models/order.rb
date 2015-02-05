@@ -22,6 +22,7 @@ class Order < ActiveRecord::Base
   scope :history, -> { where(aasm_state: ["close","abnormal","cancel"]).order(created_at: :desc) }  
   
   scope :latest, -> { where("aasm_state != 'hold'").order(created_at: :desc) }
+  scope :pending_without_vaccount, -> { where(aasm_state: ["order_placed_ATM"]) }  
 
   paginates_per 30
 
@@ -98,31 +99,31 @@ class Order < ActiveRecord::Base
   def get_payment_status
     case(self.payment_status)
     when "order_placed_ATM"
-      "新訂單"
+      "新訂單New Order"
     when "order_placed_Vaccount"
-      "新訂單"
+      "新訂單New Order"
     when "order_placed_COD"
-      "新訂單"
+      "新訂單New Order"
     when "order_placed_general"
-      "新訂單"
+      "新訂單New Order"
     when "money_placed_notice"
-      "待確認付款"
+      "待確認付款Payment Pending "
     when "paid"
-      "待寄送"
+      "待寄送Processing"
     when "shipped"
-      "已出貨"
+      "已出貨Order Completed"
     when "shipped_COD"
-      "已出貨"
+      "已出貨Order Completed"
     when "finished"
-      "交易完成"
+      "交易完成Order Completed"
     when "human_service"
       "客服處理中"
     when "abnormal_end"
-      "交易結束"
+      "交易結束Order Completed "
     when "cancel"
-      "取消訂單"
+      "取消訂單Cancelled"
     when "failed"
-      "交易失敗"
+      "交易失敗Cancelled"
     end
 
   end

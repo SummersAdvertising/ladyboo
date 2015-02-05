@@ -14,6 +14,7 @@ class LookbooksController < ApplicationController
         @topics = @lookbook.topics
         related_product_id = @lookbook.products.pluck(:id)
         @products = Product.where(id: related_product_id, status: 'enable').includes(:category, :galleries).page(params[:page])
+
       end
     rescue
       redirect_to lookbooks_path
