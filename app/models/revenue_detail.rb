@@ -2,9 +2,9 @@
 class RevenueDetail < ActiveRecord::Base
   belongs_to :daily_report
 
-  scope :sum_by_category, -> { where(type: 'SumByCategory').order(:category_name, :product_name, :stock_name) } 
-  scope :sum_by_product, -> { where(type: 'SumByProduct').order(:category_name, :product_name, :stock_name) } 
-  scope :sum_by_stock, -> { where(type: 'SumByStock').order(:category_name, :product_name, :stock_name) }
+  scope :sum_by_category, -> { where(type: 'SumByCategory').order(:category_name, :product_name, :stock_name).limit(10) } 
+  scope :sum_by_product, -> { where(type: 'SumByProduct').order(:category_name, :product_name, :stock_name).limit(10) } 
+  scope :sum_by_stock, -> { where(type: 'SumByStock').order(:category_name, :product_name, :stock_name).limit(10) }
 
   def self.types
     %w(SumByCategory SumByProduct SumByStock)
