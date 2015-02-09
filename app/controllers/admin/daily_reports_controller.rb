@@ -82,25 +82,34 @@ class Admin::DailyReportsController < AdminController
     end_date = Date.today
     
     unless params[:q].blank?
-      unless params[:q][:target_date_gteq].blank?
-        begin_date = Date.parse(params[:q][:target_date_gteq])
+      if params[:q][:target_date_eq].blank?
+        
+        unless params[:q][:target_date_gteq].blank?
+          begin_date = Date.parse(params[:q][:target_date_gteq])
 
-        unless params[:q][:target_date_lteq].blank?
-          end_date = Date.parse(params[:q][:target_date_lteq])
+          unless params[:q][:target_date_lteq].blank?
+            end_date = Date.parse(params[:q][:target_date_lteq])
 
-          if begin_date > end_date
-            tmp = end_date
-            end_date = begin_date
-            begin_date = tmp
+            if begin_date > end_date
+              tmp = end_date
+              end_date = begin_date
+              begin_date = tmp
+            end
+
+          else
+            end_date = Date.today  
           end
 
         else
-          end_date = Date.today  
-        end
+          begin_date = Date.today - 70.days
+        end 
 
-      else
-        begin_date = Date.today - 70.days
-      end 
+      else #target_date_eq
+
+        begin_date = Date.parse(params[:q][:target_date_eq])
+        params[:q][:target_date_eq] = ''
+
+      end # target_date_eq
 
       params[:q][:target_date_gteq] = begin_date
       params[:q][:target_date_lteq] = end_date

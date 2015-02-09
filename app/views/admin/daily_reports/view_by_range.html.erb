@@ -27,7 +27,7 @@ DailyReports - view by range and export by selecting scope
         預設區間：
       </td>
       <td colspan='2'>
-        <%= f.select :target_date_gteq, options_for_select([['-- 請選擇 --',nil],['1週',1.week.ago], ['1個月', 1.month.ago], ['3個月',3.month.ago], ['6個月',6.month.ago], ['1年',1.year.ago]], nil) %>
+        <%= f.select :target_date_eq, options_for_select([['-- 請選擇 --',nil],['1週',1.week.ago], ['1個月', 1.month.ago], ['3個月',3.month.ago], ['6個月',6.month.ago], ['1年',1.year.ago]], nil) %>
       </td>
     </tr>
     <tr>
