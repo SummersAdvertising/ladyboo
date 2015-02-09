@@ -6,6 +6,7 @@ class Admin::DailyReportsController < AdminController
   # GET /admin/daily_reports
   # GET /admin/daily_reports.json
   def index 
+    
     @yesterday_report = DailyReport.latest_report
     @daily_reports = DailyReport.list_by_target_date.page(params[:page])
 
@@ -42,7 +43,7 @@ class Admin::DailyReportsController < AdminController
   def view_by_range
     
     compose_query_condition(true) 
-    @daily_reports = @q.result(distinct: true)
+    @daily_reports = @q.result(distinct: true).list_by_target_date
 
     @query_condition = params[:q]
 
