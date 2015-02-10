@@ -8,9 +8,9 @@ Recaptcha.configure do |config|
     #config.public_key  = '6Lcfov8SAAAAAEQIqnDw_03A3cHxAn5BpBQrvW08'
     #config.private_key = '6Lcfov8SAAAAAIEkbbgrEBMHl2kE-Sf1skpyfMee'
   else 
-    #Temporary: www.ladybootw.com, because localhost is ok
-    config.public_key  = '6Le14_wSAAAAAMrvjXFXDvn8EvoA_hBmA8WjBB9g'
-    config.private_key = '6Le14_wSAAAAADwR5NboXH_HAukOspkjnpkrTQYV'
-    
+    #Temporary: www.ladyboo.com.tw, because localhost is ok
+    config.public_key  = '6LcnugETAAAAAJa_fuFPBYfCtzqBt0E5HwD58WeJ'
+    config.private_key = '6LcnugETAAAAAOQsd-HY9YDEAKeZqWH4c9uPhLb6'
   end
+
 end
