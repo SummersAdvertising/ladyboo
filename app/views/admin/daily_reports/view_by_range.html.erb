@@ -75,10 +75,10 @@ DailyReports - view by range and export by selecting scope
     <td><%= @sumup_report[0]['total_revenue'] %></td>
     <% unless @sumup_report[0]['total_order_count'] == 0 || @sumup_report[0]['total_order_count'].blank? %>
     <td>
-      <%= (@sumup_report[0]['valid_order_count'].to_f / @sumup_report[0]['total_order_count']).round(2)*100 %>％
+      <%= ((@sumup_report[0]['valid_order_count'].to_f / @sumup_report[0]['total_order_count'])*100).round(2) %>％
     </td>
     <td>
-      <%= (@sumup_report[0]['onhold_order_count'].to_f / @sumup_report[0]['total_order_count']).round(2)*100 %>％
+      <%= ((@sumup_report[0]['onhold_order_count'].to_f / @sumup_report[0]['total_order_count'])*100).round(2) %>％
     </td>
     <% end %>
   </tr>

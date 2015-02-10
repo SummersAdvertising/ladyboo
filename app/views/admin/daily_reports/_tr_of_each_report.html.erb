@@ -12,10 +12,10 @@
     <td><%= report.total_revenue %></td>
     <% unless report.total_order_count == 0 || report.total_order_count.blank? %>
     <td>
-      <%= (report.valid_order_count / report.total_order_count)*100 %>％
+      <%= ((report.valid_order_count.to_f / report.total_order_count)*100).round(2) %>％
     </td>
     <td>
-      <%= (report.onhold_order_count / report.total_order_count)*100 %>％
+      <%= ((report.onhold_order_count.to_f / report.total_order_count)*100).round(2) %>％
     </td>
     <% else %>
     <td> N/A </td>
