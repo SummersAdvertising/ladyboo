@@ -10,7 +10,7 @@ Version:1.0
 /* =============================================
 -----------------  General -------------
 ==============================================*/
-@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic|Gudea:400,700,400italic|Oswald:400,700,300);
+@import url(//fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic|Gudea:400,700,400italic|Oswald:400,700,300);
 
 body {
 	font: 15px/1.5em Arial, sans-serif;
