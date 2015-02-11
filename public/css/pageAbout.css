@@ -1,5 +1,5 @@
 #content { background: url(../images/content.png); z-index: -2; padding-bottom: 160px; }
-.title.about { width: 320px; }
+.title.about { width: 350px; }
 .title.news { width: 260px; }
 .title.community { width: 360px; }
 #aboutBanner { background-image: url(../images/page/img_aboutBanner.jpg); max-width: 972px;width:100%; padding-top: 21%; background-size: contain; background-repeat: no-repeat;filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../images/page/img_aboutBanner.jpg', sizingMethod='scale');-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../images/page/img_aboutBanner.jpg', sizingMethod='scale')"; }
@@ -11,8 +11,7 @@
 .article .article-meta-date span { font-size: 1.2em; }
 .article .article-meta-date { font: 1.0em Helvetica, Microsoft JhengHei; font-weight: 700; letter-spacing: 1px; }
 #wrapper { position: relative }
-.bgBottom.about { background-image: url(../images/bg_footer.png); height: 327px; width: 268px; }
-.bgBottom { position: absolute; bottom: -1px;right: 0px; }
+
  @media (min-width: 1200px) {
 .article .article-meta-date { width: 85px; }
 }

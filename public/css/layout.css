@@ -95,14 +95,14 @@ h1.logo { margin-top: 10px; margin-bottom: 15px; }
 #main-nav-container .container { width: 100%; }
 #main-nav-container #main-nav .menu li > .mega-menu { width: 100%; }
 }
-@media (min-width: 768px) and (max-width: 1060px) {
+@media (min-width: 768px) and (max-width: 1084px) {
 #main-nav { padding-right: 10px; }
 #main-nav-container #quick-access .form-group { display: none; }
 #main-nav-container.fixed #quick-access { display: block; }
 #main-nav-container .container { width: 100%; }
 #main-nav-container #main-nav .menu li > .mega-menu { width: 100%; }
 }
-@media (min-width: 768px) and (max-width: 909px) {
+@media (min-width: 768px) and (max-width: 934px) {
 #main-nav-container #main-nav .menu li a { padding: 13px 9px; }
 #main-nav-container.fixed #main-nav .menu li a { padding: 13px 20px; }
 .logo-container {float: left;width: 100px;}

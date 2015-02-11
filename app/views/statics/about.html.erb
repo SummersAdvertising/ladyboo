@@ -6,7 +6,7 @@
 <% end %>
 
 <% content_for :breadcrumb do %>
-  <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; ABOUT US
+  <%= link_to 'Home', root_path, title: '首頁' %> &nbsp; > &nbsp; WHO WE ARE
 <% end %>
 
 <div class="xlg-margin"></div><!-- Space 間隔 -->
@@ -14,7 +14,7 @@
 <div class="container">
   <header class="content-title"><!-- Start .content-title 標題 -->
     <div class="title-bg">
-      <h2 class="title about">ABOUT US<span>品牌精神</span></h2>
+      <h2 class="title about">WHO WE ARE<span>品牌精神</span></h2>
     </div>
   </header><!-- End .content-title -->
 
@@ -74,7 +74,7 @@
           <h2 class="title community">COMMUNITY<span>社群迴響</span></h2>
         </div>
         <div class="readmore-controls">
-          <%= link_to 'Read More', announcements_path, title: '更多社群迴響', id: 'readMore' %>
+          <%= link_to 'Read More', communities_path, title: '更多社群迴響', id: 'readMore' %>
         </div>
       </header><!-- End .content-title -->
 
