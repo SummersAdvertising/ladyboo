@@ -1,3 +1,4 @@
+<script src="/js_plugins/chart/Chart.js"></script>
 <style type="text/css">
   table {
     width: 100%;
@@ -5,6 +6,14 @@
   }
   table, th, td {
    border: 1px solid black;
+  }
+  canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 100%;
   }
 </style>
 DailyReports - view by range and export by selecting scope
@@ -38,7 +47,88 @@ DailyReports - view by range and export by selecting scope
   </table>  
 <% end %>
 <hr>
+<canvas id="myLine" width="700" height="300">
+  <script>
+    var data2 = {
+        labels: <%= @each_day_in_range.to_json.html_safe %>,
+        datasets: [
+            {
+                label: "總營業額",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: <%= @query_range_revenue.to_json.html_safe %>
+            }
+        ]
+    };
+    var ctx2 = document.getElementById("myLine").getContext("2d");
+    var myNewLine = new Chart(ctx2).Line(data2, {
+      pointHitDetectionRadius : 2,
+      responsive: true
+    });
 
+  </script>
+
+</canvas><!--canvas-2 end-->
+
+<canvas id="myBar" width="700" height="300">
+  <script>
+  var data3 = {
+      labels: <%= @each_day_in_range.to_json.html_safe %>,
+      datasets: [
+          {
+              label: "大分類一",
+              fillColor: "rgba(220,220,220,0.5)",
+              strokeColor: "rgba(220,220,220,0.8)",
+              highlightFill: "rgba(220,220,220,0.75)",
+              highlightStroke: "rgba(220,220,220,1)",
+              data: [65, 59, 80, 81, 56, 55, 40]
+          },
+          {
+              label: "大分類二",
+              fillColor: "rgba(151,187,205,0.5)",
+              strokeColor: "rgba(151,187,205,0.8)",
+              highlightFill: "rgba(151,187,205,0.75)",
+              highlightStroke: "rgba(151,187,205,1)",
+              data: [28, 48, 40, 19, 86, 27, 90]
+          },
+          {
+              label: "大分類三",
+              fillColor: "rgba(181,151,205,0.5)",
+              strokeColor: "rgba(181,151,205,0.8)",
+              highlightFill: "rgba(181,151,205,0.75)",
+              highlightStroke: "rgba(181,151,205,1)",
+              data: [23, 25, 32, 40, 39, 77, 20]
+          },
+          {
+              label: "大分類四",
+              fillColor: "rgba(151,205,202,0.5)",
+              strokeColor: "rgba(151,205,202,0.8)",
+              highlightFill: "rgba(151,205,202,0.75)",
+              highlightStroke: "rgba(151,205,202,1)",
+              data: [33, 55, 38, 60, 36, 70, 30]
+          },
+          {
+              label: "大分類五",
+              fillColor: "rgba(205,151,166,0.5)",
+              strokeColor: "rgba(205,151,166,0.8)",
+              highlightFill: "rgba(205,151,166,0.75)",
+              highlightStroke: "rgba(205,151,166,1)",
+              data: [30, 51, 30, 30, 30, 87, 50]
+          }
+      ]
+  };
+  var ctx3 = document.getElementById("myBar").getContext("2d");
+  var myNewBar = new Chart(ctx3).Bar(data3,{
+    
+  });
+  </script>
+  </canvas><!--canvas-3 end-->
+
+<hr>
 <% unless @sumup_report.blank? || @sumup_report[0]['total_order_count'].blank? %>
 <table class='table'>
   <caption>期間</caption>

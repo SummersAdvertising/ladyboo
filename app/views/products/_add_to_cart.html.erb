@@ -20,7 +20,7 @@
   </div>
   <hr>
   <br>
-  <%= button_tag "<span>加入購物車</span><br>ADD TO CART".html_safe, class: "btn mainBtn", data: {disable_with: "加入購物車..."}, title: "加入購物車" %>
+  <%= button_tag "<span>加入購物車</span><br>ADD TO CART".html_safe, class: "btn mainBtn", data: {disable_with: "加入購物車..."}, title: "加入購物車", onclick: "dataLayer.push({'event': 'AddToCart'});" %>
 <% end %>
 <% if current_user %>
   <% tracking_list = TrackingList.new %>

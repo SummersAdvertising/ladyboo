@@ -2,11 +2,12 @@
 class Admin::DailyReportsController < AdminController
 
   before_action :set_admin_daily_report, only: [:show, :update, :destroy]
+  before_action :set_chart_params, only: [:index, :show]
   
   # GET /admin/daily_reports
   # GET /admin/daily_reports.json
   def index 
-    
+
     @yesterday_report = DailyReport.latest_report
     @daily_reports = DailyReport.list_by_target_date.page(params[:page])
 
@@ -21,10 +22,37 @@ class Admin::DailyReportsController < AdminController
     @all_abnormal_orders_count = Order.where(aasm_state: 'abnormal').count #總經人為處理結束訂單
     @all_cancel_orders_count = Order.where(aasm_state: 'cancel').count #總取消訂單
     @all_orders_count = Order.count #總訂單
+    # return an array
+    #[ is_return_all, is_length_zero, category_revenue_details, product_revenue_details, stock_revenue_details ]
+    @revenue_details = RevenueDetail.show_top_ten_revenue() 
+    @product_revenue_amount = DailyReport.sum(:total_product_revenue)
 
-    @by_category_revenue_details = RevenueDetail.top_ten_by_type('ByCategory')
-    @by_product_revenue_details = RevenueDetail.top_ten_by_type('ByProduct')
-    @by_stock_revenue_details = RevenueDetail.top_ten_by_type('ByStock')
+    #chart
+    # top 10 (doughnut)
+    for i in 2..4
+      @revenue_details[i].each_with_index do |record, index|
+        if @product_revenue_amount > 0
+          @chart_data_array[i-2] << { value: record[1] , color: @colors[index], highlight: @highlight_colors[index], label: "#{record[0][i-2]}(#{((record[1].to_f/@product_revenue_amount)*100).round(3)} %)" }
+        else
+          @chart_data_array[i-2] << { value: record[1] , color: @colors[index], highlight: @highlight_colors[index], label: "#{record[0][i-2]}" }
+        end
+      end
+      @chart_data_array[i-2].delete_at(0)
+    end
+    # total revenue in last 12 month (bar)
+    @last_12_months_seq = []
+    for i in 1..12
+      @last_12_months_seq << (DateTime.now - ((i-1).month)).strftime("%y'%m月")
+    end
+    @last_12_months_seq = @last_12_months_seq.reverse
+    @last_12_months_revenue_seq = []
+    for i in 1..12
+      target_date = DateTime.now - ((i-1).month)
+      total_revenue = DailyReport.where(target_date: target_date.beginning_of_month..target_date.end_of_month).order(created_at: :desc).select('SUM(total_order_count) AS total_order_count, SUM(onhold_order_count) AS onhold_order_count, SUM(valid_order_count) AS valid_order_count, SUM(completed_order_count) AS completed_order_count, SUM(cancel_order_count) AS cancel_order_count, SUM(cancel_order_count) AS cancel_order_count, SUM(abnormal_end_order_count) AS abnormal_end_order_count, SUM(new_member_count) AS new_member_count, SUM(new_member_count) AS new_member_count, SUM(total_shipping_revenue) AS total_shipping_revenue, SUM(total_product_revenue) AS total_product_revenue , SUM(total_revenue) AS total_revenue ')[0]['total_revenue']
+      @last_12_months_revenue_seq << (total_revenue.blank? ? 0 : total_revenue)
+    end
+    @last_12_months_revenue_seq = @last_12_months_revenue_seq.reverse
+    #chart end
 
   end
 
@@ -37,6 +65,22 @@ class Admin::DailyReportsController < AdminController
       @sumup_by_product = @daily_report.sum_by_product
       @sumup_by_stock = @daily_report.sum_by_stock
 
+      @revenue_details = RevenueDetail.show_top_ten_revenue(@daily_report.id) # return an array
+      @product_revenue_amount = @daily_report.total_product_revenue
+
+      #chart
+      for i in 2..4
+        @revenue_details[i].each_with_index do |record, index|
+          if @product_revenue_amount > 0
+            @chart_data_array[i-2] << { value: record[1] , color: @colors[index], highlight: @highlight_colors[index], label: "#{record[0][i-2]}(#{((record[1].to_f/@product_revenue_amount)*100).round(3)} %)" }
+          else
+            @chart_data_array[i-2] << { value: record[1] , color: @colors[index], highlight: @highlight_colors[index], label: "#{record[0][i-2]}" }
+          end
+        end
+        @chart_data_array[i-2].delete_at(0)
+      end
+      #chart end
+
     end
   end
 
@@ -47,6 +91,14 @@ class Admin::DailyReportsController < AdminController
 
     @query_condition = params[:q]
 
+    @each_day_in_range = [] # strftim format
+    # chart 總營業額
+    query_range = @daily_reports.pluck(:target_date)
+    query_range.each do |date|
+      @each_day_in_range << date.strftime("%Y/%m/%d")
+    end
+    @query_range_revenue = DailyReport.where(target_date: query_range).pluck(:total_revenue)
+    # chart end
   end
 
   def export_csv
@@ -92,9 +144,7 @@ class Admin::DailyReportsController < AdminController
             end_date = Date.parse(params[:q][:target_date_lteq])
 
             if begin_date > end_date
-              tmp = end_date
-              end_date = begin_date
-              begin_date = tmp
+              begin_date, end_date = end_date, begin_date
             end
 
           else
@@ -143,4 +193,9 @@ class Admin::DailyReportsController < AdminController
     params.require(:daily_report).permit(:title, :description, :ranking, :status)
   end
 
+  def set_chart_params
+    @colors = ["#F7464A", "#46BFBD", "lightblue", "lightgreen", "tomato", "pink", "yellow", "red", "blue", "silver"]
+    @highlight_colors = ["#FF5A5E", "#5AD3D1", "blue", "green", "red", "red", "lightyellow"]
+    @chart_data_array = Array.new(3) { Array.new(1) }
+  end
 end

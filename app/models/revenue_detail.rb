@@ -10,10 +10,32 @@ class RevenueDetail < ActiveRecord::Base
     %w(SumByCategory SumByProduct SumByStock)
   end
 
+  def self.show_top_ten_revenue(*daily_report_id)
+    is_return_all = false
+    is_length_zero = false
+
+    unless daily_report_id.blank?
+      category_revenue_details = RevenueDetail.where(daily_report_id: daily_report_id).top_ten_by_type('ByCategory')
+      product_revenue_details = RevenueDetail.where(daily_report_id: daily_report_id).top_ten_by_type('ByProduct')
+      stock_revenue_details = RevenueDetail.where(daily_report_id: daily_report_id).top_ten_by_type('ByStock')
+    else
+      category_revenue_details = RevenueDetail.top_ten_by_type('ByCategory')
+      product_revenue_details = RevenueDetail.top_ten_by_type('ByProduct')
+      stock_revenue_details = RevenueDetail.top_ten_by_type('ByStock')
+      is_return_all = true
+    end
+
+    if category_revenue_details.length == 0
+      is_length_zero = true
+    end
+
+    return [ is_return_all, is_length_zero, category_revenue_details, product_revenue_details, stock_revenue_details ]
+  end
+
   def self.top_ten_by_type(type)
     case(type)
       when "ByCategory"
-        RevenueDetail.sum_by_category.group(:category_name).sum(:figure).sort_by{|k,v| v}.reverse
+        RevenueDetail.sum_by_category.group(:category_name,:product_name).sum(:figure).sort_by{|k,v| v}.reverse
       when "ByProduct"
         RevenueDetail.sum_by_product.group(:category_name,:product_name).sum(:figure).sort_by{|k,v| v}.reverse
       when "ByStock"

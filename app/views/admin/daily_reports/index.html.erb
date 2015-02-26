@@ -1,3 +1,5 @@
+<script src="/js_plugins/chart/Chart.js"></script>
+
 <style type="text/css">
   table {
     width: 100%;
@@ -6,23 +8,89 @@
   table, th, td {
    border: 1px solid black;
   }
+  canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 800px;
+}
+
 </style>
 DailyReport - index<br>
 
-<br>= top 10 in category<br>
-<% @by_category_revenue_details.each do |record| %>
-  <%= record[0] %> => <%= record[1] %><br>
-<% end %>
-<br>= top 10 in product<br>
-<% @by_product_revenue_details.each do |record| %>
-  <%= record[0][0] %> - <%= record[0][1] %> => <%= record[1] %><br>
-<% end %>
-<br>= top 10 in stock<br>
-<% @by_stock_revenue_details.each do |record| %>
-  <%= record[0][3] %> => <%= record[1] %><br>
+<% unless @revenue_details[1] == true %>
+  <br>= top 10 in category<br>
+  <% @revenue_details[2].each do |record| %>
+    <%= record[0] %> => <%= record[1] %> <%= "#{((record[1].to_f/@product_revenue_amount)*100).round(3)} %" if @product_revenue_amount > 0 %><br>
+  <% end %>
+  <canvas id="myChartByCategory">
+    <script>
+      // Chart.defaults.global.responsive = true;
+      var data_by_category = <%= @chart_data_array[0].to_json.html_safe %>;
+      // Get the context of the canvas element we want to select
+      var ctx = document.getElementById("myChartByCategory").getContext("2d");
+      var myNewChart = new Chart(ctx).Doughnut(data_by_category);
+    </script>
+  </canvas><!--canvas-1 end-->
+
+  <br>= top 10 in product<br>
+  <% @revenue_details[3].each do |record| %>
+    <%= record[0][0] %> - <%= record[0][1] %> => <%= record[1] %> <%= "#{((record[1].to_f/@product_revenue_amount)*100).round(3)} %" if @product_revenue_amount > 0 %><br>
+  <% end %>  
+
+  <canvas id="myChartByProduct">
+    <script>
+      // Chart.defaults.global.responsive = true;
+      var data_by_product = <%= @chart_data_array[1].to_json.html_safe %>;
+      // Get the context of the canvas element we want to select
+      var ctx = document.getElementById("myChartByProduct").getContext("2d");
+      var myNewChart = new Chart(ctx).Doughnut(data_by_product);
+    </script>
+  </canvas><!--canvas-2 end-->
+
+  <br>= top 10 in stock<br>
+  <% @revenue_details[4].each do |record| %>
+    <%= record[0][3] %> => <%= record[1] %> <%= "#{((record[1].to_f/@product_revenue_amount)*100).round(3)} %" if @product_revenue_amount > 0 %><br>
+  <% end %>
+  
+  <canvas id="myChartByStock">
+    <script>
+      // Chart.defaults.global.responsive = true;
+      var data_by_stock = <%= @chart_data_array[2].to_json.html_safe %>;
+      // Get the context of the canvas element we want to select
+      var ctx = document.getElementById("myChartByStock").getContext("2d");
+      var myNewChart = new Chart(ctx).Doughnut(data_by_stock);
+    </script>
+  </canvas><!--canvas-3 end-->
+
 <% end %>
 <hr>
 
+<canvas id="myLine" width="700" height="300">
+  <script>
+    var data2 = {
+        labels: <%= @last_12_months_seq.to_json.html_safe %>,
+        datasets: [
+            {
+                label: "總營業額",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: <%= @last_12_months_revenue_seq.to_json.html_safe %>
+            }
+        ]
+    };
+    var ctx2 = document.getElementById("myLine").getContext("2d");
+    var myNewLine = new Chart(ctx2).Line(data2);
+  </script>
+</canvas><!--canvas-2 end-->
+
+<hr>
 <table class='table'>
   <caption>目前訂單狀態</caption>
   <tr>
