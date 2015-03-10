@@ -28,7 +28,9 @@ DailyReport - show<br>
       var data_by_category = <%= @chart_data_array[0].to_json.html_safe %>;
       // Get the context of the canvas element we want to select
       var ctx = document.getElementById("myChartByCategory").getContext("2d");
-      var myNewChart = new Chart(ctx).Doughnut(data_by_category);
+      var myNewChart = new Chart(ctx).Doughnut(data_by_category, {
+        // percentageInnerCutout: 0
+      });
     </script>
   </canvas><!--canvas-1 end-->
 
@@ -59,7 +61,7 @@ DailyReport - show<br>
       var myNewChart = new Chart(ctx).Doughnut(data_by_stock);
     </script>
   </canvas><!--canvas-3 end-->
-  
+
 <% end %>
 <hr>
 

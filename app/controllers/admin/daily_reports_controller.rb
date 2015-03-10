@@ -40,18 +40,30 @@ class Admin::DailyReportsController < AdminController
       @chart_data_array[i-2].delete_at(0)
     end
     # total revenue in last 12 month (bar)
-    @last_12_months_seq = []
-    for i in 1..12
-      @last_12_months_seq << (DateTime.now - ((i-1).month)).strftime("%y'%m月")
-    end
-    @last_12_months_seq = @last_12_months_seq.reverse
+    @begin_date = DailyReport.order('target_date asc').first.target_date.to_datetime;@end_date = DailyReport.order('target_date desc').first.target_date.to_datetime;
+    date_range = @begin_date..@end_date
+    date_months = date_range.map {|d| Date.new(d.year, d.month, 1) }.uniq.first(12)
+    # collection of beginning of month, then strftime to readable format
+    @last_12_months_seq = date_months.map { |d| d.strftime("%y %b") }
     @last_12_months_revenue_seq = []
-    for i in 1..12
-      target_date = DateTime.now - ((i-1).month)
-      total_revenue = DailyReport.where(target_date: target_date.beginning_of_month..target_date.end_of_month).order(created_at: :desc).select('SUM(total_order_count) AS total_order_count, SUM(onhold_order_count) AS onhold_order_count, SUM(valid_order_count) AS valid_order_count, SUM(completed_order_count) AS completed_order_count, SUM(cancel_order_count) AS cancel_order_count, SUM(cancel_order_count) AS cancel_order_count, SUM(abnormal_end_order_count) AS abnormal_end_order_count, SUM(new_member_count) AS new_member_count, SUM(new_member_count) AS new_member_count, SUM(total_shipping_revenue) AS total_shipping_revenue, SUM(total_product_revenue) AS total_product_revenue , SUM(total_revenue) AS total_revenue ')[0]['total_revenue']
-      @last_12_months_revenue_seq << (total_revenue.blank? ? 0 : total_revenue)
+    date_months.each do | current_month |
+      total_revenue_sum = DailyReport.where(target_date: current_month.beginning_of_month..current_month.end_of_month).order(created_at: :desc).select('SUM(total_order_count) AS total_order_count, SUM(onhold_order_count) AS onhold_order_count, SUM(valid_order_count) AS valid_order_count, SUM(completed_order_count) AS completed_order_count, SUM(cancel_order_count) AS cancel_order_count, SUM(cancel_order_count) AS cancel_order_count, SUM(abnormal_end_order_count) AS abnormal_end_order_count, SUM(new_member_count) AS new_member_count, SUM(new_member_count) AS new_member_count, SUM(total_shipping_revenue) AS total_shipping_revenue, SUM(total_product_revenue) AS total_product_revenue , SUM(total_revenue) AS total_revenue ')[0]['total_revenue']
+      @last_12_months_revenue_seq << ( total_revenue_sum.blank? ? 0 : total_revenue_sum )
     end
-    @last_12_months_revenue_seq = @last_12_months_revenue_seq.reverse
+    # ORIGIN
+    # @last_12_months_seq = []
+    # for i in 1..12
+    #   @last_12_months_seq << (DateTime.now - ((i-1).month)).strftime("%y'%m月")
+    # end
+    # @last_12_months_seq = @last_12_months_seq.reverse
+    # @last_12_months_revenue_seq = []
+    # for i in 1..12
+    #   target_date = DateTime.now - ((i-1).month)
+    #   total_revenue = DailyReport.where(target_date: target_date.beginning_of_month..target_date.end_of_month).order(created_at: :desc).select('SUM(total_order_count) AS total_order_count, SUM(onhold_order_count) AS onhold_order_count, SUM(valid_order_count) AS valid_order_count, SUM(completed_order_count) AS completed_order_count, SUM(cancel_order_count) AS cancel_order_count, SUM(cancel_order_count) AS cancel_order_count, SUM(abnormal_end_order_count) AS abnormal_end_order_count, SUM(new_member_count) AS new_member_count, SUM(new_member_count) AS new_member_count, SUM(total_shipping_revenue) AS total_shipping_revenue, SUM(total_product_revenue) AS total_product_revenue , SUM(total_revenue) AS total_revenue ')[0]['total_revenue']
+    #   @last_12_months_revenue_seq << (total_revenue.blank? ? 0 : total_revenue)
+    # end
+    # @last_12_months_revenue_seq = @last_12_months_revenue_seq.reverse
+    # ORIGIN END
     #chart end
 
   end
@@ -91,13 +103,47 @@ class Admin::DailyReportsController < AdminController
 
     @query_condition = params[:q]
 
-    @each_day_in_range = [] # strftim format
-    # chart 總營業額
+    @each_day_in_range = [] # strftime format
+    # chart 
+    # 日區間 - 總營業額
     query_range = @daily_reports.pluck(:target_date)
     query_range.each do |date|
-      @each_day_in_range << date.strftime("%Y/%m/%d")
+      @each_day_in_range << date.strftime("%y %b %d")
     end
+    @each_day_in_range = @each_day_in_range.reverse
     @query_range_revenue = DailyReport.where(target_date: query_range).pluck(:total_revenue)
+    # 日區間 END
+
+    # 月區間 - 總營業額
+    date_range = @begin_date..@end_date
+    date_months = date_range.map {|d| Date.new(d.year, d.month, 1) }.uniq 
+    # collection of beginning of month, then strftime to readable format
+    @readable_date_months = date_months.map { |d| d.strftime("%y %b") }
+    # sum each month in scope
+    @query_range_revenue_by_month = []
+    date_months.each do | current_month |
+      total_revenue_sum = DailyReport.where(target_date: current_month.beginning_of_month..current_month.end_of_month).order(created_at: :desc).select('SUM(total_order_count) AS total_order_count, SUM(onhold_order_count) AS onhold_order_count, SUM(valid_order_count) AS valid_order_count, SUM(completed_order_count) AS completed_order_count, SUM(cancel_order_count) AS cancel_order_count, SUM(cancel_order_count) AS cancel_order_count, SUM(abnormal_end_order_count) AS abnormal_end_order_count, SUM(new_member_count) AS new_member_count, SUM(new_member_count) AS new_member_count, SUM(total_shipping_revenue) AS total_shipping_revenue, SUM(total_product_revenue) AS total_product_revenue , SUM(total_revenue) AS total_revenue ')[0]['total_revenue']
+      @query_range_revenue_by_month << ( total_revenue_sum.blank? ? 0 : total_revenue_sum )
+    end
+    # 月區間 END
+
+    # 週區間 - 總營業額
+    @date_weeks = []
+    @query_range_revenue_by_week = []
+    current_begin_date = @begin_date
+    current_end_date = @begin_date + 6.days
+    while current_end_date < @end_date
+      @date_weeks << "#{current_begin_date.strftime("%y %b %d")}~#{current_end_date.strftime("%y %b %d")}"
+      total_revenue_sum = DailyReport.where(target_date: current_begin_date.beginning_of_day..current_end_date.end_of_day).order(created_at: :desc).select('SUM(total_order_count) AS total_order_count, SUM(onhold_order_count) AS onhold_order_count, SUM(valid_order_count) AS valid_order_count, SUM(completed_order_count) AS completed_order_count, SUM(cancel_order_count) AS cancel_order_count, SUM(cancel_order_count) AS cancel_order_count, SUM(abnormal_end_order_count) AS abnormal_end_order_count, SUM(new_member_count) AS new_member_count, SUM(new_member_count) AS new_member_count, SUM(total_shipping_revenue) AS total_shipping_revenue, SUM(total_product_revenue) AS total_product_revenue , SUM(total_revenue) AS total_revenue ')[0]['total_revenue']
+      @query_range_revenue_by_week << ( total_revenue_sum.blank? ? 0 : total_revenue_sum )
+      current_begin_date, current_end_date = current_end_date + 1.days , current_end_date += 1.weeks
+    end
+
+    @date_weeks << "#{current_begin_date.strftime("%y %b %d")}~#{@end_date.strftime("%y %b %d")}"
+    total_revenue_sum = DailyReport.where(target_date: current_begin_date.beginning_of_day..@end_date.end_of_day).order(created_at: :desc).select('SUM(total_order_count) AS total_order_count, SUM(onhold_order_count) AS onhold_order_count, SUM(valid_order_count) AS valid_order_count, SUM(completed_order_count) AS completed_order_count, SUM(cancel_order_count) AS cancel_order_count, SUM(cancel_order_count) AS cancel_order_count, SUM(abnormal_end_order_count) AS abnormal_end_order_count, SUM(new_member_count) AS new_member_count, SUM(new_member_count) AS new_member_count, SUM(total_shipping_revenue) AS total_shipping_revenue, SUM(total_product_revenue) AS total_product_revenue , SUM(total_revenue) AS total_revenue ')[0]['total_revenue']
+    @query_range_revenue_by_week << ( total_revenue_sum.blank? ? 0 : total_revenue_sum )
+    # 週區間 END
+
     # chart end
   end
 
