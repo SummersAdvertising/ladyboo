@@ -16,7 +16,7 @@ class LadybooMailer < ActionMailer::Base
       @user = user
       # through api: set params
       @data[:to] = [ user.email ]
-      @data[:subject] = "LadyBoo 會員註冊通知信" # 主旨
+      @data[:subject] = "LadyBoo 會員註冊通知信 - Account Registration" # 主旨
       @data[:html] = render 'welcome' # 內容
       # through api: set params end
       deliver_by_api(@data)
@@ -35,7 +35,7 @@ class LadybooMailer < ActionMailer::Base
         
       # through api: set params
       @data[:to] = [ order.user.email ]
-      @data[:subject] = "Ladyboo 訂購單(#{order.ordernum})" # 主旨
+      @data[:subject] = "Ladyboo 訂購單(#{order.ordernum}) - Order confirmation" # 主旨
       @data[:html] = render 'atm_checkout_completed_successfully' # 內容
       # through api: set params end
 
@@ -56,7 +56,7 @@ class LadybooMailer < ActionMailer::Base
       
       # through api: set params
       @data[:to] = [ order.user.email ]
-      @data[:subject] = "Ladyboo 訂購單(#{order.ordernum})" # 主旨
+      @data[:subject] = "Ladyboo 訂購單(#{order.ordernum}) - Order confirmation" # 主旨
       @data[:html] = render 'vaccount_checkout_completed_successfully' # 內容
       # through api: set params end
       deliver_by_api(@data)
@@ -73,7 +73,7 @@ class LadybooMailer < ActionMailer::Base
 
       # through api: set params
       @data[:to] = [ order.user.email ]
-      @data[:subject] = "Ladyboo 訂購單(#{order.ordernum})" # 主旨
+      @data[:subject] = "Ladyboo 訂購單(#{order.ordernum}) - Order confirmation" # 主旨
       @data[:html] = render 'cod_checkout_completed_successfully' # 內容
       # through api: set params end
       deliver_by_api(@data)
@@ -89,7 +89,7 @@ class LadybooMailer < ActionMailer::Base
 
       # through api: set params
       @data[:to] = [ order.user.email ]
-      @data[:subject] = "Ladyboo 訂購單(#{order.ordernum})" # 主旨
+      @data[:subject] = "Ladyboo 訂購單(#{order.ordernum}) - Order confirmation" # 主旨
       @data[:html] = render 'general_checkout_completed_successfully' # 內容
       # through api: set params end
       deliver_by_api(@data)
@@ -105,7 +105,7 @@ class LadybooMailer < ActionMailer::Base
       @order = order
       # through api: set params
       @data[:to] = [ order.user.email ]
-      @data[:subject] = "Ladyboo 出貨通知(#{order.ordernum})" # 主旨
+      @data[:subject] = "Ladyboo 出貨通知(#{order.ordernum}) - Order Shipped" # 主旨
       @data[:html] = render 'ship' # 內容
       # through api: set params end
       deliver_by_api(@data) 
@@ -120,7 +120,7 @@ class LadybooMailer < ActionMailer::Base
       @order = order
       # through api: set params
       @data[:to] = [ order.user.email ]
-      @data[:subject] = "Ladyboo 出貨通知(#{order.ordernum})" # 主旨
+      @data[:subject] = "Ladyboo 出貨通知(#{order.ordernum}) - Order Shipped" # 主旨
       @data[:html] = render 'ship_cod' # 內容
       # through api: set params end
       deliver_by_api(@data)
@@ -135,7 +135,7 @@ class LadybooMailer < ActionMailer::Base
       @order = order
       # through api: set params
       @data[:to] = [ order.user.email ]
-      @data[:subject] = "Ladyboo 訂單取消(#{order.ordernum})" # 主旨
+      @data[:subject] = "Ladyboo 訂單取消(#{order.ordernum}) - Order Cancelled" # 主旨
       @data[:html] = render 'cancel_deal' # 內容
       # through api: set params end
       deliver_by_api(@data)
@@ -219,7 +219,7 @@ class LadybooMailer < ActionMailer::Base
   # MAILGUN
   def set_basic_data
     @data = Multimap.new
-    @data[:from] = "Ladyboo <postmaster@mg.ladybootw.com>"
+    @data[:from] = "Ladyboo <postmaster@mg.ladyboo.com.tw>"
     @data[:inline] = File.new(File.join("public","images","email", "maillogo.jpg")) # inline img
   end
 

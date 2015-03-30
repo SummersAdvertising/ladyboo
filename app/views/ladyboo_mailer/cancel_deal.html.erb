@@ -10,6 +10,12 @@
 
   <p>感謝您對 LadyBoo的支持，您的訂單已取消，訂單編號：<%= @order.ordernum%>。</p>
 
+  <br>
+
+  <p>Dear member <%= @order.buyer_name%>, hello :</p>
+
+  <p>LadyBoo thank you for your support , your order has been canceled , the order number : <%= @order.ordernum%>。</p>
+
   <%= render "ladyboo_mailer/footer" %>
 </body>
 </html>

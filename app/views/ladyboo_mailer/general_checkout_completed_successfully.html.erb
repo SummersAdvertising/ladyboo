@@ -14,6 +14,16 @@
 
   <p>建議您可以<%= link_to "登入 LadyBoo網站", user_session_url ,target: "_blank" %>，查詢您的訂單以及處理進度。</p>
 
+  <br>
+
+  <p>Dear member <%= @order.buyer_name%>, hello :</p>
+
+  <p>LadyBoo thank you for your support, ( order number :<%= @order.ordernum%>)</p>
+
+  <p>To protect your personal data, this notification letter will not display the order details.</p>
+
+  <p>You can <%= link_to "log in LadyBoo", user_session_url ,target: "_blank" %> website to check the progress of your order .</p>
+  
   <%= render "ladyboo_mailer/footer" %>
 </body>
 </html>
