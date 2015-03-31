@@ -7,7 +7,8 @@ class Topic < ActiveRecord::Base
 
   has_many :lookbook_topicships, dependent: :destroy
   has_many :lookbooks , through: :lookbook_topicships
-
+  
+  has_many :topic_collection_topicships, dependent: :destroy
   has_many :categories, through: :products
 
   validates_presence_of :name
