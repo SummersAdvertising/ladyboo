@@ -18,12 +18,13 @@ require 'capistrano/deploy'
 require "rvm/capistrano"
 # 使用 bundler
 # require 'bundler/capistrano'
+require 'capistrano/bundler'
 # 使 capistrano 的訊息能上色, 若沒有安裝相關 gem 則會提示
 
 # require 'capistrano/rvm'
 # require 'capistrano/rbenv'
 # require 'capistrano/chruby'
-require 'capistrano/bundler'
+# require 'capistrano/bundler' ###
 # require 'capistrano/rails/assets'
 # require 'capistrano/rails/migrations'
 

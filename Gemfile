@@ -65,7 +65,7 @@ group :production, :staging do
   gem 'mysql2'
 end
 
-gem 'capistrano'#, "3.0.1"
+gem 'capistrano', "3.2.1"
 
 group :development do
   gem 'thin'
@@ -77,10 +77,16 @@ group :development do
   #gem 'sextant'
   gem 'xray-rails'
   
-  gem 'capistrano-bundler', '~> 1.1.2'
+  gem 'capistrano-rails',   '~> 1.1', require: false
+  gem 'capistrano-bundler', '~> 1.1.2', require: false
   
   gem 'rvm-capistrano'
   gem 'capistrano-ext'
+
+  # gem 'capistrano-bundler', '~> 1.1.2'
+  
+  # gem 'rvm-capistrano'
+  # gem 'capistrano-ext'
   # gem 'lol_dba'
   # lol_dba db:find_indexes
   # gem 'newrelic_rpm'
